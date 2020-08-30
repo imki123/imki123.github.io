@@ -9,6 +9,7 @@
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
+    border-right: 1px solid green;
 }
 .menuSlide{
     /* animation: menuSlideIn 1s ease;
