@@ -1,0 +1,5 @@
+#content{
+    width: calc(100% - 200px);
+    min-height: calc(100vh - 48px);
+    padding: 0 8px 8px;
+}

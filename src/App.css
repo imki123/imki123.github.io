@@ -1,6 +1,32 @@
+*{
+  box-sizing: border-box;
+}
 html, body{
   height: 100%;
   width: 100%;
   margin: 0px;
   background: rgb(219, 250, 219);
+}
+
+a {
+	cursor: pointer;
+}
+a:link {
+	color: inherit;
+	text-decoration: inherit;
+}
+a:visited {
+	color: inherit;
+	text-decoration: inherit;
+}
+a:hover {
+	color: inherit;
+	text-decoration: inherit;
+}
+
+@media(min-width: 1000px){
+  #header, #body{
+    width: 1000px !important;
+    margin: auto !important;
+  }
 }

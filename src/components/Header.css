@@ -1,5 +1,10 @@
+#headerWrapper{
+    width: 100%;
+    background: rgb(180, 255, 180);
+}
 #header{
     width: 100%;
+    padding: 0px 8px;
     height: 48px;
     display: flex;
     justify-content: space-between;
@@ -11,7 +16,6 @@
     display: flex;
     justify-items: center;
     align-items: center;
-    color: rgb(0, 145, 0);
     font-size: 1.2rem;
     font-weight: bold;
 }

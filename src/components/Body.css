@@ -1,0 +1,5 @@
+#body{
+    display: flex;
+    height: calc(100vh - 48px);
+    background: rgb(250, 255, 250);
+}

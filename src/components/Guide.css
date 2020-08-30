@@ -1,0 +1,17 @@
+#guide{
+    width: 200px;
+    height: calc(100vh - 48px);
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+.list{
+    padding: 4px 8px;
+}
+.list:hover{
+    background: #42ff42;
+    cursor: pointer;
+}
+.activeList{
+    background: #76ff76;
+}
