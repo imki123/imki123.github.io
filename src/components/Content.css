@@ -3,3 +3,11 @@
     min-height: calc(100vh - 48px);
     padding: 0 8px 8px;
 }
+.contentSlide{
+    transition: width 1s ease;
+}
+
+textarea{
+    width: 100%;
+    overflow: visible;
+}

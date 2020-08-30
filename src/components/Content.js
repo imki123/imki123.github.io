@@ -3,7 +3,7 @@ import './Content.css'
 
 function Content(props) {
 	return(
-        <div id="content">
+        <div id="content" className="contentSlide">
             {props.children}
         </div>
     ) 
