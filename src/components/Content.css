@@ -1,6 +1,7 @@
 #content{
     width: calc(100% - 200px);
     min-height: calc(100vh - 48px);
+    overflow: auto;
     padding: 0 8px 8px;
 }
 .contentSlide{
