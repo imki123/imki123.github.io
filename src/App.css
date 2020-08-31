@@ -25,6 +25,11 @@ a:hover {
 	text-decoration: inherit;
 }
 
+p{
+  min-height: 21px;
+  margin: 0px;
+}
+
 #app{
   position: relative;
   width: 100%;

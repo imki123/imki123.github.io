@@ -3,6 +3,7 @@
     overflow: hidden;
     width: 200px;
     border-right: 1px solid green;
+    padding-top: 8px; 
 }
 
 #guide{
