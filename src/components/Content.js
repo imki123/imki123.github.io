@@ -21,7 +21,7 @@ function Content(props) {
     })
 
 	return(
-        <div id="content" className="contentSlide">
+        <div id="content" className="menuSlide">
             <div id="ps"></div>
             <div>{props.children}</div>
         </div>

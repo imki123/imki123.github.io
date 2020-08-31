@@ -4,9 +4,6 @@
   overflow: auto;
   padding: 0 8px 8px;
 }
-.contentSlide{
-    transition: width 2s ease;
-}
 
 textarea{
     width: 100%;

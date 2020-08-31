@@ -30,6 +30,10 @@ a:hover {
   width: 100%;
 }
 
+.menuSlide{
+  transition: width 1s ease;
+}
+
 
 @media(min-width: 1000px){
   #header, #body{
