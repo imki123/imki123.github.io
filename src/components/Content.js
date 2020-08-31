@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import './Content.css'
 
 function Content(props) {
-    const {text} = props
+    const {text, resizeTextarea} = props
     
     useEffect(() => {
         //텍스트를 문단으로 쪼개서 그려주는 스크립트
@@ -28,6 +28,10 @@ function Content(props) {
         if(body.clientWidth <= 500){
             guideWrapper.style.width = '0px'
             content.style.width = '100%'
+
+            setTimeout(function(){
+                resizeTextarea()
+            }, 1000)
         }
     }
 

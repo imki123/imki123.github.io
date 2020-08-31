@@ -1,7 +1,7 @@
 #guideWrapper{
     position: relative;
     overflow: hidden;
-    width: 200px;
+    width: 180px;
     border-right: 1px solid green;
     padding-top: 8px; 
 }
@@ -26,7 +26,7 @@
 
 @keyframes menuSlideIn{
     0% {
-        width: 200px;
+        width: 180px;
     }
     100%{
         width: 0px;

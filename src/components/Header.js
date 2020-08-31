@@ -8,21 +8,16 @@ function Header(props) {
     const menuSlide = () => {
         const guideWrapper = document.querySelector('#guideWrapper')
         const content = document.querySelector('#content')
-        const textareas = document.querySelectorAll('textarea')
+        setTimeout(function(){
+            resizeTextarea()
+        }, 1000)
 
-        if(textareas){ //메뉴 슬라이드 후(1초)에 텍스트에어리어 높이 조정
-            setTimeout(function(){
-                for(let i of textareas){
-                    resizeTextarea(i)
-                }
-            }, 1000)
-        }
         if(guideWrapper.clientWidth > 10){
             guideWrapper.style.width = '0px'
             content.style.width = '100%'
         }else{
-            guideWrapper.style.width = '200px'
-            content.style.width = 'calc(100% - 200px)'
+            guideWrapper.style.width = '180px'
+            content.style.width = 'calc(100% - 180px)'
         }
         
     }

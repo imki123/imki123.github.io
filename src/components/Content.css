@@ -1,5 +1,5 @@
 #content{
-  width: calc(100% - 200px);
+  width: calc(100% - 180px);
   min-height: calc(100vh - 48px);
   overflow: auto;
   padding: 8px;
