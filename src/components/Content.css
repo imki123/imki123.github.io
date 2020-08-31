@@ -5,13 +5,6 @@
   padding: 8px;
 }
 
-textarea{
-    width: 100%;
-    min-height: 50px;
-    overflow: visible;
-    resize: none;
-}
-
 @media(max-width: 500px){
     #guideWrapper{
       width: 0;

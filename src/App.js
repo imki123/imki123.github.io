@@ -20,24 +20,19 @@ function App() {
   const location = useLocation(); //페이지 경로 변경 감지
 
   //텍스트에어리어를 찾아서 크기를 글자 높이에 맞게 변경해주는 스크립트  
-  const resizeTextarea = event => { //이벤트가 있으면 event.target, 없으면 textarea 높이 조정
-    if(event){
-      let obj = event.target ? event.target : event
-      obj.style.height = '1px'
-      obj.style.height = (12+obj.scrollHeight)+"px"
-      if(event.target){ //온체인지 이벤트 발생시에는 text변경
-        setArticleText(event.target.value) 
-      }
-    }else { //온체인지 이벤트가 아니면 모든 textarea를 찾아서 높이 변경
-      const textareas = document.querySelectorAll('textarea')
-      if(textareas){
-        for(let i of textareas){
-          i.style.height = '1px'
-          i.style.height = (12+i.scrollHeight)+"px"
-        }
+  const resizeTextarea = () => { //textarea 높이 조정
+    const textareas = document.querySelectorAll('textarea')
+    const fake = document.querySelector('#fakeTextarea')
+    if(textareas){
+      for(let i=1; i<textareas.length; i++){
+        fake.style.height = "1px"
+        textareas[i].style.height = 12+fake.scrollHeight+"px"
+        console.log(fake.scrollHeight)
+        console.log(textareas[i].style.height)
       }
     }
   }
+
 
   //textarea나 주소 변경시 텍스트 높이 조정
   useEffect(() => { 
@@ -58,7 +53,8 @@ function App() {
           </Route>
           <Route path="/article">
             <Content text={articleText} resizeTextarea={resizeTextarea}>
-              <textarea value={articleText} onChange={resizeTextarea}/> 
+              <textarea disabled id="fakeTextarea" value={articleText} onChange={e => {setArticleText(e.target.value)}}/> 
+              <textarea value={articleText} onChange={e => {setArticleText(e.target.value);resizeTextarea()}}/> 
             </Content>
           </Route>
           <Route path="*">

@@ -7,6 +7,7 @@ html, body{
   margin: 0px;
   background: rgb(219, 250, 219);
   color: #202020;
+  font-size: 16px;
 }
 
 a {
@@ -28,6 +29,24 @@ a:hover {
 p{
   min-height: 21px;
   margin: 0px;
+}
+
+textarea{
+  width: 100%;
+  min-height: 50px;
+  overflow: visible;
+  resize: none;
+  font-size: 16px;
+  font: inherit;
+  padding: 0;
+}
+#fakeTextarea{
+  min-height: 0;
+  height: 1px;
+  width: 100%;
+  opacity: 1;
+  border: 0;
+  opacity: 0;
 }
 
 #app{

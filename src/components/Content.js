@@ -25,7 +25,7 @@ function Content(props) {
         const guideWrapper = document.querySelector('#guideWrapper')
         const content = document.querySelector('#content')
         
-        if(body.clientWidth <= 500){
+        if(body.clientWidth <= 500 && guideWrapper.clientWidth > 10){
             guideWrapper.style.width = '0px'
             content.style.width = '100%'
 
