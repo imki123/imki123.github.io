@@ -7,7 +7,7 @@ function NotFoundPage(){
     console.log('Go https://imki123.github.io/mytube_react/')
     return(
         <div className="notFound">
-            Not Found Page
+            <div className="title">Not Found Page</div>
             <div className="goHome">
                 <Link to="/">Go Home</Link>
             </div>

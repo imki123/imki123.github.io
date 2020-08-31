@@ -2,17 +2,28 @@ import React, { useState } from 'react'
 import './Header.css'
 import { Link } from 'react-router-dom';
 
-function Header() {
+function Header(props) {
     const [menu, setMenu] = useState(true)
+    const {resizeTextarea} = props
 
     const menuSlide = () => {
+        const guide = document.querySelector('#guide')
+        const content = document.querySelector('#content')
+        const textareas = document.querySelectorAll('textarea')
+        if(textareas){
+            setTimeout(function(){
+                for(let i of textareas){
+                    resizeTextarea(i)
+                }
+            }, 1000)
+        }
         if(menu){
-            document.querySelector('#guide').style.width = '0px'
-            document.querySelector('#content').style.width = '100%'
+            guide.style.width = '0px'
+            content.style.width = '100%'
             setMenu(false)
         }else{
-            document.querySelector('#guide').style.width = '200px'
-            document.querySelector('#content').style.width = 'calc(100% - 200px)'
+            guide.style.width = '200px'
+            content.style.width = 'calc(100% - 200px)'
             setMenu(true)
         }
         

@@ -9,6 +9,9 @@
 	font-weight: bold;
 	color: green;
 }
+.notFound .title{
+	text-align: center;
+}
 .goHome{
 	text-decoration: underline;
 	color: #0f0f0f;
