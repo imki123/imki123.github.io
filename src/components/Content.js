@@ -20,8 +20,19 @@ function Content(props) {
         }
     })
 
+    const slideMenuMobile = e => {
+        const body = document.querySelector('#body')
+        const guideWrapper = document.querySelector('#guideWrapper')
+        const content = document.querySelector('#content')
+        
+        if(body.clientWidth <= 500){
+            guideWrapper.style.width = '0px'
+            content.style.width = '100%'
+        }
+    }
+
 	return(
-        <div id="content" className="menuSlide">
+        <div id="content" className="menuSlide" onClick={slideMenuMobile}>
             <div id="ps"></div>
             <div>{props.children}</div>
         </div>
