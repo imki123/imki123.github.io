@@ -1,13 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './Header.css'
 import { Link } from 'react-router-dom';
 
 function Header(props) {
-    const [menu, setMenu] = useState(true)
+    const [menu, setMenu] = useState(true) //메뉴보임
     const {resizeTextarea} = props
 
+    useEffect(() => { //처음 로드될때 한번만 메뉴 보일지 안보일지 선택
+        const guideWrapper = document.querySelector('#guideWrapper')
+        if(guideWrapper.clientWidth < 10){
+            setMenu(false) //메뉴안보임
+        }
+    },[])
+
     const menuSlide = () => {
-        const guide = document.querySelector('#guide')
+        const guideWrapper = document.querySelector('#guideWrapper')
         const content = document.querySelector('#content')
         const textareas = document.querySelectorAll('textarea')
         if(textareas){
@@ -18,12 +25,14 @@ function Header(props) {
             }, 1000)
         }
         if(menu){
-            guide.style.width = '0px'
+            guideWrapper.style.width = '0px'
             content.style.width = '100%'
+            content.style.margin = '0px'
             setMenu(false)
         }else{
-            guide.style.width = '200px'
+            guideWrapper.style.width = '200px'
             content.style.width = 'calc(100% - 200px)'
+            content.style.margin = '0px'
             setMenu(true)
         }
         

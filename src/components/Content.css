@@ -5,7 +5,7 @@
   padding: 0 8px 8px;
 }
 .contentSlide{
-    transition: width 1s ease;
+    transition: width 2s ease;
 }
 
 textarea{
@@ -16,7 +16,7 @@ textarea{
 }
 
 @media(max-width: 500px){
-    #guide{
+    #guideWrapper{
       width: 0;
     }
     #content{

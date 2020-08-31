@@ -6,6 +6,7 @@ html, body{
   width: 100%;
   margin: 0px;
   background: rgb(219, 250, 219);
+  color: #202020;
 }
 
 a {
@@ -26,6 +27,7 @@ a:hover {
 
 #app{
   position: relative;
+  width: 100%;
 }
 
 

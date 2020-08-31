@@ -7,7 +7,6 @@ function Content(props) {
     useEffect(() => {
         //텍스트를 문단으로 쪼개서 그려주는 스크립트
         const psDiv = document.querySelector('#ps')
-        console.log(psDiv, text)
         if(psDiv){
             psDiv.innerHTML = '' //내용 지우고
             if(text){
