@@ -56,7 +56,7 @@ function App() {
               <textarea value={articleText} onChange={resizeTextarea}/> 
             </Content>
           </Route>
-          <Route path="*" to="/NotFoundPage">
+          <Route path="*">
             <Content>
               <NotFoundPage/>
             </Content>
