@@ -39,8 +39,6 @@ function App() {
     }
   },[articleText, location])
   
-  
-
 	return (
 		<>
 			<Header resizeTextarea={resizeTextarea}/>
@@ -58,7 +56,11 @@ function App() {
               <textarea value={articleText} onChange={resizeTextarea}/> 
             </Content>
           </Route>
-          <Route path="*" to="/NotFoundPage" component={NotFoundPage}/>
+          <Route path="*" to="/NotFoundPage">
+            <Content>
+              <NotFoundPage/>
+            </Content>
+          </Route>
         </Switch>
 			</Body>
 		</>
