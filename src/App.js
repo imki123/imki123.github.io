@@ -40,7 +40,7 @@ function App() {
   },[articleText, location])
   
 	return (
-		<>
+		<div id="app">
 			<Header resizeTextarea={resizeTextarea}/>
 			<Body>
 				<Guide/>
@@ -63,7 +63,7 @@ function App() {
           </Route>
         </Switch>
 			</Body>
-		</>
+		</div>
 	)
 }
 

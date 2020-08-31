@@ -1,6 +1,9 @@
 #headerWrapper{
+    position: relative;
+    z-index: 1;
     width: 100%;
     background: rgb(180, 255, 180);
+    box-shadow: 0px 3px 10px rgba(0,0,0,.4);
 }
 #header{
     width: 100%;

@@ -1,6 +1,9 @@
 #body{
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 0;
     display: flex;
     height: calc(100vh - 48px);
     background: rgb(250, 255, 250);
-    position: relative;
 }

@@ -32,14 +32,18 @@ function Header(props) {
 	return(
         <div id="headerWrapper">
             <div id="header">
-                <div className="hover" onClick={menuSlide}>MENU</div>
+                <div className="hover" onClick={menuSlide}>
+                    <img alt="MENU" src={'images/guide_icon.png'}/>
+                </div>
                 <Link to="/"> 
                     <div id="title" className="hover">
-                        <img id="logo" alt="logo" src={process.env.PUBLIC_URL+"/images/GitHub-Mark-32px.png"}/> 
+                        <img id="logo" alt="logo" src="images/GitHub-Mark-32px.png"/> 
                         행복한 세상 블로그 :D
                     </div>
                 </Link>
-                <div className="hover">PROFILE</div>
+                <div className="hover">
+                    <img alt="PROFILE" src={'images/profile_icon.png'}/>
+                </div>
             </div>
         </div>
     ) 

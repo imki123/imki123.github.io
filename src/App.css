@@ -24,6 +24,11 @@ a:hover {
 	text-decoration: inherit;
 }
 
+#app{
+  position: relative;
+}
+
+
 @media(min-width: 1000px){
   #header, #body{
     width: 1000px !important;
