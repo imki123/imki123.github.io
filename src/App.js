@@ -27,8 +27,6 @@ function App() {
       for(let i=1; i<textareas.length; i++){
         fake.style.height = "1px"
         textareas[i].style.height = 12+fake.scrollHeight+"px"
-        console.log(fake.scrollHeight)
-        console.log(textareas[i].style.height)
       }
     }
   }
