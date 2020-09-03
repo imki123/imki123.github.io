@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './NotFoundPage.css'
 
 function NotFoundPage(){
-    console.error(`Not found page! Go home. https://imki123.github.io${process.env.PUBLIC_URL}`)
+    console.log(`Not found page! Go home. https://imki123.github.io${process.env.PUBLIC_URL}`)
     return(
         <div className="notFound">
             <div className="title">Not Found Page</div>

@@ -26,21 +26,36 @@ function App() {
 		}
 	}
 
-	//posts 조회
+	//태그별 posts 조회
 	useEffect(() => {
+		let url = 'https://blog-imki123-backend.herokuapp.com/posts'
+		const path = location.pathname
+
+		if(path === '/'){ //홈
+			url += '/home'
+		}else if(path.indexOf('/about') > -1){
+			url += '/about'
+		}else if(path.indexOf('/article') > -1){
+			url += '/article'
+		}else if(path.indexOf('/programming') > -1){
+			url += '/programming'
+		}
 		axios({
 			method: 'get',
-			url: 'https://blog-imki123-backend.herokuapp.com/posts',
-		}).then((res) => {
+			url: url,
+		}).then(res => {
 			setPosts(res.data)
-			setArticleText(res.data[2].body)
+			if(path.indexOf('/article') > -1){
+				setArticleText(res.data[0].body)
+				resizeTextarea()
+			}
 		})
-	}, [])
+	}, [location])
 
 	//textarea나 주소 변경시 텍스트 높이 조정
 	useEffect(() => {
 		resizeTextarea()
-	}, [articleText, location])
+	}, [articleText])
 
 	return (
 		<div id="app">
@@ -49,30 +64,14 @@ function App() {
 				<Guide />
 				<Switch>
 					<Route path="/" exact>
-						{posts[0] && <Content text={posts[0].body} />}
+						{posts && <Content posts={posts} />}
 					</Route>
 					<Route path="/about">
-						{posts[1] && <Content text={posts[1].body} />}
+						{posts && <Content posts={posts} />}
 					</Route>
 					<Route path="/article">
-						{posts[2] && (
-							<Content text={articleText} resizeTextarea={resizeTextarea}>
-								<textarea
-									disabled
-									id="fakeTextarea"
-									value={articleText}
-									onChange={(e) => {
-										setArticleText(e.target.value)
-									}}
-								/>
-								<textarea
-									value={articleText}
-									onChange={(e) => {
-										setArticleText(e.target.value)
-										resizeTextarea()
-									}}
-								/>
-							</Content>
+						{posts && (
+							<Content posts={posts}/>
 						)}
 					</Route>
 					<Route path="*">
