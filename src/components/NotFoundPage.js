@@ -13,4 +13,4 @@ function NotFoundPage(){
         </div>
     )
 }
-export default NotFoundPage
+export default React.memo(NotFoundPage)

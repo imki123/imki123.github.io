@@ -18,10 +18,10 @@ function Post(props){
     return(
         <div className="post">
             <div className="nav">
-                <NavLink exact to="/" className="notActiveNav" activeClassName="activeNav" >Home</NavLink>
-                <NavLink to="/about" className="notActiveNav" activeClassName="activeNav" >About</NavLink>
-                <NavLink to="/article" className="notActiveNav" activeClassName="activeNav" >Article</NavLink>
-                <NavLink to="/programmin" className="notActiveNav" activeClassName="activeNav" >Programming</NavLink>
+                <NavLink exact to="/" className="inActiveNav" activeClassName="activeNav" >Home</NavLink>
+                <NavLink to="/about" className="inActiveNav" activeClassName="activeNav" >About</NavLink>
+                <NavLink to="/article" className="inActiveNav" activeClassName="activeNav" >Article</NavLink>
+                <NavLink to="/programmin" className="inActiveNav" activeClassName="activeNav" >Programming</NavLink>
                 - {no} - {date}
             </div>
             <h2 className="postTitle">{post.title}</h2>
@@ -29,4 +29,4 @@ function Post(props){
         </div>
     )
 }
-export default Post
+export default React.memo(Post)

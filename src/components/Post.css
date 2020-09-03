@@ -3,11 +3,10 @@
 }
 
 .post{
-    padding-bottom: 20px;
-    border-bottom: 1px solid black;
-    margin-bottom: 20px;
+    padding: 20px 0 60px;
+    border-bottom: 2px dotted green;
 }
-.notActiveNav{
+.inActiveNav{
     display: none;
     margin-right: 8px;
 }

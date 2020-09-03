@@ -8,4 +8,4 @@ function Body(props) {
         </div>
     ) 
 }
-export default Body
+export default React.memo(Body)

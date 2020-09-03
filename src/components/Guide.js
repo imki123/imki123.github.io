@@ -14,4 +14,4 @@ function Guide() {
         </div>
     ) 
 }
-export default Guide
+export default React.memo(Guide)

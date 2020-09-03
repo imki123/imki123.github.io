@@ -3,14 +3,9 @@ import './Header.css'
 import { Link } from 'react-router-dom';
 
 function Header(props) {
-    const {resizeTextarea} = props
-
     const menuSlide = () => {
         const guideWrapper = document.querySelector('#guideWrapper')
         const content = document.querySelector('#content')
-        setTimeout(function(){
-            resizeTextarea()
-        }, 1000)
 
         if(guideWrapper.clientWidth > 10){
             guideWrapper.style.width = '0px'
@@ -40,4 +35,4 @@ function Header(props) {
         </div>
     ) 
 }
-export default Header
+export default React.memo(Header)
