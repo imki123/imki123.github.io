@@ -33,6 +33,7 @@ function App() {
 			url: 'https://blog-imki123-backend.herokuapp.com/posts',
 		}).then((res) => {
 			setPosts(res.data)
+			setArticleText(res.data[2].body)
 		})
 	}, [])
 
@@ -55,17 +56,17 @@ function App() {
 					</Route>
 					<Route path="/article">
 						{posts[2] && (
-							<Content text={posts[2].body} resizeTextarea={resizeTextarea}>
+							<Content text={articleText} resizeTextarea={resizeTextarea}>
 								<textarea
 									disabled
 									id="fakeTextarea"
-									value={posts[2].body}
+									value={articleText}
 									onChange={(e) => {
 										setArticleText(e.target.value)
 									}}
 								/>
 								<textarea
-									value={posts[2].body}
+									value={articleText}
 									onChange={(e) => {
 										setArticleText(e.target.value)
 										resizeTextarea()
