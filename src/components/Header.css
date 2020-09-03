@@ -15,6 +15,16 @@
     background: rgb(180, 255, 180);
 }
 
+#mennu{
+    width: 24px; 
+    height: 24px;
+}
+#profile{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
 #title{
     display: flex;
     justify-items: center;

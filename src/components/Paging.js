@@ -21,11 +21,13 @@ function Paging(props){
             }else{
                 links[i].className = 'inactivePage'
             }
-            if(search.page === undefined){
-                links[0].className = 'activePage'
+            if(search.page === undefined){ //search에 page가 없으면 1을 activePage로 설정
+                if(links[i].innerHTML === '1'){
+                    links[i].className = 'activePage'
+                }
             }
         }
-    }, [location])
+    }, [location, search])
 
     
     return(

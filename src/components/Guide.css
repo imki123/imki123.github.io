@@ -1,20 +1,52 @@
 #guideWrapper{
     position: relative;
     overflow: hidden;
-    width: 180px;
+    width: 312px;
     border-right: 1px solid green;
     padding-top: 8px; 
 }
+#avatar{
+    padding: 16px;
+    border-bottom: 1px solid green;
+}
+#avatar div{
+    padding: 4px 0;
+}
+#avatar img{
+    width: 100%;
+    border-radius: 50%;
+}
+#name{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+#nickName{
+    color: #5e5e5e;
+}
+#github img{
+    width: 24px;
+    vertical-align: bottom;
+}
+#github span{
+    color: #5050ff;
+    text-decoration: underline;
+}
+#introduction{
+    margin-top: 20px;
+}
+
 
 #guide{
     height: calc(100vh - 48px);
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
+    padding-top: 8px;
 }
 
+
 .list{
-    padding: 4px 8px;
+    padding: 8px 16px;
 }
 .list:hover{
     background: #42ff42;
@@ -24,11 +56,8 @@
     background: #76ff76;
 }
 
-@keyframes menuSlideIn{
-    0% {
-        width: 180px;
-    }
-    100%{
-        width: 0px;
+@media(max-width: 500px){
+    #guideWrapper{
+        width: 230px;
     }
 }

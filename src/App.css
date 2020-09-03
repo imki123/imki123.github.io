@@ -5,7 +5,7 @@ html, body{
   height: 100%;
   width: 100%;
   margin: 0px;
-  background: rgb(219, 250, 219);
+  /* background: rgb(219, 250, 219); */
   color: #202020;
   font-size: 16px;
 }
@@ -60,9 +60,9 @@ textarea{
 }
 
 
-@media(min-width: 1000px){
+@media(min-width: 1280px){
   #header, #body{
-    width: 1000px !important;
+    width: 1280px !important;
     margin: auto !important;
   }
 }

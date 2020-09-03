@@ -6,5 +6,5 @@
     display: flex;
     width: 100%;
     height: calc(100vh - 48px);
-    background: rgb(250, 255, 250);
+    /* background: rgb(250, 255, 250); */
 }

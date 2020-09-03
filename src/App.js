@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './App.css'
 import Header from './components/Header'
-import { Switch, Route, useLocation, useParams } from 'react-router-dom'
+import { Switch, Route, useLocation} from 'react-router-dom'
 import Body from './components/Body'
 import Guide from './components/Guide'
 import Content from './components/Content'

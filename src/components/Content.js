@@ -39,6 +39,9 @@ function Content(props) {
 	return(
         <div id="content" className="menuSlide" onClick={slideMenuMobile}>
             {
+                (startPost > 1 && paging) && <Paging paging={paging}/>
+            }
+            {
                 posts && posts.map((post, idx) => <Post no={startPost-idx} key={post.postId} post={post}/>)
             }
             {
