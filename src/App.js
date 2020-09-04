@@ -13,17 +13,6 @@ function App() {
 	const [headers, setHeaders] = useState({})
 	const location = useLocation() //페이지 경로 변경 감지
 
-    const scrollUp = () => {
-        const content = document.querySelector('#content')
-        let scroll = content.scrollTop
-        const frame = setInterval(function(){
-            let dif = scroll/50
-            content.scrollTop -= dif
-            if(content.scrollTop <= 0) 
-                clearInterval(frame) 
-        },10)
-    }
-
 	//태그별 posts 조회
 	useEffect(() => {
 		let url = 'https://blog-imki123-backend.herokuapp.com/posts'
@@ -55,7 +44,7 @@ function App() {
             if(content.scrollTop <= 0) 
                 clearInterval(frame) 
         },10)
-	},[location])
+	},[location.pathname, location.search])
 
 	return (
 		<div id="app">

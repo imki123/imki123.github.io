@@ -1,0 +1,21 @@
+.postList{
+    font-size: 0.9rem;
+    border-bottom: 1px solid grey;
+}
+.postList:hover{
+    background: #b3ffb3;
+}
+.postListHeader{
+    display: flex;
+    justify-content: space-between;
+}
+.postList .postTitle{
+    padding: 0 8px;
+    font-size: 1rem;
+    font-weight: bold;
+}
+.postDate{
+}
+.postBody{
+    padding-left: 18px;
+}

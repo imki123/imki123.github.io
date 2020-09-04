@@ -16,7 +16,7 @@ function Post(props){
     },[post, location])
 
     return(
-        <div className="post">
+        <div className="post" id={`post_${no}`}>
             <div className="nav">
                 <NavLink exact to="/" className="inActiveNav" activeClassName="activeNav" >Home</NavLink>
                 <NavLink to="/about" className="inActiveNav" activeClassName="activeNav" >About</NavLink>
