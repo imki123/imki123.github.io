@@ -9,14 +9,12 @@ import NotFoundPage from './components/NotFoundPage'
 import axios from 'axios'
 
 function App() {
-	const [ready, setReady] = useState(false)
 	const [posts, setPosts] = useState([])
 	const [headers, setHeaders] = useState({})
 	const location = useLocation() //페이지 경로 변경 감지
 
 	//태그별 posts 조회
 	useEffect(() => {
-		setReady(false)
 		let url = 'https://blog-imki123-backend.herokuapp.com/posts'
 		const path = location.pathname
 
@@ -33,14 +31,14 @@ function App() {
 			method: 'get',
 			url: url,
 		}).then(res => {
+			console.log(res.data)
 			setPosts(res.data)
 			setHeaders(res.headers)
-			setReady(true)
 		})
 
 		//주소 변경 시 scrollUp
-		if(ready){
-			const content = document.querySelector('#content')
+		const content = document.querySelector('#content')
+		if(content){
 			let scroll = content.scrollTop
 			const frame = setInterval(function(){
 				let dif = scroll/50
@@ -48,6 +46,7 @@ function App() {
 				if(content.scrollTop <= 0) 
 					clearInterval(frame) 
 			},10)
+
 		}
 	},[location.pathname, location.search])
 
@@ -56,7 +55,7 @@ function App() {
 			<Header/>
 			<Body>
 				<Guide />
-				{ready && <Switch>
+				<Switch>
 					<Route path="/" exact>
 						{posts && <Content posts={posts}/>}
 					</Route>
@@ -64,16 +63,14 @@ function App() {
 						{posts && <Content posts={posts}/>}
 					</Route>
 					<Route path="/article">
-						{posts && (
-							<Content posts={posts} headers={headers}/>
-						)}
+						{posts && <Content posts={posts} headers={headers}/>}
 					</Route>
 					<Route path="*">
 						<Content>
 							<NotFoundPage />
 						</Content>
 					</Route>
-				</Switch>}
+				</Switch>
 			</Body>
 		</div>
 	)

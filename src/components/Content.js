@@ -85,7 +85,6 @@ function Content(props) {
     
 
 	return(
-        posts && 
         <div id="content" className="slideMenu" onClick={slideMenuMobile}>
             <div id="menuFAB" className="hover" onClick={slideMenu}>
                 <img alt="MENU" src={process.env.PUBLIC_URL+'/images/guide_icon.png'}/>
