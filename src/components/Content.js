@@ -34,7 +34,7 @@ function Content(props) {
             content.style.width = '100%'
         }
     }
-    const slideMenu = () => {
+    const slideMenu = () => { //메뉴버튼 클릭 시 메뉴 보이기 & 숨기기
         const body = document.querySelector('#body')
         const guideWrapper = document.querySelector('#guideWrapper')
         const content = document.querySelector('#content')
@@ -63,7 +63,8 @@ function Content(props) {
                 let dif = (elemTop - contentScroll) / 50    
                 if(elemTop > contentScroll){
                     const frame = setInterval(function(){
-                        if(content.scrollTop + dif >= elemTop ){
+                        if(content.scrollTop + dif >= elemTop 
+                            || content.scrollTop >= content.scrollHeight - content.clientHeight){
                             clearInterval(frame)
                         }else{
                             content.scrollTop += dif
@@ -78,24 +79,34 @@ function Content(props) {
                         }
                     }, 10)
                 }
-                
             }
         }
     })
     
 
 	return(
+        posts && 
         <div id="content" className="slideMenu" onClick={slideMenuMobile}>
             <div id="menuFAB" className="hover" onClick={slideMenu}>
                 <img alt="MENU" src={process.env.PUBLIC_URL+'/images/guide_icon.png'}/>
             </div>
-            {(startPost > 1 && paging) && posts && posts.map((post, idx) => <PostList no={startPost-idx} key={post.postId} post={post}/>)}
-            {(startPost > 1 && paging) && <Paging paging={paging}/>}
-            {
+            { //목록
+                (startPost > 1 && paging) && <div className="postListWrapper">
+                    <div className="postListTitle">목록</div>
+                    {posts && posts.map((post, idx) => <PostList no={startPost-idx} key={post.postId} post={post} paging={paging}/>)}
+                    {<Paging paging={paging}/>}
+                </div>
+            }
+            { //글
                 posts && posts.map((post, idx) => <Post no={startPost-idx} key={post.postId} post={post}/>)
             }
-            {(startPost > 1 && paging) && posts && posts.map((post, idx) => <PostList no={startPost-idx} key={post.postId} post={post}/>)}
-            {(startPost > 1 && paging) && <Paging paging={paging}/>}
+            { //목록
+                (startPost > 1 && paging) && <div className="postListWrapper">
+                    <div className="postListTitle">목록</div>
+                    {posts && posts.map((post, idx) => <PostList no={startPost-idx} key={post.postId} post={post} paging={paging}/>)}
+                    {<Paging paging={paging}/>}
+                </div>
+            }
             {props.children}
         </div>
     ) 

@@ -1,6 +1,7 @@
 .postList{
     font-size: 0.9rem;
     border-bottom: 1px solid grey;
+    margin-bottom: 8px;
 }
 .postList:hover{
     background: #b3ffb3;
