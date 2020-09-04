@@ -45,7 +45,7 @@ const {posts, resizeTextarea} = props
     }
 
 	return(
-        <div id="content" className="menuSlide" onClick={slideMenuMobile}>
+        <div id="content" className="slideMenu" onClick={slideMenuMobile}>
             <textarea
                 disabled
                 id="fakeTextarea"

@@ -33,11 +33,31 @@ function Content(props) {
             content.style.width = '100%'
         }
     }
+    const slideMenu = () => {
+        const body = document.querySelector('#body')
+        const guideWrapper = document.querySelector('#guideWrapper')
+        const content = document.querySelector('#content')
+
+        if(guideWrapper.clientWidth > 10){
+            guideWrapper.style.width = '0px'
+            content.style.width = '100%'
+        }else{
+            let width = '312px'
+            if(body.clientWidth < 500){
+                width = '230px'
+            }
+            guideWrapper.style.width = width
+            content.style.width = `calc(100% - ${width})`
+        }
+    }
         
     
 
 	return(
-        <div id="content" className="menuSlide" onClick={slideMenuMobile}>
+        <div id="content" className="slideMenu" onClick={slideMenuMobile}>
+            <div id="menuFAB" className="hover" onClick={slideMenu}>
+                <img alt="MENU" src={process.env.PUBLIC_URL+'/images/guide_icon.png'}/>
+            </div>
             {
                 (startPost > 1 && paging) && <Paging paging={paging}/>
             }

@@ -55,7 +55,7 @@ textarea{
   width: 100%;
 }
 
-.menuSlide{
+.slideMenu{
   transition: width 1s ease;
 }
 

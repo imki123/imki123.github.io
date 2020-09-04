@@ -3,7 +3,7 @@ import './Header.css'
 import { Link } from 'react-router-dom';
 
 function Header(props) {
-    const menuSlide = () => {
+    const slideMenu = () => {
         const body = document.querySelector('#body')
         const guideWrapper = document.querySelector('#guideWrapper')
         const content = document.querySelector('#content')
@@ -24,7 +24,7 @@ function Header(props) {
 	return(
         <div id="headerWrapper">
             <div id="header">
-                <div className="hover" onClick={menuSlide}>
+                <div className="hover" onClick={slideMenu}>
                     <img id="menu" alt="MENU" src={process.env.PUBLIC_URL+'/images/guide_icon.png'}/>
                 </div>
                 <Link to="/"> 
@@ -33,7 +33,7 @@ function Header(props) {
                         행복한 코딩 블로그 :D
                     </div>
                 </Link>
-                <div className="hover">
+                <div className="hover"  onClick={slideMenu}>
                     <img id="profile" alt="PROFILE" src={process.env.PUBLIC_URL+'/images/avatar.png'}/>
                 </div>
             </div>

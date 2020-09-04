@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 function Guide() {
 	return(
-        <div id="guideWrapper" className="menuSlide">
+        <div id="guideWrapper" className="slideMenu">
             <div id="avatar">
                 <img alt="avatar" src={process.env.PUBLIC_URL+'/images/avatar.png'}/>
                 <div id="name">Im kiyoung</div>
