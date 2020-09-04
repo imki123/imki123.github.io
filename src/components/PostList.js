@@ -17,8 +17,6 @@ function PostList(props){
         }
     },[post, location])
 
-    console.log(body)
-
     return(
         <Link to={location.pathname+location.search+'#post_'+no}>
             <div className="postList">

@@ -59,15 +59,26 @@ function Content(props) {
             if(elem){
                 const content = document.querySelector('#content')
                 let contentScroll = content.scrollTop
-                let elemScroll = elem.offsetTop
-                let dif = (elemScroll - contentScroll) / 50
-                const frame = setInterval(function(){
-                    if(content.scrollTop + dif <= elemScroll){
-                        content.scrollTop += dif
-                    }else{
-                        clearInterval(frame)
-                    }
-                },10)
+                let elemTop = elem.offsetTop
+                let dif = (elemTop - contentScroll) / 50    
+                if(elemTop > contentScroll){
+                    const frame = setInterval(function(){
+                        if(content.scrollTop + dif >= elemTop ){
+                            clearInterval(frame)
+                        }else{
+                            content.scrollTop += dif
+                        }
+                    }, 10)
+                }else{
+                    const frame = setInterval(function(){
+                        if(content.scrollTop <= elemTop ){
+                            clearInterval(frame)
+                        }else{
+                            content.scrollTop += dif
+                        }
+                    }, 10)
+                }
+                
             }
         }
     })
