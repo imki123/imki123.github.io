@@ -21,6 +21,18 @@ function Header(props) {
         }
     }
 
+    const toggleSetting = () => {
+        const setting = document.querySelector('#settingWrapper')
+        if(setting){
+            console.log(setting.style.display)
+            if(setting.style.display === 'block'){
+                setting.style.display = 'none'
+            }else{
+                setting.style.display = 'block'
+            } 
+        }
+    }
+
 	return(
         <div id="headerWrapper">
             <div id="header">
@@ -33,7 +45,7 @@ function Header(props) {
                         행복한 코딩 블로그 :D
                     </div>
                 </Link>
-                <div className="hover"  onClick={slideMenu}>
+                <div className="hover"  onClick={toggleSetting}>
                     <img id="profile" alt="PROFILE" src={process.env.PUBLIC_URL+'/images/avatar.png'}/>
                 </div>
             </div>

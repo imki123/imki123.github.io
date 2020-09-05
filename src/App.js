@@ -7,11 +7,13 @@ import Guide from './components/Guide'
 import Content from './components/Content'
 import NotFoundPage from './components/NotFoundPage'
 import axios from 'axios'
+import Setting from './components/Setting'
 
 function App() {
 	const [ready, setReady] = useState(false)
 	const [posts, setPosts] = useState([])
 	const [headers, setHeaders] = useState({})
+	const [login, setLogin] = useState(false)
 	const location = useLocation() //페이지 경로 변경 감지
 
 	//주소 변경될 때, posts 조회
@@ -51,10 +53,16 @@ function App() {
 		}
 	},[location.pathname, location.search])
 
+	//세팅이나 로그인 상태가 변경되면 리로드
+	useEffect(() => {
+
+	}, [login])
+
 	return (
 		<div id="app">
 			<Header/>
 			<Body>
+				<Setting login={login}/>
 				<Guide posts={posts}/>
 				<Content posts={posts} headers={headers} ready={ready}>
 					<Switch>

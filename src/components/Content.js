@@ -63,7 +63,6 @@ function Content(props) {
                     if(elem){
                         let contentScroll = content.scrollTop
                         let elemTop = elem.offsetTop
-                        console.log(contentScroll, elemTop)
                         let dif = (elemTop - contentScroll) / 50    
                         if(elemTop > contentScroll){
                             const frame = setInterval(function(){

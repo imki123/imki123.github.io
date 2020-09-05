@@ -1,0 +1,32 @@
+#settingWrapper{
+    position: absolute;
+    display: none;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: 1;
+    background: rgba(105, 105, 105, 0.3);
+}
+
+#setting{
+    position: absolute;
+    top: 5px;
+    right: 4px;
+    z-index: 10;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+    border-radius: 10px;
+    border: 1px solid grey;
+    box-shadow: 3px 3px 3px 0px grey;
+}
+.settingList{
+    padding: 4px 16px;
+    border-radius: 10px;
+}
+.settingList:hover{
+    background: #76ff76;
+    cursor: pointer;
+}
