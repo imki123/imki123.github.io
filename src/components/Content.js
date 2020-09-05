@@ -52,9 +52,15 @@ function Content(props) {
         }
     }
 
-    //hash가 있으면 해당 엘리먼트로 스크롤
     useEffect(() => {
-        if(location.hash){
+        const loading = document.querySelector('#loading')
+        if(ready){
+            if(loading) loading.style.display = 'none'
+        }else{
+            if(loading) loading.style.display = 'flex'
+        }
+
+        if(location.hash){ //hash가 있으면 해당 엘리먼트로 스크롤
             const elem = document.querySelector(location.hash)
             if(elem){
                 const content = document.querySelector('#content')
@@ -89,8 +95,10 @@ function Content(props) {
             <div id="menuFAB" className="hover" onClick={slideMenu}>
                 <img alt="MENU" src={process.env.PUBLIC_URL+'/images/guide_icon.png'}/>
             </div>
-            {ready ?
-            <div>
+            <div id="loading">
+                <img alt="Loading" src={process.env.PUBLIC_URL+'/images/loading.gif'}/>
+            </div>
+            {ready && <div>
                 { //목록
                     (startPost > 1 && paging) && <div className="postListWrapper">
                         <div className="postListTitle">목록</div>
@@ -109,9 +117,6 @@ function Content(props) {
                     </div>
                 }
                 {props.children}
-            </div> :
-            <div className="loading">
-                <img alt="Loading" src={process.env.PUBLIC_URL+'/images/loading.gif'}/>
             </div>}
         </div>
     ) 

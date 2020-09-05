@@ -38,7 +38,7 @@ function App() {
 			setReady(true)
 		})
 
-		//주소 변경 시 scrollUp
+		//주소 변경 시 scroll. 단 hash는 리렌더링 하지 않음.
 		const content = document.querySelector('#content')
 		if(content){
 			let scroll = content.scrollTop
@@ -49,7 +49,7 @@ function App() {
 					clearInterval(frame) 
 			},10)
 		}
-	},[location])
+	},[location.pathname, location.search])
 
 	return (
 		<div id="app">
