@@ -7,7 +7,7 @@ import Paging from './Paging';
 import PostList from './PostList'
 
 function Content(props) {
-    let {posts, headers} = props
+    let {posts, headers, ready} = props
     const location = useLocation()
     const search = queryString.parse(location.search)
     let startPost = 1
@@ -39,10 +39,10 @@ function Content(props) {
         const guideWrapper = document.querySelector('#guideWrapper')
         const content = document.querySelector('#content')
 
-        if(guideWrapper.clientWidth > 10){
+        if(guideWrapper.clientWidth > 10){ //메뉴가 열려있으면
             guideWrapper.style.width = '0px'
             content.style.width = '100%'
-        }else{
+        }else{ //메뉴가 닫혀있으면
             let width = '312px'
             if(body.clientWidth < 500){
                 width = '230px'
@@ -89,24 +89,30 @@ function Content(props) {
             <div id="menuFAB" className="hover" onClick={slideMenu}>
                 <img alt="MENU" src={process.env.PUBLIC_URL+'/images/guide_icon.png'}/>
             </div>
-            { //목록
-                (startPost > 1 && paging) && <div className="postListWrapper">
-                    <div className="postListTitle">목록</div>
-                    {posts && posts.map((post, idx) => <PostList no={startPost-idx} key={post.postId} post={post} paging={paging}/>)}
-                    {<Paging paging={paging}/>}
-                </div>
-            }
-            { //글
-                posts && posts.map((post, idx) => <Post no={startPost-idx} key={post.postId} post={post}/>)
-            }
-            { //목록
-                (startPost > 1 && paging) && <div className="postListWrapper">
-                    <div className="postListTitle">목록</div>
-                    {posts && posts.map((post, idx) => <PostList no={startPost-idx} key={post.postId} post={post} paging={paging}/>)}
-                    {<Paging paging={paging}/>}
-                </div>
-            }
-            {props.children}
+            {ready ?
+            <div>
+                { //목록
+                    (startPost > 1 && paging) && <div className="postListWrapper">
+                        <div className="postListTitle">목록</div>
+                        {posts && posts.map((post, idx) => <PostList no={startPost-idx} key={post.postId} post={post} paging={paging}/>)}
+                        {<Paging paging={paging}/>}
+                    </div>
+                }
+                { //글
+                    posts && posts.map((post, idx) => <Post no={startPost-idx} key={post.postId} post={post}/>)
+                }
+                { //목록
+                    (startPost > 1 && paging) && <div className="postListWrapper">
+                        <div className="postListTitle">목록</div>
+                        {posts && posts.map((post, idx) => <PostList no={startPost-idx} key={post.postId} post={post} paging={paging}/>)}
+                        {<Paging paging={paging}/>}
+                    </div>
+                }
+                {props.children}
+            </div> :
+            <div className="loading">
+                <img alt="Loading" src={process.env.PUBLIC_URL+'/images/loading.gif'}/>
+            </div>}
         </div>
     ) 
 }

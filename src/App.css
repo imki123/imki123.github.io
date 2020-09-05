@@ -59,7 +59,6 @@ textarea{
   transition: width 1s ease;
 }
 
-
 @media(min-width: 1280px){
   #header, #body{
     width: 1280px !important;
