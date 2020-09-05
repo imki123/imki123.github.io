@@ -1,7 +1,7 @@
 .postList{
     font-size: 0.9rem;
     border-bottom: 1px solid grey;
-    margin-bottom: 8px;
+    padding-top: 8px;
 }
 .postList:hover{
     background: #b3ffb3;
@@ -18,5 +18,7 @@
 .postDate{
 }
 .postBody{
-    padding-left: 18px;
+    padding-left: 22px;
+    height: 21px;
+    overflow: hidden;
 }

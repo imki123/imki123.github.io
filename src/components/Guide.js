@@ -6,7 +6,7 @@ function Guide() {
 	return(
         <div id="guideWrapper" className="slideMenu">
             <div id="avatar">
-                <img alt="avatar" src={process.env.PUBLIC_URL+'/images/avatar.png'}/>
+                <img alt="avatar" src={process.env.PUBLIC_URL+'/images/avatar.png'} title='Hello :D'/>
                 <div id="name">Im kiyoung</div>
                 <div id="nickName">imki123</div>
                 <div id="github">

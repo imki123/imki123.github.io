@@ -12,10 +12,10 @@ function PostList(props){
     useEffect(() => {
         if(post){
             if(post.body.length > 100){
-                setBody(post.body.replace('\n',' ').slice(0,100)+'...') //텍스트를 문단으로 쪼개기
+                setBody(post.body.replace('\n',' ').slice(0,100)+'...') //텍스트 길이 자르기
             }
         }
-    },[post, location])
+    },[post])
 
     return(
         <Link to={location.pathname+location.search+'#post_'+no}>
