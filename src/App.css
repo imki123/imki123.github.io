@@ -64,4 +64,13 @@ textarea{
     width: 1280px !important;
     margin: auto !important;
   }
+  #setting{
+    top: 50px;
+  }
+}
+
+@media(max-width: 500px){
+  #setting{
+    top: 50px;
+  }
 }

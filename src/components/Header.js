@@ -3,6 +3,7 @@ import './Header.css'
 import { Link } from 'react-router-dom';
 
 function Header(props) {
+    const {login} = props
     const slideMenu = () => {
         const body = document.querySelector('#body')
         const guideWrapper = document.querySelector('#guideWrapper')
@@ -46,7 +47,9 @@ function Header(props) {
                     </div>
                 </Link>
                 <div className="hover"  onClick={toggleSetting}>
-                    <img id="profile" alt="PROFILE" src={process.env.PUBLIC_URL+'/images/avatar.png'}/>
+                    {login ? 
+                    <img id="profile" alt="PROFILE" src={process.env.PUBLIC_URL+'/images/noavatar.png'}/> :
+                    <img id="profile" alt="PROFILE" src={process.env.PUBLIC_URL+'/images/noavatar.png'}/>}
                 </div>
             </div>
         </div>

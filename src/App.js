@@ -60,9 +60,9 @@ function App() {
 
 	return (
 		<div id="app">
-			<Header/>
+			<Header login={login}/>
+			<Setting login={login}/>
 			<Body>
-				<Setting login={login}/>
 				<Guide posts={posts}/>
 				<Content posts={posts} headers={headers} ready={ready}>
 					<Switch>
