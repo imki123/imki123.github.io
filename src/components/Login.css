@@ -39,4 +39,5 @@
     cursor: pointer;
     height: 40px;
     font-size: inherit;
+    outline: none;
 }

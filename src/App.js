@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './App.css'
 import { Switch, Route, useLocation} from 'react-router-dom'
-import axios from 'axios'
+import Axios from 'axios'
 
 import Header from './components/Header'
 import Body from './components/Body'
@@ -22,12 +22,15 @@ function App() {
 	useEffect(() => {
 		setReady(false)
 		let url = 'https://blog-imki123-backend.herokuapp.com/posts'
-		url = url + location.pathname + location.search
+		if(location.pathname === '/'){
+			url = url + '/home' + location.pathname + location.search
+		}else{
+			url = url + location.pathname + location.search
+		}
 
-		axios({
-			method: 'get',
-			url: url,
-		}).then(res => {
+
+		Axios.get(url)
+		.then(res => {
 			setPosts(res.data)
 			setHeaders(res.headers)
 			setReady(true)
@@ -46,22 +49,24 @@ function App() {
 		}
 	},[location.pathname, location.search])
 
-	//세팅이나 로그인 상태가 변경되면 리로드
+	/* //세팅이나 로그인 상태가 변경되면 리로드
 	useEffect(() => {
-
-	}, [login])
+		console.log('login: '+login)
+	}, [login]) */
 
 	return (
 		<div id="app">
 			<Header login={login}/>
-			<Setting login={login}/>
+			<Setting login={login} setLogin={setLogin}/>
 			<Body>
-				<Guide posts={posts}/>
+				<Guide/>
 				<Content posts={posts} headers={headers} ready={ready}>
 					<Switch>
 						<Route path='/' exact/>
 						<Route path={['/about','/article']}/>
-						<Route path={['/login','/register']} component={Login}/>
+						<Route path={['/login','/register']}>
+							<Login setLogin={setLogin}/>
+						</Route>
 						<Route path='*' component={NotFoundPage}/>
 					</Switch>
 				</Content>

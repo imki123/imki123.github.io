@@ -25,7 +25,6 @@ function Header(props) {
     const toggleSetting = () => {
         const setting = document.querySelector('#settingWrapper')
         if(setting){
-            console.log(setting.style.display)
             if(setting.style.display === 'block'){
                 setting.style.display = 'none'
             }else{
@@ -48,7 +47,7 @@ function Header(props) {
                 </Link>
                 <div className="hover"  onClick={toggleSetting}>
                     {login ? 
-                    <img id="profile" alt="PROFILE" src={process.env.PUBLIC_URL+'/images/noavatar.png'}/> :
+                    <img id="profile" alt="PROFILE" src={process.env.PUBLIC_URL+'/images/avatar.png'}/> :
                     <img id="profile" alt="PROFILE" src={process.env.PUBLIC_URL+'/images/noavatar.png'}/>}
                 </div>
             </div>
