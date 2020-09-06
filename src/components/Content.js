@@ -99,7 +99,7 @@ function Content(props) {
             <div id="loading">
                 <img alt="Loading" src={process.env.PUBLIC_URL+'/images/loading.gif'}/>
             </div>
-            {ready && <div>
+            {ready && <>
                 { //목록
                     (startPost > 1 && paging) && <div className="postListWrapper">
                         <div className="postListTitle">목록</div>
@@ -118,7 +118,7 @@ function Content(props) {
                     </div>
                 }
                 {props.children}
-            </div>}
+            </>}
         </div>
     ) 
 }

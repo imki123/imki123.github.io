@@ -23,6 +23,8 @@
     box-shadow: 3px 3px 3px 0px black;
 }
 .settingList{
+    display: block;
+    width: 100%;
     padding: 4px 16px;
     border-radius: 10px;
 }

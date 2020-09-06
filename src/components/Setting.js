@@ -1,5 +1,6 @@
 import React from 'react'
 import './Setting.css'
+import { Link } from 'react-router-dom'
 
 function Setting(props) {
     const {login} = props
@@ -12,17 +13,11 @@ function Setting(props) {
         <div id="settingWrapper" onClick={closeSetting}>
             <div id="setting" onClick={e=>{e.stopPropagation()}}>
                 <div id="settingListWrapper">
-                    <div className="settingList">로그인</div>
+                    <Link className="settingList" to="/login">로그인</Link>
                     <div className="settingList">로그아웃</div>
-                    <div className="settingList">회원가입</div>
+                    <Link className="settingList" to="/register">회원가입</Link>
                     <div className="settingList">회원탈퇴</div>
                 </div>
-                <form id="login">
-
-                </form>
-                <form id="login">
-
-                </form>
             </div>
         </div>
         

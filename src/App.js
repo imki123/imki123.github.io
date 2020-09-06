@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import './App.css'
-import Header from './components/Header'
 import { Switch, Route, useLocation} from 'react-router-dom'
+import axios from 'axios'
+
+import Header from './components/Header'
 import Body from './components/Body'
 import Guide from './components/Guide'
 import Content from './components/Content'
 import NotFoundPage from './components/NotFoundPage'
-import axios from 'axios'
 import Setting from './components/Setting'
+import Login from './components/Login'
 
 function App() {
 	const [ready, setReady] = useState(false)
@@ -20,17 +22,8 @@ function App() {
 	useEffect(() => {
 		setReady(false)
 		let url = 'https://blog-imki123-backend.herokuapp.com/posts'
-		const path = location.pathname
+		url = url + location.pathname + location.search
 
-		if(path === '/'){ //홈
-			url += '/home' + location.search
-		}else if(path.indexOf('/about') > -1){
-			url += '/about' + location.search
-		}else if(path.indexOf('/article') > -1){
-			url += '/article' + location.search
-		}else if(path.indexOf('/programming') > -1){
-			url += '/programming' + location.search
-		}
 		axios({
 			method: 'get',
 			url: url,
@@ -68,9 +61,8 @@ function App() {
 					<Switch>
 						<Route path='/' exact/>
 						<Route path={['/about','/article']}/>
-						<Route path='*'>
-							<NotFoundPage/>
-						</Route>
+						<Route path={['/login','/register']} component={Login}/>
+						<Route path='*' component={NotFoundPage}/>
 					</Switch>
 				</Content>
 			</Body>
