@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "https://imki123.github.io/blog_imki123/",
-  "proxy": "https://blog-imki123-backend.herokuapp.com",
   "dependencies": {
     "@testing-library/jest-dom": "4.2.4",
     "@testing-library/react": "9.5.0",

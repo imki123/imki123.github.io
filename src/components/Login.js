@@ -4,7 +4,7 @@ import { useLocation, useHistory } from 'react-router-dom'
 import Axios from 'axios'
 
 function Login(props) {
-    const {setLogin} = props
+    const {setLogin, checkToken} = props
     const location = useLocation()
     const history = useHistory()
     const [checkUsername, setCheckUsername] = useState('')
@@ -79,7 +79,8 @@ function Login(props) {
                 .then(res => {
                     console.log(res)
                     alert(res.data.username+'님의 회원가입에 성공했습니다 :D')
-                    history.push('/')
+                    checkToken()
+                    //history.push('/')
                 })
                 .catch(e => {
                     console.log(e)
@@ -99,19 +100,15 @@ function Login(props) {
                         username: username,
                         password: password,
                     },
-                    {
-                        withCredentials: true
-                    }
+                    {withCredentials: true,}
                 )
                 .then(res => {
-                    console.log('로그인 성공')
-                    console.log(res)
+                    console.log('로그인 정보', res.data)
                     setLogin(res.data)
-                    history.push('/')
+                    checkToken()
+                    //history.push('/')
                 })
                 .catch(e => {
-                    console.log('로그인 실패')
-                    console.log(e)
                     let message = '로그인에 실패했습니다. :('
                     if(e.response && e.response.status === 401){
                         message += '\n로그인 정보를 확인해주세요.'
@@ -129,13 +126,13 @@ function Login(props) {
                 <div className="check">{checkUsername}</div>
 
                 <div className="text">비밀번호</div>
-                <input name="password" type="password" onChange={changePassword}/>
+                <input name="password" type="password" onChange={changePassword} autoComplete="currnet-password"/>
                 <div className="check">{checkPassword}</div>
                 
                 {buttonName === '회원가입' &&
                 <>
                     <div className="text">비밀번호 확인</div>
-                    <input name="passwordConfirm" type="password" onChange={changePasswordConfirm}/>
+                    <input name="passwordConfirm" type="password" onChange={changePasswordConfirm} autoComplete="currnet-password"/>
                     <div className="check" id="checkPasswordConfirm">{checkPasswordConfirm}</div>
                 </>}
 
