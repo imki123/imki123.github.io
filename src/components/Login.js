@@ -79,7 +79,7 @@ function Login(props) {
                 .then(res => {
                     console.log(res)
                     alert(res.data.username+'님의 회원가입에 성공했습니다 :D')
-                    window.location.href = window.location.origin + '/blog_imki123/'
+                    history.push('/')
                 })
                 .catch(e => {
                     console.log(e)
@@ -104,11 +104,13 @@ function Login(props) {
                     }
                 )
                 .then(res => {
+                    console.log('로그인 성공')
                     console.log(res)
                     setLogin(res.data)
                     history.push('/')
                 })
                 .catch(e => {
+                    console.log('로그인 실패')
                     console.log(e)
                     let message = '로그인에 실패했습니다. :('
                     if(e.response && e.response.status === 401){

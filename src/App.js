@@ -28,7 +28,6 @@ function App() {
 			url = url + location.pathname + location.search
 		}
 
-
 		Axios.get(url)
 		.then(res => {
 			setPosts(res.data)
@@ -36,7 +35,20 @@ function App() {
 			setReady(true)
 		})
 
-		//주소 변경 시 scroll. 단 hash는 리렌더링 하지 않음.
+		url = 'https://blog-imki123-backend.herokuapp.com/auth/check'
+		Axios.get(url)
+		.then(res => {
+			console.log('토큰 체크 성공')
+			console.log(res)
+			setLogin(res.data)
+		})
+		.catch(e => {
+			console.log('토큰 체크 실패')
+			console.log(e)
+			setLogin(false)
+		})
+
+		//주소 변경 시 해쉬 위치로 scroll. 해쉬는 리렌더링 하지 않음.
 		const content = document.querySelector('#content')
 		if(content){
 			let scroll = content.scrollTop
@@ -49,10 +61,6 @@ function App() {
 		}
 	},[location.pathname, location.search])
 
-	/* //세팅이나 로그인 상태가 변경되면 리로드
-	useEffect(() => {
-		console.log('login: '+login)
-	}, [login]) */
 
 	return (
 		<div id="app">
