@@ -20,11 +20,17 @@ function App() {
 
 	const checkToken = func => {
 		let url = 'https://blog-imki123-backend.herokuapp.com/auth/check'
-		Axios.get(url)
+		// Axios.get(url)
+		fetch(url,{
+			mode: 'cors',
+			method: 'get',
+			credentials: "include",
+		})
+		.then(res => res.json())
 		.then(res => {
 			console.log('토큰 체크 성공')
 			console.log(res)
-			setLogin(res.data)
+			setLogin(res)
 			if(func) func()
 		})
 		.catch(e => {

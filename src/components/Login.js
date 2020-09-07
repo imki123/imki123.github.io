@@ -68,13 +68,27 @@ function Login(props) {
             console.log('axios submit')
             if(buttonName === '회원가입'){
                 url += '/register'
-                Axios({
+                /* Axios({
                     method: 'post',
                     url: url,
                     data: {
                         username: username,
                         password: password,
                     },
+                }) */
+                fetch(url,{
+                    mode: 'cors',
+                    method: 'post',
+                    credentials: "include",
+                    headers:{'Content-Type': 'application/json'},
+                    body: {
+                        username: username,
+                        password: password,
+                    },
+                })
+                .then(res => {
+                    if(res) res.json()
+                    else console.log('Error:',res)
                 })
                 .then(res => {
                     console.log(res)
@@ -95,20 +109,32 @@ function Login(props) {
                 })
             }else{ //로그인
                 url += '/login'
-                Axios.post(url,
+                /* Axios.post(url,
                     {
                         username: username,
                         password: password,
                     },
                     {withCredentials: true,}
-                )
+                ) */
+                fetch(url,{
+                    mode: 'cors',
+                    method: 'post',
+                    credentials: "include",
+                    headers:{'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        username: username,
+                        password: password,
+                    }),
+                })
+                //.then(res => res.json())
                 .then(res => {
-                    console.log('로그인 정보', res.data)
-                    setLogin(res.data)
+                    console.log('로그인 정보', res)
+                    setLogin(res)
                     checkToken()
                     //history.push('/')
                 })
                 .catch(e => {
+                    console.log(e)
                     let message = '로그인에 실패했습니다. :('
                     if(e.response && e.response.status === 401){
                         message += '\n로그인 정보를 확인해주세요.'
