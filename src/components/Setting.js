@@ -14,15 +14,23 @@ function Setting(props) {
 
     const logout = e => {
         let url = 'https://blog-imki123-backend.herokuapp.com/auth/logout'
-        Axios.post(url,
-            {withCredentials: true}
-        )
+        fetch(url,{
+            mode: 'cors',
+            method: 'post',
+            credentials: "include",
+        })
         .then(res => {
-            console.log(res)
+            if(res.status===200 || res.status===201) { //성공하면 아래 then 작동
+                res.json().then(res =>{ 
+                    console.log(res)
+                    alert(res.username+'님의 회원가입에 성공했습니다 :D')
+                    //history.push('/')
+                })
+            }else{
+                console.log(res)
+            }
         })
-        .catch(e =>{
-            console.log(e)
-        })
+        .catch(e => console.error(e))
     }
 
 	return(
