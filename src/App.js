@@ -25,14 +25,14 @@ function App() {
 			credentials: "include",
 		})
 		.then(res => {
-			if(res.status===200 || res.status===201) { //성공하면 아래 then 작동
+			if(res.status===200 || res.status===201 || res.status===202) { //성공하면 아래 then 작동
 				res.json().then(res =>{ 
 					console.log('토큰 체크 성공')
 					setLogin(res)
 					if(func) func()
 				})
 			}else{
-				console.log('토큰 없음')
+				console.log('토큰 없음') //res.status===204(No Content)
 				setLogin(false)
 				if(func) func()
 			}
