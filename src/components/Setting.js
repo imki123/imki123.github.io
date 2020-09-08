@@ -21,12 +21,10 @@ function Setting(props) {
                 credentials: "include",
             })
             .then(res => {
-                if(res.status===200 || res.status===201 || res.status===204) { //성공하면 아래 then 작동
-                    res.json().then(res =>{ 
-                        console.log('로그아웃 성공')
-                        history.push('/')
-                        setLogin(false)
-                    })
+                if(res.status===204) { //로그아웃은 204가 성공
+                    console.log('로그아웃 성공')
+                    history.push('/')
+                    setLogin(false)
                 }else{
                     console.log('로그아웃 실패', res)
                 }
