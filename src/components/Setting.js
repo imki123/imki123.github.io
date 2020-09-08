@@ -8,8 +8,10 @@ function Setting(props) {
 
     const closeSetting = e => {
         const settingWrapper = document.querySelector('#settingWrapper')
-        settingWrapper.style.display = 'none'
         e.stopPropagation()
+        setTimeout(function(){
+            settingWrapper.style.display = 'none'
+        },200)
     }
 
     const logout = e => {
@@ -38,7 +40,7 @@ function Setting(props) {
             <div id="setting">
                 <div id="settingListWrapper">
                     {login ? 
-                        <div className="settingList">{login.username}</div> :
+                        <Link className="settingList" to="/loginStatus">{login.username}</Link> :
                         <Link className="settingList" to="/login">로그인</Link>    
                     }
                     <div className="settingList" onClick={logout}>로그아웃</div>
@@ -47,8 +49,6 @@ function Setting(props) {
                 </div>
             </div>
         </div>
-        
-
     ) 
 }
 export default React.memo(Setting)

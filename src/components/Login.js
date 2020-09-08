@@ -1,21 +1,24 @@
 import React, { useState, useEffect } from 'react'
 import './Login.css'
-import { useLocation, useHistory } from 'react-router-dom'
+import { Switch, Route, useLocation, useHistory } from 'react-router-dom'
 
 function Login(props) {
-    const {setLogin, checkToken} = props
+    const {login, setLogin, checkToken} = props
     const location = useLocation()
     const history = useHistory()
     const [checkUsername, setCheckUsername] = useState('')
     const [checkPassword, setCheckPassword] = useState('')
     const [checkPasswordConfirm, setCheckPasswordConfirm] = useState('')
     const [buttonName, setButtonName] = useState('로그인')
+    
 
     useEffect(() => {
         if(location.pathname.indexOf('register') > -1){
             setButtonName('회원가입')
+        }else if(location.pathname.indexOf('withdraw') > -1){
+            setButtonName('회원탈퇴')
         }
-    },[location, checkUsername, checkPassword, checkPasswordConfirm])
+    },[location])
 
     const changeUsername = e => {
         const {value} = e.target
@@ -57,10 +60,9 @@ function Login(props) {
     }
     const clickButton = e => {
         e.preventDefault();
+        let url = 'https://blog-imki123-backend.herokuapp.com/auth'
         const username = document.querySelector('[name=username]').value
         const password = document.querySelector('[name=password]').value
-        let url = 'https://blog-imki123-backend.herokuapp.com/auth'
-        //url = 'http://localhost:4000/auth'
 
         if(checkUsername === '' && password.length >= 1 &&
             checkPassword === '' && checkPasswordConfirm === '')
@@ -87,7 +89,7 @@ function Login(props) {
                             history.push('/')
                         })
                     }else{
-                        let message = '회원가입에 실패했습니다. :('
+                        let message = '회원가입에 실패했습니다 :('
                         if(e.response && e.response.status === 409){
                             message += '\n이미 존재하는 아이디입니다.'
                         }
@@ -119,7 +121,7 @@ function Login(props) {
                             history.push('/')
                         })
                     }else{
-                        let message = '로그인에 실패했습니다. :('
+                        let message = '로그인에 실패했습니다 :('
                         if(e.response && e.response.status === 401){
                             message += '\n로그인 정보를 확인해주세요.'
                         }
@@ -130,26 +132,36 @@ function Login(props) {
             }
         }
     }
-	return(
-        <div id="loginWrapper">
-            <form id="login">
-                <div className="text">아이디</div>
-                <input name="username" onChange={changeUsername}/>
-                <div className="check">{checkUsername}</div>
 
-                <div className="text">비밀번호</div>
-                <input name="password" type="password" onChange={changePassword} autoComplete="currnet-password"/>
-                <div className="check">{checkPassword}</div>
-                
-                {buttonName === '회원가입' &&
-                <>
-                    <div className="text">비밀번호 확인</div>
-                    <input name="passwordConfirm" type="password" onChange={changePasswordConfirm} autoComplete="currnet-password"/>
-                    <div className="check" id="checkPasswordConfirm">{checkPasswordConfirm}</div>
-                </>}
+    return(
+        <div id="background">
+            <div id="loginWrapper">
+                <form id="login">
+                    <Switch>
+                        <Route path={['/login','/register','/withdraw']}>
+                            <div className="text">아이디</div>
+                            <input name="username" onChange={changeUsername}/>
+                            <div className="check">{checkUsername}</div>
 
-                <button className="hover" onClick={clickButton}>{buttonName}</button>
-            </form>
+                            <div className="text">비밀번호</div>
+                            <input name="password" type="password" onChange={changePassword} autoComplete="currnet-password"/>
+                            <div className="check">{checkPassword}</div>
+                            
+                            {buttonName === '회원가입' &&
+                            <>
+                                <div className="text">비밀번호 확인</div>
+                                <input name="passwordConfirm" type="password" onChange={changePasswordConfirm} autoComplete="currnet-password"/>
+                                <div className="check" id="checkPasswordConfirm">{checkPasswordConfirm}</div>
+                            </>}
+
+                            <button className="hover" onClick={clickButton}>{buttonName}</button>
+                        </Route>
+                        <Route path={['/loginStatus']}>
+                            <div className="center">{login.username}님은 현재 로그인 중입니다 :D</div>
+                        </Route>
+                    </Switch>
+                </form>
+            </div>
         </div>
     ) 
 }
