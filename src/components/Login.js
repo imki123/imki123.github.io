@@ -61,7 +61,7 @@ function Login(props) {
         const username = document.querySelector('[name=username]').value
         const password = document.querySelector('[name=password]').value
         let url = 'https://blog-imki123-backend.herokuapp.com/auth'
-        url = 'http://localhost:4000/auth'
+        //url = 'http://localhost:4000/auth'
 
         if(checkUsername === '' && password.length >= 1 &&
             checkPassword === '' && checkPasswordConfirm === '')
