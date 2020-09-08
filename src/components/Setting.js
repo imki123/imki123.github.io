@@ -43,9 +43,9 @@ function Setting(props) {
                         <Link className="settingList" to="/loginStatus">{login.username}</Link> :
                         <Link className="settingList" to="/login">로그인</Link>    
                     }
-                    <div className="settingList" onClick={logout}>로그아웃</div>
-                    <Link className="settingList" to="/register">회원가입</Link>
-                    <div className="settingList">회원탈퇴</div>
+                    {login && <div className="settingList" onClick={logout}>로그아웃</div>}
+                    {!login && <Link className="settingList" to="/register">회원가입</Link>}
+                    {login && <Link className="settingList" to="/withdraw">회원탈퇴</Link>}
                 </div>
             </div>
         </div>

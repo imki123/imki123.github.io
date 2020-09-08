@@ -95,7 +95,7 @@ function App() {
 					<Switch>
 						<Route path='/' exact/>
 						<Route path={['/about','/article']}/>
-						<Route path={['/login','/register','/loginStatus']}>
+						<Route path={['/login','/register','/loginStatus','/withdraw']}>
 							<Login login={login} setLogin={setLogin} checkToken={checkToken}/>
 						</Route>
 						<Route path='*' component={NotFoundPage}/>

@@ -61,8 +61,10 @@ function Login(props) {
     const clickButton = e => {
         e.preventDefault();
         let url = 'https://blog-imki123-backend.herokuapp.com/auth'
-        const username = document.querySelector('[name=username]').value
-        const password = document.querySelector('[name=password]').value
+        let username = document.querySelector('[name=username]')
+        if(username) username = username.value
+        let password = document.querySelector('[name=password]')
+        if(password) password = password.value
 
         if(checkUsername === '' && password.length >= 1 &&
             checkPassword === '' && checkPasswordConfirm === '')
@@ -95,6 +97,35 @@ function Login(props) {
                         }
                         if(res.status === 400){
                             message += '\n아이디나 비밀번호를 확인해주세요.'
+                        }
+                        alert(message)
+                    }
+                })
+                .catch(e => console.error(e))
+            }else if(buttonName === '회원탈퇴'){
+                url += '/withdraw'
+                fetch(url,{
+                    mode: 'cors',
+                    method: 'delete',
+                    credentials: "include",
+                    headers:{'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        username: login.username,
+                        password: password,
+                    }),
+                })
+                .then(res => {
+                    if(res.status===200) { //삭제하면 Ok
+                        alert('계정이 탈퇴되었습니다. 또 들려주세요 :D')
+                        checkToken()
+                        history.push('/')
+                    }else{
+                        let message = '탈퇴에 실패했습니다 :('
+                        if(res.status === 204){
+                            message += '\n존재하지 않는 아이디입니다.'
+                        }
+                        if(res.status === 401){
+                            message += '\n비밀번호를 확인해주세요.'
                         }
                         alert(message)
                     }
@@ -140,7 +171,11 @@ function Login(props) {
                     <Switch>
                         <Route path={['/login','/register','/withdraw']}>
                             <div className="text">아이디</div>
-                            <input name="username" onChange={changeUsername}/>
+                            {buttonName === '회원탈퇴' ?
+                                <div>{login.username}</div> :
+                                <input name="username" onChange={changeUsername}/>
+                            }
+
                             <div className="check">{checkUsername}</div>
 
                             <div className="text">비밀번호</div>
