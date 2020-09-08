@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './Login.css'
 import { useLocation, useHistory } from 'react-router-dom'
-import Axios from 'axios'
 
 function Login(props) {
     const {setLogin, checkToken} = props
@@ -85,7 +84,7 @@ function Login(props) {
                             console.log(res)
                             alert(res.username+'님의 회원가입에 성공했습니다 :D')
                             checkToken()
-                            //history.push('/')
+                            history.push('/')
                         })
                     }else{
                         let message = '회원가입에 실패했습니다. :('
@@ -117,7 +116,7 @@ function Login(props) {
                             console.log(res)
                             setLogin(res)
                             checkToken()
-                            //history.push('/')
+                            history.push('/')
                         })
                     }else{
                         let message = '로그인에 실패했습니다. :('
