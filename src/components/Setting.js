@@ -3,7 +3,7 @@ import './Setting.css'
 import { Link, useHistory } from 'react-router-dom'
 
 function Setting(props) {
-    const {login} = props
+    const {login, setLogin} = props
     const history = useHistory()
 
     const closeSetting = e => {
@@ -21,13 +21,14 @@ function Setting(props) {
                 credentials: "include",
             })
             .then(res => {
-                if(res.status===200 || res.status===201) { //성공하면 아래 then 작동
+                if(res.status===200 || res.status===201 || res.status===204) { //성공하면 아래 then 작동
                     res.json().then(res =>{ 
-                        console.log(res)
+                        console.log('로그아웃 성공')
                         history.push('/')
+                        setLogin(false)
                     })
                 }else{
-                    console.log(res)
+                    console.log('로그아웃 실패', res)
                 }
             })
             .catch(e => console.error(e))
