@@ -10,6 +10,7 @@ function Login(props) {
     const [checkPassword, setCheckPassword] = useState('')
     const [checkPasswordConfirm, setCheckPasswordConfirm] = useState('')
     const [buttonName, setButtonName] = useState('로그인')
+    const [background, setBackground] = useState('')
     
 
     useEffect(() => {
@@ -17,6 +18,7 @@ function Login(props) {
             setButtonName('회원가입')
         }else if(location.pathname.indexOf('withdraw') > -1){
             setButtonName('회원탈퇴')
+            setBackground('red')
         }
     },[location])
 
@@ -103,34 +105,36 @@ function Login(props) {
                 })
                 .catch(e => console.error(e))
             }else if(buttonName === '회원탈퇴'){
-                url += '/withdraw'
-                fetch(url,{
-                    mode: 'cors',
-                    method: 'delete',
-                    credentials: "include",
-                    headers:{'Content-Type': 'application/json'},
-                    body: JSON.stringify({
-                        username: login.username,
-                        password: password,
-                    }),
-                })
-                .then(res => {
-                    if(res.status===200) { //삭제하면 Ok
-                        alert('계정이 탈퇴되었습니다. 또 들려주세요 :D')
-                        checkToken()
-                        history.push('/')
-                    }else{
-                        let message = '탈퇴에 실패했습니다 :('
-                        if(res.status === 204){
-                            message += '\n존재하지 않는 아이디입니다.'
+                if(window.confirm("계정 탈퇴시 복구할 수 없습니다. 정말로 탈퇴하시겠습니까?")){
+                    url += '/withdraw'
+                    fetch(url,{
+                        mode: 'cors',
+                        method: 'delete',
+                        credentials: "include",
+                        headers:{'Content-Type': 'application/json'},
+                        body: JSON.stringify({
+                            username: login.username,
+                            password: password,
+                        }),
+                    })
+                    .then(res => {
+                        if(res.status===200) { //삭제하면 Ok
+                            alert('계정이 탈퇴되었습니다. 또 들러 주세요 :D')
+                            checkToken()
+                            history.push('/')
+                        }else{
+                            let message = '탈퇴에 실패했습니다 :('
+                            if(res.status === 204){
+                                message += '\n존재하지 않는 아이디입니다.'
+                            }
+                            if(res.status === 401){
+                                message += '\n비밀번호를 확인해주세요.'
+                            }
+                            alert(message)
                         }
-                        if(res.status === 401){
-                            message += '\n비밀번호를 확인해주세요.'
-                        }
-                        alert(message)
-                    }
-                })
-                .catch(e => console.error(e))
+                    })
+                    .catch(e => console.error(e))
+                }
             }else{ //로그인
                 url += '/login'
                 fetch(url,{
@@ -161,6 +165,8 @@ function Login(props) {
                 })
                 .catch(e => console.error(e))
             }
+        }else{
+            alert('입력 정보를 확인해주세요.')
         }
     }
 
@@ -188,8 +194,7 @@ function Login(props) {
                                 <input name="passwordConfirm" type="password" onChange={changePasswordConfirm} autoComplete="currnet-password"/>
                                 <div className="check" id="checkPasswordConfirm">{checkPasswordConfirm}</div>
                             </>}
-
-                            <button className="hover" onClick={clickButton}>{buttonName}</button>
+                            <button className={`hover ${background}`} onClick={clickButton}>{buttonName}</button>
                         </Route>
                         <Route path={['/loginStatus']}>
                             <div className="center">{login.username}님은 현재 로그인 중입니다 :D</div>

@@ -53,3 +53,6 @@
     font-size: inherit;
     outline: none;
 }
+.red{
+    background: red !important;
+}
