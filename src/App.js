@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './App.css'
 import { Switch, Route, useLocation} from 'react-router-dom'
-import Axios from 'axios'
 
 import Header from './components/Header'
 import Body from './components/Body'
@@ -20,7 +19,6 @@ function App() {
 
 	const checkToken = func => {
 		let url = 'https://blog-imki123-backend.herokuapp.com/auth/check'
-		// Axios.get(url)
 		fetch(url,{
 			mode: 'cors',
 			method: 'get',
@@ -53,12 +51,22 @@ function App() {
 				url = url + location.pathname + location.search
 			}
 
-			Axios.get(url)
+			fetch(url)
 			.then(res => {
-				setPosts(res.data)
-				setHeaders(res.headers)
-				setReady(true)
+				if(res.status===200 || res.status===201) { //성공하면 아래 then 작동
+					const h = {}
+					res.headers.forEach((v,n) => h[n] = v)
+					setHeaders(h)
+					res.json().then(res =>{ 
+						setPosts(res)
+						setReady(true)
+					})
+				}else{
+					console.log('posts 조회 실패')
+					setReady(true)
+				}
 			})
+			.catch(e => console.error(e))
 		}) 
 
 		

@@ -66,8 +66,8 @@ function Login(props) {
 
         if(checkUsername === '' && password.length >= 1 &&
             checkPassword === '' && checkPasswordConfirm === '')
-        { //입력폼에 이상이 없으면 axios submit
-            console.log('axios submit')
+        { //입력폼에 이상이 없으면 fetch submit
+            console.log('fetch submit')
             if(buttonName === '회원가입'){
                 url += '/register'
                 fetch(url,{
@@ -90,10 +90,10 @@ function Login(props) {
                         })
                     }else{
                         let message = '회원가입에 실패했습니다 :('
-                        if(e.response && e.response.status === 409){
+                        if(res.status === 409){
                             message += '\n이미 존재하는 아이디입니다.'
                         }
-                        if(e.response && e.response.status === 400){
+                        if(res.status === 400){
                             message += '\n아이디나 비밀번호를 확인해주세요.'
                         }
                         alert(message)
@@ -122,7 +122,7 @@ function Login(props) {
                         })
                     }else{
                         let message = '로그인에 실패했습니다 :('
-                        if(e.response && e.response.status === 401){
+                        if(res.status === 401){
                             message += '\n로그인 정보를 확인해주세요.'
                         }
                         alert(message)
