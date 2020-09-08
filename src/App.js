@@ -26,18 +26,20 @@ function App() {
 			method: 'get',
 			credentials: "include",
 		})
-		.then(res => res.json())
 		.then(res => {
-			console.log('토큰 체크 성공')
-			console.log(res)
-			setLogin(res)
-			if(func) func()
+			if(res.status===200 || res.status===201) { //성공하면 아래 then 작동
+				res.json().then(res =>{ 
+					console.log('토큰 체크 성공')
+					setLogin(res)
+					if(func) func()
+				})
+			}else{
+				console.log('토큰 없음')
+				setLogin(false)
+				if(func) func()
+			}
 		})
-		.catch(e => {
-			console.log('토큰 없음')
-			setLogin(false)
-			if(func) func()
-		})
+		.catch(e => console.error(e))
 	}
 
 	//주소 변경될 때, 토큰 체크하고 포스트 조회하기
