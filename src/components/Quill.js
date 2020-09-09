@@ -6,16 +6,21 @@ import 'quill/dist/quill.snow.css'
 function Quill(props) {
     const { quill, quillRef } = useQuill()
     const clickContent = () => {
-        console.log(quill.getContents())
+        const cont = quill.getContents().ops
+        console.log(cont)
+        let str = ''
+        for(let i in cont){
+            str += cont[i].insert + '\n'
+        }
+        alert(str)
     }
     const clickText = () => {
         console.log(quill.getText())
+        alert(quill.getText())
     }
     useEffect(() => {
         const editor = document.querySelector('#editor')
         const toolbar = document.querySelector('.ql-toolbar')
-        console.log(editor)
-        console.log(toolbar)
         if(editor && toolbar){
             editor.style.marginBottom = toolbar.clientHeight+ 10 + 'px'
         }

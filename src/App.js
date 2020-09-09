@@ -17,7 +17,6 @@ function App() {
 	const [headers, setHeaders] = useState({})
 	const [login, setLogin] = useState(false)
 	const location = useLocation() //페이지 경로 변경 감지
-	const history = useHistory()
 
 	const checkToken = (func) => {
 		let url = 'https://blog-imki123-backend.herokuapp.com/auth/check'
