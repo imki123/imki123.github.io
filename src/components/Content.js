@@ -8,6 +8,9 @@ import PostList from './PostList'
 
 function Content(props) {
     let {posts, headers, ready} = props
+    useEffect(() => {
+        
+    })
     const location = useLocation()
     const search = queryString.parse(location.search)
     let startPost = 1
@@ -99,7 +102,11 @@ function Content(props) {
             <div id="loading">
                 <img alt="Loading" src={process.env.PUBLIC_URL+'/images/loading.gif'}/>
             </div>
+            {props.children}
+            
             {ready && <>
+                
+                {!props.children && posts && posts.length === 0 && <div>작성된 글이 없네요. ^^;</div>}
                 { //목록
                     (startPost > 1 && paging) && <div className="postListWrapper">
                         <div className="postListTitle">목록</div>
@@ -117,7 +124,6 @@ function Content(props) {
                         {<Paging paging={paging}/>}
                     </div>
                 }
-                {props.children}
             </>}
         </div>
     ) 

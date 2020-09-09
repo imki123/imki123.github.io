@@ -24,6 +24,7 @@ function Guide() {
                 <NavLink to="/about" className="list" activeClassName="activeList">About</NavLink>
                 <NavLink to="/article" className="list" activeClassName="activeList">Article</NavLink>
                 <NavLink to="/programming" className="list" activeClassName="activeList">Programming</NavLink>
+                <NavLink to="/quill" className="list" activeClassName="activeList">Quill</NavLink>
             </div>
         </div>
     ) 

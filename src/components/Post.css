@@ -14,3 +14,6 @@
     display: inline;
     color: blue !important;
 }
+.postContent{
+    padding: 0 30px;
+}

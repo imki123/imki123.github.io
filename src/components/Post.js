@@ -21,11 +21,14 @@ function Post(props){
                 <NavLink exact to="/" className="inActiveNav" activeClassName="activeNav" >Home</NavLink>
                 <NavLink to="/about" className="inActiveNav" activeClassName="activeNav" >About</NavLink>
                 <NavLink to="/article" className="inActiveNav" activeClassName="activeNav" >Article</NavLink>
-                <NavLink to="/programmin" className="inActiveNav" activeClassName="activeNav" >Programming</NavLink>
+                <NavLink to="/programming" className="inActiveNav" activeClassName="activeNav" >Programming</NavLink>
                 - {no} - {date}
             </div>
             <h2 className="postTitle">{post.title}</h2>
-            {ps.map((p,idx) => <p key={idx}>{p}</p>)}
+            <div className="postContent">
+                {ps.map((p,idx) => <p key={idx}>{p}</p>)}
+            </div>
+            
         </div>
     )
 }
