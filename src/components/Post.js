@@ -1,19 +1,38 @@
 import React, { useEffect, useState } from 'react'
 import './Post.css'
 import { NavLink, useLocation } from 'react-router-dom'
+import { useQuill } from 'react-quilljs';
 
 function Post(props){
     const {post, no} = props
-    let date = post.publishedDate.substring(0,10)
-
     const [ps, setPs] = useState([])
     const location = useLocation()
+    let date = post.publishedDate.substring(0,10)
+    const {quill, quillRef} = useQuill()
 
     useEffect(() => {
         if(post){
-            setPs(post.body.split('\n')) //텍스트를 문단으로 쪼개기
+            if(typeof(post.body) === 'string'){ 
+                setPs(post.body.split('\n')) //텍스트일 경우 문단으로 쪼개기
+            }else{
+                if(quill){
+                    quill.setContents(post.body)
+                }
+            }
         }
-    },[post, location])
+    },[post, location, quill])
+    useEffect(() => {
+        const editor = document.querySelector('#editor')
+        const toolbar = document.querySelector('.ql-toolbar')
+        if(editor && toolbar){
+            editor.style.marginBottom = toolbar.clientHeight+ 10 + 'px'
+        }
+        window.addEventListener('resize',function(){
+            if(editor && toolbar){
+                editor.style.marginBottom = toolbar.clientHeight+ 10 + 'px'
+            }
+        })
+    },[location])
 
     return(
         <div className="post" id={`post_${no}`}>
@@ -26,7 +45,12 @@ function Post(props){
             </div>
             <h2 className="postTitle">{post.title}</h2>
             <div className="postContent">
-                {ps.map((p,idx) => <p key={idx}>{p}</p>)}
+                {typeof(post.body) === 'string' ? 
+                    ps.map((p,idx) => <p key={idx}>{p}</p>) :
+                    <div id="editor">
+                        <div ref={quillRef} />
+                    </div>
+                }
             </div>
             
         </div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './App.css'
-import { Switch, Route, useLocation, useHistory } from 'react-router-dom'
+import { Switch, Route, useLocation} from 'react-router-dom'
 
 import Header from './components/Header'
 import Body from './components/Body'
@@ -22,7 +22,7 @@ function App() {
 		let url = 'https://blog-imki123-backend.herokuapp.com/auth/check'
 		fetch(url, {
 			mode: 'cors',
-			method: 'get',
+			method: 'GET',
 			credentials: 'include',
 		})
 			.then((res) => {
@@ -47,29 +47,35 @@ function App() {
 		setReady(false)
 		checkToken(function () {
 			let url = 'https://blog-imki123-backend.herokuapp.com/posts'
+			//url = 'http://localhost:4000/posts'
 			if (location.pathname === '/') {
 				url = url + '/home' + location.pathname + location.search
 			} else {
 				url = url + location.pathname + location.search
 			}
 
-			fetch(url)
-				.then((res) => {
-					if (res.status === 200 || res.status === 201) {
-						//성공하면 아래 then 작동
-						const h = {}
-						res.headers.forEach((v, n) => (h[n] = v))
-						setHeaders(h)
-						res.json().then((res) => {
-							setPosts(res)
-							setReady(true)
-						})
-					} else {
-						console.log('posts 조회 실패')
+			fetch(url,{
+				mode: 'cors',
+				method: 'GET',
+				credentials: "include",
+			})
+			.then((res) => {
+				if (res.status === 200 || res.status === 201) {
+					//성공하면 아래 then 작동
+					const h = {}
+					res.headers.forEach((v, n) => (h[n] = v))
+					setHeaders(h)
+					res.json().then(res => {
+						console.log(res)
+						setPosts(res)
 						setReady(true)
-					}
-				})
-				.catch((e) => console.error(e))
+					})
+				} else {
+					console.log('posts 조회 실패')
+					setReady(true)
+				}
+			})
+			.catch((e) => console.error(e))
 		})
 
 		//주소 변경 시 해쉬 위치로 scroll. 해쉬는 리렌더링 하지 않음.

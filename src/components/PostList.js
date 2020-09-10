@@ -11,10 +11,14 @@ function PostList(props){
 
     useEffect(() => {
         if(post){
-            if(post.body.length > 100){
-                setBody(post.body.replace('\n',' ').slice(0,100)+'...') //텍스트 길이 자르기
+            if(typeof(post.body) === 'string'){
+                if(post.body.length > 100){
+                    setBody(post.body.replace('\n',' ').slice(0,100)+'...') //텍스트 길이 자르기
+                }else{
+                    setBody(post.body)
+                }
             }else{
-                setBody(post.body)
+                setBody()
             }
         }
     },[post])

@@ -1,3 +1,42 @@
+[name=title]{
+    width: 100%;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: 0px;
+    border-bottom: 1px solid black;
+    outline: none;
+    margin-bottom: 4px;
+}
 #editor{
     height: 70%;
+}
+#tags{
+    margin: 10px 0;
+}
+#tagsTitle{
+    font-size:1.2rem;
+    font-weight: bold;
+    margin-right: 12px;
+}
+#editor label{
+    margin-right: 12px;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+#editor label:hover{
+    text-decoration: underline;
+}
+.editorButtons{
+    text-align: left;
+}
+.editorButtons button{
+    border: 0px solid black;
+    border-radius: 5px;
+    background: #84ff84;
+    cursor: pointer;
+    height: 30px;
+    font-size: inherit;
+    outline: none;
+    cursor: pointer;
 }

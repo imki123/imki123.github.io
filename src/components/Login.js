@@ -63,6 +63,7 @@ function Login(props) {
     const clickButton = e => {
         e.preventDefault();
         let url = 'https://blog-imki123-backend.herokuapp.com/auth'
+        //url = 'http://localhost:4000/auth'
         let username = document.querySelector('[name=username]')
         if(username) username = username.value
         let password = document.querySelector('[name=password]')
@@ -76,7 +77,7 @@ function Login(props) {
                 url += '/register'
                 fetch(url,{
                     mode: 'cors',
-                    method: 'post',
+                    method: 'POST',
                     credentials: "include",
                     headers:{'Content-Type': 'application/json'},
                     body: JSON.stringify({
@@ -109,7 +110,7 @@ function Login(props) {
                     url += '/withdraw'
                     fetch(url,{
                         mode: 'cors',
-                        method: 'delete',
+                        method: 'DELETE',
                         credentials: "include",
                         headers:{'Content-Type': 'application/json'},
                         body: JSON.stringify({
@@ -139,7 +140,7 @@ function Login(props) {
                 url += '/login'
                 fetch(url,{
                     mode: 'cors',
-                    method: 'post',
+                    method: 'POST',
                     credentials: "include",
                     headers:{'Content-Type': 'application/json'},
                     body: JSON.stringify({

@@ -19,7 +19,7 @@ function Setting(props) {
             let url = 'https://blog-imki123-backend.herokuapp.com/auth/logout'
             fetch(url,{
                 mode: 'cors',
-                method: 'post',
+                method: 'POST',
                 credentials: "include",
             })
             .then(res => {
