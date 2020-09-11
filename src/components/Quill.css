@@ -40,3 +40,6 @@
     outline: none;
     cursor: pointer;
 }
+.ql-container{
+    font-size: inherit !important;
+}
