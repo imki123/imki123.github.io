@@ -18,8 +18,7 @@
 .activePage{
     padding: 0 8px;
     margin: 0 4px;
-    background: blue;
-    border: 1px solid blue;
-    color: white !important;
+    background: #76ff76;
+    border: 1px solid #50ff50;
     border-radius: 30%;
 }
