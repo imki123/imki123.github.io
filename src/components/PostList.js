@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import './PostList.css'
 import { useLocation, Link } from 'react-router-dom'
+import { useQuill } from 'react-quilljs';
 
 function PostList(props){
     const {post, no} = props
-    let date = post.publishedDate.substring(0,10)
-
     const [body, setBody] = useState([])
     const location = useLocation()
+    const {quill, quillRef} = useQuill({readOnly: true})
+    let date = post.publishedDate.substring(0,10)
+
 
     useEffect(() => {
         if(post){
@@ -18,10 +20,14 @@ function PostList(props){
                     setBody(post.body)
                 }
             }else{
-                setBody()
+                if(quill){ //quill Delta를 텍스트로 변경하기
+                    quill.setContents(post.body)
+                    setBody(quill.getText().replace(/\n/g,' '))
+                    quill.setText(body)
+                }
             }
         }
-    },[post])
+    },[post, quill, body])
 
     return(
         <Link to={location.pathname+location.search+'#post_'+no}>
@@ -33,7 +39,12 @@ function PostList(props){
                     </div>
                     <span className="postDate">{date}</span>
                 </div>
-                <div className="postBody">{body}</div>
+                {typeof(post.body) === 'string' ? 
+                    <div className="postBody">{body}</div> :
+                    <div id="editor">
+                        <div ref={quillRef} />
+                    </div>
+                }
             </div>
         </Link>
     )

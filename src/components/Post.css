@@ -6,6 +6,9 @@
     padding: 20px 0 60px;
     border-bottom: 2px dotted green;
 }
+.post .ql-toolbar{
+    display: none;
+}
 .inActiveNav{
     display: none;
     margin-right: 8px;
@@ -17,3 +20,4 @@
 .postContent{
     padding: 0 8px;
 }
+

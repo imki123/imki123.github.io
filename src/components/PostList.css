@@ -6,6 +6,16 @@
 .postList:hover{
     background: #b3ffb3;
 }
+.postList .ql-toolbar{
+    display: none;
+}
+.postList .ql-container{
+    border: 0px !important;
+}
+.postList .ql-editor{
+    height: 30px;
+    overflow: hidden;
+}
 .postListHeader{
     display: flex;
     justify-content: space-between;

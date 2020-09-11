@@ -53,7 +53,6 @@ function Quill(props) {
             }),
         })
         .then(res => {
-            console.log('res:',res)
             if(res.status===200 || res.status===201) { //성공하면 아래 then 작동
                 res.json().then(res =>{ 
                     console.log(res)
@@ -102,7 +101,6 @@ function Quill(props) {
         .then(res => {
             if(res.status===200 || res.status===201) { //성공하면 아래 then 작동
                 res.json().then(res =>{ 
-                    console.log('get 성공')
                     console.log(res)
                     let title = document.querySelector('[name=title]') 
                     title.value = res.title
@@ -124,7 +122,6 @@ function Quill(props) {
                     }
                 })
             }else{
-                console.log('get 실패')
                 res.json().then(res =>{ 
                     console.log(res)
                 })

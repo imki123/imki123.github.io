@@ -8,7 +8,7 @@ function Post(props){
     const [ps, setPs] = useState([])
     const location = useLocation()
     let date = post.publishedDate.substring(0,10)
-    const {quill, quillRef} = useQuill()
+    const {quill, quillRef} = useQuill({readOnly: true, theme: 'bubble', toolbar: false})
 
     useEffect(() => {
         if(post){

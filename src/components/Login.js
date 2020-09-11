@@ -88,7 +88,6 @@ function Login(props) {
                 .then(res => {
                     if(res.status===200 || res.status===201) { //성공하면 아래 then 작동
                         res.json().then(res =>{ 
-                            console.log(res)
                             alert(res.username+'님의 회원가입에 성공했습니다 :D')
                             checkToken()
                             history.push('/')
@@ -151,7 +150,6 @@ function Login(props) {
                 .then(res => {
                     if(res.status===200 || res.status===201) { //성공하면 아래 then 작동
                         res.json().then(res =>{ 
-                            console.log(res)
                             setLogin(res)
                             checkToken()
                             history.push('/')
