@@ -66,7 +66,6 @@ function App() {
 					res.headers.forEach((v, n) => (h[n] = v))
 					setHeaders(h)
 					res.json().then(res => {
-						console.log(res)
 						setPosts(res)
 						setReady(true)
 					})
@@ -96,7 +95,7 @@ function App() {
 			<Setting login={login} setLogin={setLogin} />
 			<Body>
 				<Guide />
-				<Content posts={posts} headers={headers} ready={ready}>
+				<Content posts={posts} headers={headers} ready={ready} login={login}>
 					<Switch>
 						<Route path="/" exact />
 						<Route path={['/about', '/article', '/programming']} />

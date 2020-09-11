@@ -7,7 +7,7 @@ import Paging from './Paging';
 import PostList from './PostList'
 
 function Content(props) {
-    let {posts, headers, ready} = props
+    let {posts, headers, ready, login} = props
     useEffect(() => {
         
     })
@@ -115,7 +115,7 @@ function Content(props) {
                     </div>
                 }
                 { //글
-                    posts && posts.map((post, idx) => <Post no={startPost-idx} key={post.postId} post={post}/>)
+                    posts && posts.map((post, idx) => <Post no={startPost-idx} key={post.postId} post={post} login={login}/>)
                 }
                 { //목록
                     (startPost > 1 && paging) && <div className="postListWrapper">

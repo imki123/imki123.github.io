@@ -4,7 +4,7 @@ import { NavLink, useLocation } from 'react-router-dom'
 import { useQuill } from 'react-quilljs';
 
 function Post(props){
-    const {post, no} = props
+    const {post, no, login} = props
     const [ps, setPs] = useState([])
     const location = useLocation()
     let date = post.publishedDate.substring(0,10)
@@ -34,6 +34,14 @@ function Post(props){
         })
     },[location])
 
+    //포스트 수정버튼 클릭시
+    const editPost = () => {
+        
+    }
+    const deletePost = () => {
+        
+    }
+
     return(
         <div className="post" id={`post_${no}`}>
             <div className="nav">
@@ -52,6 +60,10 @@ function Post(props){
                     </div>
                 }
             </div>
+
+            {login && <div className="postButtons">
+                <button onClick={editPost}>수정</button> <button onClick={deletePost}>삭제</button>
+            </div>}
             
         </div>
     )
