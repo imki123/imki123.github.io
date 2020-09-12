@@ -16,6 +16,7 @@ function App() {
 	const [posts, setPosts] = useState([])
 	const [headers, setHeaders] = useState({})
 	const [login, setLogin] = useState(false)
+	const [refresh, setRefresh] = useState(false)
 	const location = useLocation() //페이지 경로 변경 감지
 
 	const checkToken = (func) => {
@@ -50,7 +51,12 @@ function App() {
 			//url = 'http://localhost:4000/posts'
 			if (location.pathname === '/') {
 				url = url + '/home' + location.pathname + location.search
-			} else {
+			}else if(location.pathname.indexOf('/quill') > -1) {
+				setReady(true)
+				setHeaders(false)
+				setPosts(false)
+				return ;
+			}else {
 				url = url + location.pathname + location.search
 			}
 
@@ -87,7 +93,7 @@ function App() {
 				if (content.scrollTop <= 0) clearInterval(frame)
 			}, 10)
 		}
-	}, [location.pathname, location.search])
+	}, [location.pathname, location.search, refresh])
 
 	return (
 		<div id="app">
@@ -95,7 +101,7 @@ function App() {
 			<Setting login={login} setLogin={setLogin} />
 			<Body>
 				<Guide />
-				<Content posts={posts} headers={headers} ready={ready} login={login}>
+				<Content posts={posts} headers={headers} ready={ready} login={login} refresh={refresh} setRefresh={setRefresh}>
 					<Switch>
 						<Route path="/" exact />
 						<Route path={['/about', '/article', '/programming']} />
@@ -103,7 +109,9 @@ function App() {
 							<Login login={login} setLogin={setLogin} checkToken={checkToken}/>
 						</Route>
 						<Route path={['/quill']}>
-							<Quill/>
+							{login && login.username === 'imki123' ? 
+							<Quill/> :
+							<NotFoundPage/>}
 						</Route>
 						<Route path="*" component={NotFoundPage} />
 					</Switch>

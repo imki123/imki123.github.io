@@ -1,16 +1,15 @@
-import React, { useEffect } from 'react'
+import React, { useEffect} from 'react'
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import './Content.css'
-import Post from './Post';
 import queryString from 'query-string'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
+
+import Post from './Post';
 import Paging from './Paging';
 import PostList from './PostList'
 
 function Content(props) {
-    let {posts, headers, ready, login} = props
-    useEffect(() => {
-        
-    })
+    let {posts, headers, ready, login, refresh, setRefresh} = props
     const location = useLocation()
     const search = queryString.parse(location.search)
     let startPost = 1
@@ -96,6 +95,9 @@ function Content(props) {
 
 	return(
         <div id="content" className="slideMenu" onClick={slideMenuMobile}>
+            {login && login.username === 'imki123' && <Link id="postFAB" className="hover" to="/quill">
+                <AddCircleOutlineIcon />
+            </Link>}
             <div id="menuFAB" className="hover" onClick={slideMenu}>
                 <img alt="MENU" src={process.env.PUBLIC_URL+'/images/guide_icon.png'}/>
             </div>
@@ -115,7 +117,8 @@ function Content(props) {
                     </div>
                 }
                 { //글
-                    posts && posts.map((post, idx) => <Post no={startPost-idx} key={post.postId} post={post} login={login}/>)
+                    posts && posts.map((post, idx) => 
+                        <Post no={startPost-idx} key={post.postId} post={post} login={login} refresh={refresh} setRefresh={setRefresh}/>)
                 }
                 { //목록
                     (startPost > 1 && paging) && <div className="postListWrapper">

@@ -6,6 +6,24 @@
   position: relative;
 }
 
+#postFAB{
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 90px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background: #b4ffb4;
+  border-radius: 50%;
+  box-shadow: 5px 5px 5px 0 grey;
+}
+#postFAB svg{
+  color: #606060;
+  font-size: 30px;
+}
+
 #menuFAB{
   position: fixed;
   display: flex;

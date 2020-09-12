@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import './Post.css'
-import { NavLink, useLocation } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import { useQuill } from 'react-quilljs';
 
 function Post(props){
-    const {post, no, login} = props
+    const {post, no, login, refresh, setRefresh} = props
     const [ps, setPs] = useState([])
     const location = useLocation()
     let date = post.publishedDate.substring(0,10)
@@ -21,25 +21,31 @@ function Post(props){
             }
         }
     },[post, location, quill])
-    useEffect(() => {
-        const editor = document.querySelector('#editor')
-        const toolbar = document.querySelector('.ql-toolbar')
-        if(editor && toolbar){
-            editor.style.marginBottom = toolbar.clientHeight+ 10 + 'px'
-        }
-        window.addEventListener('resize',function(){
-            if(editor && toolbar){
-                editor.style.marginBottom = toolbar.clientHeight+ 10 + 'px'
-            }
-        })
-    },[location])
 
-    //포스트 수정버튼 클릭시
-    const editPost = () => {
-        
-    }
-    const deletePost = () => {
-        
+    const deletePost = e => {
+        if(window.confirm('글 삭제 시 복구가 불가능합니다. 해당 글을 정말로 삭제하시겠습니까?')){
+            const postId = e.target.id
+            let url = 'https://blog-imki123-backend.herokuapp.com/posts/'+postId
+            //url = 'http://localhost:4000/posts/'+postId
+            
+            fetch(url,{
+                mode: 'cors',
+                method: 'DELETE',
+                credentials: "include",
+            })
+            .then(res => {
+                if(res.status===200 || res.status===204) { //성공하면 아래 then 작동
+                    res.json().then(res =>{ 
+                        console.log(`${postId}번 글 삭제 성공`)
+                        refresh ? setRefresh(false) : setRefresh(true)
+                    })
+                }else{
+                    let message = '글 삭제에 실패했습니다 :('
+                    alert(message)
+                }
+            })
+            .catch(e => console.error(e))
+        }
     }
 
     return(
@@ -61,8 +67,9 @@ function Post(props){
                 }
             </div>
 
-            {login && <div className="postButtons">
-                <button onClick={editPost}>수정</button> <button onClick={deletePost}>삭제</button>
+            {login && login.username === 'imki123' && <div className="postButtons">
+                <Link to={`/quill?postId=${post.postId}`}>수정</Link>&nbsp;
+                <button onClick={deletePost} id={post.postId} style={{background: 'red'}}>삭제</button>
             </div>}
             
         </div>
