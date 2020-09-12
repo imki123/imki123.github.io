@@ -109,9 +109,7 @@ function App() {
 							<Login login={login} setLogin={setLogin} checkToken={checkToken}/>
 						</Route>
 						<Route path={['/quill']}>
-							{login && login.username === 'imki123' ? 
-							<Quill/> :
-							<NotFoundPage/>}
+							<Quill login={login}/>
 						</Route>
 						<Route path="*" component={NotFoundPage} />
 					</Switch>

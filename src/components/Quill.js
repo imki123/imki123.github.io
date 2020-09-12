@@ -10,6 +10,7 @@ function Quill(props) {
     const history = useHistory()
     const { quill, quillRef } = useQuill()
     const postId = queryString.parse(location.search).postId
+    const {login} = props
 
     useEffect(() => {
         //console.log(postId, Number(postId))
@@ -56,6 +57,10 @@ function Quill(props) {
 
     //글 작성 or 수정
     const clickPost = e => {
+        if(!login || (login && login.username !== 'imki123')){
+            alert('글 작성은 블로그 주인만 가능합니다 ^^;')
+            return
+        }
         if(!window.confirm('글을 게시하시겠습니까?')){
             return
         }
