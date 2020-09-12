@@ -15,7 +15,10 @@
 .postList .ql-editor{
     height: 21px;
     overflow: hidden;
-    padding: 0 15px;
+    padding-left: 22px !important;
+}
+.postList .ql-editor > * {
+    cursor: pointer !important;
 }
 .postListHeader{
     display: flex;

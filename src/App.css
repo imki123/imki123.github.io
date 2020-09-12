@@ -1,13 +1,14 @@
-*{
-  box-sizing: border-box;
+* {
+	box-sizing: border-box;
 }
-html, body{
-  height: 100%;
-  width: 100%;
-  margin: 0px;
-  /* background: rgb(219, 250, 219); */
-  color: #202020;
-  font-size: 16px;
+html,
+body {
+	height: 100%;
+	width: 100%;
+	margin: 0px;
+	/* background: rgb(219, 250, 219); */
+	color: #202020;
+	font-size: 16px;
 }
 
 a {
@@ -26,51 +27,58 @@ a:hover {
 	text-decoration: inherit;
 }
 
-p{
-  min-height: 21px;
-  margin: 0px;
+p {
+	min-height: 21px;
+	margin: 0px;
 }
 
-img, 
-button, 
-.no-drag{-ms-user-select: none; -moz-user-select: -moz-none; -webkit-user-select: none; -khtml-user-select: none; user-select:none;}
-
-textarea{
-  width: 100%;
-  min-height: 50px;
-  overflow: visible;
-  resize: none;
-  font-size: 16px;
-  font: inherit;
-  padding: 0;
-  border: 1px solid green;
-}
-#fakeTextarea{
-  min-height: 0;
-  height: 1px;
-  width: 100%;
-  opacity: 1;
-  border: 0;
-  opacity: 0;
+img,
+button,
+.no-drag {
+	-ms-user-select: none;
+	-moz-user-select: -moz-none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+  user-select: none;
 }
 
-#app{
-  position: relative;
-  width: 100%;
+textarea {
+	width: 100%;
+	min-height: 50px;
+	overflow: visible;
+	resize: none;
+	font-size: 16px;
+	font: inherit;
+	padding: 0;
+	border: 1px solid green;
+}
+#fakeTextarea {
+	min-height: 0;
+	height: 1px;
+	width: 100%;
+	opacity: 1;
+	border: 0;
+	opacity: 0;
 }
 
-@media(min-width: 1280px){
-  #header, #body{
-    width: 1280px !important;
-    margin: auto !important;
-  }
-  #setting{
-    top: 50px;
-  }
+#app {
+	position: relative;
+	width: 100%;
 }
 
-@media(max-width: 500px){
-  #setting{
-    top: 50px;
-  }
+@media (min-width: 1280px) {
+	#header,
+	#body {
+		width: 1280px !important;
+		margin: auto !important;
+	}
+	#setting {
+		top: 50px;
+	}
+}
+
+@media (max-width: 500px) {
+	#setting {
+		top: 50px;
+	}
 }

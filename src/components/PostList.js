@@ -31,7 +31,7 @@ function PostList(props){
 
     return(
         <Link to={location.pathname+location.search+'#post_'+no}>
-            <div className="postList">
+            <div className="postList no-drag">
                 <div className="postListHeader">
                     <div>
                         <span className="postId">{no}.</span>
