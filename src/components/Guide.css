@@ -1,12 +1,24 @@
+#guideBack{
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.705);
+    z-index: 10;
+}
 #guideWrapper{
-    position: relative;
+    height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
+    z-index: 10;
     width: 312px;
     border-right: 1px solid green;
     padding-top: 8px; 
+    background: white;
 }
 #avatar{
+    width: 229px;
     padding: 16px;
     border-bottom: 1px solid green;
 }
@@ -53,4 +65,13 @@
 }
 .activeList{
     background: #76ff76;
+}
+
+@media(min-width: 500px){
+    #guideBack{
+        width: 0px;
+    }
+    #avatar{
+        width: 312px;
+    }
 }

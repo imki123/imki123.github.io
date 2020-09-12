@@ -20,7 +20,7 @@
 .postListHeader{
     display: flex;
     justify-content: space-between;
-    max-height: 42px;
+    height: 21px;
     overflow: hidden;
 }
 .postList .postTitle{

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import './Paging.css'
-import {Link, useLocation } from 'react-router-dom'
+import {NavLink, useLocation } from 'react-router-dom'
 import queryString from 'query-string';
 
 function Paging(props){
@@ -33,7 +33,8 @@ function Paging(props){
     return(
         <div className="paging">
             {pages.map((p, idx) =>  
-                <Link to={`/article?page=${p}`} className="inactivePage" key={idx}>{p}</Link>)}
+                <NavLink path={location.pathname} to={`${location.pathname}?page=${p}`} 
+                    className="inactivePage" key={idx}>{p}</NavLink>)}
         </div>
     )
 }

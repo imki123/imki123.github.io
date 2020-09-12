@@ -1,12 +1,15 @@
 #content{
   width: calc(100% - 312px);
-  min-height: calc(100vh - 48px);
+  height: calc(100vh - 48px);
   overflow: auto;
   padding: 8px;
-  position: relative;
+  position: absolute;
+  top: 0px;
+  right: 0px;
 }
 
 #postFAB{
+  z-index: 1;
   position: fixed;
   display: flex;
   justify-content: center;
@@ -25,6 +28,7 @@
 }
 
 #menuFAB{
+  z-index: 1;
   position: fixed;
   display: flex;
   justify-content: center;
@@ -59,6 +63,6 @@
       width: 230px;
     }
     #content{
-      width: calc(100% - 230px);
+      width: 100%;
     }
   }
