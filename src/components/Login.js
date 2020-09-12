@@ -19,6 +19,8 @@ function Login(props) {
         }else if(location.pathname.indexOf('withdraw') > -1){
             setButtonName('회원탈퇴')
             setBackground('red')
+        }else{
+            setButtonName('로그인')
         }
     },[location])
 
