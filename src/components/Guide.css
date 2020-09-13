@@ -55,6 +55,10 @@
     flex-direction: column;
     padding-top: 8px;
 }
+#guide a{
+    display: flex;
+    justify-content: space-between;
+}
 
 .list{
     padding: 8px 16px;

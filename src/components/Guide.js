@@ -1,15 +1,17 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Guide.css'
 import { NavLink, useLocation } from 'react-router-dom';
 
-function Guide() {
+function Guide(props) {
     const location = useLocation()
-    console.log(process.env.REACT_APP_URL)
-    
+    const [homes, setHomes] = useState(0)
+    const [abouts, setAbouts] = useState(0)
+    const [articles, setArticles] = useState(0)
+    const [programmings, setProgrammings] = useState(0)
+
     // 가이드에 글이 몇개인지 표시함
     useEffect(() => {
-        
-        /*let url = 
+        let url = process.env.REACT_APP_URL+'/posts'
         fetch(url,{
             mode: 'cors',
             method: 'GET',
@@ -18,21 +20,26 @@ function Guide() {
         .then((res) => {
             if (res.status === 200 || res.status === 201) {
                 //성공하면 아래 then 작동
-                const h = {}
-                res.headers.forEach((v, n) => (h[n] = v))
-                setHeaders(h)
                 res.json().then(res => {
-                    setPosts(res)
-                    setReady(true)
+                    let ho=0, ab=0, ar=0, pr=0
+                    for(let post of res){
+                        if(post.tags.indexOf('home') > -1) ho++
+                        if(post.tags.indexOf('about') > -1) ab++
+                        if(post.tags.indexOf('article') > -1) ar++
+                        if(post.tags.indexOf('programming') > -1) pr++
+                    }
+                    setHomes(ho)
+                    setAbouts(ab)
+                    setArticles(ar)
+                    setProgrammings(pr)
                 })
             } else {
-                console.log('posts 조회 실패')
-                setReady(true)
             }
         })
-        .catch((e) => console.error(e)) */
+        .catch((e) => console.error(e))
     },[location.pathname])
 
+    //모바일에서 메뉴 클릭시 닫기
     const closeMenuMobile = e => {
         const body = document.querySelector('#body')
         const guideWrapper = document.querySelector('#guideWrapper')
@@ -63,11 +70,14 @@ function Guide() {
                     </div>
                 </div>
                 <div id="guide">
-                    <NavLink exact to="/" className="list" activeClassName="activeList">Home</NavLink>
-                    <NavLink to="/about" className="list" activeClassName="activeList">About</NavLink>
-                    <NavLink to="/article" className="list" activeClassName="activeList">Article</NavLink>
-                    <NavLink to="/programming" className="list" activeClassName="activeList">Programming</NavLink>
-                    {/* <NavLink to="/quill" className="list" activeClassName="activeList">Quill</NavLink> */}
+                    <NavLink exact to="/" className="list" activeClassName="activeList">
+                        <span>Home</span><span>{homes}</span></NavLink>
+                    <NavLink to="/about" className="list" activeClassName="activeList">
+                        <span>About</span><span>{abouts}</span></NavLink>
+                    <NavLink to="/article" className="list" activeClassName="activeList">
+                        <span>Article</span><span>{articles}</span></NavLink>
+                    <NavLink to="/programming" className="list" activeClassName="activeList">
+                        <span>Programming</span><span>{programmings}</span></NavLink>
                 </div>
             </div>
         </div>
