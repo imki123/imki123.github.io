@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './Guide.css'
 import { NavLink, useLocation } from 'react-router-dom';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 function Guide(props) {
     const location = useLocation()
@@ -8,6 +9,7 @@ function Guide(props) {
     const [abouts, setAbouts] = useState(0)
     const [articles, setArticles] = useState(0)
     const [programmings, setProgrammings] = useState(0)
+    const [javascripts, setJavascripts] = useState(0)
 
     // 가이드에 글이 몇개인지 표시함
     useEffect(() => {
@@ -21,17 +23,19 @@ function Guide(props) {
             if (res.status === 200 || res.status === 201) {
                 //성공하면 아래 then 작동
                 res.json().then(res => {
-                    let ho=0, ab=0, ar=0, pr=0
+                    let ho=0, ab=0, ar=0, pr=0, js=0
                     for(let post of res){
                         if(post.tags.indexOf('home') > -1) ho++
                         if(post.tags.indexOf('about') > -1) ab++
                         if(post.tags.indexOf('article') > -1) ar++
                         if(post.tags.indexOf('programming') > -1) pr++
+                        if(post.tags.indexOf('javascript') > -1) js++
                     }
                     setHomes(ho)
                     setAbouts(ab)
                     setArticles(ar)
                     setProgrammings(pr)
+                    setJavascripts(js)
                 })
             } else {
             }
@@ -71,13 +75,30 @@ function Guide(props) {
                 </div>
                 <div id="guide">
                     <NavLink exact to="/" className="list" activeClassName="activeList">
-                        <span>Home</span><span>{homes}</span></NavLink>
+                        <span>Home</span>
+                        <span>
+                            <span>{homes}</span><span></span>
+                        </span></NavLink>
                     <NavLink to="/about" className="list" activeClassName="activeList">
-                        <span>About</span><span>{abouts}</span></NavLink>
+                        <span>About</span>
+                        <span>
+                            <span>{abouts}</span><span></span>
+                        </span></NavLink>
                     <NavLink to="/article" className="list" activeClassName="activeList">
-                        <span>Article</span><span>{articles}</span></NavLink>
+                        <span>Article</span>
+                        <span>
+                            <span>{articles}</span><span></span>
+                        </span></NavLink>
                     <NavLink to="/programming" className="list" activeClassName="activeList">
-                        <span>Programming</span><span>{programmings}</span></NavLink>
+                        <span>Programming</span>
+                        <span>
+                            <span>{programmings}</span><span><ExpandMoreIcon/></span>
+                        </span></NavLink>
+                        <NavLink to="/javascript" className="list secondList" activeClassName="activeList">
+                            <span>Javascript</span>
+                            <span>
+                                <span>{javascripts}</span><span></span>
+                            </span></NavLink>
                 </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './Post.css'
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { useQuill } from 'react-quilljs';
 
 function Post(props){
@@ -8,7 +8,7 @@ function Post(props){
     const [ps, setPs] = useState([])
     const location = useLocation()
     let date = post.publishedDate.substring(0,10)
-    const {quill, quillRef} = useQuill({readOnly: true, theme: 'bubble', toolbar: false})
+    const {quill, quillRef} = useQuill({readOnly: true, theme: 'bubble'})
 
     useEffect(() => {
         if(post){
@@ -50,14 +50,8 @@ function Post(props){
 
     return(
         <div className="post" id={`post_${no}`}>
-            <div className="nav">
-                <NavLink exact to="/" className="inActiveNav" activeClassName="activeNav" >Home</NavLink>
-                <NavLink to="/about" className="inActiveNav" activeClassName="activeNav" >About</NavLink>
-                <NavLink to="/article" className="inActiveNav" activeClassName="activeNav" >Article</NavLink>
-                <NavLink to="/programming" className="inActiveNav" activeClassName="activeNav" >Programming</NavLink>
-                - {no} - {date}
-            </div>
-            <h2 className="postTitle">{post.title}</h2>
+            <div className="nav">{date}</div>
+            <h2 className="postTitle">{no}. {post.title}</h2>
             <div className="postContent">
                 {typeof(post.body) === 'string' ? 
                     ps.map((p,idx) => <p key={idx}>{p}</p>) :

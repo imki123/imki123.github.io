@@ -98,7 +98,7 @@ function Content(props) {
             </div>
             {props.children}
             
-            {ready && <>
+            {ready && <> 
                 
                 {!props.children && posts && posts.length === 0 && <div>작성된 글이 없네요. ^^;</div>}
                 { //목록

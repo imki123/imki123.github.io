@@ -49,6 +49,8 @@ function App() {
 		checkToken(function () {
 			let url = process.env.REACT_APP_URL+'/posts'
 			//url = process.env.REACT_APP_LOCAL_URL+'/posts'
+			let path = location.pathname.split('/')
+			path = '/'+path[1]
 			if (location.pathname === '/') {
 				url = url + '/home' + location.pathname + location.search
 			}else if(location.pathname.indexOf('/quill') > -1) {
@@ -57,7 +59,7 @@ function App() {
 				setPosts(false)
 				return ;
 			}else {
-				url = url + location.pathname + location.search
+				url = url + path + location.search
 			}
 
 			fetch(url,{
@@ -104,7 +106,7 @@ function App() {
 				<Content posts={posts} headers={headers} ready={ready} login={login} refresh={refresh} setRefresh={setRefresh}>
 					<Switch>
 						<Route path="/" exact />
-						<Route path={['/about', '/article', '/programming']} />
+						<Route path={['/about', '/article', '/programming', '/javascript']} />
 						<Route path={['/login', '/register', '/loginStatus', '/withdraw']}>
 							<Login login={login} setLogin={setLogin} checkToken={checkToken}/>
 						</Route>

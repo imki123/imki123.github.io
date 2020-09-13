@@ -155,6 +155,7 @@ function Quill(props) {
                     <label><input type="checkbox" name="about"/> about</label>
                     <label><input type="checkbox" name="article"/> article</label>
                     <label><input type="checkbox" name="programming"/> programming</label>
+                    <label><input type="checkbox" name="javascript"/> javascript</label>
                 </div>
                 <div className="editorButtons">
                     {postId !== undefined && Number(postId) >= 1 ?
