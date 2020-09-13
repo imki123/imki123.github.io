@@ -1,21 +1,50 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './Guide.css'
-import { NavLink } from 'react-router-dom';
-
-const closeMenuMobile = e => {
-    const body = document.querySelector('#body')
-    const guideWrapper = document.querySelector('#guideWrapper')
-    const content = document.querySelector('#content')
-
-    if(body.clientWidth < 500){ //모바일
-        guideWrapper.parentNode.style.width = '0' // 회색 0
-        guideWrapper.style.width = '0px' // 메뉴 0
-        content.style.width = '100%'
-    }
-}
-
+import { NavLink, useLocation } from 'react-router-dom';
 
 function Guide() {
+    const location = useLocation()
+    console.log(process.env.REACT_APP_URL)
+    
+    // 가이드에 글이 몇개인지 표시함
+    useEffect(() => {
+        
+        /*let url = 
+        fetch(url,{
+            mode: 'cors',
+            method: 'GET',
+            credentials: "include",
+        })
+        .then((res) => {
+            if (res.status === 200 || res.status === 201) {
+                //성공하면 아래 then 작동
+                const h = {}
+                res.headers.forEach((v, n) => (h[n] = v))
+                setHeaders(h)
+                res.json().then(res => {
+                    setPosts(res)
+                    setReady(true)
+                })
+            } else {
+                console.log('posts 조회 실패')
+                setReady(true)
+            }
+        })
+        .catch((e) => console.error(e)) */
+    },[location.pathname])
+
+    const closeMenuMobile = e => {
+        const body = document.querySelector('#body')
+        const guideWrapper = document.querySelector('#guideWrapper')
+        const content = document.querySelector('#content')
+
+        if(body.clientWidth < 500){ //모바일
+            guideWrapper.parentNode.style.width = '0' // 회색 0
+            guideWrapper.style.width = '0px' // 메뉴 0
+            content.style.width = '100%'
+        }
+    }
+
 	return(
         <div id="guideBack" onClick={closeMenuMobile}>
             <div id="guideWrapper" className="slideMenu">

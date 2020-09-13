@@ -20,7 +20,7 @@ function App() {
 	const location = useLocation() //페이지 경로 변경 감지
 
 	const checkToken = (func) => {
-		let url = 'https://blog-imki123-backend.herokuapp.com/auth/check'
+		let url = process.env.REACT_APP_URL+'/auth/check'
 		fetch(url, {
 			mode: 'cors',
 			method: 'GET',
@@ -47,8 +47,8 @@ function App() {
 	useEffect(() => {
 		setReady(false)
 		checkToken(function () {
-			let url = 'https://blog-imki123-backend.herokuapp.com/posts'
-			//url = 'http://localhost:4000/posts'
+			let url = process.env.REACT_APP_URL+'/posts'
+			//url = process.env.REACT_APP_LOCAL_URL+'/posts'
 			if (location.pathname === '/') {
 				url = url + '/home' + location.pathname + location.search
 			}else if(location.pathname.indexOf('/quill') > -1) {

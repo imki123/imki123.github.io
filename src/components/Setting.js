@@ -16,7 +16,7 @@ function Setting(props) {
 
     const logout = e => {
         if(window.confirm('로그아웃 하시겠습니까?')){
-            let url = 'https://blog-imki123-backend.herokuapp.com/auth/logout'
+            let url = process.env.REACT_APP_URL+'/auth/logout'
             fetch(url,{
                 mode: 'cors',
                 method: 'POST',

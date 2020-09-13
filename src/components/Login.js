@@ -64,8 +64,8 @@ function Login(props) {
     }
     const clickButton = e => {
         e.preventDefault();
-        let url = 'https://blog-imki123-backend.herokuapp.com/auth'
-        //url = 'http://localhost:4000/auth'
+        let url = process.env.REACT_APP_URL+'/auth'
+        //url = process.env.REACT_APP_LOCAL_URL+'/auth'
         let username = document.querySelector('[name=username]')
         if(username) username = username.value
         let password = document.querySelector('[name=password]')

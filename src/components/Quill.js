@@ -15,8 +15,8 @@ function Quill(props) {
     useEffect(() => {
         //console.log(postId, Number(postId))
         if(postId !== undefined && Number(postId) >= 1 && quill){ //postId가 없으면 포스트 내용 가져오지 않기
-            let url = 'https://blog-imki123-backend.herokuapp.com/posts/id/' + postId
-            //url = 'http://localhost:4000/posts/id/' + postId
+            let url = process.env.REACT_APP_URL+'/posts/id/' + postId
+            //url = process.env.REACT_APP_LOCAL_URL+'/posts/id/' + postId
             fetch(url,{
                 mode: 'cors',
                 method: 'GET',
@@ -87,8 +87,8 @@ function Quill(props) {
         } 
 
         //url에 POST 또는 PATCH 요청
-        let url = 'https://blog-imki123-backend.herokuapp.com/posts'
-        //url = 'http://localhost:4000/posts'
+        let url = process.env.REACT_APP_URL+'/posts'
+        //url = process.env.REACT_APP_LOCAL_URL+'/posts'
         let method = 'POST', message = '글 작성 성공'
         if(e.target.id === 'PATCH'){
             if(postId !== undefined && Number(postId) >= 1){
