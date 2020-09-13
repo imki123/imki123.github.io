@@ -59,6 +59,9 @@
     display: flex;
     justify-content: space-between;
 }
+#guide a>span:nth-child(2){
+    min-width: 48px;
+}
 #guide a>span:nth-child(2) span{
     display: inline-block;
     min-width: 20px;
