@@ -8,7 +8,7 @@ function PostList(props){
     const [body, setBody] = useState([])
     const location = useLocation()
     const {quill, quillRef} = useQuill({readOnly: true})
-    let date = post.publishedDate.substring(0,10)
+    let date = post.publishedDate.substring(0,16).replace('T',' ')
 
 
     useEffect(() => {

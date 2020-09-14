@@ -21,6 +21,7 @@
     height: 21px;
     overflow: hidden;
     min-width: 90px;
+    font-weight: bold;
 }
 .menuOptions{
     min-width: 48px;

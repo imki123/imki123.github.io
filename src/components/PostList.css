@@ -32,6 +32,7 @@
     font-weight: bold;
 }
 .postDate{
+    white-space: nowrap;
 }
 .postBody{
     padding-left: 22px;

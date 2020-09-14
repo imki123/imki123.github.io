@@ -7,7 +7,7 @@ function Post(props){
     const {post, no, login, refresh, setRefresh} = props
     const [ps, setPs] = useState([])
     const location = useLocation()
-    let date = post.publishedDate.substring(0,10)
+    let date = post.publishedDate.substring(0,16).replace('T',' ')
     const {quill, quillRef} = useQuill({readOnly: true, theme: 'bubble'})
 
     useEffect(() => {
@@ -64,8 +64,8 @@ function Post(props){
                 <span>태그 : </span>
                 {post.tags && post.tags.map((i,idx) => 
                     idx === 0 ? 
-                    <span key={i}><Link to={'/'+i}>{i}</Link></span> : 
-                    <span key={i}>, <Link to={'/'+i}>{i}</Link></span>)}
+                    <span key={i}><Link to={i === 'home' ? '/' : `/${i}`}>{i}</Link></span> : 
+                    <span key={i}>, <Link to={`/${i}`}>{i}</Link></span>)}
             </div>
 
             {login && login.username === 'imki123' && <div className="postButtons">

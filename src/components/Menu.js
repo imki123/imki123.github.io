@@ -20,7 +20,7 @@ function Menu(props) {
 	return(
         <>
             {menu && 
-            <NavLink exact to={`/${menu.name}`} className="list" activeClassName="activeList">
+            <NavLink exact to={menu.name === 'home' ? '/' : `/${menu.name}`} className="list" activeClassName="activeList">
                 <span className="menuName">{menu.name.substring(0,1).toUpperCase()+menu.name.substring(1)}</span>
                 <span className="menuOptions">
                     <span className="menuCnt">{menu.cnt}</span>
