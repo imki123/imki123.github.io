@@ -25,8 +25,8 @@ function Post(props){
     const deletePost = e => {
         if(window.confirm('글 삭제 시 복구가 불가능합니다. 해당 글을 정말로 삭제하시겠습니까?')){
             const postId = e.target.id
-            let url = process.env.REACT_APP_URL+'/'+postId
-            //url = process.env.REACT_APP_LOCAL_URL+'/'+postId
+            let url = process.env.REACT_APP_URL+'/posts/'+postId
+            //url = process.env.REACT_APP_LOCAL_URL+'/posts/'+postId
             
             fetch(url,{
                 mode: 'cors',
