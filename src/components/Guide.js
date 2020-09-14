@@ -1,47 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import './Guide.css'
-import { NavLink, useLocation } from 'react-router-dom';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Menu from './Menu'
 
 function Guide(props) {
-    const location = useLocation()
-    const [homes, setHomes] = useState(0)
-    const [abouts, setAbouts] = useState(0)
-    const [articles, setArticles] = useState(0)
-    const [programmings, setProgrammings] = useState(0)
-    const [javascripts, setJavascripts] = useState(0)
-
-    // 가이드에 글이 몇개인지 표시함
+    const {menus} = props
+    const [newMenu, setNewMenu] = useState([])
     useEffect(() => {
-        let url = process.env.REACT_APP_URL+'/posts'
-        fetch(url,{
-            mode: 'cors',
-            method: 'GET',
-            credentials: "include",
-        })
-        .then((res) => {
-            if (res.status === 200 || res.status === 201) {
-                //성공하면 아래 then 작동
-                res.json().then(res => {
-                    let ho=0, ab=0, ar=0, pr=0, js=0
-                    for(let post of res){
-                        if(post.tags.indexOf('home') > -1) ho++
-                        if(post.tags.indexOf('about') > -1) ab++
-                        if(post.tags.indexOf('article') > -1) ar++
-                        if(post.tags.indexOf('programming') > -1) pr++
-                        if(post.tags.indexOf('javascript') > -1) js++
-                    }
-                    setHomes(ho)
-                    setAbouts(ab)
-                    setArticles(ar)
-                    setProgrammings(pr)
-                    setJavascripts(js)
-                })
-            } else {
+        const tempMenu = []
+        for(let i in menus){
+            if(menus[i].name !== 'home' && menus[i].name !== 'about' && menus[i].name !== 'programming' && menus[i].name !== 'article'){
+                tempMenu.push(menus[i])
             }
-        })
-        .catch((e) => console.error(e))
-    },[location.pathname])
+        }
+        setNewMenu(tempMenu)
+    },[menus])
+    
 
     //모바일에서 메뉴 클릭시 닫기
     const closeMenuMobile = e => {
@@ -73,32 +46,12 @@ function Guide(props) {
                         A web programmer who dreams of being a wise developer.
                     </div>
                 </div>
-                <div id="guide">
-                    <NavLink exact to="/" className="list" activeClassName="activeList">
-                        <span>Home</span>
-                        <span>
-                            <span>{homes}</span><span></span>
-                        </span></NavLink>
-                    <NavLink to="/about" className="list" activeClassName="activeList">
-                        <span>About</span>
-                        <span>
-                            <span>{abouts}</span><span></span>
-                        </span></NavLink>
-                    <NavLink to="/article" className="list" activeClassName="activeList">
-                        <span>Article</span>
-                        <span>
-                            <span>{articles}</span><span></span>
-                        </span></NavLink>
-                    <NavLink to="/programming" className="list" activeClassName="activeList">
-                        <span>Programming</span>
-                        <span>
-                            <span>{programmings}</span><span><ExpandMoreIcon/></span>
-                        </span></NavLink>
-                        <NavLink to="/javascript" className="list secondList" activeClassName="activeList">
-                            <span>Javascript</span>
-                            <span>
-                                <span>{javascripts}</span><span></span>
-                            </span></NavLink>
+                <div id="menus">
+                    <Menu menu={menus.home}/>
+                    <Menu menu={menus.about}/>
+                    <Menu menu={menus.programming}/>
+                    <Menu menu={menus.article}/>
+                    {newMenu.map(i => <Menu menu={i} key={i}/>)}
                 </div>
             </div>
         </div>

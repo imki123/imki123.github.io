@@ -10,7 +10,7 @@ function Quill(props) {
     const history = useHistory()
     const { quill, quillRef } = useQuill()
     const postId = queryString.parse(location.search).postId
-    const {login} = props
+    const {login, subMenus} = props
 
     useEffect(() => {
         //console.log(postId, Number(postId))
@@ -32,7 +32,7 @@ function Quill(props) {
                             quill.setText(res.body) //body가 string이면 setText
                         else 
                             quill.setContents(res.body) //body가 string이 아니면 setContents : Delta
-                        const tags = document.querySelectorAll('[type=checkbox]')
+                        const tags = document.querySelectorAll('[type=radio]')
                         for(let i of tags){ //체크 초기화
                             i.checked = false
                         }
@@ -67,10 +67,23 @@ function Quill(props) {
         //제목, 내용, 태그가 있는지 검사
         let title = document.querySelector('[name=title]') 
         const content = quill.getContents()
-        const tags = document.querySelectorAll('[type=checkbox]:checked')
-        const tagsName = []
-        if(tags){
-            for(let i of tags){tagsName.push(i.name)} //태그네임
+        const mainMenu = document.querySelector('[type=radio]:checked')
+        let tags = []
+        const subMenus = document.querySelectorAll('[type=checkbox]:checked')
+        const newMainMenu = document.querySelector('[name=newMainMenu]')
+        const newMenu = document.querySelector('[name=newMenu]')
+        
+        if(mainMenu){
+            tags = [mainMenu.value]
+        }
+        if(newMainMenu.value !== ''){
+            tags = [newMainMenu.value]
+        }
+        if(subMenus){
+            for(let i of subMenus){tags.push(i.name)} //체크 된 서브메뉴 추가
+        }
+        if(newMenu.value !== ''){
+            tags.push(newMenu.value)
         }
 
         if(title.value.length === 0) {
@@ -81,8 +94,8 @@ function Quill(props) {
             alert('내용을 입력해주세요.')
             return
         } 
-        else if(tagsName.length === 0){
-            alert('태그를 1개 이상 선택해주세요.')
+        else if(tags.length < 1 && newMainMenu.value === ''){
+            alert('메인메뉴를 1개 선택해주세요.')
             return
         } 
 
@@ -108,7 +121,7 @@ function Quill(props) {
             body: JSON.stringify({
                 title: title.value,
                 body: content,
-                tags: tagsName,
+                tags: tags,
             }),
         })
         .then(res => {
@@ -116,7 +129,7 @@ function Quill(props) {
                 res.json().then(res =>{ 
                     console.log(res)
                     alert(message)
-                    history.push(tagsName[0])
+                    history.push(tags[0])
                 })
             }else{
                 alert('글 작성 실패')
@@ -143,6 +156,13 @@ function Quill(props) {
         })
     },[location])
 
+    //메인메뉴 추가시 라디오박스 체크 해제, 띄어쓰기를 _로 변경
+    const changeMainMenu = e => {
+        e.target.value = e.target.value.replace(/\s/g,'_')
+        const mainMenu = document.querySelector('[type=radio]:checked')
+        if(mainMenu) mainMenu.checked = false
+    }
+
 	return(
         <>
             <h2 id="editorTitle">글 작성</h2>
@@ -150,12 +170,22 @@ function Quill(props) {
             <div id="editor">
                 <div ref={quillRef} />
                 <div id="tags" className="no-drag">
-                    <span id="tagsTitle">tags</span>
-                    <label><input type="checkbox" name="home"/> home</label>
-                    <label><input type="checkbox" name="about"/> about</label>
-                    <label><input type="checkbox" name="article"/> article</label>
-                    <label><input type="checkbox" name="programming"/> programming</label>
-                    <label><input type="checkbox" name="javascript"/> javascript</label>
+                    <div id="tagsTitle">tags</div>
+                    <div>
+                        메인메뉴: 
+                        <label><input type="radio" name="mainMenu" value="home"/>home</label>
+                        <label><input type="radio" name="mainMenu" value="about"/>about</label>
+                        <label><input type="radio" name="mainMenu" value="programming"/>programming</label>
+                        <label><input type="radio" name="mainMenu" value="article"/>article</label>
+                        <input name="newMainMenu" placeholder="메인메뉴 추가" onChange={changeMainMenu}></input>
+                    </div>
+                    <div>
+                        서브메뉴: 
+                        {subMenus && subMenus.map(i => 
+                            <label key={i}><input type="checkbox" name={i}/>{i}</label>)
+                        }
+                        <input name="newMenu" placeholder="서브메뉴 추가"></input>
+                    </div>
                 </div>
                 <div className="editorButtons">
                     {postId !== undefined && Number(postId) >= 1 ?

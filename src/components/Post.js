@@ -60,6 +60,13 @@ function Post(props){
                     </div>
                 }
             </div>
+            <div className="tags">
+                <span>태그 : </span>
+                {post.tags && post.tags.map((i,idx) => 
+                    idx === 0 ? 
+                    <span key={i}><Link to={'/'+i}>{i}</Link></span> : 
+                    <span key={i}>, <Link to={'/'+i}>{i}</Link></span>)}
+            </div>
 
             {login && login.username === 'imki123' && <div className="postButtons">
                 <Link to={`/quill?postId=${post.postId}`}>수정</Link>&nbsp;

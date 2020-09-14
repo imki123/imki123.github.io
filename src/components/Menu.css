@@ -1,0 +1,34 @@
+.list{
+    padding: 8px 8px 8px 16px;
+    display: flex;
+    justify-content: space-between;
+}
+.list:hover{
+    background: #42ff42;
+    cursor: pointer;
+}
+.activeList{
+    background: #76ff76;
+}
+.subList .menuName{
+    padding-left: 20px;
+}
+.subList .menuCnt{
+    margin-right: 5px;
+}
+
+.menuOptions{
+    min-width: 48px;
+    text-align: right;
+}
+.menuOptions span{
+    display: inline-block;
+    min-width: 20px;
+    text-align: right;
+    margin-left: 4px;
+}
+.menuOptions svg{
+    font-size: 20px;
+    color: black;
+    vertical-align: bottom;
+}
