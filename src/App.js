@@ -157,7 +157,7 @@ function App() {
 							<Login login={login} setLogin={setLogin} checkToken={checkToken}/>
 						</Route>
 						<Route path={['/quill']}>
-							<Quill login={login} subMenus={subMenus}/>
+							<Quill login={login} menus={menus} subMenus={subMenus}/>
 						</Route>
 						{/* <Route path="*" component={NotFoundPage} /> */}
 					</Switch>

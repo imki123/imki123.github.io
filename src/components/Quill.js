@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Quill.css'
 import 'quill/dist/quill.snow.css'
 import { useHistory, useLocation } from 'react-router-dom'
@@ -7,10 +7,23 @@ import queryString from 'query-string'
 
 function Quill(props) {
     const location = useLocation()
+    const postId = queryString.parse(location.search).postId
     const history = useHistory()
     const { quill, quillRef } = useQuill()
-    const postId = queryString.parse(location.search).postId
-    const {login, subMenus} = props
+    const {login, subMenus, menus} = props
+    const [newMenu, setNewMenu] = useState([])
+    
+    useEffect(() => {
+        const tempMenu = []
+        for(let i in menus){
+            if(menus[i].name !== 'home' && menus[i].name !== 'about' && menus[i].name !== 'programming' && menus[i].name !== 'article'){
+                tempMenu.push(menus[i])
+            }
+        }
+        setNewMenu(tempMenu)
+        console.log(tempMenu)
+    },[menus])
+
 
     useEffect(() => {
         //console.log(postId, Number(postId))
@@ -177,14 +190,16 @@ function Quill(props) {
                         <label><input type="radio" name="mainMenu" value="about"/>about</label>
                         <label><input type="radio" name="mainMenu" value="programming"/>programming</label>
                         <label><input type="radio" name="mainMenu" value="article"/>article</label>
-                        <input name="newMainMenu" placeholder="메인메뉴 추가" onChange={changeMainMenu}></input>
+                        {newMenu && newMenu.map(i =>
+                            <label key={i.name}><input type="radio" name="mainMenu" value={i.name}/>{i.name}</label>)}
+                        <input name="newMainMenu" placeholder="메인메뉴 추가" onChange={changeMainMenu} autoComplete="off"></input>
                     </div>
                     <div>
                         서브메뉴: 
                         {subMenus && subMenus.map(i => 
                             <label key={i}><input type="checkbox" name={i}/>{i}</label>)
                         }
-                        <input name="newMenu" placeholder="서브메뉴 추가"></input>
+                        <input name="newMenu" placeholder="서브메뉴 추가" autoComplete="off"></input>
                     </div>
                 </div>
                 <div className="editorButtons">
