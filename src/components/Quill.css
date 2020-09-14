@@ -27,6 +27,9 @@
 #editor label:hover{
     text-decoration: underline;
 }
+#editor label input{
+    cursor: pointer;
+}
 .editorButtons{
     text-align: left;
 }
