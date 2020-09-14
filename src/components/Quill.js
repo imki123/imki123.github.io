@@ -73,12 +73,12 @@ function Quill(props) {
 								i.checked = false
 							}
 							if (res.tags) {
-								//체크박스 체크
+                                //체크박스 체크
+                                const mainMenu = document.querySelector(`[value=${res.tags[0]}]`) 
+                                if(mainMenu) mainMenu.checked = true
 								for (let i of res.tags) {
 									const tag = document.querySelector(`[name=${i}]`)
-									if (tag) {
-										tag.checked = true
-									}
+									if (tag) tag.checked = true
 								}
 							}
 						})
