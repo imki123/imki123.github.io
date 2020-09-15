@@ -96,6 +96,7 @@ function Content(props) {
 			for (let i = 1; i < textareas.length; i++) {
                 console.log(textareas)
                 fake.style.height = '1px'
+                fake.style.width = textareas[i].clientWidth +'px'
                 fake.value = textareas[i].value
 				textareas[i].style.height = 12 + fake.scrollHeight + 'px'
             }
