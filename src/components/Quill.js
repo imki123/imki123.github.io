@@ -205,7 +205,7 @@ function Quill(props) {
 	}
 
 	return (
-		<>
+		<div className="quill">
 			<h2 id="editorTitle">글 작성</h2>
 			<div>
 				<input name="title" placeholder="제목" />
@@ -274,7 +274,7 @@ function Quill(props) {
 					)}
 				</div>
 			</div>
-		</>
+		</div>
 	)
 }
 export default React.memo(Quill)

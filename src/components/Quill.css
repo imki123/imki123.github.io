@@ -1,3 +1,8 @@
+.quill{
+    background: white;
+    height: 100%;
+    overflow: auto;
+}
 [name=title]{
     width: 100%;
     font-size: 1.2rem;
@@ -8,7 +13,7 @@
     margin-bottom: 4px;
 }
 #editor{
-    height: 70%;
+    height: 100%;
 }
 #tags{
     margin: 10px 0;
