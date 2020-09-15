@@ -4,8 +4,10 @@
 }
 
 .post{
+    margin: 20px 0;
     padding: 20px 0 40px;
-    border-bottom: 2px dotted green;
+    border-radius: 8px;
+    background: white;
 }
 .post .ql-toolbar{
     display: none;
@@ -30,8 +32,47 @@
     color: blue !important;
 }
 .postContent{
+    padding: 0 8px 20px;
+}
+.comments{
     padding: 0 8px;
 }
+.writeComment{
+    border-top: 2px dotted green;
+    padding: 20px 8px 0px;
+    display: flex;
+    align-items: center;
+}
+.commentProfile{
+    width: 70px;
+    font-size: 0.9rem;
+    text-align: center;
+}
+.commentProfile img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.commentContent{
+    width: calc(92% - 70px);
+    min-height: 84px;
+}
+.commentButton{
+    width: 8%;
+    text-align: center;
+}
+.commentButton button{
+    display: inline-block;
+    padding: 6px 6px;
+    border: 0px solid black;
+    border-radius: 5px;
+    background: #84ff84;
+    cursor: pointer;
+    font-size: inherit;
+    outline: none;
+    cursor: pointer;
+}
+
 .postButtons{
     text-align: right;
 }

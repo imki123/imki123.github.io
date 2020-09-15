@@ -198,7 +198,10 @@ function Login(props) {
                             <button className={`hover ${background}`} onClick={clickButton}>{buttonName}</button>
                         </Route>
                         <Route path={['/loginStatus']}>
-                            <div className="center">{login.username}님은 현재 로그인 중입니다 :D</div>
+                            <div className="center">
+                                {login.username}님은 현재 <span style={{color:'green'}}>로그인</span> 되어있습니다 :D<br/>
+                                <span style={{fontSize: '0.8rem'}}>(로그인은 최대 일주일간 유지됩니다.)</span>
+                            </div>
                         </Route>
                     </Switch>
                 </form>

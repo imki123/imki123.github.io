@@ -13,14 +13,14 @@ function Header(props) {
         if(guideWrapper.clientWidth > 100){ //메뉴 닫기
             guideWrapper.parentNode.style.width = '0' // 회색 0
             guideWrapper.style.width = '0px' // 메뉴 0
-            content.style.width = '100%'
+            content.style.width = 'calc(100% - 16px)'
         }else{ //메뉴 열기
             if(body.clientWidth < 500){ //모바일
                 guideWrapper.parentNode.style.width = '100%' // 회색 100%
                 guideWrapper.style.width = '230px' // 메뉴 230
             }else{ //PC
                 guideWrapper.style.width = '312px' // 메뉴 312
-                content.style.width = `calc(100% - 312px)`
+                content.style.width = `calc(100% - 312px - 16px)`
             }
         }
     }
@@ -50,8 +50,8 @@ function Header(props) {
                 </Link>
                 <div className="hover"  onClick={toggleSetting}>
                     {login ? 
-                    <img id="profile" alt="PROFILE" src={process.env.PUBLIC_URL+'/images/avatar.png'}/> :
-                    <img id="profile" alt="PROFILE" src={process.env.PUBLIC_URL+'/images/noavatar.png'}/>}
+                    <img className="profile" alt="PROFILE" src={process.env.PUBLIC_URL+'/images/avatar.png'}/> :
+                    <img className="profile" alt="PROFILE" src={process.env.PUBLIC_URL+'/images/noavatar.png'}/>}
                 </div>
             </div>
         </div>

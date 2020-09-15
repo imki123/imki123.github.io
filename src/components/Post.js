@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './Post.css'
 import { Link, useLocation } from 'react-router-dom'
 import { useQuill } from 'react-quilljs';
+import Comment from './Comment'
 
 function Post(props){
     const {post, no, login, refresh, setRefresh} = props
@@ -20,6 +21,11 @@ function Post(props){
             }else{
                 if(quill){
                     quill.setContents(post.body)
+                }
+            }
+            if(post.comments){
+                for(let i of post.comments){
+                    console.log(i.username, i.content, i.publishedDate)
                 }
             }
         }
@@ -69,13 +75,32 @@ function Post(props){
                     <span key={i}><Link to={i === 'home' ? '/' : `/${i}`}>{i}</Link></span> : 
                     <span key={i}>, <Link to={`/${i}`}>{i}</Link></span>)}
                 </div>
-            </div>
-            
 
-            {login && login.username === 'imki123' && <div className="postButtons">
-                <Link to={`/quill?postId=${post.postId}`}>수정</Link>&nbsp;
-                <button onClick={deletePost} id={post.postId} style={{background: 'red'}}>삭제</button>
-            </div>}
+                {login && login.username === 'imki123' && <div className="postButtons">
+                    <Link to={`/quill?postId=${post.postId}`}>수정</Link>&nbsp;
+                    <button onClick={deletePost} id={post.postId} style={{background: 'red'}}>삭제</button>
+                </div>}
+            </div>
+
+            
+            {!(location.pathname === '/' || location.pathname.indexOf('/about') > -1) && <>
+                <div className="writeComment">
+                    <div className="commentProfile">
+                        {login ? 
+                        <img alt="PROFILE" src={process.env.PUBLIC_URL+'/images/avatar.png'}/> :
+                        <img alt="PROFILE" src={process.env.PUBLIC_URL+'/images/noavatar.png'}/>}
+                        <div>{login ? login.username : '로그인'}</div>
+                    </div>
+                    {login ? <textarea className="commentContent"/> : <textarea className="commentContent" readOnly/>}
+                    <div className="commentButton">
+                        {login ? <button>작성</button> : <button>로그인</button>}
+                    </div>
+                </div>
+                {post.comments && 
+                <div className="comments">
+                    {post.comments.map(i => <Comment comment={i}/>)}
+                </div>}
+            </>}
             
         </div>
     )

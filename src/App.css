@@ -6,9 +6,9 @@ body {
 	height: 100%;
 	width: 100%;
 	margin: 0px;
-	/* background: rgb(219, 250, 219); */
 	color: #202020;
 	font-size: 16px;
+    background: #f0f0f0;
 }
 
 a {
@@ -50,7 +50,10 @@ textarea {
 	font-size: 16px;
 	font: inherit;
 	padding: 0;
-	border: 1px solid green;
+	border: 1px solid gray;
+}
+textarea:focus {
+	outline: 1px solid green;
 }
 #fakeTextarea {
 	min-height: 0;
