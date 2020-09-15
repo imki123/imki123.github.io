@@ -2,25 +2,13 @@ import React, { useEffect, useState } from 'react'
 import './Post.css'
 import { Link, useLocation } from 'react-router-dom'
 import { useQuill } from 'react-quilljs';
+import hljs from 'highlight.js';
 
 function Post(props){
     const {post, no, login, refresh, setRefresh} = props
     const [ps, setPs] = useState([])
     const location = useLocation()
     let date = post.publishedDate.substring(0,16).replace('T',' ')
-    const modules = {
-		toolbar: [
-			['bold', 'italic', 'underline', 'strike'],
-            [{ size: ['small', false, 'large', 'huge'] },{ header: 1 }, { header: 2 }],
-            [{ align: [] }],
-            [{ color: [] }, { background: [] }],
-			[{ indent: '-1' }, { indent: '+1' }],
-            [{ list: 'ordered' }, { list: 'bullet' }],
-            ['code-block','blockquote'],
-			['link', 'image', 'video'],
-			['clean'],
-		],
-    }
     const formats = ['bold', 'italic', 'underline', 'strike', 'code-block', 'blockquote', 'size',
         'header', 'align', 'color', 'background', 'indent', 'list', 'link', 'image', 'video', 'clean']
 
@@ -33,6 +21,10 @@ function Post(props){
             }else{
                 if(quill){
                     quill.setContents(post.body)
+                    //코드에 하이라이트 적용하기
+                    document.querySelectorAll('pre').forEach((block) => {
+                        hljs.highlightBlock(block);
+                    });
                 }
             }
         }

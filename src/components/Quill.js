@@ -4,6 +4,8 @@ import 'quill/dist/quill.snow.css'
 import { useHistory, useLocation } from 'react-router-dom'
 import { useQuill } from 'react-quilljs'
 import queryString from 'query-string'
+import hljs from 'highlight.js';
+import 'highlight.js/styles/atom-one-dark.css';
 
 function Quill(props) {
 	const location = useLocation()
@@ -11,6 +13,8 @@ function Quill(props) {
 	const history = useHistory()
 	const { login, subMenus, menus } = props
 	const [newMenu, setNewMenu] = useState([])
+	const [pres, setPres] = useState([])
+	
 
 	const modules = {
 		toolbar: [
@@ -29,7 +33,7 @@ function Quill(props) {
         'header', 'align', 'color', 'background', 'indent', 'list', 'link', 'image', 'video', 'clean']
 
 	const { quill, quillRef } = useQuill({ modules, formats })
-
+	
 	useEffect(() => {
 		const tempMenu = []
 		for (let i in menus) {
@@ -43,12 +47,14 @@ function Quill(props) {
 			}
 		}
 		setNewMenu(tempMenu)
-		console.log(tempMenu)
+		//console.log(tempMenu)
 	}, [menus])
 
 	useEffect(() => {
 		//console.log(postId, Number(postId))
 		if (postId !== undefined && Number(postId) >= 1 && quill) {
+			quill.on('text-change', function() {
+			});
 			//postId가 없으면 포스트 내용 가져오지 않기
 			let url = process.env.REACT_APP_URL + '/posts/id/' + postId
 			//url = process.env.REACT_APP_LOCAL_URL+'/posts/id/' + postId
@@ -66,7 +72,14 @@ function Quill(props) {
 							title.value = res.title
 							if (typeof res.body === 'string') quill.setText(res.body)
 							//body가 string이면 setText
-							else quill.setContents(res.body) //body가 string이 아니면 setContents : Delta
+							else {
+								quill.setContents(res.body) //body가 string이 아니면 setContents : Delta
+								//코드에 하이라이트 적용하기
+								document.querySelectorAll('pre').forEach((block) => {
+									hljs.highlightBlock(block);
+								});
+							}
+							
 							const tags = document.querySelectorAll('[type=radio]')
 							for (let i of tags) {
 								//체크 초기화
