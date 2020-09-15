@@ -4,8 +4,6 @@ import 'quill/dist/quill.snow.css'
 import { useHistory, useLocation } from 'react-router-dom'
 import { useQuill } from 'react-quilljs'
 import queryString from 'query-string'
-import hljs from 'highlight.js';
-import 'highlight.js/styles/atom-one-dark.css';
 
 function Quill(props) {
 	const location = useLocation()
@@ -13,8 +11,6 @@ function Quill(props) {
 	const history = useHistory()
 	const { login, subMenus, menus } = props
 	const [newMenu, setNewMenu] = useState([])
-	const [pres, setPres] = useState([])
-	
 
 	const modules = {
 		toolbar: [
@@ -28,12 +24,13 @@ function Quill(props) {
 			['link', 'image', 'video'],
 			['clean'],
 		],
+		syntax: true,
     }
     const formats = ['bold', 'italic', 'underline', 'strike', 'code-block', 'blockquote', 'size',
         'header', 'align', 'color', 'background', 'indent', 'list', 'link', 'image', 'video', 'clean']
 
 	const { quill, quillRef } = useQuill({ modules, formats })
-	
+
 	useEffect(() => {
 		const tempMenu = []
 		for (let i in menus) {
@@ -47,14 +44,12 @@ function Quill(props) {
 			}
 		}
 		setNewMenu(tempMenu)
-		//console.log(tempMenu)
 	}, [menus])
 
+	
 	useEffect(() => {
 		//console.log(postId, Number(postId))
 		if (postId !== undefined && Number(postId) >= 1 && quill) {
-			quill.on('text-change', function() {
-			});
 			//postId가 없으면 포스트 내용 가져오지 않기
 			let url = process.env.REACT_APP_URL + '/posts/id/' + postId
 			//url = process.env.REACT_APP_LOCAL_URL+'/posts/id/' + postId
@@ -63,45 +58,39 @@ function Quill(props) {
 				method: 'GET',
 				credentials: 'include',
 			})
-				.then((res) => {
-					if (res.status === 200 || res.status === 201) {
-						//성공하면 아래 then 작동
-						res.json().then((res) => {
-							//console.log(res)
-							let title = document.querySelector('[name=title]')
-							title.value = res.title
-							if (typeof res.body === 'string') quill.setText(res.body)
-							//body가 string이면 setText
-							else {
-								quill.setContents(res.body) //body가 string이 아니면 setContents : Delta
-								//코드에 하이라이트 적용하기
-								document.querySelectorAll('pre').forEach((block) => {
-									hljs.highlightBlock(block);
-								});
+			.then((res) => {
+				if (res.status === 200 || res.status === 201) {
+					//성공하면 아래 then 작동
+					res.json().then((res) => {
+						//console.log(res)
+						let title = document.querySelector('[name=title]')
+						title.value = res.title
+						if (typeof res.body === 'string') quill.setText(res.body)
+						//body가 string이면 setText
+						else quill.setContents(res.body) //body가 string이 아니면 setContents : Delta
+												
+						const tags = document.querySelectorAll('[type=radio]')
+						for (let i of tags) {
+							//체크 초기화
+							i.checked = false
+						}
+						if (res.tags) {
+							//체크박스 체크
+							const mainMenu = document.querySelector(`[value=${res.tags[0]}]`) 
+							if(mainMenu) mainMenu.checked = true
+							for (let i of res.tags) {
+								const tag = document.querySelector(`[name=${i}]`)
+								if (tag) tag.checked = true
 							}
-							
-							const tags = document.querySelectorAll('[type=radio]')
-							for (let i of tags) {
-								//체크 초기화
-								i.checked = false
-							}
-							if (res.tags) {
-                                //체크박스 체크
-                                const mainMenu = document.querySelector(`[value=${res.tags[0]}]`) 
-                                if(mainMenu) mainMenu.checked = true
-								for (let i of res.tags) {
-									const tag = document.querySelector(`[name=${i}]`)
-									if (tag) tag.checked = true
-								}
-							}
-						})
-					} else {
-						res.json().then((res) => {
-							console.log(res)
-						})
-					}
-				})
-				.catch((e) => console.error(e))
+						}
+					})
+				} else {
+					res.json().then((res) => {
+						console.log(res)
+					})
+				}
+			})
+			.catch((e) => console.error(e))
 		}
 	}, [location, quill, postId])
 
