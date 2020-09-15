@@ -34,9 +34,6 @@
 .postContent{
     padding: 0 8px 20px;
 }
-.comments{
-    padding: 0 8px;
-}
 .writeComment{
     border-top: 2px dotted green;
     padding: 20px 8px 0px;
@@ -46,6 +43,7 @@
 .commentProfile{
     width: 60px;
     font-size: 0.9rem;
+    font-weight: bold;
     text-align: center;
 }
 .commentProfile img{
@@ -55,7 +53,10 @@
 }
 .commentContent{
     width: calc(100% - 60px);
+}
+.writeComment textarea{
     min-height: 84px;
+    font-size: 0.9rem;
 }
 .commentButtons{
     text-align: right;
@@ -71,6 +72,9 @@
     font-size: inherit;
     outline: none;
     cursor: pointer;
+}
+.commentButton{
+    margin-left: 8px;
 }
 
 .postButtons{

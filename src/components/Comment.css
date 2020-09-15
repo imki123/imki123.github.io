@@ -1,4 +1,15 @@
 .comment{
-    margin-bottom: 10px;
+    padding: 20px 8px 0px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.comment .commentContent textarea{
+    border: 0px;
+    outline: 0px;
     font-size: 0.9rem;
+}
+.commentDate{
+    font-size: 0.9rem;
+    color: gray;
 }

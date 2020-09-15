@@ -23,11 +23,6 @@ function Post(props){
                     quill.setContents(post.body)
                 }
             }
-            if(post.comments){
-                for(let i of post.comments){
-                    console.log(i.username, i.content, i.publishedDate)
-                }
-            }
         }
     },[post, location, quill])
 
@@ -95,7 +90,14 @@ function Post(props){
                         <img alt="PROFILE" src={process.env.PUBLIC_URL+'/images/noavatar.png'}/>}
                         <div>{login ? login.username : <button className="loginButton">로그인</button>}</div>
                     </div>
-                    {login ? <textarea className="commentContent"/> : <textarea className="commentContent" readOnly/>}
+                    
+                    {login ? 
+                    <div className="commentContent">
+                        <textarea/>
+                    </div> : 
+                    <div className="commentContent">
+                        <textarea readOnly/>
+                    </div>}
                 </div>
                 <div className="commentButtons">
                     {login && <button className="commentButton">작성</button>}
@@ -104,7 +106,7 @@ function Post(props){
                 {/* 댓글 목록 */}
                 {post.comments && 
                 <div className="comments">
-                    {post.comments.map(i => <Comment comment={i}/>)}
+                    {post.comments.map(i => <Comment comment={i} login={login} key={i.commentId}/>)}
                 </div>}
             </>}
             

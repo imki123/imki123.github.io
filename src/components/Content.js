@@ -79,11 +79,30 @@ function Content(props) {
                     }
                 },100)
             }
+            setTimeout(function(){
+                resizeTextarea()
+            }, 10)
         }else{
             if(loading) loading.style.display = 'flex'
         }
     })
     
+    //텍스트에어리어를 찾아서 크기를 글자 높이에 맞게 변경해주는 스크립트
+	const resizeTextarea = () => {
+		//textarea 높이 조정
+		const textareas = document.querySelectorAll('textarea')
+		const fake = document.querySelector('#fakeTextarea')
+		if (textareas && fake) {
+			for (let i = 1; i < textareas.length; i++) {
+                console.log(textareas)
+                fake.style.height = '1px'
+                fake.value = textareas[i].value
+				textareas[i].style.height = 12 + fake.scrollHeight + 'px'
+            }
+            fake.value = ''
+            fake.style.height = '0px'
+		}
+	}
 
 	return(
         <div id="content" className="slideMenu">
@@ -119,6 +138,7 @@ function Content(props) {
                     </div>
                 }
             </>}
+			<textarea disabled id="fakeTextarea"/>
         </div>
     ) 
 }
