@@ -16,7 +16,7 @@
 }
 
 .slideMenu{
-    transition: width 1s ease;
+    transition: width 0.5s ease;
 }
 
 #menu{
