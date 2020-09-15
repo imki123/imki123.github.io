@@ -25,7 +25,7 @@ function Guide(props) {
         if(body.clientWidth < 500){ //모바일
             guideWrapper.parentNode.style.width = '0' // 회색 0
             guideWrapper.style.width = '0px' // 메뉴 0
-            content.style.width = '100%'
+            content.style.width = 'calc(100% - 16px)'
         }
     }
 
