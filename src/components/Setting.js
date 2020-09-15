@@ -25,7 +25,6 @@ function Setting(props) {
             .then(res => {
                 if(res.status===204) { //로그아웃은 204가 성공
                     console.log('로그아웃 성공')
-                    history.push('/')
                     setLogin(false)
                 }else{
                     console.log('로그아웃 실패', res)
