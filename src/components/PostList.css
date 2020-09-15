@@ -33,6 +33,7 @@
 }
 .postDate{
     white-space: nowrap;
+    color: gray;
 }
 .postBody{
     padding-left: 22px;

@@ -10,6 +10,9 @@
 .post .ql-toolbar{
     display: none;
 }
+.ql-disabled {
+    border: 0 !important;
+}
 .post .tags{
     margin-top: 20px;
     color: gray;

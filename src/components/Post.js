@@ -8,7 +8,23 @@ function Post(props){
     const [ps, setPs] = useState([])
     const location = useLocation()
     let date = post.publishedDate.substring(0,16).replace('T',' ')
-    const {quill, quillRef} = useQuill({readOnly: true, theme: 'bubble'})
+    const modules = {
+		toolbar: [
+			['bold', 'italic', 'underline', 'strike'],
+            [{ size: ['small', false, 'large', 'huge'] },{ header: 1 }, { header: 2 }],
+            [{ align: [] }],
+            [{ color: [] }, { background: [] }],
+			[{ indent: '-1' }, { indent: '+1' }],
+            [{ list: 'ordered' }, { list: 'bullet' }],
+            ['code-block','blockquote'],
+			['link', 'image', 'video'],
+			['clean'],
+		],
+    }
+    const formats = ['bold', 'italic', 'underline', 'strike', 'code-block', 'blockquote', 'size',
+        'header', 'align', 'color', 'background', 'indent', 'list', 'link', 'image', 'video', 'clean']
+
+	const { quill, quillRef } = useQuill({formats, readOnly: true})
 
     useEffect(() => {
         if(post){
