@@ -62,12 +62,15 @@ function Post(props){
             <div className="nav">{date}</div>
             <h2 className="postTitle">{no}. {post.title}</h2>
             <div className="postContent">
+                {/* 본문 */}
                 {typeof(post.body) === 'string' ? 
                     ps.map((p,idx) => <p key={idx}>{p}</p>) :
                     <div id="editor">
                         <div ref={quillRef} />
                     </div>
                 }
+
+                {/* 태그 */}
                 <div className="tags">
                 <span>태그 : </span>
                 {post.tags && post.tags.map((i,idx) => 
@@ -76,26 +79,29 @@ function Post(props){
                     <span key={i}>, <Link to={`/${i}`}>{i}</Link></span>)}
                 </div>
 
+                {/* 글 수정 삭제 버튼 */}
                 {login && login.username === 'imki123' && <div className="postButtons">
                     <Link to={`/quill?postId=${post.postId}`}>수정</Link>&nbsp;
                     <button onClick={deletePost} id={post.postId} style={{background: 'red'}}>삭제</button>
                 </div>}
             </div>
 
-            
             {!(location.pathname === '/' || location.pathname.indexOf('/about') > -1) && <>
+                {/* 댓글 작성*/}
                 <div className="writeComment">
                     <div className="commentProfile">
                         {login ? 
                         <img alt="PROFILE" src={process.env.PUBLIC_URL+'/images/avatar.png'}/> :
                         <img alt="PROFILE" src={process.env.PUBLIC_URL+'/images/noavatar.png'}/>}
-                        <div>{login ? login.username : '로그인'}</div>
+                        <div>{login ? login.username : <button className="loginButton">로그인</button>}</div>
                     </div>
                     {login ? <textarea className="commentContent"/> : <textarea className="commentContent" readOnly/>}
-                    <div className="commentButton">
-                        {login ? <button>작성</button> : <button>로그인</button>}
-                    </div>
                 </div>
+                <div className="commentButtons">
+                    {login && <button className="commentButton">작성</button>}
+                </div>
+
+                {/* 댓글 목록 */}
                 {post.comments && 
                 <div className="comments">
                     {post.comments.map(i => <Comment comment={i}/>)}

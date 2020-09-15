@@ -1,10 +1,9 @@
 import React from 'react'
 import './Setting.css'
-import { Link, useHistory } from 'react-router-dom'
+import { Link} from 'react-router-dom'
 
 function Setting(props) {
     const {login, setLogin} = props
-    const history = useHistory()
 
     const closeSetting = e => {
         const settingWrapper = document.querySelector('#settingWrapper')

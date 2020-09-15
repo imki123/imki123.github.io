@@ -92,7 +92,7 @@ function Login(props) {
                         res.json().then(res =>{ 
                             alert(res.username+'님의 회원가입에 성공했습니다 :D')
                             checkToken()
-                            history.push('/')
+                            history.go(-1)
                         })
                     }else{
                         let message = '회원가입에 실패했습니다 :('
@@ -154,7 +154,7 @@ function Login(props) {
                         res.json().then(res =>{ 
                             setLogin(res)
                             checkToken()
-                            history.push('/')
+                            history.go(-1)
                         })
                     }else{
                         let message = '로그인에 실패했습니다 :('

@@ -44,7 +44,7 @@
     align-items: center;
 }
 .commentProfile{
-    width: 70px;
+    width: 60px;
     font-size: 0.9rem;
     text-align: center;
 }
@@ -54,14 +54,14 @@
     border-radius: 50%;
 }
 .commentContent{
-    width: calc(92% - 70px);
+    width: calc(100% - 60px);
     min-height: 84px;
 }
-.commentButton{
-    width: 8%;
-    text-align: center;
+.commentButtons{
+    text-align: right;
+    padding-right: 8px;
 }
-.commentButton button{
+.commentButton, .loginButton{
     display: inline-block;
     padding: 6px 6px;
     border: 0px solid black;
@@ -87,4 +87,3 @@
     outline: none;
     cursor: pointer;
 }
-
