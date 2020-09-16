@@ -5,7 +5,7 @@ import { useQuill } from 'react-quilljs';
 import Comment from './Comment'
 
 function Post(props){
-    const {post, no, login, refresh, setRefresh} = props
+    const {post, no, login, refresh, setRefresh, resizeTextarea} = props
     const [ps, setPs] = useState([])
     const location = useLocation()
     let date = post.publishedDate.substring(0,16).replace('T',' ')
@@ -52,6 +52,38 @@ function Post(props){
         }
     }
 
+    const postComment = e => {
+        const comment = document.querySelector('.commentContent textarea') //댓글 텍스트
+        if(comment && comment.value !== '' && window.confirm('댓글을 작성하시겠습니까?')){
+            const postId = e.target.id
+            let url = process.env.REACT_APP_URL+'/comments/'+postId
+            //url = process.env.REACT_APP_LOCAL_URL+'/comments/'+postId
+            
+            fetch(url, {
+                mode: 'cors',
+                method: 'PATCH',
+                credentials: "include",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    //username: login.username,
+                    content: comment.value,
+                }),
+            })
+            .then(res => {
+                if(res.status===200) { //성공하면 아래 then 작동
+                    res.json().then(res =>{ 
+                        console.log(`${postId} 댓글 추가 성공`)
+                        refresh ? setRefresh(false) : setRefresh(true) //포스트 다시 불러오기
+                    })
+                }else{
+                    let message = '댓글 작성에 실패했습니다 :('
+                    alert(message)
+                }
+            })
+            .catch(e => console.error(e))
+        }
+    }
+
     return(
         <div className="post" id={`post_${no}`}>
             <div className="nav">{date}</div>
@@ -87,26 +119,27 @@ function Post(props){
                     <div className="commentProfile">
                         {login ? 
                         <img alt="PROFILE" src={process.env.PUBLIC_URL+'/images/avatar.png'}/> :
-                        <img alt="PROFILE" src={process.env.PUBLIC_URL+'/images/noavatar.png'}/>}
-                        <div>{login ? login.username : <button className="loginButton">로그인</button>}</div>
+                        <>
+                            <img alt="PROFILE" src={process.env.PUBLIC_URL+'/images/noavatar.png'}/>
+                            
+                        </>}
                     </div>
-                    
-                    {login ? 
                     <div className="commentContent">
-                        <textarea/>
-                    </div> : 
-                    <div className="commentContent">
-                        <textarea readOnly/>
-                    </div>}
+                        {login ? <span className="commentUsername">{login.username}</span> : <button className="loginButton">로그인</button>}
+                        {login ? 
+                            <textarea onChange={resizeTextarea} placeholder=" 댓글을 남겨주세요 :D"/> : 
+                            <textarea readOnly onChange={resizeTextarea} placeholder=" 로그인 후에 댓글을 남겨주세요 :D"/>}
+                    </div>
                 </div>
                 <div className="commentButtons">
-                    {login && <button className="commentButton">작성</button>}
+                    {login && <button id={post.postId} className="commentButton" onClick={postComment}>댓글작성</button>}
                 </div>
 
                 {/* 댓글 목록 */}
                 {post.comments && 
                 <div className="comments">
-                    {post.comments.map(i => <Comment comment={i} login={login} key={i.commentId}/>)}
+                    {post.comments.map(i => 
+                        <Comment post={post} comment={i} login={login} key={i.commentId} refresh={refresh} setRefresh={setRefresh}/>)}
                 </div>}
             </>}
             

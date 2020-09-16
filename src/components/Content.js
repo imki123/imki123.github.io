@@ -47,6 +47,9 @@ function Content(props) {
     }
 
     useEffect(() => {
+        window.addEventListener('resize',function(){
+            resizeTextarea()
+        })
         const loading = document.querySelector('#loading')
         if(ready){
             if(loading) loading.style.display = 'none'
@@ -88,17 +91,22 @@ function Content(props) {
     })
     
     //텍스트에어리어를 찾아서 크기를 글자 높이에 맞게 변경해주는 스크립트
-	const resizeTextarea = () => {
-		//textarea 높이 조정
-		const textareas = document.querySelectorAll('textarea')
-		const fake = document.querySelector('#fakeTextarea')
+	const resizeTextarea = e => {
+        //textarea 높이 조정
+        const fake = document.querySelector('#fakeTextarea')
+        let textareas = []
+        if(e && e.target){
+            textareas.push(e.target)
+        }else{
+            textareas = document.querySelectorAll('textarea')
+        }
+		
 		if (textareas && fake) {
-			for (let i = 1; i < textareas.length; i++) {
-                console.log(textareas)
+			for (let i = 0; i < textareas.length; i++) {
                 fake.style.height = '1px'
                 fake.style.width = textareas[i].clientWidth +'px'
                 fake.value = textareas[i].value
-				textareas[i].style.height = 12 + fake.scrollHeight + 'px'
+                textareas[i].style.height = 5 + fake.scrollHeight + 'px'
             }
             fake.value = ''
             fake.style.height = '0px'
@@ -129,7 +137,8 @@ function Content(props) {
                 }
                 { //글
                     posts && posts.map((post, idx) => 
-                        <Post no={startPost-idx} key={post.postId} post={post} login={login} refresh={refresh} setRefresh={setRefresh}/>)
+                        <Post no={startPost-idx} key={post.postId} post={post} login={login} 
+                            refresh={refresh} setRefresh={setRefresh} resizeTextarea={resizeTextarea}/>)
                 }
                 { //목록
                     (startPost > 1 && paging) && <div className="postListWrapper">

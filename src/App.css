@@ -44,7 +44,6 @@ button,
 
 textarea {
 	width: 100%;
-	min-height: 50px;
 	overflow: visible;
 	resize: none;
 	font-size: 16px;
