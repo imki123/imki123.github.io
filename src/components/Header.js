@@ -49,9 +49,12 @@ function Header(props) {
                     </div>
                 </Link>
                 <div className="hover"  onClick={toggleSetting}>
-                    {login ? 
-                    <img className="profile" alt="PROFILE" src={process.env.PUBLIC_URL+'/images/avatar.png'}/> :
-                    <img className="profile" alt="PROFILE" src={process.env.PUBLIC_URL+'/images/noavatar.png'}/>}
+                {!login ? 
+                    <img className="profile" alt="PROFILE" src={process.env.PUBLIC_URL+'/images/noavatar.png'}/> :
+                    login.username === 'imki123' ?
+                        <img className="profile" alt="PROFILE" src={process.env.PUBLIC_URL+'/images/avatar.png'}/> :
+                        <img className="profile" alt="PROFILE" 
+                            src={process.env.PUBLIC_URL+'/images/dog'+(Math.floor(Math.random() * (3 - 1 + 1)) + 1)+'.png'}/>}
                 </div>
             </div>
         </div>

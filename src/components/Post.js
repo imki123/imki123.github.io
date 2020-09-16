@@ -117,12 +117,12 @@ function Post(props){
                 {/* 댓글 작성*/}
                 <div className="writeComment">
                     <div className="commentProfile">
-                        {login ? 
+                        {!login ? 
+                        <img alt="PROFILE" src={process.env.PUBLIC_URL+'/images/noavatar.png'}/> :
+                        login.username === 'imki123' ?
                         <img alt="PROFILE" src={process.env.PUBLIC_URL+'/images/avatar.png'}/> :
-                        <>
-                            <img alt="PROFILE" src={process.env.PUBLIC_URL+'/images/noavatar.png'}/>
-                            
-                        </>}
+                        <img alt="PROFILE" 
+                            src={process.env.PUBLIC_URL+'/images/dog'+(Math.floor(Math.random() * (3 - 1 + 1)) + 1)+'.png'}/>}
                     </div>
                     <div className="commentContent">
                         {login ? <span className="commentUsername">{login.username}</span> : <button className="loginButton">로그인</button>}
