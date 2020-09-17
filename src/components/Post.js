@@ -128,7 +128,7 @@ function Post(props){
                         {login ? <span className="commentUsername">{login.username}</span> : <button className="loginButton">로그인</button>}
                         {login ? 
                             <textarea onChange={resizeTextarea} placeholder=" 댓글을 남겨주세요 :D"/> : 
-                            <textarea readOnly onChange={resizeTextarea} placeholder=" 로그인 후에 댓글을 남겨주세요 :D"/>}
+                            <textarea readOnly placeholder=" 로그인 후에 댓글을 남겨주세요 :D"/>}
                     </div>
                 </div>
                 <div className="commentButtons">
@@ -139,7 +139,8 @@ function Post(props){
                 {post.comments && 
                 <div className="comments">
                     {post.comments.map(i => 
-                        <Comment post={post} comment={i} login={login} key={i.commentId} refresh={refresh} setRefresh={setRefresh}/>)}
+                        <Comment post={post} comment={i} login={login} key={i.commentId} 
+                        refresh={refresh} setRefresh={setRefresh} resizeTextarea={resizeTextarea}/>)}
                 </div>}
             </>}
             

@@ -1,5 +1,7 @@
-.comment{
+.commentWrapper{
     margin: 8px;
+}
+.comment{
     display: flex;
     align-items: flex-start;
 }
@@ -13,4 +15,10 @@
 .commentDate{
     font-size: 0.8rem;
     color: gray;
+}
+.updateMode{
+    border: 1px solid gray !important;
+}
+.updateMode:focus{
+    outline: 1px solid green !important;
 }

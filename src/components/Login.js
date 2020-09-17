@@ -8,7 +8,7 @@ function Login(props) {
     const history = useHistory()
     let browser = ''
     const agent = navigator.userAgent.toLowerCase()
-    if(agent.indexOf("safari") > -1) browser = 'chrome'
+    if(agent.indexOf("chrome") > -1) browser = 'chrome'
     else if(agent.indexOf("safari") > -1) browser = 'safari'
         
     const [checkUsername, setCheckUsername] = useState('')
@@ -19,6 +19,9 @@ function Login(props) {
     
 
     useEffect(() => {
+        if(login && location.pathname.indexOf('loginStatus') === -1){ //이미 로그인이 되어있다면 스테이터스로 이동
+            history.replace('/loginStatus')
+        }
         if(location.pathname.indexOf('register') > -1){
             setButtonName('회원가입')
         }else if(location.pathname.indexOf('withdraw') > -1){
@@ -27,14 +30,15 @@ function Login(props) {
         }else{
             setButtonName('로그인')
         }
-    },[location])
+    },[location, login, history])
 
     const changeUsername = e => {
-        const {value} = e.target
+        const pattern = /[^a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣_]/g
+        const value = e.target.value = e.target.value.replace(/\s/g,'_').replace(pattern,'')
         if(value.length < 3){ //3글자 이상
-            setCheckUsername('- Longer than 3 letters')
+            setCheckUsername('- 3자 이상 입력해주세요')
         }else if(value.length > 20){ //20글자 이하
-            setCheckUsername('- Max length is 20 letters')
+            setCheckUsername('- 20자 이하로 입력해주세요')
         }else{
             setCheckUsername('')
         }
@@ -50,9 +54,9 @@ function Login(props) {
         }
 
         if(value.length < 6){ //6글자 이상
-            setCheckPassword('- Longer than 6 letters')
+            setCheckPassword('- 6자 이상 입력해주세요')
         }else if(value.length > 20){ //20글자 이하
-            setCheckPassword('- Max length is 20 letters')
+            setCheckPassword('- 20자 이하로 입력해주세요')
         }else{
             setCheckPassword('')
         }
@@ -62,7 +66,7 @@ function Login(props) {
         const password = document.querySelector('[name=password]')
         
         if(value !== password.value && value.length >= 1){ //password와 같으면
-            setCheckPasswordConfirm('- Not correct')
+            setCheckPasswordConfirm('- 비밀번호가 일치하지 않습니다')
         }else{
             setCheckPasswordConfirm('')
         }
@@ -71,8 +75,9 @@ function Login(props) {
         e.preventDefault();
         let url = process.env.REACT_APP_URL+'/auth'
         //url = process.env.REACT_APP_LOCAL_URL+'/auth'
+        const pattern = /[^a-zA-Z0-9가-힣_]/g
         let username = document.querySelector('[name=username]')
-        if(username) username = username.value
+        if(username) username = username.value = username.value.replace(pattern,'')
         let password = document.querySelector('[name=password]')
         if(password) password = password.value
 
@@ -174,7 +179,6 @@ function Login(props) {
         }
     }
 
-    console.log(navigator.userAgent.toLowerCase())
     return(
         <div id="background">
             <div id="loginWrapper">
@@ -201,7 +205,9 @@ function Login(props) {
                             </>}
                             <button className={`hover ${background}`} onClick={clickButton}>{buttonName}</button>
                             {browser === 'safari' &&
-                            <div className="text" style={{fontSize: '0.8rem', textAlign: 'center'}}>(Safari의 경우 설정을 변경해주셔야 로그인이 가능합니다.<br/>설정 → Safari → 개인 정보 보호 및 보안 → <br/>크로스 사이트 추적방지 OFF, 모든 쿠키 차단 OFF) </div>}
+                            <div className="text" style={{fontSize: '0.8rem', textAlign: 'center'}}>
+                                (Safari의 경우 설정을 변경해주셔야 로그인이 가능합니다.<br/>설정 → Safari → 개인 정보 보호 및 보안 → <br/>크로스 사이트 추적방지 OFF, 모든 쿠키 차단 OFF) 
+                            </div>}
                         </Route>
                         <Route path={['/loginStatus']}>
                             {login ? 
