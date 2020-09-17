@@ -28,21 +28,21 @@ function App() {
 			method: 'GET',
 			credentials: 'include',
 		})
-			.then((res) => {
-				if (res.status === 200 || res.status === 201 || res.status === 202) {
-					//성공하면 아래 then 작동
-					res.json().then((res) => {
-						console.log('토큰 체크 성공')
-						setLogin(res)
-						if (func) func()
-					})
-				} else {
-					console.log('토큰 없음') //res.status===204(No Content)
-					setLogin(false)
+		.then((res) => {
+			if (res.status === 200) {
+				//성공하면 아래 then 작동
+				res.json().then((res) => {
+					console.log('토큰 체크 성공')
+					setLogin(res)
 					if (func) func()
-				}
-			})
-			.catch((e) => console.error(e))
+				})
+			} else {
+				console.log('토큰 없음') //res.status===204(No Content)
+				setLogin(false)
+				if (func) func()
+			}
+		})
+		.catch((e) => console.error(e))
 	}
 
 	// 포스트에서 태그 정보를 가져와서 메뉴에 표시함, Quill의 태그목록에 표시
@@ -116,8 +116,7 @@ function App() {
 				credentials: "include",
 			})
 			.then((res) => {
-				if (res.status === 200 || res.status === 201) {
-					//성공하면 아래 then 작동
+				if (res.status === 200 || res.status === 201) {//성공하면 아래 then 작동
 					const h = {}
 					res.headers.forEach((v, n) => (h[n] = v))
 					setHeaders(h)
