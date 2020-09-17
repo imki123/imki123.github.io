@@ -6,12 +6,11 @@ function Login(props) {
     const {login, setLogin} = props
     const location = useLocation()
     const history = useHistory()
-    const browser = () => {
-        const agent = navigator.userAgent.toLowerCase()
-        if(agent.indexOf("safari") > -1) return 'chrome'
-        else if(agent.indexOf("safari") > -1) return 'safari'
+    let browser = ''
+    const agent = navigator.userAgent.toLowerCase()
+    if(agent.indexOf("safari") > -1) browser = 'chrome'
+    else if(agent.indexOf("safari") > -1) browser = 'safari'
         
-    }
     const [checkUsername, setCheckUsername] = useState('')
     const [checkPassword, setCheckPassword] = useState('')
     const [checkPasswordConfirm, setCheckPasswordConfirm] = useState('')
@@ -205,10 +204,14 @@ function Login(props) {
                             <div className="text" style={{fontSize: '0.8rem', textAlign: 'center'}}>(Safari의 경우 설정을 변경해주셔야 로그인이 가능합니다.<br/>설정 → Safari → 개인 정보 보호 및 보안 → <br/>크로스 사이트 추적방지 OFF, 모든 쿠키 차단 OFF) </div>}
                         </Route>
                         <Route path={['/loginStatus']}>
+                            {login ? 
                             <div className="center">
                                 {login.username}님은 현재 <span style={{color:'green'}}>로그인</span> 되어있습니다 :D<br/>
                                 <span style={{fontSize: '0.8rem'}}>(로그인은 최대 일주일간 유지됩니다.)</span>
-                            </div>
+                            </div> : 
+                            <div className="center">
+                                재 로그인이 필요합니다 :D
+                            </div>}
                         </Route>
                     </Switch>
                 </form>
