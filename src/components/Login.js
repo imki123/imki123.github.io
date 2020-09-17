@@ -15,18 +15,17 @@ function Login(props) {
     const [checkPassword, setCheckPassword] = useState('')
     const [checkPasswordConfirm, setCheckPasswordConfirm] = useState('')
     const [buttonName, setButtonName] = useState('로그인')
-    const [background, setBackground] = useState('')
     
 
     useEffect(() => {
-        if(login && location.pathname.indexOf('loginStatus') === -1){ //이미 로그인이 되어있다면 스테이터스로 이동
+        //이미 로그인이 되어있다면 스테이터스로 이동
+        if(login && location.pathname === '/login'){ 
             history.replace('/loginStatus')
         }
         if(location.pathname.indexOf('register') > -1){
             setButtonName('회원가입')
         }else if(location.pathname.indexOf('withdraw') > -1){
             setButtonName('회원탈퇴')
-            setBackground('red')
         }else{
             setButtonName('로그인')
         }
@@ -203,7 +202,11 @@ function Login(props) {
                                 <input name="passwordConfirm" type="password" onChange={changePasswordConfirm} autoComplete="currnet-password"/>
                                 <div className="check" id="checkPasswordConfirm">{checkPasswordConfirm}</div>
                             </>}
-                            <button className={`hover ${background}`} onClick={clickButton}>{buttonName}</button>
+
+                            {buttonName === '회원탈퇴' 
+                            ? <button className="hover" style={{background: 'red'}} onClick={clickButton}>{buttonName}</button>
+                            : <button className="hover" onClick={clickButton}>{buttonName}</button>}
+
                             {browser === 'safari' &&
                             <div className="text" style={{fontSize: '0.8rem', textAlign: 'center'}}>
                                 (Safari의 경우 설정을 변경해주셔야 로그인이 가능합니다.<br/>설정 → Safari → 개인 정보 보호 및 보안 → <br/>크로스 사이트 추적방지 OFF, 모든 쿠키 차단 OFF) 
