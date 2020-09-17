@@ -1,9 +1,10 @@
 import React from 'react'
 import './Header.css'
 import { Link } from 'react-router-dom';
+import { AppContext } from '../App'
 
 function Header(props) {
-    const {login} = props
+    const store = React.useContext(AppContext)
 
     const slideMenu = () => { //메뉴버튼 클릭 시 메뉴 보이기 & 숨기기
         const body = document.querySelector('#body')
@@ -49,9 +50,9 @@ function Header(props) {
                     </div>
                 </Link>
                 <div className="hover"  onClick={toggleSetting}>
-                {!login ? 
+                {!store.login ? 
                     <img className="profile" alt="PROFILE" src={process.env.PUBLIC_URL+'/images/noavatar.png'}/> :
-                    login.username === 'imki123' ?
+                    store.login.username === 'imki123' ?
                         <img className="profile" alt="PROFILE" src={process.env.PUBLIC_URL+'/images/avatar.png'}/> :
                         <img className="profile" alt="PROFILE" 
                             src={process.env.PUBLIC_URL+'/images/dog'+(Math.floor(Math.random() * (3 - 1 + 1)) + 1)+'.png'}/>}

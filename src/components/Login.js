@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import './Login.css'
 import { Switch, Route, useLocation, useHistory } from 'react-router-dom'
+import { AppContext } from '../App'
 
 function Login(props) {
-    const {login, setLogin} = props
+    const store = React.useContext(AppContext)
     const location = useLocation()
     const history = useHistory()
     let browser = ''
@@ -19,7 +20,7 @@ function Login(props) {
 
     useEffect(() => {
         //이미 로그인이 되어있다면 스테이터스로 이동
-        if(login && location.pathname === '/login'){ 
+        if(store.login && location.pathname === '/login'){ 
             history.replace('/loginStatus')
         }
         if(location.pathname.indexOf('register') > -1){
@@ -29,7 +30,7 @@ function Login(props) {
         }else{
             setButtonName('로그인')
         }
-    },[location, login, history])
+    },[location, store.login, history])
 
     const changeUsername = e => {
         const pattern = /[^a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣_]/g
@@ -123,7 +124,7 @@ function Login(props) {
                         credentials: "include",
                         headers:{'Content-Type': 'application/json'},
                         body: JSON.stringify({
-                            username: login.username,
+                            username: store.login.username,
                             password: password,
                         }),
                     })
@@ -159,7 +160,7 @@ function Login(props) {
                 .then(res => {
                     if(res.status===200 || res.status===201) { //성공하면 아래 then 작동
                         res.json().then(res =>{ 
-                            setLogin(res)
+                            store.setLogin(res)
                             alert(res.username+'님 환영합니다 :D')
                             history.go(-1)
                         })
@@ -186,7 +187,7 @@ function Login(props) {
                         <Route path={['/login','/register','/withdraw']}>
                             <div className="text">아이디</div>
                             {buttonName === '회원탈퇴' ?
-                                <div>{login.username}</div> :
+                                <div>{store.login.username}</div> :
                                 <input name="username" onChange={changeUsername}/>
                             }
 
@@ -204,8 +205,8 @@ function Login(props) {
                             </>}
 
                             {buttonName === '회원탈퇴' 
-                            ? <button className="hover" style={{background: 'red'}} onClick={clickButton}>{buttonName}</button>
-                            : <button className="hover" onClick={clickButton}>{buttonName}</button>}
+                            ? <button style={{background: 'red'}} onClick={clickButton}>{buttonName}</button>
+                            : <button onClick={clickButton}>{buttonName}</button>}
 
                             {browser === 'safari' &&
                             <div className="text" style={{fontSize: '0.8rem', textAlign: 'center'}}>
@@ -213,9 +214,9 @@ function Login(props) {
                             </div>}
                         </Route>
                         <Route path={['/loginStatus']}>
-                            {login ? 
+                            {store.login ? 
                             <div className="center">
-                                {login.username}님은 현재 <span style={{color:'green'}}>로그인</span> 되어있습니다 :D<br/>
+                                {store.login.username}님은 현재 <span style={{color:'green'}}>로그인</span> 되어있습니다 :D<br/>
                                 <span style={{fontSize: '0.8rem'}}>(로그인은 최대 일주일간 유지됩니다.)</span>
                             </div> : 
                             <div className="center">

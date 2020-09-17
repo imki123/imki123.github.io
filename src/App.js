@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import './App.css'
 import { Switch, Route, useLocation} from 'react-router-dom'
 
@@ -10,6 +10,8 @@ import Setting from './components/Setting'
 import Login from './components/Login'
 import Quill from './components/Quill'
 
+const AppContext = createContext()
+
 function App() {
 	const location = useLocation() //페이지 경로 변경 감지
 	const [ready, setReady] = useState(false)
@@ -19,6 +21,41 @@ function App() {
 	const [refresh, setRefresh] = useState(false)
 	const [menus, setMenus] = useState({})
 	const [subMenus, setSubMenus] = useState([])
+
+	//텍스트에어리어를 찾아서 크기를 글자 높이에 맞게 변경해주는 스크립트
+	const resizeTextarea = e => {
+        //textarea 높이 조정
+        const fake = document.querySelector('#fakeTextarea')
+        let textareas = []
+        if(e && e.target){
+            textareas.push(e.target)
+        }else{
+            textareas = document.querySelectorAll('textarea')
+        }
+		
+		if (textareas && fake) {
+			for (let i = 0; i < textareas.length; i++) {
+                fake.style.height = '1px'
+                fake.style.width = textareas[i].clientWidth +'px'
+                fake.value = textareas[i].value
+                textareas[i].style.height = 5 + fake.scrollHeight + 'px'
+            }
+            fake.value = ''
+            fake.style.height = '0px'
+		}
+	}
+	//useContext 이용하여 하위 컴포넌트에 상태 전달
+	const store = {
+		ready, setReady, 
+		posts, setPosts,
+		headers, setHeaders,
+		login, setLogin,
+		refresh, setRefresh,
+		menus, setMenus,
+		subMenus, setSubMenus,
+		resizeTextarea,
+	}
+	
 	
 
 	const checkToken = (func) => {
@@ -146,25 +183,28 @@ function App() {
 	}, [location.pathname, location.search, refresh])
 
 	return (
+		<AppContext.Provider value={store}>
 		<div id="app">
-			<Header login={login} />
-			<Setting login={login} setLogin={setLogin} />
+			<Header />
+			<Setting setLogin={setLogin} />
 			<Body>
 				<Guide menus={menus}/>
-				<Content posts={posts} headers={headers} ready={ready} login={login} refresh={refresh} setRefresh={setRefresh}>
+				<Content posts={posts} headers={headers}>
 					<Switch>
 						<Route path={['/login', '/register', '/loginStatus', '/withdraw']}>
-							<Login login={login} setLogin={setLogin} checkToken={checkToken}/>
+							<Login/>
 						</Route>
 						<Route path={['/quill']}>
-							<Quill login={login} menus={menus} subMenus={subMenus}/>
+							<Quill/>
 						</Route>
 						{/* <Route path="*" component={NotFoundPage} /> */}
 					</Switch>
 				</Content>
 			</Body>
 		</div>
+		</AppContext.Provider>
 	)
 }
-
+export {AppContext}
 export default React.memo(App)
+

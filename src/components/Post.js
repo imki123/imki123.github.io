@@ -3,9 +3,11 @@ import './Post.css'
 import { Link, useHistory, useLocation } from 'react-router-dom'
 import { useQuill } from 'react-quilljs';
 import Comment from './Comment'
+import { AppContext } from '../App'
 
 function Post(props){
-    const {post, no, login, refresh, setRefresh, resizeTextarea} = props
+    const store = React.useContext(AppContext)
+    const {post, no} = props
     const [ps, setPs] = useState([])
     const location = useLocation()
     const history = useHistory()
@@ -29,7 +31,7 @@ function Post(props){
     },[post, location, quill])
 
     const deletePost = e => {
-        if(window.confirm('글 삭제 시 복구가 불가능합니다. 해당 글을 정말로 삭제하시겠습니까?')){
+        if(window.confirm('글 삭제 시 복구가 불가합니다. 해당 글을 정말로 삭제하시겠습니까?')){
             const postId = e.target.id
             let url = process.env.REACT_APP_URL+'/posts/'+postId
             //url = process.env.REACT_APP_LOCAL_URL+'/posts/'+postId
@@ -43,7 +45,7 @@ function Post(props){
                 if(res.status===200 || res.status===204) { //성공하면 아래 then 작동
                     res.json().then(res =>{ 
                         console.log(`${postId}번 글 삭제 성공`)
-                        refresh ? setRefresh(false) : setRefresh(true)
+                        store.refresh ? store.setRefresh(false) : store.setRefresh(true)
                     })
                 }else{
                     let message = '글 삭제에 실패했습니다 :('
@@ -55,11 +57,11 @@ function Post(props){
     }
 
     const postComment = e => {
-        const comment = document.querySelector('.commentContent textarea') //댓글 텍스트
+        const comment = document.querySelector(`#post_${no} .commentContent textarea`) //댓글 텍스트
+        console.log(post)
         if(comment && comment.value !== '' && window.confirm('댓글을 작성하시겠습니까?')){
-            const postId = e.target.id
-            let url = process.env.REACT_APP_URL+'/comments/'+postId
-            url = process.env.REACT_APP_LOCAL_URL+'/comments/'+postId
+            let url = process.env.REACT_APP_URL+'/comments/'+post.postId
+            //url = process.env.REACT_APP_LOCAL_URL+'/comments/'+post.postId
             
             fetch(url, {
                 mode: 'cors',
@@ -74,8 +76,8 @@ function Post(props){
             .then(res => {
                 if(res.status===200) { //성공하면 아래 then 작동
                     res.json().then(res =>{ 
-                        console.log(`${postId} 댓글 추가 성공`)
-                        refresh ? setRefresh(false) : setRefresh(true) //포스트 다시 불러오기
+                        console.log(`${post.postId} 댓글 추가 성공`)
+                        store.refresh ? store.setRefresh(false) : store.setRefresh(true) //포스트 다시 불러오기
                     })
                 }else{
                     let message = '댓글 작성에 실패했습니다 :('
@@ -109,8 +111,8 @@ function Post(props){
                 </div>
 
                 {/* 글 수정 삭제 버튼 */}
-                {login && login.username === 'imki123' && <div className="postButtons">
-                    <Link to={`/quill?postId=${post.postId}`}>수정</Link>&nbsp;
+                {store.login && store.login.username === 'imki123' && <div className="postButtons">
+                    <Link to={`/quill?postId=${post.postId}`} className="hover">수정</Link>&nbsp;
                     <button onClick={deletePost} id={post.postId} style={{background: 'red'}}>삭제</button>
                 </div>}
             </div>
@@ -119,32 +121,31 @@ function Post(props){
                 {/* 댓글 작성*/}
                 <div className="writeComment">
                     <div className="commentProfile">
-                        {!login ? 
+                        {!store.login ? 
                         <img alt="PROFILE" src={process.env.PUBLIC_URL+'/images/noavatar.png'}/> :
-                        login.username === 'imki123' ?
+                        store.login.username === 'imki123' ?
                         <img alt="PROFILE" src={process.env.PUBLIC_URL+'/images/avatar.png'}/> :
                         <img alt="PROFILE" 
                             src={process.env.PUBLIC_URL+'/images/dog'+(Math.floor(Math.random() * (3 - 1 + 1)) + 1)+'.png'}/>}
                     </div>
                     <div className="commentContent">
-                        {login 
-                        ? <span className="commentUsername">{login.username}</span> 
+                        {store.login 
+                        ? <span className="commentUsername">{store.login.username}</span> 
                         : <button className="loginButton" onClick={() => {history.push('/login')}}>로그인</button>}
-                        {login ? 
-                            <textarea onChange={resizeTextarea} placeholder=" 댓글을 남겨주세요 :D"/> : 
+                        {store.login ? 
+                            <textarea onChange={store.resizeTextarea} placeholder=" 댓글을 남겨주세요 :D"/> : 
                             <textarea readOnly placeholder=" 로그인 후에 댓글을 남겨주세요 :D"/>}
                     </div>
                 </div>
                 <div className="commentButtons">
-                    {login && <button id={post.postId} className="commentButton" onClick={postComment}>댓글작성</button>}
+                    {store.login && <button className="commentButton" onClick={postComment}>댓글작성</button>}
                 </div>
 
                 {/* 댓글 목록 */}
                 {post.comments && 
                 <div className="comments">
                     {post.comments.map(i => 
-                        <Comment post={post} comment={i} login={login} key={i.commentId} 
-                        refresh={refresh} setRefresh={setRefresh} resizeTextarea={resizeTextarea}/>)}
+                        <Comment post={post} comment={i} key={i.commentId}/>)}
                 </div>}
             </>}
             

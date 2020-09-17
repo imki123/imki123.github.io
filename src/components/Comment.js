@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react'
 import './Comment.css'
+import { AppContext } from '../App'
 
 function Comment(props) {
-    const {comment, login, post, refresh, setRefresh, resizeTextarea} = props
+    const store = React.useContext(AppContext)
+    const {comment, post} = props
     let update = false
     let date = comment.publishedDate.substring(0,16).replace('T',' ')
     useEffect(() => {
         const textarea = document.querySelector(`#comment_${post.postId}_${comment.commentId} textarea`)
         textarea.value = comment.content
-    },[comment, refresh])
+    },[comment, post])
 
     const updateComment = e => { //댓글 수정
         const textarea = document.querySelector(`#comment_${post.postId}_${comment.commentId} textarea`)
@@ -37,7 +39,7 @@ function Comment(props) {
                if(res.status===200) { //성공하면 아래 then 작동
                     res.json().then(res =>{ 
                         console.log(`${comment.commentId}번 댓글 수정 성공`)
-                        refresh ? setRefresh(false) : setRefresh(true) //포스트 다시 불러오기
+                        store.refresh ? store.setRefresh(false) : store.setRefresh(true) //포스트 다시 불러오기
                     })
                 }else{
                     let message = '댓글 수정에 실패했습니다 :('
@@ -49,7 +51,7 @@ function Comment(props) {
     }
 
     const deleteComment = e => {
-        if(window.confirm('삭제 후에는 복구가 불가능 합니다. 정말로 댓글을 삭제하시겠습니까?')){
+        if(window.confirm('삭제 후에는 복구가 불가합니다. 정말로 댓글을 삭제하시겠습니까?')){
             let url = process.env.REACT_APP_URL+`/comments/delete/${post.postId}/${comment.commentId}`
             //url = process.env.REACT_APP_LOCAL_URL+`/comments/delete/${post.postId}/${commentId}`
             fetch(url, {
@@ -61,7 +63,7 @@ function Comment(props) {
                if(res.status===200) { //성공하면 아래 then 작동
                     res.json().then(res =>{ 
                         console.log(`${comment.commentId}번 댓글 삭제 성공`)
-                        refresh ? setRefresh(false) : setRefresh(true) //포스트 다시 불러오기
+                        store.refresh ? store.setRefresh(false) : store.setRefresh(true) //포스트 다시 불러오기
                     })
                 }else{
                     let message = '댓글 삭제에 실패했습니다 :('
@@ -86,10 +88,10 @@ function Comment(props) {
             <div className="commentContent">
                 <span className="commentUsername">{comment.username}</span>
                 <span className="commentDate"> - {date} {comment.updated && '(수정됨)'}</span>
-                <textarea readOnly onChange={resizeTextarea}/>
+                <textarea readOnly onChange={store.resizeTextarea}/>
             </div>
         </div>
-        {(comment.username === login.username || login.username === 'imki123')&&
+        {(comment.username === store.login.username || store.login.username === 'imki123')&&
         <div className="commentButtons">
             <button className="commentButton" onClick={updateComment}>수정</button>
             <button className="commentButton" style={{background:'red'}} onClick={deleteComment}>삭제</button>

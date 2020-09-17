@@ -3,21 +3,22 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import './Content.css'
 import queryString from 'query-string'
 import { Link, useLocation } from 'react-router-dom'
+import { AppContext } from '../App'
 
 import Post from './Post';
 import Paging from './Paging';
 import PostList from './PostList'
 
 function Content(props) {
-    let {posts, headers, ready, login, refresh, setRefresh} = props
+    const store = React.useContext(AppContext)
     const location = useLocation()
     const search = queryString.parse(location.search)
     let startPost = 1
     let paging = null
-    if(headers){
+    if(store.headers){
         const page = Number(search.page) || 1
-        const lastPage = Number(headers['last-page'])
-        const totalPost = Number(headers['total-post'])
+        const lastPage = Number(store.headers['last-page'])
+        const totalPost = Number(store.headers['total-post'])
         startPost = totalPost - (page-1)*5
         paging = {
             page: page,
@@ -48,10 +49,10 @@ function Content(props) {
 
     useEffect(() => {
         window.addEventListener('resize',function(){
-            resizeTextarea()
+            store.resizeTextarea()
         })
         const loading = document.querySelector('#loading')
-        if(ready){
+        if(store.ready){
             if(loading) loading.style.display = 'none'
             if(location.hash){ //hash가 있으면 해당 엘리먼트로 스크롤
                 setTimeout(function(){ //elem이 로드된 이후에 스크롤이 되야해서 0.1초 타임아웃 추가..
@@ -83,39 +84,17 @@ function Content(props) {
                 },100)
             }
             setTimeout(function(){
-                resizeTextarea()
+                store.resizeTextarea()
             }, 10)
         }else{
             if(loading) loading.style.display = 'flex'
         }
     })
     
-    //텍스트에어리어를 찾아서 크기를 글자 높이에 맞게 변경해주는 스크립트
-	const resizeTextarea = e => {
-        //textarea 높이 조정
-        const fake = document.querySelector('#fakeTextarea')
-        let textareas = []
-        if(e && e.target){
-            textareas.push(e.target)
-        }else{
-            textareas = document.querySelectorAll('textarea')
-        }
-		
-		if (textareas && fake) {
-			for (let i = 0; i < textareas.length; i++) {
-                fake.style.height = '1px'
-                fake.style.width = textareas[i].clientWidth +'px'
-                fake.value = textareas[i].value
-                textareas[i].style.height = 5 + fake.scrollHeight + 'px'
-            }
-            fake.value = ''
-            fake.style.height = '0px'
-		}
-	}
-
 	return(
         <div id="content" className="slideMenu">
-            {login && login.username === 'imki123' && <Link id="postFAB" className="hover" to="/quill">
+            {store.login && store.login.username === 'imki123' && 
+            <Link id="postFAB" className="hover" to="/quill">
                 <AddCircleOutlineIcon />
             </Link>}
             <div id="menuFAB" className="hover" onClick={slideMenu}>
@@ -126,24 +105,24 @@ function Content(props) {
             </div>
             {props.children}
             
-            {ready && <> 
-                {!props.children && posts && posts.length === 0 && <div>작성된 글이 없네요. ^^;</div>}
+            {store.ready && <> 
                 { //목록
                     (startPost > 1 && paging) && <div className="postListWrapper">
                         <div className="postListTitle">목록</div>
-                        {posts && posts.map((post, idx) => <PostList no={startPost-idx} key={post.postId} post={post} paging={paging}/>)}
+                        {store.posts && store.posts.map((i, idx) => 
+                            <PostList no={startPost-idx} post={i} key={i.postId}/>)}
                         {<Paging paging={paging}/>}
                     </div>
                 }
                 { //글
-                    posts && posts.map((post, idx) => 
-                        <Post no={startPost-idx} key={post.postId} post={post} login={login} 
-                            refresh={refresh} setRefresh={setRefresh} resizeTextarea={resizeTextarea}/>)
+                    store.posts && store.posts.map((i, idx) => 
+                        <Post no={startPost-idx} post={i} key={i.postId}/>)
                 }
                 { //목록
                     (startPost > 1 && paging) && <div className="postListWrapper">
                         <div className="postListTitle">목록</div>
-                        {posts && posts.map((post, idx) => <PostList no={startPost-idx} key={post.postId} post={post} paging={paging}/>)}
+                        {store.posts && store.posts.map((i, idx) => 
+                            <PostList no={startPost-idx} post={i} key={i.postId}/>)}
                         {<Paging paging={paging}/>}
                     </div>
                 }

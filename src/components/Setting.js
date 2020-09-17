@@ -1,9 +1,10 @@
 import React from 'react'
 import './Setting.css'
 import { Link} from 'react-router-dom'
+import { AppContext } from '../App'
 
 function Setting(props) {
-    const {login, setLogin} = props
+    const store = React.useContext(AppContext)
 
     const closeSetting = e => {
         const settingWrapper = document.querySelector('#settingWrapper')
@@ -24,7 +25,7 @@ function Setting(props) {
             .then(res => {
                 if(res.status===204) { //로그아웃은 204가 성공
                     console.log('로그아웃 성공')
-                    setLogin(false)
+                    store.setLogin(false)
                 }else{
                     console.log('로그아웃 실패', res)
                 }
@@ -37,13 +38,13 @@ function Setting(props) {
         <div id="settingWrapper" onClick={closeSetting}>
             <div id="setting">
                 <div id="settingListWrapper">
-                    {login ? 
-                        <Link className="settingList" to="/loginStatus">{login.username}</Link> :
+                    {store.login ? 
+                        <Link className="settingList" to="/loginStatus">{store.login.username}</Link> :
                         <Link className="settingList" to="/login">로그인</Link>    
                     }
-                    {login && <div className="settingList" onClick={logout}>로그아웃</div>}
-                    {!login && <Link className="settingList" to="/register">회원가입</Link>}
-                    {login && <Link className="settingList" to="/withdraw">회원탈퇴</Link>}
+                    {store.login && <div className="settingList" onClick={logout}>로그아웃</div>}
+                    {!store.login && <Link className="settingList" to="/register">회원가입</Link>}
+                    {store.login && <Link className="settingList" to="/withdraw">회원탈퇴</Link>}
                 </div>
             </div>
         </div>

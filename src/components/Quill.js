@@ -4,13 +4,15 @@ import 'quill/dist/quill.snow.css'
 import { useHistory, useLocation } from 'react-router-dom'
 import { useQuill } from 'react-quilljs'
 import queryString from 'query-string'
+import { AppContext } from '../App'
 
 function Quill(props) {
+	const store = React.useContext(AppContext)
 	const location = useLocation()
 	const postId = queryString.parse(location.search).postId
 	const history = useHistory()
-	const { login, subMenus, menus } = props
 	const [newMenu, setNewMenu] = useState([])
+
 
 	const modules = {
 		toolbar: [
@@ -54,18 +56,18 @@ function Quill(props) {
 
 	useEffect(() => {
 		const tempMenu = []
-		for (let i in menus) {
+		for (let i in store.menus) {
 			if (
-				menus[i].name !== 'home' &&
-				menus[i].name !== 'about' &&
-				menus[i].name !== 'programming' &&
-				menus[i].name !== 'article'
+				store.menus[i].name !== 'home' &&
+				store.menus[i].name !== 'about' &&
+				store.menus[i].name !== 'programming' &&
+				store.menus[i].name !== 'article'
 			) {
-				tempMenu.push(menus[i])
+				tempMenu.push(store.menus[i])
 			}
 		}
 		setNewMenu(tempMenu)
-	}, [menus])
+	}, [store.menus])
 
 	useEffect(() => {
 		//console.log(postId, Number(postId))
@@ -118,7 +120,7 @@ function Quill(props) {
 
 	//글 작성 or 수정
 	const clickPost = (e) => {
-		if (!login || (login && login.username !== 'imki123')) {
+		if (!store.login || (store.login && store.login.username !== 'imki123')) {
 			alert('글 작성은 블로그 주인만 가능합니다 ^^;')
 			return
 		}
@@ -130,7 +132,7 @@ function Quill(props) {
 		const content = quill.getContents()
 		const mainMenu = document.querySelector('[type=radio]:checked')
 		let tags = []
-		const subMenus = document.querySelectorAll('[type=checkbox]:checked')
+		const checkBoxs = document.querySelectorAll('[type=checkbox]:checked')
 		const newMainMenu = document.querySelector('[name=newMainMenu]')
 		const newMenu = document.querySelector('[name=newMenu]')
 
@@ -140,8 +142,8 @@ function Quill(props) {
 		if (newMainMenu.value !== '') {
 			tags = [newMainMenu.value]
 		}
-		if (subMenus) {
-			for (let i of subMenus) {
+		if (checkBoxs) {
+			for (let i of checkBoxs) {
 				tags.push(i.name)
 			} //체크 된 서브메뉴 추가
 		}
@@ -162,7 +164,7 @@ function Quill(props) {
 
 		//url에 POST 또는 PATCH 요청
 		let url = process.env.REACT_APP_URL + '/posts'
-		url = process.env.REACT_APP_LOCAL_URL + '/posts'
+		//url = process.env.REACT_APP_LOCAL_URL + '/posts'
 		let method = 'POST',
 			message = '글 작성 성공'
 		if (e.target.id === 'PATCH') {
@@ -171,7 +173,7 @@ function Quill(props) {
 				method = 'PATCH'
 				message = '글 수정 성공'
 			} else {
-				console.log('postId 비정상, 글 수정 불가')
+				console.log('postId 비정상, 글 수정 실패')
 				return
 			}
 		}
@@ -270,8 +272,8 @@ function Quill(props) {
 					</div>
 					<div>
 						서브메뉴:
-						{subMenus &&
-							subMenus.map((i) => (
+						{store.subMenus &&
+							store.subMenus.map((i) => (
 								<label key={i}>
 									<input type="checkbox" name={i} />
 									{i}
@@ -286,11 +288,11 @@ function Quill(props) {
 				</div>
 				<div className="editorButtons">
 					{postId !== undefined && Number(postId) >= 1 ? (
-						<button onClick={clickPost} className="hover" id="PATCH">
+						<button onClick={clickPost} id="PATCH">
 							글 수정
 						</button>
 					) : (
-						<button onClick={clickPost} className="hover">
+						<button onClick={clickPost}>
 							새글 작성
 						</button>
 					)}

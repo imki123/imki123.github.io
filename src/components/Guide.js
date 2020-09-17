@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import './Guide.css'
 import Menu from './Menu'
+import { AppContext } from '../App'
 
 function Guide(props) {
-    const {menus} = props
+    const store = React.useContext(AppContext)
     const [newMenu, setNewMenu] = useState([])
     useEffect(() => {
         const tempMenu = []
-        for(let i in menus){
-            if(menus[i].name !== 'home' && menus[i].name !== 'about' && menus[i].name !== 'programming' && menus[i].name !== 'article'){
-                tempMenu.push(menus[i])
+        for(let i in store.menus){
+            if(store.menus[i].name !== 'home' && store.menus[i].name !== 'about' && store.menus[i].name !== 'programming' && store.menus[i].name !== 'article'){
+                tempMenu.push(store.menus[i])
             }
         }
         setNewMenu(tempMenu)
-    },[menus])
+    },[store.menus])
     
 
     //모바일에서 메뉴 클릭시 닫기
@@ -47,10 +48,10 @@ function Guide(props) {
                     </div>
                 </div>
                 <div id="menus">
-                    <Menu menu={menus.home}/>
-                    <Menu menu={menus.about}/>
-                    <Menu menu={menus.programming}/>
-                    <Menu menu={menus.article}/>
+                    <Menu menu={store.menus.home}/>
+                    <Menu menu={store.menus.about}/>
+                    <Menu menu={store.menus.programming}/>
+                    <Menu menu={store.menus.article}/>
                     {newMenu.map(i => <Menu menu={i} key={i}/>)}
                 </div>
             </div>
