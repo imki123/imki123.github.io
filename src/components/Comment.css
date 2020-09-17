@@ -12,6 +12,10 @@
     font-size: 0.9rem;
     color: #4e4e4e;
 }
+.commentButtons{
+    position: relative;
+    top: -10px;
+}
 .commentDate{
     font-size: 0.8rem;
     color: gray;

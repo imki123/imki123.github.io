@@ -6,12 +6,12 @@ function Comment(props) {
     let update = false
     let date = comment.publishedDate.substring(0,16).replace('T',' ')
     useEffect(() => {
-        const textarea = document.querySelector(`#comment_${comment.commentId} textarea`)
+        const textarea = document.querySelector(`#comment_${post.postId}_${comment.commentId} textarea`)
         textarea.value = comment.content
     },[comment, refresh])
 
     const updateComment = e => { //댓글 수정
-        const textarea = document.querySelector(`#comment_${comment.commentId} textarea`)
+        const textarea = document.querySelector(`#comment_${post.postId}_${comment.commentId} textarea`)
         if(!update){
             update = true
             textarea.classList.add('updateMode')
@@ -73,7 +73,7 @@ function Comment(props) {
     }
 
 	return(
-    <div className="commentWrapper" id={`comment_${comment.commentId}`}>
+    <div className="commentWrapper" id={`comment_${post.postId}_${comment.commentId}`}>
         <div className="comment">
             <div className="commentProfile">
                 {!comment.username ? 

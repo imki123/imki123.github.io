@@ -9,7 +9,7 @@ function Post(props){
     const [ps, setPs] = useState([])
     const location = useLocation()
     const history = useHistory()
-    
+
     let date = post.publishedDate.substring(0,16).replace('T',' ')
     const modules = {syntax: true}
     const formats = ['bold', 'italic', 'underline', 'strike', 'code-block', 'blockquote', 'size',
@@ -59,7 +59,7 @@ function Post(props){
         if(comment && comment.value !== '' && window.confirm('댓글을 작성하시겠습니까?')){
             const postId = e.target.id
             let url = process.env.REACT_APP_URL+'/comments/'+postId
-            //url = process.env.REACT_APP_LOCAL_URL+'/comments/'+postId
+            url = process.env.REACT_APP_LOCAL_URL+'/comments/'+postId
             
             fetch(url, {
                 mode: 'cors',

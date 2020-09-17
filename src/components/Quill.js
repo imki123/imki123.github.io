@@ -15,19 +15,40 @@ function Quill(props) {
 	const modules = {
 		toolbar: [
 			['bold', 'italic', 'underline', 'strike'],
-            [{ size: ['small', false, 'large', 'huge'] },{ header: 1 }, { header: 2 }],
-            [{ align: [] }],
-            [{ color: [] }, { background: [] }],
+			[
+				{ size: ['small', false, 'large', 'huge'] },
+				{ header: 1 },
+				{ header: 2 },
+			],
+			[{ align: [] }],
+			[{ color: [] }, { background: [] }],
 			[{ indent: '-1' }, { indent: '+1' }],
-            [{ list: 'ordered' }, { list: 'bullet' }],
-            ['code-block','blockquote'],
+			[{ list: 'ordered' }, { list: 'bullet' }],
+			['code-block', 'blockquote'],
 			['link', 'image', 'video'],
 			['clean'],
 		],
 		syntax: true,
-    }
-    const formats = ['bold', 'italic', 'underline', 'strike', 'code-block', 'blockquote', 'size',
-        'header', 'align', 'color', 'background', 'indent', 'list', 'link', 'image', 'video', 'clean']
+	}
+	const formats = [
+		'bold',
+		'italic',
+		'underline',
+		'strike',
+		'code-block',
+		'blockquote',
+		'size',
+		'header',
+		'align',
+		'color',
+		'background',
+		'indent',
+		'list',
+		'link',
+		'image',
+		'video',
+		'clean',
+	]
 
 	const { quill, quillRef } = useQuill({ modules, formats })
 
@@ -46,7 +67,6 @@ function Quill(props) {
 		setNewMenu(tempMenu)
 	}, [menus])
 
-	
 	useEffect(() => {
 		//console.log(postId, Number(postId))
 		if (postId !== undefined && Number(postId) >= 1 && quill) {
@@ -58,39 +78,41 @@ function Quill(props) {
 				method: 'GET',
 				credentials: 'include',
 			})
-			.then((res) => {
-				if (res.status === 200 || res.status === 201) {
-					//성공하면 아래 then 작동
-					res.json().then((res) => {
-						//console.log(res)
-						let title = document.querySelector('[name=title]')
-						title.value = res.title
-						if (typeof res.body === 'string') quill.setText(res.body)
-						//body가 string이면 setText
-						else quill.setContents(res.body) //body가 string이 아니면 setContents : Delta
-												
-						const tags = document.querySelectorAll('[type=radio]')
-						for (let i of tags) {
-							//체크 초기화
-							i.checked = false
-						}
-						if (res.tags) {
-							//체크박스 체크
-							const mainMenu = document.querySelector(`[value=${res.tags[0]}]`) 
-							if(mainMenu) mainMenu.checked = true
-							for (let i of res.tags) {
-								const tag = document.querySelector(`[name=${i}]`)
-								if (tag) tag.checked = true
+				.then((res) => {
+					if (res.status === 200 || res.status === 201) {
+						//성공하면 아래 then 작동
+						res.json().then((res) => {
+							//console.log(res)
+							let title = document.querySelector('[name=title]')
+							title.value = res.title
+							if (typeof res.body === 'string') quill.setText(res.body)
+							//body가 string이면 setText
+							else quill.setContents(res.body) //body가 string이 아니면 setContents : Delta
+
+							const tags = document.querySelectorAll('[type=radio]')
+							for (let i of tags) {
+								//체크 초기화
+								i.checked = false
 							}
-						}
-					})
-				} else {
-					res.json().then((res) => {
-						console.log(res)
-					})
-				}
-			})
-			.catch((e) => console.error(e))
+							if (res.tags) {
+								//체크박스 체크
+								const mainMenu = document.querySelector(
+									`[value=${res.tags[0]}]`,
+								)
+								if (mainMenu) mainMenu.checked = true
+								for (let i of res.tags) {
+									const tag = document.querySelector(`[name=${i}]`)
+									if (tag) tag.checked = true
+								}
+							}
+						})
+					} else {
+						res.json().then((res) => {
+							console.log(res)
+						})
+					}
+				})
+				.catch((e) => console.error(e))
 		}
 	}, [location, quill, postId])
 
@@ -140,7 +162,7 @@ function Quill(props) {
 
 		//url에 POST 또는 PATCH 요청
 		let url = process.env.REACT_APP_URL + '/posts'
-		//url = process.env.REACT_APP_LOCAL_URL+'/posts'
+		url = process.env.REACT_APP_LOCAL_URL + '/posts'
 		let method = 'POST',
 			message = '글 작성 성공'
 		if (e.target.id === 'PATCH') {
