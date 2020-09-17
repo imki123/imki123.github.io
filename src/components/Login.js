@@ -3,9 +3,15 @@ import './Login.css'
 import { Switch, Route, useLocation, useHistory } from 'react-router-dom'
 
 function Login(props) {
-    const {login, setLogin, checkToken} = props
+    const {login, setLogin} = props
     const location = useLocation()
     const history = useHistory()
+    const browser = () => {
+        const agent = navigator.userAgent.toLowerCase()
+        if(agent.indexOf("safari") > -1) return 'chrome'
+        else if(agent.indexOf("safari") > -1) return 'safari'
+        
+    }
     const [checkUsername, setCheckUsername] = useState('')
     const [checkPassword, setCheckPassword] = useState('')
     const [checkPasswordConfirm, setCheckPasswordConfirm] = useState('')
@@ -91,7 +97,6 @@ function Login(props) {
                     if(res.status===200 || res.status===201) { //성공하면 아래 then 작동
                         res.json().then(res =>{ 
                             alert(res.username+'님의 회원가입에 성공했습니다 :D')
-                            //checkToken()
                             history.go(-1)
                         })
                     }else{
@@ -122,7 +127,6 @@ function Login(props) {
                     .then(res => {
                         if(res.status===200) { //삭제하면 Ok
                             alert('계정이 탈퇴되었습니다. 또 들러 주세요 :D')
-                            checkToken()
                             history.push('/')
                         }else{
                             let message = '탈퇴에 실패했습니다 :('
@@ -154,7 +158,6 @@ function Login(props) {
                         res.json().then(res =>{ 
                             setLogin(res)
                             alert(res.username+'님 환영합니다 :D')
-                            //checkToken()
                             history.go(-1)
                         })
                     }else{
@@ -172,6 +175,7 @@ function Login(props) {
         }
     }
 
+    console.log(navigator.userAgent.toLowerCase())
     return(
         <div id="background">
             <div id="loginWrapper">
@@ -197,6 +201,8 @@ function Login(props) {
                                 <div className="check" id="checkPasswordConfirm">{checkPasswordConfirm}</div>
                             </>}
                             <button className={`hover ${background}`} onClick={clickButton}>{buttonName}</button>
+                            {browser === 'safari' &&
+                            <div className="text" style={{fontSize: '0.8rem', textAlign: 'center'}}>(Safari의 경우 설정을 변경해주셔야 로그인이 가능합니다.<br/>설정 → Safari → 개인 정보 보호 및 보안 → <br/>크로스 사이트 추적방지 OFF, 모든 쿠키 차단 OFF) </div>}
                         </Route>
                         <Route path={['/loginStatus']}>
                             <div className="center">

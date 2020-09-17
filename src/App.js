@@ -94,7 +94,8 @@ function App() {
 	//주소 변경될 때, 토큰 체크하고 포스트 조회하기
 	useEffect(() => {
 		setReady(false)
-		checkToken(function () {
+		checkToken(
+			function() {
 			let url = process.env.REACT_APP_URL+'/posts'
 			//url = process.env.REACT_APP_LOCAL_URL+'/posts'
 			let path = location.pathname.split('/')
@@ -105,7 +106,7 @@ function App() {
 				setReady(true)
 				setHeaders(false)
 				setPosts(false)
-				return ;
+				return
 			}else {
 				url = url + path + location.search
 			}
