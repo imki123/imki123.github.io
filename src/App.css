@@ -54,15 +54,6 @@ textarea {
 textarea:focus {
 	outline: 1px solid green;
 }
-#fakeTextarea {
-	min-height: 0;
-	height: 0px;
-	border: 0;
-	width: 100%;
-	opacity: 0;
-
-	font-size: 0.9rem;
-}
 
 #app {
 	position: relative;

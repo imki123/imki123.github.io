@@ -64,6 +64,18 @@
   
 }
 
+#fakeTextarea {
+	min-height: 0;
+	height: 0px;
+	border: 0;
+	width: 100%;
+	opacity: 0;
+
+  font-size: 0.9rem;
+  position: absolute;
+  top: -10000000px;
+}
+
 @media(max-width: 500px){
     #guideWrapper{
       width: 230px;
