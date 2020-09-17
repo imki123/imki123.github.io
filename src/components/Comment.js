@@ -85,7 +85,7 @@ function Comment(props) {
             </div>
             <div className="commentContent">
                 <span className="commentUsername">{comment.username}</span>
-                <span className="commentDate"> - {date}</span>
+                <span className="commentDate"> - {date} {comment.updated && '(수정됨)'}</span>
                 <textarea readOnly onChange={resizeTextarea}/>
             </div>
         </div>
