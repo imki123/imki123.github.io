@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './Post.css'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import { useQuill } from 'react-quilljs';
 import Comment from './Comment'
 
@@ -8,6 +8,8 @@ function Post(props){
     const {post, no, login, refresh, setRefresh, resizeTextarea} = props
     const [ps, setPs] = useState([])
     const location = useLocation()
+    const history = useHistory()
+    
     let date = post.publishedDate.substring(0,16).replace('T',' ')
     const modules = {syntax: true}
     const formats = ['bold', 'italic', 'underline', 'strike', 'code-block', 'blockquote', 'size',
@@ -125,7 +127,9 @@ function Post(props){
                             src={process.env.PUBLIC_URL+'/images/dog'+(Math.floor(Math.random() * (3 - 1 + 1)) + 1)+'.png'}/>}
                     </div>
                     <div className="commentContent">
-                        {login ? <span className="commentUsername">{login.username}</span> : <button className="loginButton">로그인</button>}
+                        {login 
+                        ? <span className="commentUsername">{login.username}</span> 
+                        : <button className="loginButton" onClick={() => {history.push('/login')}}>로그인</button>}
                         {login ? 
                             <textarea onChange={resizeTextarea} placeholder=" 댓글을 남겨주세요 :D"/> : 
                             <textarea readOnly placeholder=" 로그인 후에 댓글을 남겨주세요 :D"/>}
