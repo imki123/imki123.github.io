@@ -54,3 +54,8 @@
 .ql-container{
     font-size: inherit !important;
 }
+.ql-syntax{
+    min-width: 700px;
+    overflow: scroll !important; 
+    font-size: initial;
+}
