@@ -42,7 +42,7 @@ function Content(props) {
                 guideWrapper.style.width = '230px' // 메뉴 230
             }else{ //PC
                 guideWrapper.style.width = '312px' // 메뉴 312
-                content.style.width = `calc(100% - 312px)`
+                content.style.width = `calc(100% - 312px - 16px)`
             }
         }
     }
