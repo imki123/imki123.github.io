@@ -83,7 +83,6 @@ function App() {
 		
 		Axios.get(url) //메뉴 태그 가져오기
 		.then(res => {
-			console.log(res)
 			setMainMenus(res.data.mainMenus)
 			setSubMenus(res.data.subMenus)
 		})

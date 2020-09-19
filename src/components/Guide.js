@@ -7,14 +7,18 @@ function Guide(props) {
     const store = React.useContext(AppContext)
     const [newMenu, setNewMenu] = useState([])
     useEffect(() => {
-        const tempMenu = []
-        for(let i in store.menus){
-            if(store.menus[i].name !== 'home' && store.menus[i].name !== 'about' && store.menus[i].name !== 'programming' && store.menus[i].name !== 'article'){
-                tempMenu.push(store.menus[i])
+        const mainMenu = []
+        for(let i in store.mainMenus){
+            if(store.mainMenus[i].name !== 'home' 
+            && store.mainMenus[i].name !== 'about' 
+            && store.mainMenus[i].name !== 'programming' 
+            && store.mainMenus[i].name !== 'article')
+            {
+                mainMenu.push(store.mainMenus[i])
             }
         }
-        setNewMenu(tempMenu)
-    },[store.menus, store.refresh])
+        setNewMenu(mainMenu)
+    },[store.mainMenus, store.refresh])
     
 
     //모바일에서 메뉴 클릭시 닫기

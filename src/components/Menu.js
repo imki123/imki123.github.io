@@ -8,6 +8,7 @@ function Menu(props) {
     const subMenu = []
     if(menu){
         const keys = Object.keys(menu)
+        keys.sort()
         for(let i in keys){
             if(keys[i] !== 'cnt' && keys[i] !== 'name'){
                 subMenu.push(menu[keys[i]])

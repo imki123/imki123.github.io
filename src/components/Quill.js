@@ -57,18 +57,18 @@ function Quill(props) {
 
 	useEffect(() => {
 		const tempMenu = []
-		for (let i in store.menus) {
+		for (let i in store.mainMenus) {
 			if (
-				store.menus[i].name !== 'home' &&
-				store.menus[i].name !== 'about' &&
-				store.menus[i].name !== 'programming' &&
-				store.menus[i].name !== 'article'
+				store.mainMenus[i].name !== 'home' &&
+				store.mainMenus[i].name !== 'about' &&
+				store.mainMenus[i].name !== 'programming' &&
+				store.mainMenus[i].name !== 'article'
 			) {
-				tempMenu.push(store.menus[i])
+				tempMenu.push(store.mainMenus[i])
 			}
 		}
 		setNewMenu(tempMenu)
-	}, [store.menus])
+	}, [store.mainMenus])
 
 	useEffect(() => {
 		//포스트 불러오기 axios
