@@ -99,3 +99,16 @@
     outline: none;
     cursor: pointer;
 }
+
+.comments{
+    text-align: right;
+}
+.commentMore{
+    color: blue;
+    font-size: 0.9rem;
+    padding-right: 8px;
+}
+.commentMore:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}

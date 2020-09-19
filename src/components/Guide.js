@@ -14,7 +14,7 @@ function Guide(props) {
             }
         }
         setNewMenu(tempMenu)
-    },[store.menus])
+    },[store.menus, store.refresh])
     
 
     //모바일에서 메뉴 클릭시 닫기

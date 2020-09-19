@@ -2,12 +2,15 @@ import React, { useEffect} from 'react'
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import './Content.css'
 import queryString from 'query-string'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, Route, useLocation, Switch } from 'react-router-dom'
 import { AppContext } from '../App'
 
 import Post from './Post';
 import Paging from './Paging';
 import PostList from './PostList'
+import NotFoundPage from './NotFoundPage'
+import Login from './Login'
+import Quill from './Quill'
 
 function Content(props) {
     const store = React.useContext(AppContext)
@@ -93,6 +96,7 @@ function Content(props) {
     
 	return(
         <div id="content" className="slideMenu">
+            {/* FAB */}
             {store.login && store.login.username === 'imki123' && 
             <Link id="postFAB" className="hover" to="/quill">
                 <AddCircleOutlineIcon />
@@ -100,33 +104,51 @@ function Content(props) {
             <div id="menuFAB" className="hover" onClick={slideMenu}>
                 <img alt="MENU" src={process.env.PUBLIC_URL+'/images/guide_icon.png'}/>
             </div>
+            {/* 로딩 */}
             <div id="loading">
                 <img alt="Loading" src={process.env.PUBLIC_URL+'/images/loading.gif'}/>
             </div>
-            {props.children}
+
+            {/* Quill, Login일 경우 칠드런 */}
+            <Switch>
+                <Route path={['/login', '/register', '/loginStatus', '/withdraw']}>
+                    <Login/>
+                </Route>
+                <Route path={['/quill']}>
+                    <Quill/>
+                </Route>
+                <Route path="*">
+                    {/* 본문 내용 */}
+                    {store.ready && <>
+                        {(store.posts.length < 1) 
+                        ? <NotFoundPage/>
+                        : <> 
+                            { //목록
+                                (startPost > 1 && paging) && <div className="postListWrapper">
+                                    <div className="postListTitle">목록</div>
+                                    {store.posts && store.posts.map((i, idx) => 
+                                        <PostList no={startPost-idx} post={i} key={i.postId}/>)}
+                                    {<Paging paging={paging}/>}
+                                </div>
+                            }
+                            { //글
+                                store.posts && store.posts.map((i, idx) => 
+                                    <Post no={startPost-idx} post={i} key={i.postId}/>)
+                            }
+                            { //목록
+                                (startPost > 1 && paging) && <div className="postListWrapper">
+                                    <div className="postListTitle">목록</div>
+                                    {store.posts && store.posts.map((i, idx) => 
+                                        <PostList no={startPost-idx} post={i} key={i.postId}/>)}
+                                    {<Paging paging={paging}/>}
+                                </div>
+                            }
+                        </>} 
+                    </>}
+                </Route>
+            </Switch>
             
-            {store.ready && <> 
-                { //목록
-                    (startPost > 1 && paging) && <div className="postListWrapper">
-                        <div className="postListTitle">목록</div>
-                        {store.posts && store.posts.map((i, idx) => 
-                            <PostList no={startPost-idx} post={i} key={i.postId}/>)}
-                        {<Paging paging={paging}/>}
-                    </div>
-                }
-                { //글
-                    store.posts && store.posts.map((i, idx) => 
-                        <Post no={startPost-idx} post={i} key={i.postId}/>)
-                }
-                { //목록
-                    (startPost > 1 && paging) && <div className="postListWrapper">
-                        <div className="postListTitle">목록</div>
-                        {store.posts && store.posts.map((i, idx) => 
-                            <PostList no={startPost-idx} post={i} key={i.postId}/>)}
-                        {<Paging paging={paging}/>}
-                    </div>
-                }
-            </>}
+            {/* 텍스트 에어리어 높이 조정을 위한 안보이는 가짜 텍스트에어리어 */}
 			<textarea disabled id="fakeTextarea"/>
         </div>
     ) 

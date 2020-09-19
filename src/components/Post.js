@@ -88,6 +88,10 @@ function Post(props){
         }
     }
 
+    const commentMore = e => {
+        
+    }
+
     return(
         <div className="post" id={`post_${no}`}>
             <div className="nav">{date}</div>
@@ -144,8 +148,10 @@ function Post(props){
                 {/* 댓글 목록 */}
                 {post.comments && 
                 <div className="comments">
-                    {post.comments.map(i => 
+                    {post.comments.map((i, idx) => idx < 5 &&
                         <Comment post={post} comment={i} key={i.commentId}/>)}
+                    {post.comments.length >= 5 && 
+                        <div><span className="commentMore" onClick={commentMore}>댓글 더보기</span></div>}
                 </div>}
             </>}
             

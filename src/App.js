@@ -126,7 +126,7 @@ function App() {
             }
         })
         .catch((e) => console.error(e))
-    },[location.pathname])
+    },[location.pathname, refresh])
 
 	//주소 변경될 때, 토큰 체크하고 포스트 조회하기
 	useEffect(() => {
@@ -137,6 +137,7 @@ function App() {
 			//url = process.env.REACT_APP_LOCAL_URL+'/posts'
 			let path = location.pathname.split('/')
 			path = '/'+path[1]
+			
 			if (location.pathname === '/') {
 				url = url + '/home' + location.pathname + location.search
 			}else if(location.pathname.indexOf('/quill') > -1) {
@@ -189,17 +190,7 @@ function App() {
 			<Setting setLogin={setLogin} />
 			<Body>
 				<Guide menus={menus}/>
-				<Content posts={posts} headers={headers}>
-					<Switch>
-						<Route path={['/login', '/register', '/loginStatus', '/withdraw']}>
-							<Login/>
-						</Route>
-						<Route path={['/quill']}>
-							<Quill/>
-						</Route>
-						{/* <Route path="*" component={NotFoundPage} /> */}
-					</Switch>
-				</Content>
+				<Content posts={posts} headers={headers}/>
 			</Body>
 		</div>
 		</AppContext.Provider>
