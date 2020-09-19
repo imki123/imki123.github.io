@@ -4,11 +4,14 @@ import { Link, useHistory, useLocation } from 'react-router-dom'
 import { useQuill } from 'react-quilljs';
 import Comment from './Comment'
 import { AppContext } from '../App'
+import RefreshIcon from '@material-ui/icons/Refresh';
 
 function Post(props){
     const store = React.useContext(AppContext)
     const {post, no} = props
+    const [comments, setComments] = useState(post.comments)
     const [ps, setPs] = useState([])
+    const [commentCnt, setCommentCnt] = useState(3)
     const location = useLocation()
     const history = useHistory()
 
@@ -88,8 +91,35 @@ function Post(props){
         }
     }
 
-    const commentMore = e => {
-        
+    const refreshComment = e => { //포스트 가져오기
+        let url = process.env.REACT_APP_URL+'/posts/id/'+post.postId
+        //url = process.env.REACT_APP_LOCAL_URL+'/posts/id/'+post.postId
+
+        const svg = e.target.querySelector('svg')
+        svg.classList.add('refreshing') //refresh 애니메이션 시작
+
+        fetch(url, {
+            mode: 'cors',
+            method: 'GET',
+            credentials: "include",
+        })
+        .then(res => {
+            if(res.status===200) { //성공하면 아래 then 작동
+                res.json().then(res =>{ 
+                    console.log(`${post.postId} 댓글 새로고침`)
+                    setComments(res.comments)
+                    svg.classList.remove('refreshing') //refresh 애니메이션 끝
+                })
+            }else{
+                let message = '댓글 새로고침에 실패했습니다 :('
+                console.log(message)
+                svg.classList.remove('refreshing') //refresh 애니메이션 끝
+            }
+        })
+        .catch(e => {
+            console.error(e)
+            svg.classList.remove('refreshing') //refresh 애니메이션 끝
+        })
     }
 
     return(
@@ -146,12 +176,18 @@ function Post(props){
                 </div>
 
                 {/* 댓글 목록 */}
-                {post.comments && 
+                {comments && comments.length > 0 &&
                 <div className="comments">
-                    {post.comments.map((i, idx) => idx < 5 &&
+                    <div className="commentTitle">
+                        <div className="commentCnt">댓글 {comments.length}개</div>
+                        <span className="commentRefresh" onClick={refreshComment}>댓글 새로고침 <RefreshIcon/></span>
+                    </div>
+                    {comments.map((i, idx) => idx < commentCnt &&
                         <Comment post={post} comment={i} key={i.commentId}/>)}
-                    {post.comments.length >= 5 && 
-                        <div><span className="commentMore" onClick={commentMore}>댓글 더보기</span></div>}
+                    {comments.length > commentCnt && 
+                        <div className="more">
+                            <span className="moreButton" onClick={e => setCommentCnt(commentCnt + 10)}>댓글 더보기</span>
+                        </div>}
                 </div>}
             </>}
             

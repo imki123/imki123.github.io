@@ -121,7 +121,7 @@ function Content(props) {
                     {/* 본문 내용 */}
                     {store.ready && <>
                         {(store.posts.length < 1) 
-                        ? <NotFoundPage/>
+                        ? <NotFoundPage/> /* 글이 없으면 페이지 없음 */
                         : <> 
                             { //목록
                                 (startPost > 1 && paging) && <div className="postListWrapper">

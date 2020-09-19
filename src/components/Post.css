@@ -101,14 +101,49 @@
 }
 
 .comments{
+    padding: 8px 8px 0;
+}
+.commentTitle{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 4px;
+}
+.commentRefresh{
+    color: blue;
+    display: flex;
+    align-items: flex-end;
+    font-size: 0.8rem;
+}
+.commentRefresh svg{
+    font-size: 1rem;
+}
+.commentRefresh:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+.more{
     text-align: right;
 }
-.commentMore{
+.moreButton{
     color: blue;
     font-size: 0.9rem;
     padding-right: 8px;
 }
-.commentMore:hover{
+.moreButton:hover{
     cursor: pointer;
     text-decoration: underline;
+}
+
+.refreshing{
+    animation: refresh 1s linear infinite;
+}
+
+@keyframes refresh {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
 }
