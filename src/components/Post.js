@@ -61,7 +61,6 @@ function Post(props){
 
     const postComment = e => {
         const comment = document.querySelector(`#post_${no} .commentContent textarea`) //댓글 텍스트
-        console.log(post)
         if(comment && comment.value !== '' && window.confirm('댓글을 작성하시겠습니까?')){
             let url = process.env.REACT_APP_URL+'/comments/'+post.postId
             //url = process.env.REACT_APP_LOCAL_URL+'/comments/'+post.postId
@@ -80,7 +79,7 @@ function Post(props){
                 if(res.status===200) { //성공하면 아래 then 작동
                     res.json().then(res =>{ 
                         console.log(`${post.postId} 댓글 추가 성공`)
-                        store.refresh ? store.setRefresh(false) : store.setRefresh(true) //포스트 다시 불러오기
+                        refreshComment(null, setCommentCnt(res.comments.length)) //포스트 다시 불러오고 댓글 끝까지 보이기
                     })
                 }else{
                     let message = '댓글 작성에 실패했습니다 :('
@@ -91,12 +90,12 @@ function Post(props){
         }
     }
 
-    const refreshComment = e => { //포스트 가져오기
+    const refreshComment = (e,func) => { //포스트 가져오기
         let url = process.env.REACT_APP_URL+'/posts/id/'+post.postId
         //url = process.env.REACT_APP_LOCAL_URL+'/posts/id/'+post.postId
-
-        const svg = e.target.querySelector('svg')
-        svg.classList.add('refreshing') //refresh 애니메이션 시작
+        let svg //refresh 아이콘
+        if(e && e.target) svg = e.target.querySelector('svg')
+        if(svg) svg.classList.add('refreshing') //refresh 애니메이션 시작
 
         fetch(url, {
             mode: 'cors',
@@ -108,17 +107,19 @@ function Post(props){
                 res.json().then(res =>{ 
                     console.log(`${post.postId} 댓글 새로고침`)
                     setComments(res.comments)
-                    svg.classList.remove('refreshing') //refresh 애니메이션 끝
+                    if(svg) svg.classList.remove('refreshing') //refresh 애니메이션 끝
+                    
+                    if(func) func() //파라미터에 함수가 있으면 함수 실행
                 })
             }else{
                 let message = '댓글 새로고침에 실패했습니다 :('
                 console.log(message)
-                svg.classList.remove('refreshing') //refresh 애니메이션 끝
+                if(svg) svg.classList.remove('refreshing') //refresh 애니메이션 끝
             }
         })
         .catch(e => {
             console.error(e)
-            svg.classList.remove('refreshing') //refresh 애니메이션 끝
+            if(svg) svg.classList.remove('refreshing') //refresh 애니메이션 끝
         })
     }
 
@@ -183,7 +184,7 @@ function Post(props){
                         <span className="commentRefresh" onClick={refreshComment}>댓글 새로고침 <RefreshIcon/></span>
                     </div>
                     {comments.map((i, idx) => idx < commentCnt &&
-                        <Comment post={post} comment={i} key={i.commentId}/>)}
+                        <Comment post={post} comment={i} key={i.commentId} refreshComment={refreshComment}/>)}
                     {comments.length > commentCnt && 
                         <div className="more">
                             <span className="moreButton" onClick={e => setCommentCnt(commentCnt + 10)}>댓글 더보기</span>

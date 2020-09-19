@@ -4,7 +4,7 @@ import { AppContext } from '../App'
 
 function Comment(props) {
     const store = React.useContext(AppContext)
-    const {comment, post} = props
+    const {comment, post, refreshComment} = props
     let update = false
     let date = comment.publishedDate.substring(0,16).replace('T',' ')
     useEffect(() => {
@@ -39,7 +39,7 @@ function Comment(props) {
                if(res.status===200) { //성공하면 아래 then 작동
                     res.json().then(res =>{ 
                         console.log(`${comment.commentId}번 댓글 수정 성공`)
-                        store.refresh ? store.setRefresh(false) : store.setRefresh(true) //포스트 다시 불러오기
+                        refreshComment() //포스트 다시 불러오기
                     })
                 }else{
                     let message = '댓글 수정에 실패했습니다 :('
@@ -63,7 +63,7 @@ function Comment(props) {
                if(res.status===200) { //성공하면 아래 then 작동
                     res.json().then(res =>{ 
                         console.log(`${comment.commentId}번 댓글 삭제 성공`)
-                        store.refresh ? store.setRefresh(false) : store.setRefresh(true) //포스트 다시 불러오기
+                        refreshComment() //포스트 다시 불러오기
                     })
                 }else{
                     let message = '댓글 삭제에 실패했습니다 :('
@@ -86,7 +86,9 @@ function Comment(props) {
                             src={process.env.PUBLIC_URL+'/images/dog'+(Math.floor(Math.random() * (3 - 1 + 1)) + 1)+'.png'}/>}
             </div>
             <div className="commentContent">
-                <span className="commentUsername">{comment.username}</span>
+                {comment.username === store.login.username 
+                ? <span className="commentUsername" style={{fontWeight:'bold'}}>{comment.username}</span>
+                : <span className="commentUsername">{comment.username}</span>}
                 <span className="commentDate"> - {date} {comment.updated && '(수정됨)'}</span>
                 <textarea readOnly onChange={store.resizeTextarea}/>
             </div>
