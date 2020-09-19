@@ -18,7 +18,7 @@ function App() {
 	const [headers, setHeaders] = useState({})
 	const [login, setLogin] = useState(false)
 	const [refresh, setRefresh] = useState(false)
-	const [menus, setMenus] = useState({})
+	const [mainMenus, setMainMenus] = useState({})
 	const [subMenus, setSubMenus] = useState([])
 
 	//텍스트에어리어를 찾아서 크기를 글자 높이에 맞게 변경해주는 스크립트
@@ -50,66 +50,42 @@ function App() {
 		headers, setHeaders,
 		login, setLogin,
 		refresh, setRefresh,
-		menus, setMenus,
+		mainMenus, setMainMenus,
 		subMenus, setSubMenus,
 		resizeTextarea,
 	}
 	
-	
-
 	const checkToken = (func) => { //로그인 되어있는지 토큰 체크하기
 		let url = process.env.REACT_APP_URL+'/auth/check'
-		Axios.get(url,{
-			withCredentials: true,
-		})
+		//url = process.env.REACT_APP_LOCAL_URL+'/auth/check'
+		Axios.get(url,
+			{withCredentials: true}
+		)
 		.then(res => {
-			console.log('토큰 체크 성공')
-			setLogin(res.data)
+			if(res.data){
+				console.log('토큰 체크 성공')
+				setLogin(res.data)
+			}else{
+				console.log('토큰 없음') //res.status===204(No Content)
+				setLogin(false)
+			}
 			if (func) func()
 		})
 		.catch(e => { //실패
-			console.log('토큰 없음') //res.status===204(No Content)
-			setLogin(false)
 			if (func) func()
 		}) 
 	}
 
 	// 포스트에서 태그 정보를 가져와서 메뉴에 표시함, Quill의 태그목록에 표시
     useEffect(() => {
-		let url = process.env.REACT_APP_URL+'/posts'
+		let url = process.env.REACT_APP_URL+'/posts/menus'
+		//url = process.env.REACT_APP_LOCAL_URL+'/posts/menus'
 		
-		Axios.get(url, { //태그 가져오기
-			withCredentials: true, //CORS
-		})
+		Axios.get(url) //메뉴 태그 가져오기
 		.then(res => {
-			const tempMenu = {}
-			const tempTags = []
-			for(let post of res.data){ //포스트의 태그정보를 menus에 저장
-				let i=0
-				for(let tag of post.tags){
-					if(i===0){ //첫번째 태그는 대메뉴로 사용
-						if(!tempMenu[tag]){ 
-							tempMenu[tag] = {'cnt': 1, 'name': tag}
-						}else{
-							tempMenu[tag]['cnt']++
-						}
-					}else{
-						//서브메뉴 추가
-						if(!tempMenu[post.tags[0]][tag]){ 
-							tempMenu[post.tags[0]][tag] = {'cnt': 1, 'name': tag}
-						}else{
-							tempMenu[post.tags[0]][tag]['cnt']++
-						}
-						//Quill 태그 추가
-						if(tempTags.indexOf(tag) === -1){
-							tempTags.push(tag)
-						}
-					}
-					i++
-				}
-			}
-			setMenus(tempMenu)
-			setSubMenus(tempTags)
+			console.log(res)
+			setMainMenus(res.data.mainMenus)
+			setSubMenus(res.data.subMenus)
 		})
 		.catch(e => alert(e)) //실패
 

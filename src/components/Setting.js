@@ -2,7 +2,6 @@ import React from 'react'
 import './Setting.css'
 import { Link} from 'react-router-dom'
 import { AppContext } from '../App'
-import Axios from 'axios'
 
 function Setting(props) {
     const store = React.useContext(AppContext)
@@ -19,15 +18,22 @@ function Setting(props) {
         if(window.confirm('로그아웃 하시겠습니까?')){
             let url = process.env.REACT_APP_URL+'/auth/logout'
             //url = process.env.REACT_APP_LOCAL_URL+'/auth/logout'
-            
-            Axios.post(url, { //로그아웃
-                withCredentials: true, //CORS
+
+            fetch(url,{
+                mode: 'cors',
+                method: 'POST',
+                credentials: "include",
             })
             .then(res => {
-                console.log('로그아웃 성공')
-                store.setLogin(false)
+                if(res.status===204) { //로그아웃 하면 204
+                    console.log('로그아웃 성공')
+                    store.setLogin(false)
+                }
+                else{
+                    console.log('로그아웃 실패')
+                }
             })
-            .catch(e => alert(e)) //실패
+            .catch(e => console.error(e))
         }
     }
 

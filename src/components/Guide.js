@@ -48,10 +48,10 @@ function Guide(props) {
                     </div>
                 </div>
                 <div id="menus">
-                    <Menu menu={store.menus.home}/>
-                    <Menu menu={store.menus.about}/>
-                    <Menu menu={store.menus.programming}/>
-                    <Menu menu={store.menus.article}/>
+                    <Menu menu={store.mainMenus.home}/>
+                    <Menu menu={store.mainMenus.about}/>
+                    <Menu menu={store.mainMenus.programming}/>
+                    <Menu menu={store.mainMenus.article}/>
                     {newMenu.map(i => <Menu menu={i} key={i}/>)}
                 </div>
             </div>
