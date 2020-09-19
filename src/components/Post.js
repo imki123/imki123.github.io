@@ -5,6 +5,7 @@ import { useQuill } from 'react-quilljs';
 import Comment from './Comment'
 import { AppContext } from '../App'
 import RefreshIcon from '@material-ui/icons/Refresh';
+import Axios from 'axios'
 
 function Post(props){
     const store = React.useContext(AppContext)
@@ -39,23 +40,14 @@ function Post(props){
             let url = process.env.REACT_APP_URL+'/posts/'+postId
             //url = process.env.REACT_APP_LOCAL_URL+'/posts/'+postId
             
-            fetch(url,{
-                mode: 'cors',
-                method: 'DELETE',
-                credentials: "include",
+            Axios.delete(url, { //글 삭제
+                withCredentials: true, //CORS
             })
             .then(res => {
-                if(res.status===200 || res.status===204) { //성공하면 아래 then 작동
-                    res.json().then(res =>{ 
-                        console.log(`${postId}번 글 삭제 성공`)
-                        store.refresh ? store.setRefresh(false) : store.setRefresh(true)
-                    })
-                }else{
-                    let message = '글 삭제에 실패했습니다 :('
-                    alert(message)
-                }
+                console.log(`${postId}번 글 삭제 성공`)
+                store.refresh ? store.setRefresh(false) : store.setRefresh(true)
             })
-            .catch(e => console.error(e))
+            .catch(e => alert(e)) //실패
         }
     }
 
@@ -65,62 +57,41 @@ function Post(props){
             let url = process.env.REACT_APP_URL+'/comments/'+post.postId
             //url = process.env.REACT_APP_LOCAL_URL+'/comments/'+post.postId
             
-            fetch(url, {
-                mode: 'cors',
-                method: 'PATCH',
-                credentials: "include",
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    //username: login.username,
+            Axios.patch(url, { //댓글 작성
+                withCredentials: true, //CORS
+                data: {
+                    //username: store.login.username,
                     content: comment.value,
-                }),
-            })
-            .then(res => {
-                if(res.status===200) { //성공하면 아래 then 작동
-                    res.json().then(res =>{ 
-                        console.log(`${post.postId} 댓글 추가 성공`)
-                        refreshComment(null, setCommentCnt(res.comments.length)) //포스트 다시 불러오고 댓글 끝까지 보이기
-                    })
-                }else{
-                    let message = '댓글 작성에 실패했습니다 :('
-                    alert(message)
                 }
             })
-            .catch(e => console.error(e))
+            .then(res => {
+                console.log(`${post.postId} 댓글 추가 성공`)
+                refreshComment(null, setCommentCnt(res.data.comments.length)) //포스트 다시 불러오고 댓글 끝까지 보이기
+            })
+            .catch(e => alert(e)) //실패
         }
     }
 
     const refreshComment = (e,func) => { //포스트 가져오기
         let url = process.env.REACT_APP_URL+'/posts/id/'+post.postId
         //url = process.env.REACT_APP_LOCAL_URL+'/posts/id/'+post.postId
+        
         let svg //refresh 아이콘
         if(e && e.target) svg = e.target.querySelector('svg')
         if(svg) svg.classList.add('refreshing') //refresh 애니메이션 시작
 
-        fetch(url, {
-            mode: 'cors',
-            method: 'GET',
-            credentials: "include",
-        })
-        .then(res => {
-            if(res.status===200) { //성공하면 아래 then 작동
-                res.json().then(res =>{ 
-                    console.log(`${post.postId} 댓글 새로고침`)
-                    setComments(res.comments)
-                    if(svg) svg.classList.remove('refreshing') //refresh 애니메이션 끝
-                    
-                    if(func) func() //파라미터에 함수가 있으면 함수 실행
-                })
-            }else{
-                let message = '댓글 새로고침에 실패했습니다 :('
-                console.log(message)
-                if(svg) svg.classList.remove('refreshing') //refresh 애니메이션 끝
-            }
-        })
-        .catch(e => {
-            console.error(e)
+        Axios(url) //댓글 새로고치기
+		.then(res => {
+			console.log(`${post.postId} 댓글 새로고침`)
+            setComments(res.data.comments)
             if(svg) svg.classList.remove('refreshing') //refresh 애니메이션 끝
-        })
+            
+            if(func) func() //파라미터에 함수가 있으면 함수 실행
+		})
+		.catch(e => { //실패
+            if(svg) svg.classList.remove('refreshing') //refresh 애니메이션 끝
+            alert(e)
+        }) 
     }
 
     return(

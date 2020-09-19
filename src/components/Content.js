@@ -30,6 +30,7 @@ function Content(props) {
             startPost: startPost
         }
     }
+
     const slideMenu = () => { //메뉴FAB버튼 클릭 시 메뉴 보이기 & 숨기기
         const body = document.querySelector('#body')
         const guideWrapper = document.querySelector('#guideWrapper')
@@ -51,9 +52,11 @@ function Content(props) {
     }
 
     useEffect(() => {
-        window.addEventListener('resize',function(){
+        const resize = () => {
             store.resizeTextarea()
-        })
+        }
+
+        window.addEventListener('resize', resize)
         const loading = document.querySelector('#loading')
         if(store.ready){
             if(loading) loading.style.display = 'none'
@@ -84,7 +87,7 @@ function Content(props) {
                             }, 10)
                         }
                     }
-                },100)
+                },10)
             }
             setTimeout(function(){
                 store.resizeTextarea()
@@ -92,7 +95,8 @@ function Content(props) {
         }else{
             if(loading) loading.style.display = 'flex'
         }
-    })
+        return window.removeEventListener('resize', resize)
+    },[location.hash, store])
     
 	return(
         <div id="content" className="slideMenu">

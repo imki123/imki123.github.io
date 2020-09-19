@@ -75,6 +75,7 @@ function Login(props) {
         e.preventDefault();
         let url = process.env.REACT_APP_URL+'/auth'
         //url = process.env.REACT_APP_LOCAL_URL+'/auth'
+        
         const pattern = /[^a-zA-Z0-9가-힣_]/g
         let username = document.querySelector('[name=username]')
         if(username) username = username.value = username.value.replace(pattern,'')
@@ -84,7 +85,6 @@ function Login(props) {
         if(checkUsername === '' && password.length >= 1 &&
             checkPassword === '' && checkPasswordConfirm === '')
         { //입력폼에 이상이 없으면 fetch submit
-            console.log('fetch submit')
             if(buttonName === '회원가입'){
                 url += '/register'
                 fetch(url,{

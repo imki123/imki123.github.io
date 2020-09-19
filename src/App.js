@@ -7,6 +7,7 @@ import Body from './components/Body'
 import Guide from './components/Guide'
 import Content from './components/Content'
 import Setting from './components/Setting'
+import Axios from 'axios'
 
 const AppContext = createContext()
 
@@ -56,74 +57,62 @@ function App() {
 	
 	
 
-	const checkToken = (func) => {
+	const checkToken = (func) => { //로그인 되어있는지 토큰 체크하기
 		let url = process.env.REACT_APP_URL+'/auth/check'
-		fetch(url, {
-			mode: 'cors',
-			method: 'GET',
-			credentials: 'include',
+		Axios.get(url,{
+			withCredentials: true,
 		})
-		.then((res) => {
-			if (res.status === 200) {
-				//성공하면 아래 then 작동
-				res.json().then((res) => {
-					console.log('토큰 체크 성공')
-					setLogin(res)
-					if (func) func()
-				})
-			} else {
-				console.log('토큰 없음') //res.status===204(No Content)
-				setLogin(false)
-				if (func) func()
-			}
+		.then(res => {
+			console.log('토큰 체크 성공')
+			setLogin(res.data)
+			if (func) func()
 		})
-		.catch((e) => console.error(e))
+		.catch(e => { //실패
+			console.log('토큰 없음') //res.status===204(No Content)
+			setLogin(false)
+			if (func) func()
+		}) 
 	}
 
 	// 포스트에서 태그 정보를 가져와서 메뉴에 표시함, Quill의 태그목록에 표시
     useEffect(() => {
-        let url = process.env.REACT_APP_URL+'/posts'
-        fetch(url,{
-            mode: 'cors',
-            method: 'GET',
-            credentials: "include",
-        })
-        .then((res) => {//성공하면 아래 then 작동
-            if (res.status === 200 || res.status === 201) {
-                res.json().then(res => {
-					const tempMenu = {}
-					const tempTags = []
-                    for(let post of res){ //포스트의 태그정보를 menus에 저장
-						let i=0
-						for(let tag of post.tags){
-							if(i===0){ //첫번째 태그는 대메뉴로 사용
-								if(!tempMenu[tag]){ 
-									tempMenu[tag] = {'cnt': 1, 'name': tag}
-								}else{
-									tempMenu[tag]['cnt']++
-								}
-							}else{
-								//서브메뉴 추가
-								if(!tempMenu[post.tags[0]][tag]){ 
-									tempMenu[post.tags[0]][tag] = {'cnt': 1, 'name': tag}
-								}else{
-									tempMenu[post.tags[0]][tag]['cnt']++
-								}
-								//Quill 태그 추가
-								if(tempTags.indexOf(tag) === -1){
-									tempTags.push(tag)
-								}
-							}
-							i++
+		let url = process.env.REACT_APP_URL+'/posts'
+		
+		Axios.get(url, { //태그 가져오기
+			withCredentials: true, //CORS
+		})
+		.then(res => {
+			const tempMenu = {}
+			const tempTags = []
+			for(let post of res.data){ //포스트의 태그정보를 menus에 저장
+				let i=0
+				for(let tag of post.tags){
+					if(i===0){ //첫번째 태그는 대메뉴로 사용
+						if(!tempMenu[tag]){ 
+							tempMenu[tag] = {'cnt': 1, 'name': tag}
+						}else{
+							tempMenu[tag]['cnt']++
+						}
+					}else{
+						//서브메뉴 추가
+						if(!tempMenu[post.tags[0]][tag]){ 
+							tempMenu[post.tags[0]][tag] = {'cnt': 1, 'name': tag}
+						}else{
+							tempMenu[post.tags[0]][tag]['cnt']++
+						}
+						//Quill 태그 추가
+						if(tempTags.indexOf(tag) === -1){
+							tempTags.push(tag)
 						}
 					}
-					setMenus(tempMenu)
-					setSubMenus(tempTags)
-                })
-            } else {
-            }
-        })
-        .catch((e) => console.error(e))
+					i++
+				}
+			}
+			setMenus(tempMenu)
+			setSubMenus(tempTags)
+		})
+		.catch(e => alert(e)) //실패
+
     },[location.pathname, refresh])
 
 	//주소 변경될 때, 토큰 체크하고 포스트 조회하기
@@ -147,26 +136,13 @@ function App() {
 				url = url + path + location.search
 			}
 
-			fetch(url,{
-				mode: 'cors',
-				method: 'GET',
-				credentials: "include",
+			Axios.get(url)
+			.then(res => {
+				setHeaders(res.headers)
+				setPosts(res.data)
+				setReady(true)
 			})
-			.then((res) => {
-				if (res.status === 200 || res.status === 201) {//성공하면 아래 then 작동
-					const h = {}
-					res.headers.forEach((v, n) => (h[n] = v))
-					setHeaders(h)
-					res.json().then(res => {
-						setPosts(res)
-						setReady(true)
-					})
-				} else {
-					console.log('posts 조회 실패')
-					setReady(true)
-				}
-			})
-			.catch((e) => console.error(e))
+			.catch(e => alert(e)) //실패
 		})
 
 		//주소 변경 시 해쉬 위치로 scroll. 해쉬는 리렌더링 하지 않음.

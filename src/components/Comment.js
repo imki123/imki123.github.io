@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import './Comment.css'
 import { AppContext } from '../App'
+import Axios from 'axios'
 
 function Comment(props) {
     const store = React.useContext(AppContext)
@@ -26,51 +27,34 @@ function Comment(props) {
             
             let url = process.env.REACT_APP_URL+`/comments/${post.postId}/${comment.commentId}`
             //url = process.env.REACT_APP_LOCAL_URL+`/comments/${post.postId}/${comment.commentId}`
-            fetch(url, {
-                mode: 'cors',
-                method: 'PATCH',
-                credentials: "include",
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
+
+            Axios.patch(url, { //댓글 수정
+                withCredentials: true, //CORS
+                data: {
                     content: textarea.value,
-                }),
-            })
-            .then(res => {
-               if(res.status===200) { //성공하면 아래 then 작동
-                    res.json().then(res =>{ 
-                        console.log(`${comment.commentId}번 댓글 수정 성공`)
-                        refreshComment() //포스트 다시 불러오기
-                    })
-                }else{
-                    let message = '댓글 수정에 실패했습니다 :('
-                    alert(message)
                 }
             })
-            .catch(e => console.error(e))
+            .then(res => {
+                console.log(`${comment.commentId}번 댓글 수정 성공`)
+                refreshComment() //포스트 다시 불러오기
+            })
+            .catch(e => alert(e)) //실패
         }
     }
 
     const deleteComment = e => {
         if(window.confirm('삭제 후에는 복구가 불가합니다. 정말로 댓글을 삭제하시겠습니까?')){
             let url = process.env.REACT_APP_URL+`/comments/delete/${post.postId}/${comment.commentId}`
-            //url = process.env.REACT_APP_LOCAL_URL+`/comments/delete/${post.postId}/${commentId}`
-            fetch(url, {
-                mode: 'cors',
-                method: 'PATCH',
-                credentials: "include",
+            //url = process.env.REACT_APP_LOCAL_URL+`/comments/delete/${post.postId}/${comment.commentId}`
+
+            Axios.patch(url, { //포스트 작성, 수정
+                withCredentials: true, //CORS
             })
             .then(res => {
-               if(res.status===200) { //성공하면 아래 then 작동
-                    res.json().then(res =>{ 
-                        console.log(`${comment.commentId}번 댓글 삭제 성공`)
-                        refreshComment() //포스트 다시 불러오기
-                    })
-                }else{
-                    let message = '댓글 삭제에 실패했습니다 :('
-                    alert(message)
-                }
+                console.log(`${comment.commentId}번 댓글 삭제 성공`)
+                refreshComment() //포스트 다시 불러오기
             })
-            .catch(e => console.error(e))
+            .catch(e => alert(e)) //실패
         }
     }
 

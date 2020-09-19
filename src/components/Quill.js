@@ -5,6 +5,7 @@ import { useHistory, useLocation } from 'react-router-dom'
 import { useQuill } from 'react-quilljs'
 import queryString from 'query-string'
 import { AppContext } from '../App'
+import Axios from 'axios'
 
 function Quill(props) {
 	const store = React.useContext(AppContext)
@@ -70,51 +71,36 @@ function Quill(props) {
 	}, [store.menus])
 
 	useEffect(() => {
-		//console.log(postId, Number(postId))
+		//포스트 불러오기 axios
 		if (postId !== undefined && Number(postId) >= 1 && quill) {
 			//postId가 없으면 포스트 내용 가져오지 않기
 			let url = process.env.REACT_APP_URL + '/posts/id/' + postId
 			//url = process.env.REACT_APP_LOCAL_URL+'/posts/id/' + postId
-			fetch(url, {
-				mode: 'cors',
-				method: 'GET',
-				credentials: 'include',
-			})
-				.then((res) => {
-					if (res.status === 200 || res.status === 201) {
-						//성공하면 아래 then 작동
-						res.json().then((res) => {
-							//console.log(res)
-							let title = document.querySelector('[name=title]')
-							title.value = res.title
-							if (typeof res.body === 'string') quill.setText(res.body)
-							//body가 string이면 setText
-							else quill.setContents(res.body) //body가 string이 아니면 setContents : Delta
 
-							const tags = document.querySelectorAll('[type=radio]')
-							for (let i of tags) {
-								//체크 초기화
-								i.checked = false
-							}
-							if (res.tags) {
-								//체크박스 체크
-								const mainMenu = document.querySelector(
-									`[value=${res.tags[0]}]`,
-								)
-								if (mainMenu) mainMenu.checked = true
-								for (let i of res.tags) {
-									const tag = document.querySelector(`[name=${i}]`)
-									if (tag) tag.checked = true
-								}
-							}
-						})
-					} else {
-						res.json().then((res) => {
-							console.log(res)
-						})
+			Axios.get(url) //포스트 작성, 수정
+			.then(res => {
+				let title = document.querySelector('[name=title]')
+				title.value = res.data.title
+				if (typeof res.data.body === 'string') quill.setText(res.data.body) //body가 string이면 setText
+				else quill.setContents(res.data.body) //body가 string이 아니면 setContents : Delta
+
+				const tags = document.querySelectorAll('[type=radio]')
+				for (let i of tags) { //체크 초기화
+					i.checked = false
+				}
+				if (res.data.tags) {
+					//체크박스 체크
+					const mainMenu = document.querySelector(
+						`[value=${res.data.tags[0]}]`,
+					)
+					if (mainMenu) mainMenu.checked = true
+					for (let i of res.data.tags) {
+						const tag = document.querySelector(`[name=${i}]`)
+						if (tag) tag.checked = true
 					}
-				})
-				.catch((e) => console.error(e))
+				}
+			})
+			.catch(e => alert(e)) //실패
 		}
 	}, [location, quill, postId])
 
@@ -177,33 +163,22 @@ function Quill(props) {
 				return
 			}
 		}
-		fetch(url, {
-			mode: 'cors',
+
+		Axios(url, { //포스트 작성, 수정 (최대 10mb. koa-bodyparser에서 설정.)
 			method: method,
-			credentials: 'include',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({
+			withCredentials: true, //CORS
+			data: {
 				title: title.value,
 				body: content,
 				tags: tags,
-			}),
+			}
 		})
-			.then((res) => {
-				if (res.status === 200 || res.status === 201) {
-					//성공하면 아래 then 작동
-					res.json().then((res) => {
-						console.log(res)
-						alert(message)
-						history.push(tags[0])
-					})
-				} else {
-					alert('글 작성 실패')
-					res.json().then((res) => {
-						console.log(res)
-					})
-				}
-			})
-			.catch((e) => console.error(e))
+		.then(res => {
+			console.log(res.data)
+			alert(message) //성공
+			history.push(tags[0]) //수정 성공하면 해당 글의 태그로 이동함
+		})
+		.catch(e => alert(e)) //실패
 	}
 
 	// 화면 리사이즈시 editor 아래 마진 변경
