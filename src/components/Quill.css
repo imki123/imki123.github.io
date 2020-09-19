@@ -41,20 +41,13 @@
 #editor label input {
 	cursor: pointer;
 }
-.editorButtons {
-    position: absolute;
-    top: 6px;
-    right: 0;
-    opacity: 0.6;
-}
-.editorButtons button {
-	border: 0px solid black;
+.editorButton {
+	border: 0px;
 	border-radius: 5px;
 	background: #84ff84;
-	cursor: pointer;
 	height: 30px;
-	font-size: inherit;
-	outline: none;
+	font-size: 0.9rem;
+	margin-left: 12px;
 }
 #content .ql-editor {
 	padding: 0;

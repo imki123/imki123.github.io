@@ -232,22 +232,22 @@ function Quill(props) {
 		<div className="quill">
 			<div className="quillTitle">
 				<input name="title" placeholder="제목" />
-				<div className="editorButtons">
-					{postId !== undefined && Number(postId) >= 1 ? (
-						<button onClick={clickPost} id="PATCH">
-							글 수정
-						</button>
-					) : (
-						<button onClick={clickPost}>
-							새글 작성
-						</button>
-					)}
-				</div>
 			</div>
 			<div id="editor">
 				<div ref={quillRef} />
 				<div id="tags" className="no-drag">
-					<div id="tagsTitle">tags</div>
+					<div id="tagsTitle">
+						tags
+						{postId !== undefined && Number(postId) >= 1 ? (
+							<button className="editorButton" onClick={clickPost} id="PATCH">
+								글 수정
+							</button>
+						) : (
+							<button className="editorButton" onClick={clickPost}>
+								새글 작성
+							</button>
+						)}
+					</div>
 					<div>
 						메인메뉴:
 						<label>
