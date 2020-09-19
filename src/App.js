@@ -1,14 +1,12 @@
 import React, { createContext, useEffect, useState } from 'react'
 import './App.css'
-import { Switch, Route, useLocation} from 'react-router-dom'
+import {useLocation} from 'react-router-dom'
 
 import Header from './components/Header'
 import Body from './components/Body'
 import Guide from './components/Guide'
 import Content from './components/Content'
 import Setting from './components/Setting'
-import Login from './components/Login'
-import Quill from './components/Quill'
 
 const AppContext = createContext()
 
@@ -187,10 +185,10 @@ function App() {
 		<AppContext.Provider value={store}>
 		<div id="app">
 			<Header />
-			<Setting setLogin={setLogin} />
+			<Setting/>
 			<Body>
-				<Guide menus={menus}/>
-				<Content posts={posts} headers={headers}/>
+				<Guide/>
+				<Content/>
 			</Body>
 		</div>
 		</AppContext.Provider>

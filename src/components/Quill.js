@@ -230,9 +230,19 @@ function Quill(props) {
 
 	return (
 		<div className="quill">
-			<h2 id="editorTitle">글 작성</h2>
-			<div>
+			<div className="quillTitle">
 				<input name="title" placeholder="제목" />
+				<div className="editorButtons">
+					{postId !== undefined && Number(postId) >= 1 ? (
+						<button onClick={clickPost} id="PATCH">
+							글 수정
+						</button>
+					) : (
+						<button onClick={clickPost}>
+							새글 작성
+						</button>
+					)}
+				</div>
 			</div>
 			<div id="editor">
 				<div ref={quillRef} />
@@ -285,17 +295,6 @@ function Quill(props) {
 							autoComplete="off"
 						></input>
 					</div>
-				</div>
-				<div className="editorButtons">
-					{postId !== undefined && Number(postId) >= 1 ? (
-						<button onClick={clickPost} id="PATCH">
-							글 수정
-						</button>
-					) : (
-						<button onClick={clickPost}>
-							새글 작성
-						</button>
-					)}
 				</div>
 			</div>
 		</div>

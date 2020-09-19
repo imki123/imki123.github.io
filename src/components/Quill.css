@@ -1,7 +1,13 @@
 .quill {
 	background: white;
 	height: 100%;
-	overflow: auto;
+    overflow: auto;
+    position: relative;
+}
+.quillTitle{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
 }
 [name='title'] {
 	width: 100%;
@@ -10,10 +16,10 @@
 	border: 0px;
 	border-bottom: 1px solid black;
 	outline: none;
-	margin-bottom: 4px;
+	margin: 12px 0 0;
 }
 #editor {
-	height: 100%;
+	height: calc(100% - 200px);
 }
 #tags {
 	margin: 10px 0;
@@ -36,7 +42,10 @@
 	cursor: pointer;
 }
 .editorButtons {
-	text-align: left;
+    position: absolute;
+    top: 6px;
+    right: 0;
+    opacity: 0.6;
 }
 .editorButtons button {
 	border: 0px solid black;
@@ -46,7 +55,6 @@
 	height: 30px;
 	font-size: inherit;
 	outline: none;
-	cursor: pointer;
 }
 #content .ql-editor {
 	padding: 0;
