@@ -72,9 +72,9 @@ function Post(props){
         }
     }
 
-    const refreshComment = (e,func) => { //포스트 가져오기
-        let url = process.env.REACT_APP_URL+'/posts/id/'+post.postId
-        //url = process.env.REACT_APP_LOCAL_URL+'/posts/id/'+post.postId
+    const refreshComment = (e,func) => { //댓글 가져오기
+        let url = process.env.REACT_APP_URL+'/comments/'+post.postId
+        //url = process.env.REACT_APP_LOCAL_URL+'/comments/'+post.postId
         
         let svg //refresh 아이콘
         if(e && e.target) svg = e.target.querySelector('svg')
@@ -85,7 +85,7 @@ function Post(props){
         }) //댓글 새로고치기
 		.then(res => {
 			console.log(`${post.postId} 댓글 새로고침`)
-            setComments(res.data.comments)
+            setComments(res.data) //댓글 저장
             if(svg) svg.classList.remove('refreshing') //refresh 애니메이션 끝
             
             if(func) func() //파라미터에 함수가 있으면 함수 실행
