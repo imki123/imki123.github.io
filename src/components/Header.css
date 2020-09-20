@@ -15,10 +15,6 @@
     background: #b4ffb4;
 }
 
-.slideMenu{
-    transition: width 0.5s ease;
-}
-
 #menu{
     width: 32px; 
     height: 32px;

@@ -6,4 +6,6 @@
     display: flex;
     width: 100%;
     height: calc(100vh - 48px);
+    overflow-x: hidden;
+    overflow-y: auto;
 }

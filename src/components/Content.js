@@ -31,26 +31,6 @@ function Content(props) {
         }
     }
 
-    const slideMenu = () => { //메뉴FAB버튼 클릭 시 메뉴 보이기 & 숨기기
-        const body = document.querySelector('#body')
-        const guideWrapper = document.querySelector('#guideWrapper')
-        const content = document.querySelector('#content')
-
-        if(guideWrapper.clientWidth > 100){ //메뉴 닫기
-            guideWrapper.parentNode.style.width = '0' // 회색 0
-            guideWrapper.style.width = '0px' // 메뉴 0
-            content.style.width = 'calc(100% - 16px)'
-        }else{ //메뉴 열기
-            if(body.clientWidth < 500){ //모바일
-                guideWrapper.parentNode.style.width = '100%' // 회색 100%
-                guideWrapper.style.width = '230px' // 메뉴 230
-            }else{ //PC
-                guideWrapper.style.width = '312px' // 메뉴 312
-                content.style.width = `calc(100% - 312px - 16px)`
-            }
-        }
-    }
-
     useEffect(() => {
         const resize = () => {
             store.resizeTextarea()
@@ -105,7 +85,7 @@ function Content(props) {
             <Link id="postFAB" className="hover" to="/quill">
                 <AddCircleOutlineIcon />
             </Link>}
-            <div id="menuFAB" className="hover" onClick={slideMenu}>
+            <div id="menuFAB" className="hover" onClick={store.slideMenu}>
                 <img alt="MENU" src={process.env.PUBLIC_URL+'/images/guide_icon.png'}/>
             </div>
             {/* 로딩 */}

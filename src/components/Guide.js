@@ -21,7 +21,7 @@ function Guide(props) {
     },[store.mainMenus, store.refresh])
     
 
-    //모바일에서 메뉴 클릭시 닫기
+    //모바일에서 회색부분 클릭 시 메뉴 닫기
     const closeMenuMobile = e => {
         const body = document.querySelector('#body')
         const guideWrapper = document.querySelector('#guideWrapper')
@@ -29,7 +29,7 @@ function Guide(props) {
 
         if(body.clientWidth < 500){ //모바일
             guideWrapper.parentNode.style.width = '0' // 회색 0
-            guideWrapper.style.width = '0px' // 메뉴 0
+            guideWrapper.style.left = '-230px' // 메뉴 0
             content.style.width = 'calc(100% - 16px)'
         }
     }

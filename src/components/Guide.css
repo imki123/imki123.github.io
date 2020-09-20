@@ -11,9 +11,12 @@
     height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
+    position: absolute;
     z-index: 10;
+    top: 0;
+    left: 0;
+
     width: 312px;
-    /* border-right: 1px solid green; */
     padding-top: 8px; 
     background: white;
 }

@@ -21,8 +21,7 @@ function App() {
 	const [mainMenus, setMainMenus] = useState({})
 	const [subMenus, setSubMenus] = useState([])
 
-	//텍스트에어리어를 찾아서 크기를 글자 높이에 맞게 변경해주는 스크립트
-	const resizeTextarea = e => {
+	const resizeTextarea = e => { //텍스트에어리어를 찾아서 크기를 글자 높이에 맞게 변경하기
         //textarea 높이 조정
         const fake = document.querySelector('#fakeTextarea')
         let textareas = []
@@ -43,6 +42,30 @@ function App() {
             fake.style.height = '0px'
 		}
 	}
+
+	const slideMenu = () => { //메뉴버튼 클릭 시 메뉴 보이기 & 숨기기
+        const body = document.querySelector('#body')
+        const guideWrapper = document.querySelector('#guideWrapper')
+        const content = document.querySelector('#content')
+
+		if(guideWrapper.style.left.replace('px','') > -100){ //메뉴 닫기
+			guideWrapper.parentNode.style.width = '0' // 회색 0
+			content.style.width = 'calc(100% - 16px)' //콘텐트 100% - 16px
+			if(body.clientWidth < 500){ //모바일
+				guideWrapper.style.left = '-230px' // 메뉴 왼쪽으로
+			}else{
+				guideWrapper.style.left = '-312px' // 메뉴 왼쪽으로
+			}
+		}else{ //메뉴 열기
+			guideWrapper.style.left = '0px' // 메뉴 230
+            if(body.clientWidth < 500){ //모바일
+                guideWrapper.parentNode.style.width = '100%' // 회색 100%
+                
+            }else{ //PC
+                content.style.width = `calc(100% - 312px - 16px)`
+            }
+        }
+    }
 	//useContext 이용하여 하위 컴포넌트에 상태 전달
 	const store = {
 		ready, setReady, 
@@ -52,7 +75,7 @@ function App() {
 		refresh, setRefresh,
 		mainMenus, setMainMenus,
 		subMenus, setSubMenus,
-		resizeTextarea,
+		resizeTextarea, slideMenu,
 	}
 	
 	const checkToken = (func) => { //로그인 되어있는지 토큰 체크하기
