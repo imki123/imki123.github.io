@@ -1,6 +1,6 @@
 .notFound{
 	width: 100%;
-	height: 80vh;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -8,6 +8,7 @@
 	font-size: 2rem;
 	font-weight: bold;
 	color: green;
+	background: white;
 }
 .notFound .title{
 	text-align: center;
