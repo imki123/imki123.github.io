@@ -128,9 +128,9 @@ function App() {
 			if (location.pathname === '/') {
 				url = url + '/home' + location.pathname + location.search
 			}else if(location.pathname.indexOf('/quill') > -1) {
-				setReady(true)
 				setHeaders(false)
 				setPosts(false)
+				setReady(true)
 				return
 			}else {
 				url = url + path + location.search

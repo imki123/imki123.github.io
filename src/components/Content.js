@@ -93,7 +93,6 @@ function Content(props) {
                 <img alt="Loading" src={process.env.PUBLIC_URL+'/images/loading.gif'}/>
             </div>
 
-            {/* Quill, Login일 경우 칠드런 */}
             <Switch>
                 <Route path={['/login', '/register', '/loginStatus', '/withdraw']}>
                     <Login/>
