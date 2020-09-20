@@ -77,7 +77,9 @@ function Quill(props) {
 			let url = process.env.REACT_APP_URL + '/posts/id/' + postId
 			//url = process.env.REACT_APP_LOCAL_URL+'/posts/id/' + postId
 
-			Axios.get(url) //포스트 작성, 수정
+			Axios.get(url, {
+				withCredentials: true,
+			}) //포스트 작성, 수정
 			.then(res => {
 				let title = document.querySelector('[name=title]')
 				title.value = res.data.title

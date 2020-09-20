@@ -47,7 +47,7 @@ function Comment(props) {
             let url = process.env.REACT_APP_URL+`/comments/delete/${post.postId}/${comment.commentId}`
             //url = process.env.REACT_APP_LOCAL_URL+`/comments/delete/${post.postId}/${comment.commentId}`
 
-            Axios.patch(url, { //포스트 작성, 수정
+            Axios.patch(url, { //포스트 삭제
                 withCredentials: true, //CORS
             })
             .then(res => {
@@ -77,7 +77,8 @@ function Comment(props) {
                 <textarea readOnly onChange={store.resizeTextarea}/>
             </div>
         </div>
-        {(comment.username === store.login.username || store.login.username === 'imki123')&&
+        {((comment.username && comment.username === store.login.username) 
+            || store.login.username === 'imki123')&&
         <div className="commentButtons">
             <button className="commentButton" onClick={updateComment}>수정</button>
             <button className="commentButton" style={{background:'red'}} onClick={deleteComment}>삭제</button>

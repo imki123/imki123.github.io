@@ -80,7 +80,9 @@ function Post(props){
         if(e && e.target) svg = e.target.querySelector('svg')
         if(svg) svg.classList.add('refreshing') //refresh 애니메이션 시작
 
-        Axios(url) //댓글 새로고치기
+        Axios.get(url, {
+            withCredentials: true,
+        }) //댓글 새로고치기
 		.then(res => {
 			console.log(`${post.postId} 댓글 새로고침`)
             setComments(res.data.comments)

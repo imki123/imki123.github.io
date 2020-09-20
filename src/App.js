@@ -104,7 +104,9 @@ function App() {
 		let url = process.env.REACT_APP_URL+'/posts/menus'
 		//url = process.env.REACT_APP_LOCAL_URL+'/posts/menus'
 		
-		Axios.get(url) //메뉴 태그 가져오기
+		Axios.get(url, {
+			withCredentials: true,
+		}) //메뉴 태그 가져오기
 		.then(res => {
 			setMainMenus(res.data.mainMenus)
 			setSubMenus(res.data.subMenus)
@@ -134,7 +136,9 @@ function App() {
 				url = url + path + location.search
 			}
 
-			Axios.get(url)
+			Axios.get(url, {
+				withCredentials: true,
+			})
 			.then(res => {
 				setHeaders(res.headers)
 				setPosts(res.data)
