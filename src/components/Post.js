@@ -60,7 +60,7 @@ function Post(props){
             Axios.patch(url, { //댓글 작성
                 withCredentials: true, //CORS
                 data: {
-                    //username: store.login.username,
+                    username: store.login.username,
                     content: comment.value,
                 }
             })
