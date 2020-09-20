@@ -33,7 +33,7 @@ function Header(props) {
                 {!store.login ? 
                     <img className="profile" alt="PROFILE" src={process.env.PUBLIC_URL+'/images/noavatar.png'}/> :
                     store.login.username === 'imki123' ?
-                        <img className="profile" alt="PROFILE" src={process.env.PUBLIC_URL+'/images/avatar.png'}/> :
+                        <img className="profile" alt="PROFILE" src={process.env.PUBLIC_URL+'/images/avatar_small.png'}/> :
                         <img className="profile" alt="PROFILE" 
                             src={process.env.PUBLIC_URL+'/images/dog'+(Math.floor(Math.random() * (3 - 1 + 1)) + 1)+'.png'}/>}
                 </div>

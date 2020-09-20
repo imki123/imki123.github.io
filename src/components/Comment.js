@@ -65,7 +65,7 @@ function Comment(props) {
                 {!comment.username ? 
                 <img alt="PROFILE" src={process.env.PUBLIC_URL+'/images/noavatar.png'}/> :
                     comment.username === 'imki123' ?
-                        <img alt="PROFILE" src={process.env.PUBLIC_URL+'/images/avatar.png'}/> :
+                        <img alt="PROFILE" src={process.env.PUBLIC_URL+'/images/avatar_small.png'}/> :
                         <img alt="PROFILE" 
                             src={process.env.PUBLIC_URL+'/images/dog'+(Math.floor(Math.random() * (3 - 1 + 1)) + 1)+'.png'}/>}
             </div>
