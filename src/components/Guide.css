@@ -21,7 +21,7 @@
     background: white;
 }
 #avatar{
-    width: 229px;
+    width: 100%;
     padding: 16px;
     border-bottom: 1px solid green;
 }
@@ -49,22 +49,19 @@
     font-size: 0.9rem;
 }
 #introduction{
-    margin-top: 20px;
+    margin-top: 8px;
 }
 
 #menus{
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
-    padding-top: 8px;
+    padding: 8px 0 20px;
 }
 
 
 @media(min-width: 500px){
     #guideBack{
         width: 0px;
-    }
-    #avatar{
-        width: 312px;
     }
 }
