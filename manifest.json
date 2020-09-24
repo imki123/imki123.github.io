@@ -1,0 +1,25 @@
+{
+  "short_name": "행복한 코딩 블로그",
+  "name": "행복한 코딩 블로그",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/blog_imki123/images/GitHub-Mark-120px-plus.png",
+      "type": "image/png",
+      "sizes": "120x120"
+    },
+    {
+      "src": "/blog_imki123/images/GitHub-Mark-120px-plus.png",
+      "type": "image/png",
+      "sizes": "120x120"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
