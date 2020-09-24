@@ -1,142 +1,143 @@
-.nav{
-    text-align: right;
-    color: gray;
+.nav {
+	text-align: right;
+	color: gray;
 }
 
-.post{
-    margin: 20px 0;
-    padding: 20px 0 40px;
-    border-radius: 8px;
-    background: white;
-    box-shadow: 0px 2px 2px 1px gray;
+.post {
+	margin: 20px 0;
+	padding: 20px 4px 40px;
+	border-radius: 8px;
+	background: white;
+	box-shadow: 0px 2px 2px 1px gray;
 }
-.post .ql-toolbar{
-    display: none;
+.post .ql-toolbar {
+	display: none;
 }
 .ql-disabled {
-    border: 0 !important;
+	border: 0 !important;
 }
-.post .tags{
-    margin-top: 20px;
-    color: gray;
+.post .tags {
+	margin-top: 20px;
+	color: gray;
 }
-.tags a:hover{
-    cursor: pointer;
-    text-decoration: underline;
+.tags a:hover {
+	cursor: pointer;
+	text-decoration: underline;
 }
-.inActiveNav{
-    display: none;
-    margin-right: 8px;
+.inActiveNav {
+	display: none;
+	margin-right: 8px;
 }
-.activeNav{
-    display: inline;
-    color: blue !important;
+.activeNav {
+	display: inline;
+	color: blue !important;
 }
-.postContent{
-    padding: 0 8px 20px;
-}
-
-
-.writeComment{
-    border-top: 2px dotted green;
-    padding: 20px 8px 0px;
-    display: flex;
-    align-items: center;
-}
-.commentProfile{
-    text-align: center;
-    font-size: 0.8rem;
-    margin-right: 10px;
-    width: 60px;
-}
-.commentProfile img{
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-}
-.commentUsername{
-    font-size: 0.8rem;
-}
-.commentContent{
-    width: calc(100% - 60px);
-    font-size: 0.8rem;
-}
-.commentContent textarea{
-    font-size: 0.9rem;
-}
-.commentButtons{
-    text-align: right;
-    padding-right: 8px;
-    font-size: 0.8rem;
-}
-.commentButton, .loginButton{
-    display: inline-block;
-    padding: 6px 6px;
-    border: 0px solid black;
-    border-radius: 5px;
-    background: #84ff84;
-    cursor: pointer;
-    font-size: inherit;
-    outline: none;
-    cursor: pointer;
-}
-.commentButton{
-    margin-left: 8px;
+.postContent {
+	padding: 0 8px 20px;
 }
 
-.postButtons{
-    text-align: right;
-    font-size: 0.8rem;
+.writeComment {
+	border-top: 2px dotted green;
+	padding: 20px 8px 0px;
+	display: flex;
+	align-items: center;
 }
-.postButtons button, .postButtons a{
-    display: inline-block;
-    padding: 6px 6px;
-    border: 0px solid black;
-    border-radius: 5px;
-    background: #84ff84;
-    cursor: pointer;
-    font-size: inherit;
-    outline: none;
-    cursor: pointer;
+.commentProfile {
+	text-align: center;
+	font-size: 0.8rem;
+	margin-right: 10px;
+	width: 60px;
 }
-
-.comments{
-    padding: 8px 8px 0;
+.commentProfile img {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
 }
-.commentTitle{
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 4px;
+.commentUsername {
+	font-size: 0.8rem;
 }
-.commentRefresh{
-    color: blue;
-    display: flex;
-    align-items: flex-end;
-    font-size: 0.8rem;
+.commentContent {
+	width: calc(100% - 60px);
+	font-size: 0.8rem;
 }
-.commentRefresh svg{
-    font-size: 1rem;
+.commentContent textarea {
+	font-size: 0.9rem;
 }
-.commentRefresh:hover{
-    cursor: pointer;
-    text-decoration: underline;
+.commentButtons {
+	text-align: right;
+	padding-right: 8px;
+	font-size: 0.8rem;
 }
-.more{
-    text-align: center;
+.commentButton,
+.loginButton {
+	display: inline-block;
+	padding: 6px 6px;
+	border: 0px solid black;
+	border-radius: 5px;
+	background: #84ff84;
+	cursor: pointer;
+	font-size: inherit;
+	outline: none;
+	cursor: pointer;
 }
-.moreButton{
-    color: blue;
-    font-size: 0.9rem;
-    padding-right: 8px;
-}
-.moreButton:hover{
-    cursor: pointer;
-    text-decoration: underline;
+.commentButton {
+	margin-left: 8px;
 }
 
-.refreshing{
-    animation: refresh 1s linear infinite;
+.postButtons {
+	text-align: right;
+	font-size: 0.8rem;
+}
+.postButtons button,
+.postButtons a {
+	display: inline-block;
+	padding: 6px 6px;
+	border: 0px solid black;
+	border-radius: 5px;
+	background: #84ff84;
+	cursor: pointer;
+	font-size: inherit;
+	outline: none;
+	cursor: pointer;
+}
+
+.comments {
+	padding: 8px 8px 0;
+}
+.commentTitle {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	margin-bottom: 4px;
+}
+.commentRefresh {
+	color: blue;
+	display: flex;
+	align-items: flex-end;
+	font-size: 0.8rem;
+}
+.commentRefresh svg {
+	font-size: 1rem;
+}
+.commentRefresh:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+.more {
+	text-align: center;
+}
+.moreButton {
+	color: blue;
+	font-size: 0.9rem;
+	padding-right: 8px;
+}
+.moreButton:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+.refreshing {
+	animation: refresh 1s linear infinite;
 }
 
 @keyframes refresh {
