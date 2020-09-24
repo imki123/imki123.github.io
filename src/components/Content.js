@@ -106,7 +106,7 @@ function Content(props) {
                         {(store.posts.length < 1) 
                         ? <NotFoundPage/> /* 글이 없으면 페이지 없음 */
                         : <> 
-                            { //목록
+                            { //태그별 목록
                                 (startPost > 1 && paging) && <div className="postListWrapper">
                                     <div className="postListTitle">목록</div>
                                     {store.posts && store.posts.map((i, idx) => 
@@ -118,7 +118,7 @@ function Content(props) {
                                 store.posts && store.posts.map((i, idx) => 
                                     <Post no={startPost-idx} post={i} key={i.postId}/>)
                             }
-                            { //목록
+                            { //태그별 목록
                                 (startPost > 1 && paging) && <div className="postListWrapper">
                                     <div className="postListTitle">목록</div>
                                     {store.posts && store.posts.map((i, idx) => 
