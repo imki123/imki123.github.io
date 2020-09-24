@@ -120,7 +120,7 @@ function Post(props){
 
                 {/* 글 수정 삭제 버튼 */}
                 {store.login && store.login.username === 'imki123' && <div className="postButtons">
-                    <Link to={`/quill?postId=${post.postId}`} className="hover">수정</Link>&nbsp;
+                    <Link to={`/quill?postId=${post.postId}`} className="hover no-drag">수정</Link>&nbsp;
                     <button onClick={deletePost} id={post.postId} style={{background: 'red'}}>삭제</button>
                 </div>}
             </div>
