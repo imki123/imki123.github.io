@@ -96,6 +96,16 @@ function Post(props){
         }) 
     }
 
+    //댓글 10개 더보기
+    const more = e => {
+        setCommentCnt(commentCnt + 10)
+    }
+
+    //댓글 더보기, 댓글 새로고침 하면 리사이즈
+    useEffect(() => {
+        store.resizeTextarea()
+    },[commentCnt, store, comments])
+
     return(
         <div className="post" id={`post_${no}`}>
             <div className="nav">{date}</div>
@@ -160,7 +170,7 @@ function Post(props){
                         <Comment post={post} comment={i} key={i.commentId} refreshComment={refreshComment}/>)}
                     {comments.length > commentCnt && 
                         <div className="more">
-                            <span className="moreButton" onClick={e => setCommentCnt(commentCnt + 10)}>댓글 더보기</span>
+                            <span className="moreButton" onClick={more}>댓글 더보기</span>
                         </div>}
                 </div>}
             </>}
