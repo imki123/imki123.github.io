@@ -143,16 +143,6 @@ function Content(props) {
 										//글
 										store.posts && store.posts.map((i, idx) => <Post no={startPost - idx} post={i} key={i.postId} />)
 									}
-									{
-										//태그별 목록
-										startPost > 1 && paging && (
-											<div className="postListWrapper">
-												<div className="postListTitle">목록</div>
-												{store.posts && store.posts.map((i, idx) => <PostList no={startPost - idx} post={i} key={i.postId} />)}
-												{<Paging paging={paging} />}
-											</div>
-										)
-									}
 								</>
 							)}
 						</>
