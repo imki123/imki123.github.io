@@ -125,7 +125,7 @@ function Quill(props) {
 
 		//url에 POST 또는 PATCH 요청
 		let url = process.env.REACT_APP_URL + '/posts'
-		url = process.env.REACT_APP_LOCAL_URL + '/posts'
+		//url = process.env.REACT_APP_LOCAL_URL + '/posts'
 		let method = 'POST',
 			message = '글 작성 성공'
 		if (e.target.id === 'PATCH') {
