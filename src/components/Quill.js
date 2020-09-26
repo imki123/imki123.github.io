@@ -14,15 +14,10 @@ function Quill(props) {
 	const history = useHistory()
 	const [newMenu, setNewMenu] = useState([])
 
-
 	const modules = {
 		toolbar: [
 			['bold', 'italic', 'underline', 'strike'],
-			[
-				{ size: ['small', false, 'large', 'huge'] },
-				{ header: 1 },
-				{ header: 2 },
-			],
+			[{ size: ['small', false, 'large', 'huge'] }, { header: 1 }, { header: 2 }],
 			[{ align: [] }],
 			[{ color: [] }, { background: [] }],
 			[{ indent: '-1' }, { indent: '+1' }],
@@ -33,37 +28,14 @@ function Quill(props) {
 		],
 		syntax: true,
 	}
-	const formats = [
-		'bold',
-		'italic',
-		'underline',
-		'strike',
-		'code-block',
-		'blockquote',
-		'size',
-		'header',
-		'align',
-		'color',
-		'background',
-		'indent',
-		'list',
-		'link',
-		'image',
-		'video',
-		'clean',
-	]
+	const formats = ['bold', 'italic', 'underline', 'strike', 'code-block', 'blockquote', 'size', 'header', 'align', 'color', 'background', 'indent', 'list', 'link', 'image', 'video', 'clean']
 
 	const { quill, quillRef } = useQuill({ modules, formats })
 
 	useEffect(() => {
 		const tempMenu = []
 		for (let i in store.mainMenus) {
-			if (
-				store.mainMenus[i].name !== 'home' &&
-				store.mainMenus[i].name !== 'about' &&
-				store.mainMenus[i].name !== 'programming' &&
-				store.mainMenus[i].name !== 'article'
-			) {
+			if (store.mainMenus[i].name !== 'home' && store.mainMenus[i].name !== 'about' && store.mainMenus[i].name !== 'programming' && store.mainMenus[i].name !== 'article') {
 				tempMenu.push(store.mainMenus[i])
 			}
 		}
@@ -80,29 +52,29 @@ function Quill(props) {
 			Axios.get(url, {
 				withCredentials: true,
 			}) //포스트 작성, 수정
-			.then(res => {
-				let title = document.querySelector('[name=title]')
-				title.value = res.data.title
-				if (typeof res.data.body === 'string') quill.setText(res.data.body) //body가 string이면 setText
-				else quill.setContents(res.data.body) //body가 string이 아니면 setContents : Delta
+				.then((res) => {
+					let title = document.querySelector('[name=title]')
+					title.value = res.data.title
+					if (typeof res.data.body === 'string') quill.setText(res.data.body)
+					//body가 string이면 setText
+					else quill.setContents(res.data.body) //body가 string이 아니면 setContents : Delta
 
-				const tags = document.querySelectorAll('[type=radio]')
-				for (let i of tags) { //체크 초기화
-					i.checked = false
-				}
-				if (res.data.tags) {
-					//체크박스 체크
-					const mainMenu = document.querySelector(
-						`[value=${res.data.tags[0]}]`,
-					)
-					if (mainMenu) mainMenu.checked = true
-					for (let i of res.data.tags) {
-						const tag = document.querySelector(`[name=${i}]`)
-						if (tag) tag.checked = true
+					const tags = document.querySelectorAll('[type=radio]')
+					for (let i of tags) {
+						//체크 초기화
+						i.checked = false
 					}
-				}
-			})
-			.catch(e => alert(e)) //실패
+					if (res.data.tags) {
+						//체크박스 체크
+						const mainMenu = document.querySelector(`[value=${res.data.tags[0]}]`)
+						if (mainMenu) mainMenu.checked = true
+						for (let i of res.data.tags) {
+							const tag = document.querySelector(`[name=${i}]`)
+							if (tag) tag.checked = true
+						}
+					}
+				})
+				.catch((e) => alert(e)) //실패
 		}
 	}, [location, quill, postId])
 
@@ -118,6 +90,7 @@ function Quill(props) {
 		//제목, 내용, 태그가 있는지 검사
 		let title = document.querySelector('[name=title]')
 		const content = quill.getContents()
+		const text = quill.getText()
 		const mainMenu = document.querySelector('[type=radio]:checked')
 		let tags = []
 		const checkBoxs = document.querySelectorAll('[type=checkbox]:checked')
@@ -152,7 +125,7 @@ function Quill(props) {
 
 		//url에 POST 또는 PATCH 요청
 		let url = process.env.REACT_APP_URL + '/posts'
-		//url = process.env.REACT_APP_LOCAL_URL + '/posts'
+		url = process.env.REACT_APP_LOCAL_URL + '/posts'
 		let method = 'POST',
 			message = '글 작성 성공'
 		if (e.target.id === 'PATCH') {
@@ -166,21 +139,23 @@ function Quill(props) {
 			}
 		}
 
-		Axios(url, { //포스트 작성, 수정 (최대 10mb. koa-bodyparser에서 설정.)
+		Axios(url, {
+			//포스트 작성, 수정 (최대 10mb. koa-bodyparser에서 설정.)
 			method: method,
 			withCredentials: true, //CORS
 			data: {
 				title: title.value,
 				body: content,
+				text: text,
 				tags: tags,
-			}
+			},
 		})
-		.then(res => {
-			console.log(res.data)
-			alert(message) //성공
-			history.push(tags[0]) //수정 성공하면 해당 글의 태그로 이동함
-		})
-		.catch(e => alert(e)) //실패
+			.then((res) => {
+				console.log(res.data)
+				alert(message) //성공
+				history.push(tags[0]) //수정 성공하면 해당 글의 태그로 이동함
+			})
+			.catch((e) => alert(e)) //실패
 	}
 
 	// 화면 리사이즈시 editor 아래 마진 변경
@@ -250,12 +225,7 @@ function Quill(props) {
 									{i.name}
 								</label>
 							))}
-						<input
-							name="newMainMenu"
-							placeholder="메인메뉴 추가"
-							onChange={changeMainMenu}
-							autoComplete="off"
-						></input>
+						<input name="newMainMenu" placeholder="메인메뉴 추가" onChange={changeMainMenu} autoComplete="off"></input>
 					</div>
 					<div>
 						서브메뉴:
@@ -266,11 +236,7 @@ function Quill(props) {
 									{i}
 								</label>
 							))}
-						<input
-							name="newMenu"
-							placeholder="서브메뉴 추가"
-							autoComplete="off"
-						></input>
+						<input name="newMenu" placeholder="서브메뉴 추가" autoComplete="off"></input>
 					</div>
 				</div>
 			</div>
