@@ -13,7 +13,7 @@ function Tags({ match, location, history }) {
 	useEffect(() => {
 		store.setReady(false)
 		let url = process.env.REACT_APP_URL + '/posts/' + tag + location.search
-		url = process.env.REACT_APP_LOCAL_URL + '/posts/' + tag + location.search
+		//url = process.env.REACT_APP_LOCAL_URL + '/posts/' + tag + location.search
 
 		Axios.get(url, {
 			withCredentials: true,
