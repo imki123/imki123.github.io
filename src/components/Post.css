@@ -4,6 +4,9 @@
 	align-items: center;
 	color: gray;
 }
+.nav a:hover{
+	text-decoration: underline;
+}
 
 .post {
 	margin: 20px 0;
