@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward'
 import './Content.css'
-import queryString from 'query-string'
 import { Link, Route, useLocation, Switch } from 'react-router-dom'
 import { AppContext } from '../App'
 

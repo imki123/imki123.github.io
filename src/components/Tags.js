@@ -11,9 +11,7 @@ function Tags({ match }) {
 	const [lists, setLists] = useState([])
 
 	useEffect(() => {
-		console.log(tag)
 		store.setReady(false)
-		store.checkToken()
 		let url = process.env.REACT_APP_URL + '/posts/' + tag
 		//url = process.env.REACT_APP_LOCAL_URL + '/posts/' + tag
 
@@ -26,7 +24,7 @@ function Tags({ match }) {
 				store.setReady(true)
 			})
 			.catch((e) => alert(e)) //실패
-	}, [tag])
+	},[tag])
 
 	return (
 		<div className="postListWrapper">

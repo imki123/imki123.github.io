@@ -7,14 +7,14 @@ import { AppContext } from '../App'
 import RefreshIcon from '@material-ui/icons/Refresh'
 import Axios from 'axios'
 
-function Post({match}) {
+function Post({ match }) {
 	const store = React.useContext(AppContext)
-    const { postId } = match.params
-    const [post, setPost] = useState(false)
-    const [ps, setPs] = useState([])
+	const { postId } = match.params
+	const [post, setPost] = useState(false)
+	const [ps, setPs] = useState([])
 	const [comments, setComments] = useState(post.comments)
-    const [commentCnt, setCommentCnt] = useState(3)
-    
+	const [commentCnt, setCommentCnt] = useState(3)
+
 	const location = useLocation()
 	const history = useHistory()
 
@@ -22,12 +22,13 @@ function Post({match}) {
 	const formats = ['bold', 'italic', 'underline', 'strike', 'code-block', 'blockquote', 'size', 'header', 'align', 'color', 'background', 'indent', 'list', 'link', 'image', 'video', 'clean']
 	const { quill, quillRef } = useQuill({ modules, formats, readOnly: true })
 
-	useEffect(() => { //포스트 가져오기
-        store.setReady(false)
+	useEffect(() => {
+		//포스트 가져오기
+		store.setReady(false)
 		let url = process.env.REACT_APP_URL + '/posts/id/' + postId
 		//url = process.env.REACT_APP_LOCAL_URL + '/posts/id/' + postId
 
-		if(location.pathname === '/'){
+		if (location.pathname === '/') {
 			url = process.env.REACT_APP_URL + '/posts/id/1'
 			//url = process.env.REACT_APP_LOCAL_URL + '/posts/id/1'
 		}
@@ -35,12 +36,12 @@ function Post({match}) {
 			withCredentials: true,
 		})
 			.then((res) => {
-                console.log(res.data)
-                setPost(res.data)
-                store.setReady(true)
+				console.log(res.data)
+				setPost(res.data)
+				store.setReady(true)
 			})
-            .catch((e) => alert(e)) //실패
-	},[location, postId])
+			.catch((e) => alert(e)) //실패
+	}, [location, postId, store.setReady])
 
 	useEffect(() => {
 		if (post) {
@@ -151,9 +152,7 @@ function Post({match}) {
 				</div>
 				{post && post.publishedDate.substring(0, 16).replace('T', ' ')}
 			</div>
-			<h2 className="postTitle">
-				{post.title}
-			</h2>
+			<h2 className="postTitle">{post.title}</h2>
 			<div className="postContent">
 				{/* 본문 */}
 				{typeof post.body === 'string' ? (

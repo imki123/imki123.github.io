@@ -16,8 +16,10 @@ function Login(props) {
     const [checkPassword, setCheckPassword] = useState('')
     const [checkPasswordConfirm, setCheckPasswordConfirm] = useState('')
     const [buttonName, setButtonName] = useState('로그인')
-    
 
+    useEffect(() => {
+        store.setReady(true)
+    })
     useEffect(() => {
         //이미 로그인이 되어있다면 스테이터스로 이동
         if(store.login && location.pathname === '/login'){ 
