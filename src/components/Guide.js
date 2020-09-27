@@ -10,7 +10,6 @@ function Guide(props) {
         const mainMenu = []
         for(let i in store.mainMenus){
             if(store.mainMenus[i].name !== 'home' 
-            && store.mainMenus[i].name !== 'about' 
             && store.mainMenus[i].name !== 'programming' 
             && store.mainMenus[i].name !== 'article')
             {
@@ -53,7 +52,6 @@ function Guide(props) {
                 </div>
                 <div id="menus">
                     <Menu menu={store.mainMenus.home}/>
-                    <Menu menu={store.mainMenus.about}/>
                     <Menu menu={store.mainMenus.programming}/>
                     <Menu menu={store.mainMenus.article}/>
                     {newMenu.map(i => <Menu menu={i} key={i}/>)}

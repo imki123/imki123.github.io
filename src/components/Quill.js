@@ -3,14 +3,13 @@ import './Quill.css'
 import 'quill/dist/quill.snow.css'
 import { useHistory, useLocation } from 'react-router-dom'
 import { useQuill } from 'react-quilljs'
-import queryString from 'query-string'
 import { AppContext } from '../App'
 import Axios from 'axios'
 
-function Quill(props) {
+function Quill({match}) {
 	const store = React.useContext(AppContext)
 	const location = useLocation()
-	const postId = queryString.parse(location.search).postId
+	const {postId} = match.params
 	const history = useHistory()
 	const [newMenu, setNewMenu] = useState([])
 
@@ -35,7 +34,7 @@ function Quill(props) {
 	useEffect(() => {
 		const tempMenu = []
 		for (let i in store.mainMenus) {
-			if (store.mainMenus[i].name !== 'home' && store.mainMenus[i].name !== 'about' && store.mainMenus[i].name !== 'programming' && store.mainMenus[i].name !== 'article') {
+			if (store.mainMenus[i].name !== 'home' && store.mainMenus[i].name !== 'programming' && store.mainMenus[i].name !== 'article') {
 				tempMenu.push(store.mainMenus[i])
 			}
 		}
@@ -44,6 +43,7 @@ function Quill(props) {
 
 	useEffect(() => {
 		//포스트 불러오기 axios
+		console.log('get')
 		if (postId !== undefined && Number(postId) >= 1 && quill) {
 			//postId가 없으면 포스트 내용 가져오지 않기
 			let url = process.env.REACT_APP_URL + '/posts/id/' + postId
@@ -51,7 +51,7 @@ function Quill(props) {
 
 			Axios.get(url, {
 				withCredentials: true,
-			}) //포스트 작성, 수정
+			}) //포스트 불러오기
 				.then((res) => {
 					let title = document.querySelector('[name=title]')
 					title.value = res.data.title
@@ -73,10 +73,16 @@ function Quill(props) {
 							if (tag) tag.checked = true
 						}
 					}
+					store.setReady(true)
 				})
-				.catch((e) => alert(e)) //실패
+				.catch((e) => {
+					alert(e)
+					store.setReady(true)
+				}) //실패
+		}else{
+			store.setReady(true)
 		}
-	}, [location, quill, postId])
+	}, [location, quill, postId, store])
 
 	//글 작성 or 수정
 	const clickPost = (e) => {
@@ -153,7 +159,7 @@ function Quill(props) {
 			.then((res) => {
 				console.log(res.data)
 				alert(message) //성공
-				history.push(tags[0]) //수정 성공하면 해당 글의 태그로 이동함
+				history.push(`/posts/${postId}`) //수정 성공하면 해당 글로 이동함
 			})
 			.catch((e) => alert(e)) //실패
 	}
@@ -205,10 +211,6 @@ function Quill(props) {
 						<label>
 							<input type="radio" name="mainMenu" value="home" />
 							home
-						</label>
-						<label>
-							<input type="radio" name="mainMenu" value="about" />
-							about
 						</label>
 						<label>
 							<input type="radio" name="mainMenu" value="programming" />

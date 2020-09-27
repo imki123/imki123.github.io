@@ -21,7 +21,7 @@ function Menu(props) {
 	return(
         <>
             {menu && 
-            <NavLink exact to={menu.name === 'home' ? '/' : `/${menu.name}`} className="list" activeClassName="activeList">
+            <NavLink exact to={menu.name === 'home' ? '/' : `/tags/${menu.name}`} className="list" activeClassName="activeList">
                 <span className="menuName">{menu.name.substring(0,1).toUpperCase()+menu.name.substring(1)}</span>
                 <span className="menuOptions">
                     <span className="menuCnt">{menu.cnt}</span>
@@ -29,7 +29,7 @@ function Menu(props) {
                 </span>
             </NavLink>}
             {subMenu.length > 0 && subMenu.map(i => 
-                <NavLink exact to={`/${i.name}`} className="list subList" activeClassName="activeList" key={i.name}>
+                <NavLink exact to={`/tags/${i.name}`} className="list subList" activeClassName="activeList" key={i.name}>
                     <span className="menuName">{i.name.substring(0,1).toUpperCase()+i.name.substring(1)}</span>
                     <span className="menuOptions">
                         <span className="menuCnt">{i.cnt}</span>

@@ -65,19 +65,7 @@ function App() {
                 content.style.width = `calc(100% - 312px - 16px)`
             }
         }
-    }
-	//useContext 이용하여 하위 컴포넌트에 상태 전달
-	const store = {
-		ready, setReady, 
-		posts, setPosts,
-		headers, setHeaders,
-		login, setLogin,
-		refresh, setRefresh,
-		mainMenus, setMainMenus,
-		subMenus, setSubMenus,
-		resizeTextarea, slideMenu,
 	}
-	
 	const checkToken = (func) => { //로그인 되어있는지 토큰 체크하기
 		let url = process.env.REACT_APP_URL+'/auth/check'
 		//url = process.env.REACT_APP_LOCAL_URL+'/auth/check'
@@ -99,6 +87,21 @@ function App() {
 		}) 
 	}
 
+	//useContext 이용하여 하위 컴포넌트에 상태 전달
+	const store = {
+		ready, setReady, 
+		posts, setPosts,
+		headers, setHeaders,
+		login, setLogin,
+		refresh, setRefresh,
+		mainMenus, setMainMenus,
+		subMenus, setSubMenus,
+		resizeTextarea, slideMenu,
+		checkToken,
+	}
+	
+	
+
 	// 포스트에서 태그 정보를 가져와서 메뉴에 표시함, Quill의 태그목록에 표시
     useEffect(() => {
 		let url = process.env.REACT_APP_URL+'/posts/menus'
@@ -118,34 +121,7 @@ function App() {
 	//주소 변경될 때, 토큰 체크하고 포스트 조회하기
 	useEffect(() => {
 		setReady(false)
-		checkToken(
-			function() {
-			let url = process.env.REACT_APP_URL+'/posts'
-			//url = process.env.REACT_APP_LOCAL_URL+'/posts'
-			let path = location.pathname.split('/')
-			path = '/'+path[1]
-			
-			if (location.pathname === '/') {
-				url = url + '/home' + location.pathname + location.search
-			}else if(location.pathname.indexOf('/quill') > -1) {
-				setHeaders(false)
-				setPosts(false)
-				setReady(true)
-				return
-			}else {
-				url = url + path + location.search
-			}
-
-			Axios.get(url, {
-				withCredentials: true,
-			})
-			.then(res => {
-				setHeaders(res.headers)
-				setPosts(res.data)
-				setReady(true)
-			})
-			.catch(e => alert(e)) //실패
-		})
+		checkToken()
 
 		//주소 변경 시 해쉬 위치로 scroll. 해쉬는 리렌더링 하지 않음.
 		const content = document.querySelector('#content')

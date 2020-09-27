@@ -7,30 +7,14 @@ import { Link, Route, useLocation, Switch } from 'react-router-dom'
 import { AppContext } from '../App'
 
 import Post from './Post'
-import Paging from './Paging'
-import PostList from './PostList'
 import NotFoundPage from './NotFoundPage'
 import Login from './Login'
 import Quill from './Quill'
+import Tags from './Tags'
 
 function Content(props) {
 	const store = React.useContext(AppContext)
 	const location = useLocation()
-	const search = queryString.parse(location.search)
-	let startPost = 1
-	let paging = null
-	if (store.headers) {
-		const page = Number(search.page) || 1
-		const lastPage = Number(store.headers['last-page'])
-		const totalPost = Number(store.headers['total-post'])
-		startPost = totalPost - (page - 1) * 5
-		paging = {
-			page: page,
-			lastPage: lastPage,
-			totalPost: totalPost,
-			startPost: startPost,
-		}
-	}
 
 	useEffect(() => {
 		const resize = () => {
@@ -80,8 +64,8 @@ function Content(props) {
 		return window.removeEventListener('resize', resize)
 	}, [location.hash, store])
 
-
-	const scrollUp = (e) => { // content의 스크롤을 가장 위로
+	const scrollUp = (e) => {
+		// content의 스크롤을 가장 위로
 		const content = document.querySelector('#content')
 		let contentScroll = content.scrollTop
 		let dif = contentScroll / 50
@@ -118,36 +102,11 @@ function Content(props) {
 				<Route path={['/login', '/register', '/loginStatus', '/withdraw']}>
 					<Login />
 				</Route>
-				<Route path={['/quill']}>
-					<Quill />
-				</Route>
-				<Route path="*">
-					{/* 본문 내용 */}
-					{store.ready && (
-						<>
-							{store.posts.length < 1 ? (
-								<NotFoundPage /> /* 글이 없으면 페이지 없음 */
-							) : (
-								<>
-									{
-										//태그별 목록
-										startPost > 1 && paging && (
-											<div className="postListWrapper">
-												<div className="postListTitle">목록</div>
-												{store.posts && store.posts.map((i, idx) => <PostList no={startPost - idx} post={i} key={i.postId} />)}
-												{<Paging paging={paging} />}
-											</div>
-										)
-									}
-									{
-										//글
-										store.posts && store.posts.map((i, idx) => <Post no={startPost - idx} post={i} key={i.postId} />)
-									}
-								</>
-							)}
-						</>
-					)}
-				</Route>
+				<Route path={'/quill/:postId?'} component={Quill}/>
+				<Route path="/tags/:tag" component={Tags}/>
+				<Route path="/" exact component={Post}/>
+				<Route path="/posts/:postId" component={Post}/>
+				<Route path="*" component={NotFoundPage}/>
 			</Switch>
 
 			{/* 텍스트 에어리어 높이 조정을 위한 안보이는 가짜 텍스트에어리어 */}

@@ -4,14 +4,29 @@ import {NavLink, useLocation } from 'react-router-dom'
 import queryString from 'query-string';
 
 function Paging(props){
-    const {paging} = props //page, lastPage, totalPost, startPost
-    const location = useLocation()
-    const search = queryString.parse(location.search)
+    const {postCount} = props
+	const location = useLocation()
+	const search = queryString.parse(location.search)
+    let paging = null
     const pages = []
+	if (postCount) {
+		const page = Number(search.page) || 1
+		const startPost = postCount - (page - 1) * 10
+		paging = {
+			page: page,
+			lastPage: Math.ceil(postCount / 10),
+			postCount: postCount,
+			startPost: startPost,
+        }
+        
+        for(let i=0; i<paging.lastPage; i++){
+            pages.push(i+1)
+        }
+	}
 
-    for(let i=0; i<paging.lastPage; i++){
-        pages.push(i+1)
-    }
+    
+
+    
 
     useEffect(() => {
         const links = document.querySelectorAll('.paging a')
@@ -27,7 +42,7 @@ function Paging(props){
                 }
             }
         }
-    }, [location, search])
+    }, [search, postCount])
 
     
     return(
