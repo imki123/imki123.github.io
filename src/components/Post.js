@@ -12,7 +12,7 @@ function Post({ match }) {
 	const { postId } = match.params
 	const [post, setPost] = useState(false)
 	const [ps, setPs] = useState([])
-	const [comments, setComments] = useState(post.comments)
+	const [comments, setComments] = useState([])
 	const [commentCnt, setCommentCnt] = useState(3)
 
 	const location = useLocation()
@@ -37,10 +37,11 @@ function Post({ match }) {
 		})
 			.then((res) => {
 				setPost(res.data)
+				setComments(res.data.comments)
 				store.setReady(true)
 			})
 			.catch((e) => {
-				alert('찾으시는 페이지가 없습니다.\n' +e)
+				alert('찾으시는 페이지가 없습니다.\n' + e)
 				history.go(-1)
 			}) //실패
 	}, [location, postId, store.setReady])
