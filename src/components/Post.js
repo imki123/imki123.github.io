@@ -6,6 +6,7 @@ import Comment from './Comment'
 import { AppContext } from '../App'
 import RefreshIcon from '@material-ui/icons/Refresh'
 import Axios from 'axios'
+import Meta from './Meta';
 
 function Post({ match }) {
 	const store = React.useContext(AppContext)
@@ -44,7 +45,7 @@ function Post({ match }) {
 				alert('찾으시는 페이지가 없습니다.\n' + e)
 				history.go(-1)
 			}) //실패
-	}, [location, postId, store.setReady])
+	}, [location, postId])
 
 	useEffect(() => {
 		if (post) {
@@ -136,6 +137,13 @@ function Post({ match }) {
 
 	return (
 		<div className="post">
+			{location.pathname === '/' 
+			? <Meta data={{
+				title: '행복한 코딩 블로그 :D',
+				discription: 'imki123의 행복한 코딩 블로그입니다 :D',
+				locale: 'ko',
+				}}/>
+			:<Meta data={{title: post.title, discription: post.text, locale: 'ko'}}/>}
 			{/* 태그 */}
 			<div className="nav">
 				<div>

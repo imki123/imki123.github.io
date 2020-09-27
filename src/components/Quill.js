@@ -157,7 +157,6 @@ function Quill({match}) {
 		})
 			.then((res) => {
 				alert(message) //성공
-				console.log(res)
 				postId = res.data.postId
 				if(postId){
 					history.push(`/posts/${postId}`) //수정 성공하면 해당 글로 이동함
