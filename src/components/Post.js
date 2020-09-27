@@ -36,11 +36,13 @@ function Post({ match }) {
 			withCredentials: true,
 		})
 			.then((res) => {
-				console.log(res.data)
 				setPost(res.data)
 				store.setReady(true)
 			})
-			.catch((e) => alert(e)) //실패
+			.catch((e) => {
+				alert('찾으시는 페이지가 없습니다.\n' +e)
+				history.go(-1)
+			}) //실패
 	}, [location, postId, store.setReady])
 
 	useEffect(() => {

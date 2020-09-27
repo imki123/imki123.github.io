@@ -43,7 +43,6 @@ function Quill({match}) {
 
 	useEffect(() => {
 		//포스트 불러오기 axios
-		console.log('get')
 		if (postId !== undefined && Number(postId) >= 1 && quill) {
 			//postId가 없으면 포스트 내용 가져오지 않기
 			let url = process.env.REACT_APP_URL + '/posts/id/' + postId
@@ -157,7 +156,6 @@ function Quill({match}) {
 			},
 		})
 			.then((res) => {
-				console.log(res.data)
 				alert(message) //성공
 				history.push(`/posts/${postId}`) //수정 성공하면 해당 글로 이동함
 			})

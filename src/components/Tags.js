@@ -1,5 +1,6 @@
 import Axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import { AppContext } from '../App'
 import Paging from './Paging'
 import PostList from './PostList'
@@ -9,6 +10,7 @@ function Tags({ match }) {
 	const store = React.useContext(AppContext)
 	const { tag } = match.params
 	const [lists, setLists] = useState([])
+	const history = useHistory()
 
 	useEffect(() => {
 		store.setReady(false)
@@ -19,9 +21,13 @@ function Tags({ match }) {
 			withCredentials: true,
 		})
 			.then((res) => {
-                console.log(res)
-                setLists(res.data.list)
+				if(res.data.list.length < 1){
+					alert('찾으시는 페이지가 없습니다.')
+					history.go(-1)
+				}else{
+					setLists(res.data.list)
 				store.setReady(true)
+				}
 			})
 			.catch((e) => alert(e)) //실패
 	},[tag])

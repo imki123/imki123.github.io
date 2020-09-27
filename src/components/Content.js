@@ -105,6 +105,7 @@ function Content(props) {
 				<Route path="/tags/:tag" component={Tags}/>
 				<Route path="/" exact component={Post}/>
 				<Route path="/posts/:postId" component={Post}/>
+				<Route path="/NotFoundPage" component={NotFoundPage}/>
 				<Route path="*" component={NotFoundPage}/>
 			</Switch>
 
