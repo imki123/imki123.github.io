@@ -9,7 +9,7 @@ import Axios from 'axios'
 function Quill({match}) {
 	const store = React.useContext(AppContext)
 	const location = useLocation()
-	const {postId} = match.params
+	let {postId} = match.params
 	const history = useHistory()
 	const [newMenu, setNewMenu] = useState([])
 
@@ -157,7 +157,12 @@ function Quill({match}) {
 		})
 			.then((res) => {
 				alert(message) //성공
-				history.push(`/posts/${postId}`) //수정 성공하면 해당 글로 이동함
+				console.log(res)
+				postId = res.data.postId
+				if(postId){
+					history.push(`/posts/${postId}`) //수정 성공하면 해당 글로 이동함
+				}
+				
 			})
 			.catch((e) => alert(e)) //실패
 	}

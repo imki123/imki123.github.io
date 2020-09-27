@@ -1,21 +1,19 @@
 import Axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
 import { AppContext } from '../App'
 import Paging from './Paging'
 import PostList from './PostList'
+
 import './Tags.css'
 
-function Tags({ match }) {
+function Tags({ match, location, history }) {
 	const store = React.useContext(AppContext)
 	const { tag } = match.params
 	const [lists, setLists] = useState([])
-	const history = useHistory()
-
 	useEffect(() => {
 		store.setReady(false)
-		let url = process.env.REACT_APP_URL + '/posts/' + tag
-		//url = process.env.REACT_APP_LOCAL_URL + '/posts/' + tag
+		let url = process.env.REACT_APP_URL + '/posts/' + tag + location.search
+		url = process.env.REACT_APP_LOCAL_URL + '/posts/' + tag + location.search
 
 		Axios.get(url, {
 			withCredentials: true,
@@ -30,7 +28,7 @@ function Tags({ match }) {
 				}
 			})
 			.catch((e) => alert(e)) //실패
-	},[tag])
+	},[tag, location])
 
 	return (
 		<div className="postListWrapper">

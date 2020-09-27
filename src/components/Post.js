@@ -70,7 +70,7 @@ function Post({ match }) {
 			})
 				.then((res) => {
 					console.log(`${postId}번 글 삭제 성공`)
-					store.refresh ? store.setRefresh(false) : store.setRefresh(true)
+					history.go(-1)
 				})
 				.catch((e) => alert(e)) //실패
 		}
