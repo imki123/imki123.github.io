@@ -26,10 +26,12 @@ function Guide(props) {
         const guideWrapper = document.querySelector('#guideWrapper')
         const content = document.querySelector('#content')
 
+        guideWrapper.parentNode.style.width = '0' // 회색 0
         if(body.clientWidth < 500){ //모바일
-            guideWrapper.parentNode.style.width = '0' // 회색 0
             guideWrapper.style.left = '-230px' // 메뉴 0
             content.style.width = 'calc(100% - 16px)'
+        }else{
+            content.style.width = 'calc(100% - 312px - 16px)'
         }
     }
 
