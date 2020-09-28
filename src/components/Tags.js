@@ -24,11 +24,11 @@ function Tags({ match, location, history }) {
 					history.go(-1)
 				}else{
 					setLists(res.data.list)
-				store.setReady(true)
+					store.setReady(true)
 				}
 			})
 			.catch((e) => alert(e)) //실패
-	},[tag, location])
+	},[tag, location, history])
 
 	return (
 		<div className="postListWrapper">

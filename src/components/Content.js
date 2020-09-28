@@ -98,10 +98,8 @@ function Content(props) {
 			</div>
 
 			<Switch>
-				<Route path={['/login', '/register', '/loginStatus', '/withdraw']}>
-					<Login />
-				</Route>
-				<Route path={'/quill/:postId?'} component={Quill}/>
+				<Route path={['/login', '/register', '/loginStatus', '/withdraw']} component={Login}/>
+				<Route path="/quill/:postId?" component={Quill}/>
 				<Route path="/tags/:tag" component={Tags}/>
 				<Route path="/" exact component={Post}/>
 				<Route path="/posts/:postId" component={Post}/>

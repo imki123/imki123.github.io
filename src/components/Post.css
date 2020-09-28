@@ -141,6 +141,11 @@
 .refreshing {
 	animation: refresh 1s linear infinite;
 }
+.recents{
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
 
 @keyframes refresh {
 	0% {

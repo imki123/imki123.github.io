@@ -2,7 +2,7 @@
     display: inline-block;
     vertical-align: top;
     width: 48%;
-    margin: 10px 2% 10px 0;
+    margin: 10px 0;
 	padding: 8px;
 	border-radius: 8px;
 	background: white;
@@ -11,6 +11,6 @@
 @media(max-width: 500px){
     #recents{
         width: 100%;
-        margin: 20px 0 40px;
+        margin: 20px 0;
     }    
 }

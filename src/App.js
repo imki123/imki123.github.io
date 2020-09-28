@@ -19,7 +19,11 @@ function App() {
 	const [headers, setHeaders] = useState({})
 	const [login, setLogin] = useState(false)
 	const [refresh, setRefresh] = useState(false)
-	const [mainMenus, setMainMenus] = useState({})
+	const [mainMenus, setMainMenus] = useState({
+		home: {name: 'home', cnt: 1},
+		programming: {name: 'programming'},
+		article: {name: 'article'},
+	})
 	const [subMenus, setSubMenus] = useState([])
 
 	const resizeTextarea = (e) => {

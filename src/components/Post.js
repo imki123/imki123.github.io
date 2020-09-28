@@ -8,7 +8,6 @@ import RefreshIcon from '@material-ui/icons/Refresh'
 import Axios from 'axios'
 import Meta from './Meta'
 import Recents from './Recents'
-import Popular from './Popular'
 
 function Post({ match }) {
 	const store = React.useContext(AppContext)
@@ -17,6 +16,8 @@ function Post({ match }) {
 	const [ps, setPs] = useState([])
 	const [comments, setComments] = useState([])
 	const [commentCnt, setCommentCnt] = useState(3)
+	const [recents, setRecents] = useState([])
+	const [popular, setPopular] = useState([])
 
 	const location = useLocation()
 	const history = useHistory()
@@ -47,7 +48,21 @@ function Post({ match }) {
 				alert('찾으시는 페이지가 없습니다.\n' + e)
 				history.go(-1)
 			}) //실패
-	}, [location, postId])
+		if (location.pathname === '/') {
+			//홈일경우 recents, popular 가져옴
+			url = process.env.REACT_APP_URL + '/posts/popular'
+			//url = process.env.REACT_APP_LOCAL_URL + '/posts/popular'
+			Axios.get(url).then((res) => {
+				setPopular(res.data)
+			})
+
+			url = process.env.REACT_APP_URL + '/posts/recents'
+			//url = process.env.REACT_APP_LOCAL_URL + '/posts/recents'
+			Axios.get(url).then((res) => {
+				setRecents(res.data)
+			})
+		}
+	}, [location, postId, history])
 
 	useEffect(() => {
 		if (post) {
@@ -249,8 +264,12 @@ function Post({ match }) {
 					</div>
 				)}
 			</div>
-			<Recents/>
-			<Popular/>
+			{location.pathname === '/' && (
+				<div className="recents">
+					<Recents title="최신글" list={recents} />
+					<Recents title="인기글" list={popular} />
+				</div>
+			)}
 		</>
 	)
 }
