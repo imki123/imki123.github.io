@@ -45,8 +45,8 @@ function Quill({match}) {
 		//포스트 불러오기 axios
 		if (postId !== undefined && Number(postId) >= 1 && quill) {
 			//postId가 없으면 포스트 내용 가져오지 않기
-			let url = process.env.REACT_APP_URL + '/posts/id/' + postId
-			//url = process.env.REACT_APP_LOCAL_URL+'/posts/id/' + postId
+			let url = process.env.REACT_APP_URL + '/posts/' + postId
+			//url = process.env.REACT_APP_LOCAL_URL+'/posts/' + postId
 
 			Axios.get(url, {
 				withCredentials: true,

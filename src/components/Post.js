@@ -26,12 +26,12 @@ function Post({ match }) {
 	useEffect(() => {
 		//포스트 가져오기
 		store.setReady(false)
-		let url = process.env.REACT_APP_URL + '/posts/id/' + postId
-		//url = process.env.REACT_APP_LOCAL_URL + '/posts/id/' + postId
+		let url = process.env.REACT_APP_URL + '/posts/' + postId
+		//url = process.env.REACT_APP_LOCAL_URL + '/posts/' + postId
 
 		if (location.pathname === '/') {
-			url = process.env.REACT_APP_URL + '/posts/id/1'
-			//url = process.env.REACT_APP_LOCAL_URL + '/posts/id/1'
+			url = process.env.REACT_APP_URL + '/posts/1'
+			//url = process.env.REACT_APP_LOCAL_URL + '/posts/1'
 		}
 		Axios.get(url, {
 			withCredentials: true,

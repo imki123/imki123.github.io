@@ -12,8 +12,8 @@ function Tags({ match, location, history }) {
 	const [lists, setLists] = useState([])
 	useEffect(() => {
 		store.setReady(false)
-		let url = process.env.REACT_APP_URL + '/posts/' + tag + location.search
-		//url = process.env.REACT_APP_LOCAL_URL + '/posts/' + tag + location.search
+		let url = process.env.REACT_APP_URL + '/posts/tag/' + tag + location.search
+		//url = process.env.REACT_APP_LOCAL_URL + '/posts/tag/' + tag + location.search
 
 		Axios.get(url, {
 			withCredentials: true,
