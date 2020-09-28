@@ -141,7 +141,6 @@ function Post({ match }) {
 			? <Meta data={{
 				title: '행복한 코딩 블로그 :D',
 				discription: 'imki123의 행복한 코딩 블로그입니다 :D',
-				locale: 'ko',
 				}}/>
 			:<Meta data={{title: post.title, discription: post.text, locale: 'ko'}}/>}
 			{/* 태그 */}
