@@ -1,127 +1,127 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>'https://imki123.github.io/'login</loc>
+    <loc>https://imki123.github.io</loc>
     <lastmod>2020-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>'https://imki123.github.io/'posts/16</loc>
+    <loc>https://imki123.github.io/login</loc>
     <lastmod>2020-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>'https://imki123.github.io/'posts/18</loc>
+    <loc>https://imki123.github.io/posts/16</loc>
     <lastmod>2020-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>'https://imki123.github.io/'posts/19</loc>
+    <loc>https://imki123.github.io/posts/18</loc>
     <lastmod>2020-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>'https://imki123.github.io/'posts/20</loc>
+    <loc>https://imki123.github.io/posts/19</loc>
     <lastmod>2020-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>'https://imki123.github.io/'posts/23</loc>
+    <loc>https://imki123.github.io/posts/20</loc>
     <lastmod>2020-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>'https://imki123.github.io/'posts/24</loc>
+    <loc>https://imki123.github.io/posts/23</loc>
     <lastmod>2020-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>'https://imki123.github.io/'posts/25</loc>
+    <loc>https://imki123.github.io/posts/24</loc>
     <lastmod>2020-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>'https://imki123.github.io/'posts/26</loc>
+    <loc>https://imki123.github.io/posts/25</loc>
     <lastmod>2020-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>'https://imki123.github.io/'posts/27</loc>
+    <loc>https://imki123.github.io/posts/26</loc>
     <lastmod>2020-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>'https://imki123.github.io/'register</loc>
+    <loc>https://imki123.github.io/posts/27</loc>
     <lastmod>2020-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>'https://imki123.github.io/'tags/css</loc>
+    <loc>https://imki123.github.io/register</loc>
     <lastmod>2020-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>'https://imki123.github.io/'tags/koa</loc>
+    <loc>https://imki123.github.io/tags/css</loc>
     <lastmod>2020-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>'https://imki123.github.io/'index.html</loc>
+    <loc>https://imki123.github.io/tags/koa</loc>
     <lastmod>2020-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>'https://imki123.github.io/'tags/react</loc>
+    <loc>https://imki123.github.io/tags/react</loc>
     <lastmod>2020-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>'https://imki123.github.io/'tags/github</loc>
+    <loc>https://imki123.github.io/tags/github</loc>
     <lastmod>2020-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>'https://imki123.github.io/'tags/article</loc>
+    <loc>https://imki123.github.io/tags/article</loc>
     <lastmod>2020-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>'https://imki123.github.io/'tags/current</loc>
+    <loc>https://imki123.github.io/tags/current</loc>
     <lastmod>2020-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>'https://imki123.github.io/'tags/javascript</loc>
+    <loc>https://imki123.github.io/tags/javascript</loc>
     <lastmod>2020-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>'https://imki123.github.io/'tags/programming</loc>
+    <loc>https://imki123.github.io/tags/programming</loc>
     <lastmod>2020-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>'https://imki123.github.io/'tags/react-native</loc>
+    <loc>https://imki123.github.io/tags/react-native</loc>
     <lastmod>2020-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
