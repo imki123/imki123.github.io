@@ -3,6 +3,7 @@
 	justify-content: space-between;
 	align-items: center;
 	color: gray;
+	font-size: 0.9rem;
 }
 .nav a:hover{
 	text-decoration: underline;
