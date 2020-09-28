@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://imki123.github.io/",
   "dependencies": {
+    "@fudohq/react-snap-sitemap": "0.1.5",
     "@material-ui/core": "4.11.0",
     "@material-ui/icons": "4.9.1",
     "@testing-library/jest-dom": "4.2.4",
@@ -28,7 +29,7 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "postbuild": "react-snap"
+    "postbuild": "react-snap && react-snap-sitemap --base-url='https://imki123.github.io/'"
   },
   "eslintConfig": {
     "extends": "react-app"
