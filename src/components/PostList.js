@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 function PostList(props){
     const {list, no} = props
-    let date = list.publishedDate.substring(0,16).replace('T',' ')
+    let date = list.publishedDate.substring(0,10).replace('T',' ')
 
     return(
         <Link to={`/posts/${list.postId}`}>
