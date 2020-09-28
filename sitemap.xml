@@ -7,12 +7,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://imki123.github.io/login</loc>
-    <lastmod>2020-09-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://imki123.github.io/posts/16</loc>
     <lastmod>2020-09-28</lastmod>
     <changefreq>monthly</changefreq>
@@ -62,12 +56,6 @@
   </url>
   <url>
     <loc>https://imki123.github.io/posts/27</loc>
-    <lastmod>2020-09-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://imki123.github.io/register</loc>
     <lastmod>2020-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
