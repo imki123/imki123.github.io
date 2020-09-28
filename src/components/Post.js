@@ -6,7 +6,9 @@ import Comment from './Comment'
 import { AppContext } from '../App'
 import RefreshIcon from '@material-ui/icons/Refresh'
 import Axios from 'axios'
-import Meta from './Meta';
+import Meta from './Meta'
+import Recents from './Recents'
+import Popular from './Popular'
 
 function Post({ match }) {
 	const store = React.useContext(AppContext)
@@ -136,112 +138,120 @@ function Post({ match }) {
 	}, [commentCnt, store, comments])
 
 	return (
-		<div className="post">
-			{location.pathname === '/' 
-			? <Meta data={{
-				title: '행복한 코딩 블로그 :D',
-				discription: 'imki123의 행복한 코딩 블로그입니다 :D',
-				}}/>
-			:<Meta data={{title: post.title, discription: post.text, locale: 'ko'}}/>}
-			{/* 태그 */}
-			<div className="nav">
-				<div>
-					<span>Tag : </span>
-					{post.tags &&
-						post.tags.map((i, idx) =>
-							idx === 0 ? (
-								<span key={i}>
-									<Link to={i === 'home' ? '/' : `/tags/${i}`}>{i}</Link>
-								</span>
-							) : (
-								<span key={i}>
-									, <Link to={`/tags/${i}`}>{i}</Link>
-								</span>
-							),
-						)}
-				</div>
-				{post && post.publishedDate.substring(0, 16).replace('T', ' ')}
-			</div>
-			<h2 className="postTitle">{post.title}</h2>
-			<div className="postContent">
-				{/* 본문 */}
-				{typeof post.body === 'string' ? (
-					ps.map((p, idx) => <p key={idx}>{p}</p>)
+		<>
+			<div className="post">
+				{location.pathname === '/' ? (
+					<Meta
+						data={{
+							title: '행복한 코딩 블로그 :D',
+							discription: 'imki123의 행복한 코딩 블로그입니다 :D',
+						}}
+					/>
 				) : (
-					<div id="editor">
-						<div ref={quillRef} />
-					</div>
+					<Meta data={{ title: post.title, discription: post.text, locale: 'ko' }} />
 				)}
-
-				{/* 글 수정 삭제 버튼 */}
-				{store.login && store.login.username === 'imki123' && (
-					<div className="postButtons">
-						<Link to={`/quill/${post.postId}`} className="hover no-drag">
-							수정
-						</Link>
-						&nbsp;
-						<button onClick={deletePost} id={post.postId} style={{ background: 'red' }}>
-							삭제
-						</button>
+				{/* 태그 */}
+				<div className="nav">
+					<div>
+						<span>Tag : </span>
+						{post.tags &&
+							post.tags.map((i, idx) =>
+								idx === 0 ? (
+									<span key={i}>
+										<Link to={i === 'home' ? '/' : `/tags/${i}`}>{i}</Link>
+									</span>
+								) : (
+									<span key={i}>
+										, <Link to={`/tags/${i}`}>{i}</Link>
+									</span>
+								),
+							)}
 					</div>
-				)}
-			</div>
-
-			{/* 댓글 작성*/}
-			<div className="writeComment">
-				<div className="commentProfile">
-					{!store.login ? (
-						<img alt="PROFILE" src={process.env.PUBLIC_URL + '/images/noavatar.png'} />
-					) : store.login.username === 'imki123' ? (
-						<img alt="PROFILE" src={process.env.PUBLIC_URL + '/images/avatar.png'} />
-					) : (
-						<img alt="PROFILE" src={process.env.PUBLIC_URL + '/images/dog' + (Math.floor(Math.random() * (3 - 1 + 1)) + 1) + '.png'} />
-					)}
+					{post && post.publishedDate.substring(0, 16).replace('T', ' ')}
 				</div>
-				<div className="commentContent">
-					{store.login ? (
-						<span className="commentUsername">{store.login.username}</span>
+				<h2 className="postTitle">{post.title}</h2>
+				<div className="postContent">
+					{/* 본문 */}
+					{typeof post.body === 'string' ? (
+						ps.map((p, idx) => <p key={idx}>{p}</p>)
 					) : (
-						<button
-							className="loginButton"
-							onClick={() => {
-								history.push('/login')
-							}}
-						>
-							로그인
-						</button>
+						<div id="editor">
+							<div ref={quillRef} />
+						</div>
 					)}
-					{store.login ? <textarea onChange={store.resizeTextarea} placeholder=" 댓글을 남겨주세요 :D" /> : <textarea readOnly placeholder=" 로그인 후에 댓글을 남겨주세요 :D" />}
-				</div>
-			</div>
-			<div className="commentButtons">
-				{store.login && (
-					<button className="commentButton" onClick={postComment}>
-						댓글작성
-					</button>
-				)}
-			</div>
 
-			{/* 댓글 목록 */}
-			{comments && comments.length > 0 && (
-				<div className="comments">
-					<div className="commentTitle">
-						<div className="commentCnt">댓글 {comments.length}개</div>
-						<span className="commentRefresh" onClick={refreshComment}>
-							댓글 새로고침 <RefreshIcon />
-						</span>
-					</div>
-					{comments.map((i, idx) => idx < commentCnt && <Comment post={post} comment={i} key={i.commentId} refreshComment={refreshComment} />)}
-					{comments.length > commentCnt && (
-						<div className="more">
-							<span className="moreButton" onClick={more}>
-								댓글 더보기
-							</span>
+					{/* 글 수정 삭제 버튼 */}
+					{store.login && store.login.username === 'imki123' && (
+						<div className="postButtons">
+							<Link to={`/quill/${post.postId}`} className="hover no-drag">
+								수정
+							</Link>
+							&nbsp;
+							<button onClick={deletePost} id={post.postId} style={{ background: 'red' }}>
+								삭제
+							</button>
 						</div>
 					)}
 				</div>
-			)}
-		</div>
+
+				{/* 댓글 작성*/}
+				<div className="writeComment">
+					<div className="commentProfile">
+						{!store.login ? (
+							<img alt="PROFILE" src={process.env.PUBLIC_URL + '/images/noavatar.png'} />
+						) : store.login.username === 'imki123' ? (
+							<img alt="PROFILE" src={process.env.PUBLIC_URL + '/images/avatar.png'} />
+						) : (
+							<img alt="PROFILE" src={process.env.PUBLIC_URL + '/images/dog' + (Math.floor(Math.random() * (3 - 1 + 1)) + 1) + '.png'} />
+						)}
+					</div>
+					<div className="commentContent">
+						{store.login ? (
+							<span className="commentUsername">{store.login.username}</span>
+						) : (
+							<button
+								className="loginButton"
+								onClick={() => {
+									history.push('/login')
+								}}
+							>
+								로그인
+							</button>
+						)}
+						{store.login ? <textarea onChange={store.resizeTextarea} placeholder=" 댓글을 남겨주세요 :D" /> : <textarea readOnly placeholder=" 로그인 후에 댓글을 남겨주세요 :D" />}
+					</div>
+				</div>
+				<div className="commentButtons">
+					{store.login && (
+						<button className="commentButton" onClick={postComment}>
+							댓글작성
+						</button>
+					)}
+				</div>
+
+				{/* 댓글 목록 */}
+				{comments && comments.length > 0 && (
+					<div className="comments">
+						<div className="commentTitle">
+							<div className="commentCnt">댓글 {comments.length}개</div>
+							<span className="commentRefresh" onClick={refreshComment}>
+								댓글 새로고침 <RefreshIcon />
+							</span>
+						</div>
+						{comments.map((i, idx) => idx < commentCnt && <Comment post={post} comment={i} key={i.commentId} refreshComment={refreshComment} />)}
+						{comments.length > commentCnt && (
+							<div className="more">
+								<span className="moreButton" onClick={more}>
+									댓글 더보기
+								</span>
+							</div>
+						)}
+					</div>
+				)}
+			</div>
+			<Recents/>
+			<Popular/>
+		</>
 	)
 }
 export default React.memo(Post)
