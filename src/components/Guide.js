@@ -1,24 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import './Guide.css'
-import Menu from './Menu'
 import { AppContext } from '../App'
+import Menus from './Menus'
 
 function Guide(props) {
     const store = React.useContext(AppContext)
-    const [newMenu, setNewMenu] = useState([])
-    useEffect(() => {
-        const mainMenu = []
-        for(let i in store.mainMenus){
-            if(store.mainMenus[i].name !== 'home' 
-            && store.mainMenus[i].name !== 'programming' 
-            && store.mainMenus[i].name !== 'article')
-            {
-                mainMenu.push(store.mainMenus[i])
-            }
-        }
-        setNewMenu(mainMenu)
-    },[store.mainMenus, store.refresh])
-    
 
     //모바일에서 회색부분 클릭 시 메뉴 닫기
     const closeMenuMobile = e => {
@@ -53,10 +39,7 @@ function Guide(props) {
                     </div>
                 </div>
                 <div id="menus">
-                    <Menu menu={store.mainMenus.home}/>
-                    <Menu menu={store.mainMenus.programming}/>
-                    <Menu menu={store.mainMenus.article}/>
-                    {newMenu.map(i => <Menu menu={i} key={i}/>)}
+                    <Menus menus={store.menus}/>
                 </div>
             </div>
         </div>

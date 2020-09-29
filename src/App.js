@@ -19,12 +19,11 @@ function App() {
 	const [headers, setHeaders] = useState({})
 	const [login, setLogin] = useState(false)
 	const [refresh, setRefresh] = useState(false)
-	const [mainMenus, setMainMenus] = useState({
-		home: {name: 'home', cnt: 1},
-		programming: {name: 'programming'},
-		article: {name: 'article'},
-	})
-	const [subMenus, setSubMenus] = useState([])
+	const [menus, setMenus] = useState([
+		{ name: 'home', count: 1, order: 1 },
+		{ name: 'programming', count: 1, order: 2 },
+		{ name: 'article', count: 1, order: 3 },
+	])
 
 	const resizeTextarea = (e) => {
 		//텍스트에어리어를 찾아서 크기를 글자 높이에 맞게 변경하기
@@ -110,10 +109,8 @@ function App() {
 		setLogin,
 		refresh,
 		setRefresh,
-		mainMenus,
-		setMainMenus,
-		subMenus,
-		setSubMenus,
+		menus,
+		setMenus,
 		resizeTextarea,
 		slideMenu,
 		checkToken,
@@ -121,15 +118,15 @@ function App() {
 
 	// 포스트에서 태그 정보를 가져와서 메뉴에 표시함, Quill의 태그목록에 표시
 	useEffect(() => {
-		let url = process.env.REACT_APP_URL + '/posts/menus'
-		//url = process.env.REACT_APP_LOCAL_URL+'/posts/menus'
+		let url = process.env.REACT_APP_URL + '/menus'
+		//url = process.env.REACT_APP_LOCAL_URL+'/menus'
 
 		Axios.get(url, {
 			withCredentials: true,
 		}) //메뉴 태그 가져오기
 			.then((res) => {
-				setMainMenus(res.data.mainMenus)
-				setSubMenus(res.data.subMenus)
+				setMenus(res.data)
+				console.log(res.data)
 			})
 			.catch((e) => alert(e)) //실패
 	}, [location.pathname, refresh])
