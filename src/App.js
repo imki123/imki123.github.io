@@ -126,7 +126,6 @@ function App() {
 		}) //메뉴 태그 가져오기
 			.then((res) => {
 				setMenus(res.data)
-				console.log(res.data)
 			})
 			.catch((e) => alert(e)) //실패
 	}, [location.pathname, refresh])

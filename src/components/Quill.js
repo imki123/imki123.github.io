@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import './Quill.css'
 import 'quill/dist/quill.snow.css'
-import { useHistory, useLocation } from 'react-router-dom'
 import { useQuill } from 'react-quilljs'
 import { AppContext } from '../App'
 import Axios from 'axios'
 
-function Quill({match}) {
+function Quill({ match, location, history }) {
 	const store = React.useContext(AppContext)
-	const location = useLocation()
-	let {postId} = match.params
-	const history = useHistory()
-	const [newMenu, setNewMenu] = useState([])
+	let { postId } = match.params
+	const [post, setPost] = useState()
+	const [subMenus, setSubMenus] = useState()
 
 	const modules = {
 		toolbar: [
@@ -32,16 +30,6 @@ function Quill({match}) {
 	const { quill, quillRef } = useQuill({ modules, formats })
 
 	useEffect(() => {
-		const tempMenu = []
-		for (let i in store.mainMenus) {
-			if (store.mainMenus[i].name !== 'home' && store.mainMenus[i].name !== 'programming' && store.mainMenus[i].name !== 'article') {
-				tempMenu.push(store.mainMenus[i])
-			}
-		}
-		setNewMenu(tempMenu)
-	}, [store.mainMenus])
-
-	useEffect(() => {
 		//포스트 불러오기 axios
 		if (postId !== undefined && Number(postId) >= 1 && quill) {
 			//postId가 없으면 포스트 내용 가져오지 않기
@@ -52,6 +40,7 @@ function Quill({match}) {
 				withCredentials: true,
 			}) //포스트 불러오기
 				.then((res) => {
+					setPost(res.data)
 					let title = document.querySelector('[name=title]')
 					title.value = res.data.title
 					if (typeof res.data.body === 'string') quill.setText(res.data.body)
@@ -67,9 +56,10 @@ function Quill({match}) {
 						//체크박스 체크
 						const mainMenu = document.querySelector(`[value=${res.data.tags[0]}]`)
 						if (mainMenu) mainMenu.checked = true
-						for (let i of res.data.tags) {
-							const tag = document.querySelector(`[name=${i}]`)
-							if (tag) tag.checked = true
+						for (let i of store.menus) {
+							if (i.name === res.data.tags[0]) { //선택된 메인메뉴의 서브메뉴를 그리기
+								setSubMenus(i.subMenus)
+							}
 						}
 					}
 					store.setReady(true)
@@ -78,10 +68,19 @@ function Quill({match}) {
 					alert(e)
 					store.setReady(true)
 				}) //실패
-		}else{
+		} else {
 			store.setReady(true)
 		}
-	}, [location, quill, postId, store])
+	}, [location, quill, postId, store.menus])
+
+	useEffect(() => {
+		if (subMenus) {
+			const subMenu = document.querySelector(`[value=${post.tags[1]}]`)
+			if (subMenu) subMenu.checked = true
+		}
+		const newSubMenu = document.querySelector('[name=newSubMenu]')
+		if(newSubMenu) newSubMenu.value = ''
+	}, [subMenus, post])
 
 	//글 작성 or 수정
 	const clickPost = (e) => {
@@ -96,25 +95,24 @@ function Quill({match}) {
 		let title = document.querySelector('[name=title]')
 		const content = quill.getContents()
 		const text = quill.getText()
-		const mainMenu = document.querySelector('[type=radio]:checked')
+		const mainMenu = document.querySelector('[name=mainMenu]:checked')
 		let tags = []
-		const checkBoxs = document.querySelectorAll('[type=checkbox]:checked')
+		const subMenu = document.querySelector('[name=subMenu]:checked')
 		const newMainMenu = document.querySelector('[name=newMainMenu]')
-		const newMenu = document.querySelector('[name=newMenu]')
+		const newSubMenu = document.querySelector('[name=newSubMenu]')
 
 		if (mainMenu) {
-			tags = [mainMenu.value]
+			tags[0] = mainMenu.value
 		}
 		if (newMainMenu.value !== '') {
-			tags = [newMainMenu.value]
+			tags[0] = newMainMenu.value
 		}
-		if (checkBoxs) {
-			for (let i of checkBoxs) {
-				tags.push(i.name)
-			} //체크 된 서브메뉴 추가
+		if (subMenu) {
+			if(subMenu.value !== '')
+				tags[1] = subMenu.value //체크 된 서브메뉴 추가
 		}
-		if (newMenu.value !== '') {
-			tags.push(newMenu.value)
+		if (newSubMenu.value !== '') {
+			tags[1] = newSubMenu.value
 		}
 
 		if (title.value.length === 0) {
@@ -158,10 +156,15 @@ function Quill({match}) {
 			.then((res) => {
 				alert(message) //성공
 				postId = res.data.postId
-				if(postId){
-					history.push(`/posts/${postId}`) //수정 성공하면 해당 글로 이동함
+				if (method === 'POST') {
+					//글 작성시 menus 카운트 증가
+					Axios()
 				}
-				
+				if (postId > 1) {
+					history.push(`/posts/${postId}`) //수정 성공하면 해당 글로 이동함
+				} else {
+					history.push(`/posts/1`) //인사말은 홈으로 이동
+				}
 			})
 			.catch((e) => alert(e)) //실패
 	}
@@ -183,9 +186,30 @@ function Quill({match}) {
 
 	//메인메뉴 추가시 라디오박스 체크 해제, 띄어쓰기를 _로 변경
 	const changeMainMenu = (e) => {
-		e.target.value = e.target.value.replace(/\s/g, '_')
-		const mainMenu = document.querySelector('[type=radio]:checked')
-		if (mainMenu) mainMenu.checked = false
+		if (store.menus) {
+			for (let i of store.menus) {
+				if (i.name === e.target.value) {
+					setSubMenus(i.subMenus)
+				}
+			}
+		}
+
+		if (e.target.type !== 'radio') { //인풋박스 입력하면 라디오 체크 해제
+			e.target.value = e.target.value.replace(/\s/g, '_')
+			const mainMenu = document.querySelector('[name=mainMenu]:checked')
+			if (mainMenu) mainMenu.checked = false
+		}
+	}
+	//서브메뉴 추가시 라디오박스 체크 해제, 띄어쓰기를 _로 변경
+	const changeSubMenu = (e) => {
+		if (e.target.type !== 'radio') { //인풋박스 입력하면 라디오 체크 해제
+			e.target.value = e.target.value.replace(/\s/g, '_')
+			const subMenu = document.querySelector('[name=subMenu]:checked')
+			if (subMenu) subMenu.checked = false
+		}else{
+			const newSubMenu = document.querySelector('[name=newSubMenu]')
+			if (newSubMenu) newSubMenu.value = ''
+		}
 	}
 
 	return (
@@ -210,22 +234,10 @@ function Quill({match}) {
 					</div>
 					<div>
 						메인메뉴:
-						<label>
-							<input type="radio" name="mainMenu" value="home" />
-							home
-						</label>
-						<label>
-							<input type="radio" name="mainMenu" value="programming" />
-							programming
-						</label>
-						<label>
-							<input type="radio" name="mainMenu" value="article" />
-							article
-						</label>
-						{newMenu &&
-							newMenu.map((i) => (
+						{store.menus &&
+							store.menus.map((i) => (
 								<label key={i.name}>
-									<input type="radio" name="mainMenu" value={i.name} />
+									<input type="radio" name="mainMenu" value={i.name} onClick={changeMainMenu} />
 									{i.name}
 								</label>
 							))}
@@ -233,14 +245,16 @@ function Quill({match}) {
 					</div>
 					<div>
 						서브메뉴:
-						{store.subMenus &&
-							store.subMenus.map((i) => (
-								<label key={i}>
-									<input type="checkbox" name={i} />
-									{i}
+						<label>
+							<input type="radio" name="subMenu" value="" onClick={changeSubMenu}/> 선택안함
+						</label>
+						{subMenus &&
+							subMenus.map((i) => (
+								<label key={i.name}>
+									<input type="radio" name="subMenu" value={i.name} onClick={changeSubMenu}/> {i.name}
 								</label>
 							))}
-						<input name="newMenu" placeholder="서브메뉴 추가" autoComplete="off"></input>
+						<input name="newSubMenu" placeholder="서브메뉴 추가" autoComplete="off" onChange={changeSubMenu}></input>
 					</div>
 				</div>
 			</div>
