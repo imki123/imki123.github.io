@@ -3,17 +3,17 @@
   "name": "행복한 코딩 블로그",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "imcat_64.png",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "/blog_imki123/images/GitHub-Mark-120px-plus.png",
+      "src": "/blog_imki123/images/imcat_120.png",
       "type": "image/png",
       "sizes": "120x120"
     },
     {
-      "src": "/blog_imki123/images/GitHub-Mark-120px-plus.png",
+      "src": "/blog_imki123/images/imcat_120.png",
       "type": "image/png",
       "sizes": "120x120"
     }
