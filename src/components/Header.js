@@ -25,7 +25,7 @@ function Header(props) {
                 </div>
                 <Link to="/"> 
                     <div id="title" className="hover">
-                        <img id="logo" alt="logo" src={process.env.PUBLIC_URL+'/images/GitHub-Mark-32px.png'}/> 
+                        <img id="logo" alt="logo" src={process.env.PUBLIC_URL+'/images/imcat_64.png'}/> 
                         행복한 코딩 블로그 :D
                     </div>
                 </Link>
