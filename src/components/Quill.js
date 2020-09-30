@@ -40,12 +40,8 @@ function Quill({ match, location, history }) {
 				withCredentials: true,
 			}) //포스트 불러오기
 				.then((res) => {
-					setPost(res.data)
 					let title = document.querySelector('[name=title]')
 					title.value = res.data.title
-					if (typeof res.data.body === 'string') quill.setText(res.data.body)
-					//body가 string이면 setText
-					else quill.setContents(res.data.body) //body가 string이 아니면 setContents : Delta
 
 					const tags = document.querySelectorAll('[type=radio]')
 					for (let i of tags) {
@@ -57,11 +53,29 @@ function Quill({ match, location, history }) {
 						const mainMenu = document.querySelector(`[value=${res.data.tags[0]}]`)
 						if (mainMenu) mainMenu.checked = true
 						for (let i of store.menus) {
-							if (i.name === res.data.tags[0]) { //선택된 메인메뉴의 서브메뉴를 그리기
+							if (i.name === res.data.tags[0]) {
+								//선택된 메인메뉴의 서브메뉴를 그리기
 								setSubMenus(i.subMenus)
 							}
 						}
 					}
+
+					//포스트바디 가져오기
+					url = process.env.REACT_APP_URL + '/posts/postBody/' + postId
+					//url = process.env.REACT_APP_LOCAL_URL + '/posts/postBody/' + postId
+					Axios.get(url)
+						.then((res2) => {
+							if (typeof res2.data.body === 'string') quill.setText(res2.data.body)
+							//body가 string이면 setText
+							else quill.setContents(res2.data.body) //body가 string이 아니면 setContents : Delta
+							setPost({
+								...res.data,
+								body: res2.data.body,
+							})
+						})
+						.catch((e) => {
+							alert(e)
+						}) //실패
 					store.setReady(true)
 				})
 				.catch((e) => {
@@ -74,12 +88,12 @@ function Quill({ match, location, history }) {
 	}, [location, quill, postId, store.menus])
 
 	useEffect(() => {
-		if (subMenus) {
+		if (subMenus && post) {
 			const subMenu = document.querySelector(`[value=${post.tags[1]}]`)
 			if (subMenu) subMenu.checked = true
 		}
 		const newSubMenu = document.querySelector('[name=newSubMenu]')
-		if(newSubMenu) newSubMenu.value = ''
+		if (newSubMenu) newSubMenu.value = ''
 	}, [subMenus, post])
 
 	//글 작성 or 수정
@@ -108,8 +122,7 @@ function Quill({ match, location, history }) {
 			tags[0] = newMainMenu.value
 		}
 		if (subMenu) {
-			if(subMenu.value !== '')
-				tags[1] = subMenu.value //체크 된 서브메뉴 추가
+			if (subMenu.value !== '') tags[1] = subMenu.value //체크 된 서브메뉴 추가
 		}
 		if (newSubMenu.value !== '') {
 			tags[1] = newSubMenu.value
@@ -194,7 +207,8 @@ function Quill({ match, location, history }) {
 			}
 		}
 
-		if (e.target.type !== 'radio') { //인풋박스 입력하면 라디오 체크 해제
+		if (e.target.type !== 'radio') {
+			//인풋박스 입력하면 라디오 체크 해제
 			e.target.value = e.target.value.replace(/\s/g, '_')
 			const mainMenu = document.querySelector('[name=mainMenu]:checked')
 			if (mainMenu) mainMenu.checked = false
@@ -202,11 +216,12 @@ function Quill({ match, location, history }) {
 	}
 	//서브메뉴 추가시 라디오박스 체크 해제, 띄어쓰기를 _로 변경
 	const changeSubMenu = (e) => {
-		if (e.target.type !== 'radio') { //인풋박스 입력하면 라디오 체크 해제
+		if (e.target.type !== 'radio') {
+			//인풋박스 입력하면 라디오 체크 해제
 			e.target.value = e.target.value.replace(/\s/g, '_')
 			const subMenu = document.querySelector('[name=subMenu]:checked')
 			if (subMenu) subMenu.checked = false
-		}else{
+		} else {
 			const newSubMenu = document.querySelector('[name=newSubMenu]')
 			if (newSubMenu) newSubMenu.value = ''
 		}
@@ -246,12 +261,12 @@ function Quill({ match, location, history }) {
 					<div>
 						서브메뉴:
 						<label>
-							<input type="radio" name="subMenu" value="" onClick={changeSubMenu}/> 선택안함
+							<input type="radio" name="subMenu" value="" onClick={changeSubMenu} /> 선택안함
 						</label>
 						{subMenus &&
 							subMenus.map((i) => (
 								<label key={i.name}>
-									<input type="radio" name="subMenu" value={i.name} onClick={changeSubMenu}/> {i.name}
+									<input type="radio" name="subMenu" value={i.name} onClick={changeSubMenu} /> {i.name}
 								</label>
 							))}
 						<input name="newSubMenu" placeholder="서브메뉴 추가" autoComplete="off" onChange={changeSubMenu}></input>

@@ -11,7 +11,7 @@ import Recents from './Recents'
 
 function Post({ match }) {
 	const store = React.useContext(AppContext)
-	const { postId } = match.params
+	let { postId } = match.params
 	const [post, setPost] = useState(false)
 	const [ps, setPs] = useState([])
 	const [comments, setComments] = useState([])
@@ -33,15 +33,28 @@ function Post({ match }) {
 		//url = process.env.REACT_APP_LOCAL_URL + '/posts/' + postId
 
 		if (location.pathname === '/') {
-			url = process.env.REACT_APP_URL + '/posts/1'
-			//url = process.env.REACT_APP_LOCAL_URL + '/posts/1'
+			postId = 1
+			url = process.env.REACT_APP_URL + '/posts/' + postId
+			//url = process.env.REACT_APP_LOCAL_URL + '/posts/' + postId
 		}
 		Axios.get(url, {
 			withCredentials: true,
 		})
 			.then((res) => {
-				setPost(res.data)
 				setComments(res.data.comments)
+				//포스트바디 가져오기
+				url = process.env.REACT_APP_URL + '/posts/postBody/' + postId
+				//url = process.env.REACT_APP_LOCAL_URL + '/posts/postBody/' + postId
+				Axios.get(url)
+					.then((res2) => {
+						setPost({
+							...res.data,
+							body: res2.data.body,
+						})
+					})
+					.catch((e) => {
+						alert(e)
+					}) //실패
 				store.setReady(true)
 			})
 			.catch((e) => {
@@ -50,11 +63,11 @@ function Post({ match }) {
 			}) //실패
 		if (location.pathname === '/') {
 			//홈일경우 recents, popular 가져옴
-			/* url = process.env.REACT_APP_URL + '/posts/popular'
+			url = process.env.REACT_APP_URL + '/posts/popular'
 			//url = process.env.REACT_APP_LOCAL_URL + '/posts/popular'
 			Axios.get(url).then((res) => {
 				setPopular(res.data)
-			}) */
+			})
 
 			url = process.env.REACT_APP_URL + '/posts/recents'
 			//url = process.env.REACT_APP_LOCAL_URL + '/posts/recents'
@@ -267,7 +280,7 @@ function Post({ match }) {
 			{location.pathname === '/' && (
 				<div className="recents">
 					<Recents title="최신글" list={recents} />
-					{/* <Recents title="인기글" list={popular} /> */}
+					<Recents title="인기글" list={popular} />
 				</div>
 			)}
 		</>
