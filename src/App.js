@@ -156,6 +156,7 @@ function App() {
 						discription: 'imki123의 행복한 코딩 블로그입니다 :D',
 					}}
 				/>
+				<img alt="logo" src={process.env.PUBLIC_URL+'/images/imcat_64.png'} className="firstLogo"/>
 				<Header />
 				<Setting />
 				<Body>

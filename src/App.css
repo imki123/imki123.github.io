@@ -8,7 +8,7 @@ body {
 	margin: 0px;
 	color: #202020;
 	font-size: 16px;
-    background: #f0f0f0;
+	background: #f0f0f0;
 }
 
 a {
@@ -39,7 +39,7 @@ button,
 	-moz-user-select: -moz-none;
 	-webkit-user-select: none;
 	-khtml-user-select: none;
-  user-select: none;
+	user-select: none;
 }
 
 textarea {
@@ -60,9 +60,13 @@ textarea:focus {
 	width: 100%;
 }
 
-.slideMenu{
+.slideMenu {
 	transition: width 0.5s ease, left 0.5s ease;
-	
+}
+.firstLogo {
+	position: absolute;
+	opacity: 0;
+	z-index: -100;
 }
 
 @media (min-width: 1280px) {
