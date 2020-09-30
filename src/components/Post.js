@@ -13,7 +13,6 @@ function Post({ match, location, history }) {
 	const store = React.useContext(AppContext)
 	let {postId} = match.params
 	const [post, setPost] = useState(false)
-	const [ps, setPs] = useState([])
 	const [comments, setComments] = useState([])
 	const [commentCnt, setCommentCnt] = useState(3)
 	const [recents, setRecents] = useState([])
@@ -73,12 +72,8 @@ function Post({ match, location, history }) {
 
 	useEffect(() => {
 		if (post) {
-			if (typeof post.body === 'string') {
-				setPs(post.body.split('\n')) //텍스트일 경우 문단으로 쪼개기
-			} else {
-				if (quill) {
-					quill.setContents(post.body)
-				}
+			if (quill) {
+				quill.setContents(post.body)
 			}
 		}
 	}, [post, quill])
@@ -194,13 +189,9 @@ function Post({ match, location, history }) {
 				<h2 className="postTitle">{post.title}</h2>
 				<div className="postContent">
 					{/* 본문 */}
-					{typeof post.body === 'string' ? (
-						ps.map((p, idx) => <p key={idx}>{p}</p>)
-					) : (
 						<div id="editor">
 							<div ref={quillRef} />
 						</div>
-					)}
 
 					{/* 글 수정 삭제 버튼 */}
 					{store.login && store.login.username === 'imki123' && (
