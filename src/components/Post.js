@@ -11,7 +11,7 @@ import Recents from './Recents'
 
 function Post({ match, location, history }) {
 	const store = React.useContext(AppContext)
-	let postId = match.params.postId ? match.params.postId : 1
+	let {postId} = match.params
 	const [post, setPost] = useState(false)
 	const [ps, setPs] = useState([])
 	const [comments, setComments] = useState([])
@@ -26,8 +26,10 @@ function Post({ match, location, history }) {
 	useEffect(() => {
 		//포스트 가져오기
 		store.setReady(false)
-		let url = process.env.REACT_APP_URL + '/posts/' + postId
-		//url = process.env.REACT_APP_LOCAL_URL + '/posts/' + postId
+		let id = 1
+		if(postId) id = postId
+		let url = process.env.REACT_APP_URL + '/posts/' + id
+		//url = process.env.REACT_APP_LOCAL_URL + '/posts/' + id
 
 		Axios.get(url, {
 			withCredentials: true,
@@ -35,8 +37,8 @@ function Post({ match, location, history }) {
 			.then((res) => {
 				setComments(res.data.comments)
 				//포스트바디 가져오기
-				url = process.env.REACT_APP_URL + '/posts/postBody/' + postId
-				//url = process.env.REACT_APP_LOCAL_URL + '/posts/postBody/' + postId
+				url = process.env.REACT_APP_URL + '/posts/postBody/' + id
+				//url = process.env.REACT_APP_LOCAL_URL + '/posts/postBody/' + id
 				Axios.get(url)
 					.then((res2) => {
 						setPost({
