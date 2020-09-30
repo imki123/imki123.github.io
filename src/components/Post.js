@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './Post.css'
-import { Link, useHistory, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useQuill } from 'react-quilljs'
 import Comment from './Comment'
 import { AppContext } from '../App'
@@ -11,7 +11,7 @@ import Recents from './Recents'
 
 function Post({ match, location, history }) {
 	const store = React.useContext(AppContext)
-	let postId = location.pathname === '/' ? 1 : match.params.postId
+	let postId = match.params.postId ? match.params.postId : 1
 	const [post, setPost] = useState(false)
 	const [ps, setPs] = useState([])
 	const [comments, setComments] = useState([])

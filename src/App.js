@@ -154,9 +154,9 @@ function App() {
 					data={{
 						title: '행복한 코딩 블로그 :D',
 						discription: 'imki123의 행복한 코딩 블로그입니다 :D',
+						image: process.env.PUBLIC_URL+'/images/imcat_64.png',
 					}}
 				/>
-				<img alt="logo" src={process.env.PUBLIC_URL+'/images/imcat_64.png'} className="firstLogo"/>
 				<Header />
 				<Setting />
 				<Body>
