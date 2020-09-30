@@ -9,18 +9,15 @@ import Axios from 'axios'
 import Meta from './Meta'
 import Recents from './Recents'
 
-function Post({ match }) {
+function Post({ match, location, history }) {
 	const store = React.useContext(AppContext)
-	let { postId } = match.params
+	let postId = location.pathname === '/' ? 1 : match.params.postId
 	const [post, setPost] = useState(false)
 	const [ps, setPs] = useState([])
 	const [comments, setComments] = useState([])
 	const [commentCnt, setCommentCnt] = useState(3)
 	const [recents, setRecents] = useState([])
 	const [popular, setPopular] = useState([])
-
-	const location = useLocation()
-	const history = useHistory()
 
 	const modules = { syntax: true }
 	const formats = ['bold', 'italic', 'underline', 'strike', 'code-block', 'blockquote', 'size', 'header', 'align', 'color', 'background', 'indent', 'list', 'link', 'image', 'video', 'clean']
@@ -32,11 +29,6 @@ function Post({ match }) {
 		let url = process.env.REACT_APP_URL + '/posts/' + postId
 		//url = process.env.REACT_APP_LOCAL_URL + '/posts/' + postId
 
-		if (location.pathname === '/') {
-			postId = 1
-			url = process.env.REACT_APP_URL + '/posts/' + postId
-			//url = process.env.REACT_APP_LOCAL_URL + '/posts/' + postId
-		}
 		Axios.get(url, {
 			withCredentials: true,
 		})
