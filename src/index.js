@@ -8,18 +8,14 @@ const rootElement = document.getElementById('root')
 if (rootElement.hasChildNodes()) {
 	hydrate(
 		<BrowserRouter>
-			<React.StrictMode>
-				<App />
-			</React.StrictMode>
+			<App />
 		</BrowserRouter>,
 		rootElement,
 	)
 } else {
 	ReactDOM.render(
 		<BrowserRouter basename={process.env.PUBLIC_URL}>
-			<React.StrictMode>
-				<App />
-			</React.StrictMode>
+			<App />
 		</BrowserRouter>,
 		document.getElementById('root'),
 	)
