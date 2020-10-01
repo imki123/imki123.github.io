@@ -11,8 +11,9 @@ import Recents from './Recents'
 
 function Post({ match, location, history }) {
 	const store = React.useContext(AppContext)
-	let {postId} = match.params
+	let { postId } = match.params
 	const [post, setPost] = useState(false)
+	const [postBody, setPostBody] = useState()
 	const [comments, setComments] = useState([])
 	const [commentCnt, setCommentCnt] = useState(3)
 	const [recents, setRecents] = useState([])
@@ -26,33 +27,31 @@ function Post({ match, location, history }) {
 		//포스트 가져오기
 		store.setReady(false)
 		let id = 1
-		if(postId) id = postId
+		if (postId) id = postId
 		let url = process.env.REACT_APP_URL + '/posts/' + id
 		//url = process.env.REACT_APP_LOCAL_URL + '/posts/' + id
-
 		Axios.get(url, {
 			withCredentials: true,
 		})
 			.then((res) => {
 				setComments(res.data.comments)
-				//포스트바디 가져오기
-				url = process.env.REACT_APP_URL + '/posts/postBody/' + id
-				//url = process.env.REACT_APP_LOCAL_URL + '/posts/postBody/' + id
-				Axios.get(url)
-					.then((res2) => {
-						setPost({
-							...res.data,
-							body: res2.data.body,
-						})
-					})
-					.catch((e) => {
-						alert(e)
-					}) //실패
+				setPost(res.data)
 				store.setReady(true)
 			})
 			.catch((e) => {
 				alert('찾으시는 페이지가 없습니다.\n' + e)
 				history.go(-1)
+			}) //실패
+
+		//포스트바디 가져오기
+		url = process.env.REACT_APP_URL + '/posts/postBody/' + id
+		//url = process.env.REACT_APP_LOCAL_URL + '/posts/postBody/' + id
+		Axios.get(url)
+			.then((res) => {
+				setPostBody(res.data.body)
+			})
+			.catch((e) => {
+				alert(e)
 			}) //실패
 		if (location.pathname === '/') {
 			//홈일경우 recents, popular 가져옴
@@ -71,12 +70,14 @@ function Post({ match, location, history }) {
 	}, [location, postId, history])
 
 	useEffect(() => {
-		if (post) {
-			if (quill) {
-				quill.setContents(post.body)
+		if (quill) {
+			if (postBody) {
+				quill.setContents(postBody)
+			} else if (post) {
+				quill.setText(post.text)
 			}
 		}
-	}, [post, quill])
+	}, [post, postBody, quill])
 
 	const deletePost = (e) => {
 		if (window.confirm('글 삭제 시 복구가 불가합니다. 해당 글을 정말로 삭제하시겠습니까?')) {
@@ -189,9 +190,9 @@ function Post({ match, location, history }) {
 				<h2 className="postTitle">{post.title}</h2>
 				<div className="postContent">
 					{/* 본문 */}
-						<div id="editor">
-							<div ref={quillRef} />
-						</div>
+					<div id="editor">
+						<div ref={quillRef} />
+					</div>
 
 					{/* 글 수정 삭제 버튼 */}
 					{store.login && store.login.username === 'imki123' && (
