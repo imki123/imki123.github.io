@@ -77,7 +77,7 @@ function Post({ match, location, history }) {
 				quill.setText(post.text)
 			}
 		}
-	})
+	}, [quill, postBody, post])
 
 	const deletePost = (e) => {
 		if (window.confirm('글 삭제 시 복구가 불가합니다. 해당 글을 정말로 삭제하시겠습니까?')) {

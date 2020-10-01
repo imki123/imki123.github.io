@@ -16,7 +16,7 @@
 	background: white;
 	box-shadow: 0px 2px 2px 1px gray;
 }
-.post .ql-toolbar {
+.post #editor>div:nth-child(1) {
 	display: none;
 }
 .ql-disabled {
