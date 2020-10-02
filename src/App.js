@@ -58,15 +58,10 @@ function App() {
 			//메뉴 닫기
 			guideWrapper.parentNode.style.width = '0' // 회색 0
 			content.style.width = 'calc(100% - 16px)' //콘텐트 100% - 16px
-			if (body.clientWidth < 500) {
-				//모바일
-				guideWrapper.style.left = '-230px' // 메뉴 왼쪽으로
-			} else {
-				guideWrapper.style.left = '-312px' // 메뉴 왼쪽으로
-			}
+			guideWrapper.style.left = '-312px' // 메뉴 왼쪽으로
 		} else {
 			//메뉴 열기
-			guideWrapper.style.left = '0px' // 메뉴 230
+			guideWrapper.style.left = '0px' // 메뉴 0
 			if (body.clientWidth < 500) {
 				//모바일
 				guideWrapper.parentNode.style.width = '100%' // 회색 100%

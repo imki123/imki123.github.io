@@ -14,7 +14,7 @@ function Guide(props) {
 
         guideWrapper.parentNode.style.width = '0' // 회색 0
         if(body.clientWidth < 500){ //모바일
-            guideWrapper.style.left = '-230px' // 메뉴 0
+            guideWrapper.style.left = '-312px' // 메뉴 0
             content.style.width = 'calc(100% - 16px)'
         }else{
             content.style.width = 'calc(100% - 312px - 16px)'
