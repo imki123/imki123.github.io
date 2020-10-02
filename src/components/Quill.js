@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react'
 import './Quill.css'
 import 'quill/dist/quill.snow.css'
 import { useQuill } from 'react-quilljs'
+import imageCompress from 'quill-image-compress'
 import { AppContext } from '../App'
 import Axios from 'axios'
+
 
 function Quill({ match, location, history }) {
 	const store = React.useContext(AppContext)
@@ -24,10 +26,22 @@ function Quill({ match, location, history }) {
 			['clean'],
 		],
 		syntax: true,
+		imageCompress: {
+			quality: 0.7, // default
+			maxWidth: 1280, // default 1000
+			maxHeight: 1000, // default 1000
+			imageType: 'image/jpeg', // default
+			debug: true, // default
+		  }
 	}
 	const formats = ['bold', 'italic', 'underline', 'strike', 'code-block', 'blockquote', 'size', 'header', 'align', 'color', 'background', 'indent', 'list', 'link', 'image', 'video', 'clean']
 
-	const { quill, quillRef } = useQuill({ modules, formats })
+	const { quill, quillRef, Quill } = useQuill({ modules, formats })
+	if (Quill && !quill) {
+		// For execute this line only once.
+		Quill.register('modules/imageCompress', imageCompress)
+		console.log('imageCompress registered')
+	}
 
 	useEffect(() => {
 		//포스트 불러오기 axios
