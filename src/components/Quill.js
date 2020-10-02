@@ -40,7 +40,6 @@ function Quill({ match, location, history }) {
 	if (Quill && !quill) {
 		// For execute this line only once.
 		Quill.register('modules/imageCompress', imageCompress)
-		console.log('imageCompress registered')
 	}
 
 	useEffect(() => {
@@ -94,6 +93,8 @@ function Quill({ match, location, history }) {
 				.catch((e) => {
 					alert(e)
 				}) //실패
+		}else{
+			setPost(true)
 		}
 	}, [location, quill, postId, store.menus])
 
