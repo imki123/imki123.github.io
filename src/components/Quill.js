@@ -50,7 +50,7 @@ function Quill({ match, location, history }) {
 					}
 					if (res.data.tags) {
 						//체크박스 체크
-						const mainMenu = document.querySelector(`[value=${res.data.tags[0]}]`)
+						const mainMenu = document.getElementById(res.data.tags[0])
 						if (mainMenu) mainMenu.checked = true
 						for (let i of store.menus) {
 							if (i.name === res.data.tags[0]) {
@@ -89,7 +89,7 @@ function Quill({ match, location, history }) {
 
 	useEffect(() => {
 		if (subMenus && post) {
-			const subMenu = document.querySelector(`[value=${post.tags[1]}]`)
+			const subMenu = document.getElementById(post.tags[1])
 			if (subMenu) subMenu.checked = true
 		}
 		const newSubMenu = document.querySelector('[name=newSubMenu]')
@@ -252,7 +252,7 @@ function Quill({ match, location, history }) {
 						{store.menus &&
 							store.menus.map((i) => (
 								<label key={i.name}>
-									<input type="radio" name="mainMenu" value={i.name} onClick={changeMainMenu} />
+									<input type="radio" name="mainMenu" value={i.name} id={i.name} onClick={changeMainMenu} />
 									{i.name}
 								</label>
 							))}
@@ -266,7 +266,7 @@ function Quill({ match, location, history }) {
 						{subMenus &&
 							subMenus.map((i) => (
 								<label key={i.name}>
-									<input type="radio" name="subMenu" value={i.name} onClick={changeSubMenu} /> {i.name}
+									<input type="radio" name="subMenu" value={i.name} id={i.name} onClick={changeSubMenu} /> {i.name}
 								</label>
 							))}
 						<input name="newSubMenu" placeholder="서브메뉴 추가" autoComplete="off" onChange={changeSubMenu}></input>
