@@ -28,7 +28,7 @@ function Quill({ match, location, history }) {
 		syntax: true,
 		imageCompress: {
 			quality: 0.7, // default
-			maxWidth: 1280, // default 1000
+			maxWidth: 1000, // default 1000
 			maxHeight: 1000, // default 1000
 			imageType: 'image/jpeg', // default
 			debug: true, // default
