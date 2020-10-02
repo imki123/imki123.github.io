@@ -88,10 +88,12 @@ function Quill({ match, location, history }) {
 						})
 						.catch((e) => {
 							alert(e)
+							setPost(true)
 						}) //실패
 				})
 				.catch((e) => {
 					alert(e)
+					setPost(true)
 				}) //실패
 		}else{
 			setPost(true)
