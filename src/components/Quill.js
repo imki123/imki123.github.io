@@ -11,6 +11,7 @@ function Quill({ match, location, history }) {
 	const store = React.useContext(AppContext)
 	let { postId } = match.params
 	const [post, setPost] = useState()
+	const [ready, setReady] = useState()
 	const [subMenus, setSubMenus] = useState()
 
 	const modules = {
@@ -43,6 +44,7 @@ function Quill({ match, location, history }) {
 	}
 
 	useEffect(() => {
+		setReady(false)
 		//포스트 불러오기 axios
 		if (postId !== undefined && Number(postId) >= 1 && quill) {
 			//postId가 없으면 포스트 내용 가져오지 않기
@@ -88,15 +90,15 @@ function Quill({ match, location, history }) {
 						})
 						.catch((e) => {
 							alert(e)
-							setPost(true)
+							setReady(true)
 						}) //실패
 				})
 				.catch((e) => {
 					alert(e)
-					setPost(true)
+					setReady(true)
 				}) //실패
 		}else{
-			setPost(true)
+			setReady(true)
 		}
 	}, [location, quill, postId, store.menus])
 
@@ -111,7 +113,7 @@ function Quill({ match, location, history }) {
 
 	useEffect(() => {
 		store.setReady(false)
-		if(post){
+		if(post || ready){
 			store.setReady(true)
 		}
 	})
