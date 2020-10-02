@@ -11,7 +11,7 @@ function Tags({ match, location, history }) {
 	const { tag } = match.params
 	const [lists, setLists] = useState([])
 	useEffect(() => {
-		store.setReady(false)
+		
 		let url = process.env.REACT_APP_URL + '/posts/tag/' + tag + location.search
 		//url = process.env.REACT_APP_LOCAL_URL + '/posts/tag/' + tag + location.search
 
@@ -24,11 +24,18 @@ function Tags({ match, location, history }) {
 					history.go(-1)
 				}else{
 					setLists(res.data.list)
-					store.setReady(true)
+					
 				}
 			})
 			.catch((e) => alert(e)) //실패
 	},[tag, location, history])
+	
+	useEffect(() => {
+		store.setReady(false)
+		if(lists){
+			store.setReady(true)
+		}
+	})
 
 	return (
 		<div className="postListWrapper">

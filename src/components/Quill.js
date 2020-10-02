@@ -76,14 +76,10 @@ function Quill({ match, location, history }) {
 						.catch((e) => {
 							alert(e)
 						}) //실패
-					store.setReady(true)
 				})
 				.catch((e) => {
 					alert(e)
-					store.setReady(true)
 				}) //실패
-		} else {
-			store.setReady(true)
 		}
 	}, [location, quill, postId, store.menus])
 
@@ -95,6 +91,13 @@ function Quill({ match, location, history }) {
 		const newSubMenu = document.querySelector('[name=newSubMenu]')
 		if (newSubMenu) newSubMenu.value = ''
 	}, [subMenus, post])
+
+	useEffect(() => {
+		store.setReady(false)
+		if(post){
+			store.setReady(true)
+		}
+	})
 
 	//글 작성 or 수정
 	const clickPost = (e) => {

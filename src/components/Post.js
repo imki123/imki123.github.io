@@ -25,7 +25,6 @@ function Post({ match, location, history }) {
 
 	useEffect(() => {
 		//포스트 가져오기
-		store.setReady(false)
 		let id = 1
 		if (postId) id = postId
 		let url = process.env.REACT_APP_URL + '/posts/' + id
@@ -36,7 +35,6 @@ function Post({ match, location, history }) {
 			.then((res) => {
 				setComments(res.data.comments)
 				setPost(res.data)
-				store.setReady(true)
 			})
 			.catch((e) => {
 				alert('찾으시는 페이지가 없습니다.\n' + e)
@@ -78,6 +76,13 @@ function Post({ match, location, history }) {
 			}
 		}
 	}, [quill, postBody, post])
+
+	useEffect(() => {
+		store.setReady(false)
+		if(post){
+			store.setReady(true)
+		}
+	})
 
 	const deletePost = (e) => {
 		if (window.confirm('글 삭제 시 복구가 불가합니다. 해당 글을 정말로 삭제하시겠습니까?')) {
