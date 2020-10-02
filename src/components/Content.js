@@ -22,8 +22,11 @@ function Content(props) {
 
 		window.addEventListener('resize', resize)
 		const loading = document.querySelector('#loading')
+		const view = document.querySelector('.post')
 		if (store.ready) {
 			if (loading) loading.style.display = 'none'
+			if (view) view.style.display = 'block'
+
 			if (location.hash) {
 				//hash가 있으면 해당 엘리먼트로 스크롤
 				setTimeout(function () {
@@ -59,6 +62,7 @@ function Content(props) {
 			}, 10)
 		} else {
 			if (loading) loading.style.display = 'flex'
+			if (view) view.style.display = 'none'
 		}
 		return window.removeEventListener('resize', resize)
 	}, [location.hash, store])
@@ -98,13 +102,13 @@ function Content(props) {
 			</div>
 
 			<Switch>
-				<Route path={['/login', '/register', '/loginStatus', '/withdraw']} component={Login}/>
-				<Route path="/quill/:postId?" component={Quill}/>
-				<Route path="/tags/:tag" component={Tags}/>
-				<Route path="/" exact component={Post}/>
-				<Route path="/posts/:postId" component={Post}/>
-				<Route path="/NotFoundPage" component={NotFoundPage}/>
-				<Route path="*" component={NotFoundPage}/>
+				<Route path={['/login', '/register', '/loginStatus', '/withdraw']} component={Login} />
+				<Route path="/quill/:postId?" component={Quill} />
+				<Route path="/tags/:tag" component={Tags} />
+				<Route path="/" exact component={Post} />
+				<Route path="/posts/:postId" component={Post} />
+				<Route path="/NotFoundPage" component={NotFoundPage} />
+				<Route path="*" component={NotFoundPage} />
 			</Switch>
 
 			{/* 텍스트 에어리어 높이 조정을 위한 안보이는 가짜 텍스트에어리어 */}

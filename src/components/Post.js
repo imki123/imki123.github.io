@@ -49,7 +49,7 @@ function Post({ match, location, history }) {
 				setPostBody(res.data.body)
 			})
 			.catch((e) => {
-				alert(e)
+				console.log(e)
 			}) //실패
 		if (location.pathname === '/') {
 			//홈일경우 recents, popular 가져옴
