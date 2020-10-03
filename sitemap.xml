@@ -61,6 +61,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://imki123.github.io/posts/28</loc>
+    <lastmod>2020-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://imki123.github.io/tags/css</loc>
     <lastmod>2020-10-03</lastmod>
     <changefreq>monthly</changefreq>
@@ -68,6 +74,12 @@
   </url>
   <url>
     <loc>https://imki123.github.io/tags/koa</loc>
+    <lastmod>2020-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://imki123.github.io/tags/play</loc>
     <lastmod>2020-10-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
