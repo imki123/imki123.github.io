@@ -8,7 +8,7 @@ function Recents(props) {
 	return (
 		<div id="recents">
             <div className="postListTitle">{title}</div>
-            {list && list.map((i, idx) => <PostList no={list.length - idx} list={i} key={i.postId} />)}
+            {list && list.map((i, idx) => <PostList no={idx+1} list={i} key={i.postId} />)}
 		</div>
 	)
 }
