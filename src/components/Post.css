@@ -103,7 +103,7 @@
 	cursor: pointer;
 }
 
-.comments {
+#comments {
 	padding: 8px 8px 0;
 }
 .commentTitle {
@@ -141,7 +141,7 @@
 .refreshing {
 	animation: refresh 1s linear infinite;
 }
-.recents{
+.homeLists{
 	display: flex;
 	justify-content: space-between;
 	flex-wrap: wrap;

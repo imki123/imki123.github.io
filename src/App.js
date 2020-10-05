@@ -127,19 +127,7 @@ function App() {
 
 	//주소 변경될 때, 토큰 체크하고 포스트 조회하기
 	useEffect(() => {
-		setReady(false)
 		checkToken()
-
-		//주소 변경 시 해쉬 위치로 scroll. 해쉬는 리렌더링 하지 않음.
-		const content = document.querySelector('#content')
-		if (content) {
-			let scroll = content.scrollTop
-			const frame = setInterval(function () {
-				let dif = scroll / 50
-				content.scrollTop -= dif
-				if (content.scrollTop <= 0) clearInterval(frame)
-			}, 10)
-		}
 	}, [location.pathname, location.search, refresh])
 
 	return (

@@ -8,6 +8,7 @@ import RefreshIcon from '@material-ui/icons/Refresh'
 import Axios from 'axios'
 import Meta from './Meta'
 import Recents from './Recents'
+import CommentLists from './CommentLists'
 
 function Post({ match, location, history }) {
 	const store = React.useContext(AppContext)
@@ -16,14 +17,18 @@ function Post({ match, location, history }) {
 	const [postBody, setPostBody] = useState()
 	const [comments, setComments] = useState([])
 	const [commentCnt, setCommentCnt] = useState(3)
+
 	const [recents, setRecents] = useState([])
 	const [popular, setPopular] = useState([])
+	const [recentComments, setRecentComments] = useState([])
 
 	const modules = { syntax: true }
 	const formats = ['bold', 'italic', 'underline', 'strike', 'code-block', 'blockquote', 'size', 'header', 'align', 'color', 'background', 'indent', 'list', 'link', 'image', 'video', 'clean']
 	const { quill, quillRef } = useQuill({ modules, formats, readOnly: true })
 
 	useEffect(() => {
+		setPost(false)
+		setPostBody(false)
 		//포스트 가져오기
 		let id = 1
 		if (postId) id = postId
@@ -47,12 +52,31 @@ function Post({ match, location, history }) {
 		Axios.get(url)
 			.then((res) => {
 				setPostBody(res.data.body)
+
+				//postBody 변경 시 해쉬 있으면 해쉬 위치로 scroll.
+				setTimeout(function () {
+					//바로 적용하면 postBody 렌더링하는데 시간이 걸려서 0.1초 있다가 작동
+					const content = document.querySelector('#content')
+					let hash
+					if (location.hash) hash = document.querySelector(location.hash)
+
+					if (content && hash) {
+						let scroll = hash.offsetTop
+						let dif = scroll / 100
+						console.log('scroll', scroll)
+						const frame = setInterval(function () {
+							content.scrollTop += dif
+							if (content.scrollTop + dif >= scroll || content.scrollTop + content.offsetHeight >= content.scrollHeight) clearInterval(frame)
+						}, 10)
+					}
+				}, 100)
 			})
 			.catch((e) => {
 				console.log(e)
 			}) //실패
+
+		//홈일경우 recents, popular, recentComments 가져옴
 		if (location.pathname === '/') {
-			//홈일경우 recents, popular 가져옴
 			url = process.env.REACT_APP_URL + '/posts/popular'
 			//url = process.env.REACT_APP_LOCAL_URL + '/posts/popular'
 			Axios.get(url).then((res) => {
@@ -63,6 +87,12 @@ function Post({ match, location, history }) {
 			//url = process.env.REACT_APP_LOCAL_URL + '/posts/recents'
 			Axios.get(url).then((res) => {
 				setRecents(res.data)
+			})
+
+			url = process.env.REACT_APP_URL + '/comments/recent'
+			//url = process.env.REACT_APP_LOCAL_URL + '/comments/recent'
+			Axios.get(url).then((res) => {
+				setRecentComments(res.data)
 			})
 		}
 	}, [location, postId, history])
@@ -79,7 +109,7 @@ function Post({ match, location, history }) {
 
 	useEffect(() => {
 		store.setReady(false)
-		if(post){
+		if (post) {
 			store.setReady(true)
 		}
 	})
@@ -250,7 +280,7 @@ function Post({ match, location, history }) {
 
 				{/* 댓글 목록 */}
 				{comments && comments.length > 0 && (
-					<div className="comments">
+					<div id="comments">
 						<div className="commentTitle">
 							<div className="commentCnt">댓글 {comments.length}개</div>
 							<span className="commentRefresh" onClick={refreshComment}>
@@ -269,9 +299,10 @@ function Post({ match, location, history }) {
 				)}
 			</div>
 			{location.pathname === '/' && (
-				<div className="recents">
+				<div className="homeLists">
 					<Recents title="최신글" list={recents} />
 					<Recents title="인기글" list={popular} />
+					<CommentLists title="최근 댓글" list={recentComments} />
 				</div>
 			)}
 		</>
