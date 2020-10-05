@@ -54,12 +54,25 @@ function App() {
 		const guideWrapper = document.querySelector('#guideWrapper')
 		const content = document.querySelector('#content')
 
-		if (guideWrapper.style.left.replace('px', '') > -100) {
+		if (!guideWrapper.style.left) {
+			//스타일 속성이 없으면 초기값 지정
+			if (body.clientWidth < 500) {
+				guideWrapper.style.left = '-312px' //모바일
+			} else {
+				guideWrapper.style.left = '0px' //PC
+			}
+		}
+
+		if (guideWrapper.style.left && guideWrapper.style.left.replace('px', '') > -100) {
+			console.log(guideWrapper.style.left)
+			console.log('close')
 			//메뉴 닫기
 			guideWrapper.parentNode.style.width = '0' // 회색 0
 			content.style.width = 'calc(100% - 16px)' //콘텐트 100% - 16px
 			guideWrapper.style.left = '-312px' // 메뉴 왼쪽으로
 		} else {
+			console.log(guideWrapper.style.left)
+			console.log('open')
 			//메뉴 열기
 			guideWrapper.style.left = '0px' // 메뉴 0
 			if (body.clientWidth < 500) {
@@ -72,19 +85,20 @@ function App() {
 		}
 	}
 	//모바일에서 회색부분 클릭 시 메뉴 닫기
-    const closeMenuMobile = e => {
-        const body = document.querySelector('#body')
-        const guideWrapper = document.querySelector('#guideWrapper')
-        const content = document.querySelector('#content')
+	const closeMenuMobile = (e) => {
+		const body = document.querySelector('#body')
+		const guideWrapper = document.querySelector('#guideWrapper')
+		const content = document.querySelector('#content')
 
-        guideWrapper.parentNode.style.width = '0' // 회색 0
-        if(body.clientWidth < 500){ //모바일
-            guideWrapper.style.left = '-312px' // 메뉴 0
-            content.style.width = 'calc(100% - 16px)'
-        }else{
-            content.style.width = 'calc(100% - 312px - 16px)'
-        }
-    }
+		guideWrapper.parentNode.style.width = '0' // 회색 0
+		if (body.clientWidth < 500) {
+			//모바일
+			guideWrapper.style.left = '-312px' // 메뉴 0
+			content.style.width = 'calc(100% - 16px)'
+		} else {
+			content.style.width = 'calc(100% - 312px - 16px)'
+		}
+	}
 	const checkToken = (func) => {
 		//로그인 되어있는지 토큰 체크하기
 		let url = process.env.REACT_APP_URL + '/auth/check'
@@ -152,7 +166,7 @@ function App() {
 					data={{
 						title: '행복한 코딩 블로그 :D',
 						discription: 'imki123의 행복한 코딩 블로그입니다 :D',
-						image: process.env.PUBLIC_URL+'/images/imcat_800x400.png',
+						image: process.env.PUBLIC_URL + '/images/imcat_800x400.png',
 					}}
 				/>
 				<Header />

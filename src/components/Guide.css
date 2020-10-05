@@ -3,7 +3,7 @@
     position: absolute;
     top: 0px;
     left: 0px;
-    width: 100%;
+    width: 0;
     background: rgba(0, 0, 0, 0.705);
     z-index: 10;
 }
@@ -14,7 +14,7 @@
     position: absolute;
     z-index: 10;
     top: 0;
-    left: 0;
+    left: -312px;
 
     width: 312px;
     padding-top: 8px; 
@@ -63,5 +63,8 @@
 @media(min-width: 500px){
     #guideBack{
         width: 0px;
+    }
+    #guideWrapper{
+        left: 0;
     }
 }
