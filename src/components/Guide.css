@@ -23,7 +23,6 @@
 #avatar{
     width: 100%;
     padding: 16px;
-    border-bottom: 1px solid green;
 }
 #avatar div{
     padding: 4px 0;
@@ -52,13 +51,36 @@
     margin-top: 8px;
 }
 
-#menus{
+.menus{
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
-    padding: 8px 0 20px;
+    padding: 8px 0 8px;
+    border-top: 1px solid green;
 }
 
+.menuLink{
+    min-height: 21px;
+    width: 100%;
+    overflow: hidden;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.menuLink img{
+    width: 32px;
+    height: 32px;
+    margin-right: 8px;
+}
+.menuLink svg{
+    font-size: 24px;
+    color: #444444;
+}
+.menuLink div{
+    display: flex;
+    align-items: center;
+}
 
 @media(min-width: 500px){
     #guideBack{
