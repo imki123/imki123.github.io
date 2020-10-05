@@ -3,9 +3,14 @@
 }
 .recentComment .postTitle{
     font-weight: unset;
+    font-size: 0.9rem;
+    text-align: right;
+    color: gray;
+    padding: 0;
 }
 .recentComment .postBody{
     height: 1.2rem;
+    padding-left: 8px;
 }
 .recentComment .username{
     font-weight: bold;

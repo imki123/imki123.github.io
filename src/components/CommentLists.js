@@ -14,14 +14,15 @@ function CommentLists(props) {
 							<div className="postList no-drag">
 								<div className="postListHeader">
 									<div>
-										<span className="postId">{idx + 1}.</span>
-										<span className="postTitle">{i.title}</span>
+										<span className="postId">{idx + 1}. </span>
+										<span className="username">{i.username}</span>
 									</div>
 									<span className="postDate">{i.publishedDate && i.publishedDate.substring(0, 19).replace('T', ' ')}</span>
 								</div>
 								<div className="postBody">
-                                    <span className="username">{i.username}</span>{i.content}
-                                </div>
+									{i.content}
+								</div>
+								<div className="postTitle">{i.title}</div>
 							</div>
 						</Link>
 					</div>
