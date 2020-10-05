@@ -244,39 +244,43 @@ function Post({ match, location, history }) {
 				</div>
 
 				{/* 댓글 작성*/}
-				<div className="writeComment">
-					<div className="commentProfile">
-						{!store.login ? (
-							<img alt="PROFILE" src={process.env.PUBLIC_URL + '/images/noavatar.png'} />
-						) : store.login.username === 'imki123' ? (
-							<img alt="PROFILE" src={process.env.PUBLIC_URL + '/images/avatar.png'} />
-						) : (
-							<img alt="PROFILE" src={process.env.PUBLIC_URL + '/images/dog' + (Math.floor(Math.random() * (3 - 1 + 1)) + 1) + '.png'} />
-						)}
-					</div>
-					<div className="commentContent">
-						{store.login ? (
-							<span className="commentUsername">{store.login.username}</span>
-						) : (
-							<button
-								className="loginButton"
-								onClick={() => {
-									history.push('/login')
-								}}
-							>
-								로그인
-							</button>
-						)}
-						{store.login ? <textarea onChange={store.resizeTextarea} placeholder=" 댓글을 남겨주세요 :D" /> : <textarea readOnly placeholder=" 로그인 후에 댓글을 남겨주세요 :D" />}
-					</div>
-				</div>
-				<div className="commentButtons">
-					{store.login && (
-						<button className="commentButton" onClick={postComment}>
-							댓글작성
-						</button>
-					)}
-				</div>
+				{location.pathname !== '/' && (
+					<>
+						<div className="writeComment">
+							<div className="commentProfile">
+								{!store.login ? (
+									<img alt="PROFILE" src={process.env.PUBLIC_URL + '/images/noavatar.png'} />
+								) : store.login.username === 'imki123' ? (
+									<img alt="PROFILE" src={process.env.PUBLIC_URL + '/images/avatar.png'} />
+								) : (
+									<img alt="PROFILE" src={process.env.PUBLIC_URL + '/images/dog' + (Math.floor(Math.random() * (3 - 1 + 1)) + 1) + '.png'} />
+								)}
+							</div>
+							<div className="commentContent">
+								{store.login ? (
+									<span className="commentUsername">{store.login.username}</span>
+								) : (
+									<button
+										className="loginButton"
+										onClick={() => {
+											history.push('/login')
+										}}
+									>
+										로그인
+									</button>
+								)}
+								{store.login ? <textarea onChange={store.resizeTextarea} placeholder=" 댓글을 남겨주세요 :D" /> : <textarea readOnly placeholder=" 로그인 후에 댓글을 남겨주세요 :D" />}
+							</div>
+						</div>
+						<div className="commentButtons">
+							{store.login && (
+								<button className="commentButton" onClick={postComment}>
+									댓글작성
+								</button>
+							)}
+						</div>
+					</>
+				)}
 
 				{/* 댓글 목록 */}
 				{comments && comments.length > 0 && (
