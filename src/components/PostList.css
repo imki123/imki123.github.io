@@ -28,10 +28,14 @@
 .postListHeader {
 	display: flex;
 	justify-content: space-between;
-	align-items: flex-end;
+	align-items: center;
 	height: 1.4rem;
 	overflow: hidden;
-	margin-bottom: 4px;
+}
+.postListHeader div{
+	height: 1.4rem;
+	display: flex;
+	align-items: flex-start;
 }
 .postList .postTitle {
 	padding: 0 8px;

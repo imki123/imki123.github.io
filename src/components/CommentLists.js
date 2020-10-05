@@ -14,7 +14,7 @@ function CommentLists(props) {
 							<div className="postList no-drag">
 								<div className="postListHeader">
 									<div>
-										<span className="postId">{idx + 1}. </span>
+										<span className="postId">{idx + 1}.</span>
 										<span className="username">{i.username}</span>
 									</div>
 									<span className="postDate">{i.publishedDate && i.publishedDate.substring(0, 19).replace('T', ' ')}</span>
