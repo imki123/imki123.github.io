@@ -21,8 +21,8 @@ function App() {
 	const [refresh, setRefresh] = useState(false)
 	const [menus, setMenus] = useState([
 		{ name: 'home', count: 1, order: 1 },
-		{ name: 'programming', count: 1, order: 2 },
-		{ name: 'article', count: 1, order: 3 },
+		{ name: 'programming', order: 2 },
+		{ name: 'article', order: 3 },
 	])
 
 	const resizeTextarea = (e) => {

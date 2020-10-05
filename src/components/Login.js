@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './Login.css'
-import { Switch, Route, useLocation, useHistory } from 'react-router-dom'
+import { Switch, Route, useLocation, useHistory, Link } from 'react-router-dom'
 import { AppContext } from '../App'
 
 function Login(props) {
@@ -206,9 +206,15 @@ function Login(props) {
                                 <div className="check" id="checkPasswordConfirm">{checkPasswordConfirm}</div>
                             </>}
 
+                            {/* 버튼 */}
                             {buttonName === '회원탈퇴' 
                             ? <button style={{background: 'red'}} onClick={clickButton}>{buttonName}</button>
                             : <button onClick={clickButton}>{buttonName}</button>}
+
+                            {buttonName === '로그인' &&
+                                <Link to="/register" className="loginLink">회원가입</Link>}
+                            {buttonName === '회원가입' &&
+                                <Link to="/login" className="loginLink">로그인</Link>} 
 
                             {browser === 'safari' &&
                             <div className="text" style={{fontSize: '0.8rem', textAlign: 'center'}}>
