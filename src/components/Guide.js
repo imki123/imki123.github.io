@@ -6,23 +6,8 @@ import Menus from './Menus'
 function Guide(props) {
     const store = React.useContext(AppContext)
 
-    //모바일에서 회색부분 클릭 시 메뉴 닫기
-    const closeMenuMobile = e => {
-        const body = document.querySelector('#body')
-        const guideWrapper = document.querySelector('#guideWrapper')
-        const content = document.querySelector('#content')
-
-        guideWrapper.parentNode.style.width = '0' // 회색 0
-        if(body.clientWidth < 500){ //모바일
-            guideWrapper.style.left = '-312px' // 메뉴 0
-            content.style.width = 'calc(100% - 16px)'
-        }else{
-            content.style.width = 'calc(100% - 312px - 16px)'
-        }
-    }
-
 	return(
-        <div id="guideBack" onClick={closeMenuMobile}>
+        <div id="guideBack" onClick={store.closeMenuMobile}>
             <div id="guideWrapper" className="slideMenu">
                 <div id="avatar">
                     <img alt="avatar" src={process.env.PUBLIC_URL+'/images/avatar.png'} title='Hello :D'/>

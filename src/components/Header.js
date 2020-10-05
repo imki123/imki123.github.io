@@ -24,7 +24,7 @@ function Header(props) {
                     <img id="menu" alt="MENU" src={process.env.PUBLIC_URL+'/images/guide_icon.png'}/>
                 </div>
                 <Link to="/"> 
-                    <div id="title" className="hover">
+                    <div id="title" className="hover" onClick={store.closeMenuMobile}>
                         <img id="logo" alt="logo" src={process.env.PUBLIC_URL+'/images/imcat_64.png'}/> 
                         행복한 코딩 블로그 :D
                     </div>
