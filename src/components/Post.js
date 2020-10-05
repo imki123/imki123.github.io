@@ -53,23 +53,36 @@ function Post({ match, location, history }) {
 			.then((res) => {
 				setPostBody(res.data.body)
 
-				//postBody 변경 시 해쉬 있으면 해쉬 위치로 scroll.
-				setTimeout(function () {
-					//바로 적용하면 postBody 렌더링하는데 시간이 걸려서 0.1초 있다가 작동
-					const content = document.querySelector('#content')
-					let hash
-					if (location.hash) hash = document.querySelector(location.hash)
-
-					if (content && hash) {
-						let scroll = hash.offsetTop
-						let dif = scroll / 100
-						console.log('scroll', scroll)
-						const frame = setInterval(function () {
-							content.scrollTop += dif
-							if (content.scrollTop + dif >= scroll || content.scrollTop + content.offsetHeight >= content.scrollHeight) clearInterval(frame)
-						}, 10)
-					}
-				}, 100)
+				if (location.hash) {
+					//hash가 있으면 해당 엘리먼트로 스크롤
+					setTimeout(function () {
+						//postBody가 로드된 이후에 스크롤이 되야해서 0.01초 타임아웃 추가..
+						const content = document.querySelector('#content')
+						const elem = document.querySelector(location.hash)
+						if (content && elem) {
+							let contentScroll = content.scrollTop
+							let elemTop = elem.offsetTop
+							let dif = (elemTop - contentScroll) / 100
+							if (elemTop > contentScroll) {
+								const frame = setInterval(function () {
+									if (content.scrollTop + dif >= elemTop || content.scrollTop >= content.scrollHeight - content.clientHeight) {
+										clearInterval(frame)
+									} else {
+										content.scrollTop += dif
+									}
+								}, 10)
+							} else {
+								const frame = setInterval(function () {
+									if (content.scrollTop <= elemTop) {
+										clearInterval(frame)
+									} else {
+										content.scrollTop += dif
+									}
+								}, 10)
+							}
+						}
+					}, 10)
+				}
 			})
 			.catch((e) => {
 				console.log(e)

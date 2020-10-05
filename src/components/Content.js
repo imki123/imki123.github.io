@@ -27,36 +27,6 @@ function Content(props) {
 			if (loading) loading.style.display = 'none'
 			if (view) view.style.display = 'block'
 
-			if (location.hash) {
-				//hash가 있으면 해당 엘리먼트로 스크롤
-				setTimeout(function () {
-					//elem이 로드된 이후에 스크롤이 되야해서 0.1초 타임아웃 추가..
-					const content = document.querySelector('#content')
-					const elem = document.querySelector(location.hash)
-					if (elem) {
-						let contentScroll = content.scrollTop
-						let elemTop = elem.offsetTop
-						let dif = (elemTop - contentScroll) / 50
-						if (elemTop > contentScroll) {
-							const frame = setInterval(function () {
-								if (content.scrollTop + dif >= elemTop || content.scrollTop >= content.scrollHeight - content.clientHeight) {
-									clearInterval(frame)
-								} else {
-									content.scrollTop += dif
-								}
-							}, 10)
-						} else {
-							const frame = setInterval(function () {
-								if (content.scrollTop <= elemTop) {
-									clearInterval(frame)
-								} else {
-									content.scrollTop += dif
-								}
-							}, 10)
-						}
-					}
-				}, 10)
-			}
 			setTimeout(function () {
 				store.resizeTextarea()
 			}, 10)
