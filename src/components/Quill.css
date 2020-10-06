@@ -56,11 +56,11 @@
 	font-size: inherit !important;
 }
 .ql-syntax {
-	width: max-width 600px;
+	width: 100%;
 	overflow: auto !important;
-	font-size: initial;
 	font-size: 0.85rem !important;
 	white-space: pre !important;
+	word-break: normal;
 }
 
 .ql-toolbat.ql-snow{
