@@ -56,7 +56,9 @@
 	font-size: inherit !important;
 }
 .ql-syntax {
-	min-width: 700px;
-	overflow: auto;
+	width: max-width 600px;
+	overflow: auto !important;
 	font-size: initial;
+	font-size: 0.85rem !important;
+	white-space: pre !important;
 }
