@@ -26,7 +26,7 @@ function Header(props) {
                 <Link to="/"> 
                     <div id="title" className="hover" onClick={store.closeMenuMobile}>
                         <img id="logo" alt="logo" src={process.env.PUBLIC_URL+'/images/imcat_64.png'}/> 
-                        행복한 코딩 블로그 :D
+                        임기의 코딩 블로그 :D
                     </div>
                 </Link>
                 <div className="hover"  onClick={toggleSetting}>
