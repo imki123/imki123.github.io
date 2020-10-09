@@ -25,12 +25,30 @@
 .settingList{
     display: block;
     width: 100%;
-    padding: 4px 16px;
-    border-radius: 10px;
+    padding: 4px 16px !important;
+    border-radius: 10px !important;
 }
 .settingList:hover{
-    background: #76ff76;
+    background: #76ff76 !important;
     cursor: pointer;
+}
+
+.googleLogout{
+    font-size: 1rem !important;
+    font-weight: bold !important;
+    color: black !important;
+    width: 100%;
+    outline: 0;
+}
+.googleLogout:hover{
+    opacity: 1 !important;
+}
+.googleLogout div {
+    background-color: transparent !important;
+	padding: 0 !important;
+}
+.googleLogout span{
+    padding: 0 !important;
 }
 
 

@@ -32,9 +32,9 @@ function Login({ history, match, location }) {
 		//이미 로그인이 되어있다면 스테이터스로 이동
 		if (store.login && location.pathname === '/login') {
 			history.replace('/loginStatus')
-        }
-        //로그인이 안되어있으면 로그인으로 이동
-        if (!store.login && location.pathname === '/loginStatus') {
+		}
+		//로그인이 안되어있으면 로그인으로 이동
+		if (!store.login && location.pathname === '/loginStatus') {
 			history.replace('/login')
 		}
 		if (location.pathname.indexOf('register') > -1) {
@@ -204,7 +204,6 @@ function Login({ history, match, location }) {
 	const successGoogle = (res) => {
 		console.log('구글로그인 성공')
 		//console.log(res)
-		console.log(res.profileObj.name)
 
 		let url = process.env.REACT_APP_URL + '/auth/oauth'
 		//url = process.env.REACT_APP_LOCAL_URL + '/auth/oauth'
@@ -215,7 +214,7 @@ function Login({ history, match, location }) {
 			credentials: 'include',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({
-				username: res.profileObj.name,
+				username: res.profileObj.name.replace(/\s/g, '_'),
 				email: res.profileObj.email,
 				imageUrl: res.profileObj.imageUrl,
 			}),
@@ -224,8 +223,8 @@ function Login({ history, match, location }) {
 				if (res.status === 200 || res.status === 201) {
 					//성공하면 아래 then 작동
 					res.json().then((res) => {
-						//console.log(res)
-						res.profileObj.name = res.profileObj.name.replace(/\s/g,'_')
+						alert(res.username + '님 환영합니다 :D')
+						history.go(-1)
 						store.setLogin(res)
 					})
 				} else {
@@ -324,10 +323,11 @@ function Login({ history, match, location }) {
 							</div>
 						) : (
 							<div className="login center">
-                                재 로그인이 필요합니다
-                                <Link to="/login" className="loginLink">로그인</Link>
-                            </div>
-
+								재 로그인이 필요합니다
+								<Link to="/login" className="loginLink">
+									로그인
+								</Link>
+							</div>
 						)}
 					</Route>
 				</Switch>

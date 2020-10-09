@@ -72,7 +72,7 @@ function Setting(props) {
 						<div onClick={logout}>
 							<GoogleLogout
 								buttonText="로그아웃"
-								className="settingList logout"
+								className="settingList googleLogout"
 								clientId={clientId}
 								onSuccess={(res) => {
 									console.log('logout')
