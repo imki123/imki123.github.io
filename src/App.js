@@ -103,10 +103,10 @@ function App() {
 		Axios.get(url, { withCredentials: true })
 			.then((res) => {
 				if (res.data) {
-					console.log('토큰 체크 성공')
+					//console.log('토큰 체크 성공')
 					setLogin(res.data)
 				} else {
-					console.log('토큰 없음') //res.status===204(No Content)
+					//console.log('토큰 없음') //res.status===204(No Content)
 					setLogin(false)
 				}
 				if (func) func()
