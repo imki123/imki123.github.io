@@ -63,8 +63,13 @@ function Post({ match, location, history }) {
 							let contentScroll = content.scrollTop
 							let elemTop = elem.offsetTop
 							let dif = (elemTop - contentScroll) / 100
+							let frame 
+							//프레임이 혹시라도 안멈출 수 있어서 1초 후에 강제로 종료함
+							setTimeout(function(){
+								clearInterval(frame)
+							}, 1000)
 							if (elemTop > contentScroll) {
-								const frame = setInterval(function () {
+								frame = setInterval(function () { //인터벌
 									if (content.scrollTop + dif >= elemTop || content.scrollTop >= content.scrollHeight - content.clientHeight) {
 										clearInterval(frame)
 									} else {
@@ -72,7 +77,7 @@ function Post({ match, location, history }) {
 									}
 								}, 10)
 							} else {
-								const frame = setInterval(function () {
+								frame = setInterval(function () {
 									if (content.scrollTop <= elemTop) {
 										clearInterval(frame)
 									} else {
