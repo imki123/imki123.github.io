@@ -224,7 +224,8 @@ function Login({ history, match, location }) {
 				if (res.status === 200 || res.status === 201) {
 					//성공하면 아래 then 작동
 					res.json().then((res) => {
-						console.log(res)
+						//console.log(res)
+						res.profileObj.name = res.profileObj.name.replace(/\s/g,'_')
 						store.setLogin(res)
 					})
 				} else {

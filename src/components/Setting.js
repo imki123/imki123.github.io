@@ -2,7 +2,7 @@ import React from 'react'
 import './Setting.css'
 import { Link } from 'react-router-dom'
 import { AppContext } from '../App'
-import { useGoogleLogout } from 'react-google-login'
+import { GoogleLogout } from 'react-google-login'
 
 function Setting(props) {
 	const store = React.useContext(AppContext)
@@ -16,11 +16,11 @@ function Setting(props) {
 		clientId = '605411712139-eb3qqicskmkal2i9u26ppdhoq2jt0bd8.apps.googleusercontent.com'
 	}
 
-	const { signOut } = useGoogleLogout({
+	/* const { signOut } = useGoogleLogout({
 		clientId: clientId,
 		onFailure: (res) => console.log(res),
 		onLogoutSuccess: (res, e) => console.log('success:', res, e),
-	})
+	}) */
 
 	const closeSetting = (e) => {
 		const settingWrapper = document.querySelector('#settingWrapper')
@@ -45,7 +45,7 @@ function Setting(props) {
 						//로그아웃 하면 204
 						console.log('로그아웃 성공')
 						//구글 로그아웃
-						signOut()
+						//signOut()
 						store.setLogin(false)
 					} else {
 						console.log('로그아웃 실패')
@@ -69,8 +69,19 @@ function Setting(props) {
 						</Link>
 					)}
 					{store.login && (
-						<div className="settingList" onClick={logout}>
-							로그아웃
+						<div onClick={logout}>
+							<GoogleLogout
+								buttonText="로그아웃"
+								className="settingList logout"
+								clientId={clientId}
+								onSuccess={(res) => {
+									console.log('logout')
+								}}
+								onFailure={(res) => {
+									console.log(res)
+								}}
+								cookiePolicy={'single_host_origin'}
+							/>
 						</div>
 					)}
 					{!store.login && (
