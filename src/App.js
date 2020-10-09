@@ -143,6 +143,14 @@ function App() {
 				setMenus(res.data)
 			})
 			.catch((e) => alert(e)) //실패
+
+		//페이지 이동할 때 activeListManual 스타일을 모두 지움
+		const tags = document.querySelectorAll('.activeListManual')
+		if(tags){
+			for(let i of tags){
+				i.classList.remove('activeListManual')
+			}
+		}
 	}, [location.pathname])
 
 	//주소 변경될 때, 토큰 체크하고 포스트 조회하기

@@ -10,6 +10,9 @@
 .activeList{
     background: #76ff76;
 }
+.activeListManual{
+    background: #76ff76;
+}
 .subList .menuName{
     padding-left: 20px;
 }

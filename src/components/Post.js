@@ -115,6 +115,8 @@ function Post({ match, location, history }) {
 		}
 	}, [location, postId, history])
 
+	//포스트 바디가 준비되면 quill에 포스트 바디를 그리고
+	//포스트 바디가 없으면 포스트가 있으면 quill에 포스트 텍스트를 그리기.
 	useEffect(() => {
 		if (quill) {
 			if (postBody) {
@@ -125,10 +127,20 @@ function Post({ match, location, history }) {
 		}
 	}, [quill, postBody, post])
 
+	//포스트가 준비되면 화면 보이기
 	useEffect(() => {
 		store.setReady(false)
 		if (post) {
 			store.setReady(true)
+
+			//태그 찾아서 active
+			if(post.tags[1]){
+				const tag = document.querySelector(`a[href="/tags/${post.tags[1]}"]`)
+				if(tag) tag.classList.add('activeListManual')
+			}else if(post.tags[0]){
+				const tag = document.querySelector(`a[href="/tags/${post.tags[0]}"]`)
+				if(tag) tag.classList.add('activeListManual')
+			}
 		}
 	})
 
