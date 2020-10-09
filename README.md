@@ -4,5 +4,5 @@ My blog using React
 
 Thanks :D
 
-There is ```REACT_APP_URL``` in .env.  
-Set your own backend URL.
+There is a environmental variable ```REACT_APP_URL``` in .env file.  
+Set this your own backend URL.
