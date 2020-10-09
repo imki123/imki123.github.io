@@ -15,10 +15,7 @@ const AppContext = createContext()
 function App() {
 	const location = useLocation() //페이지 경로 변경 감지
 	const [ready, setReady] = useState(false)
-	const [posts, setPosts] = useState([])
-	const [headers, setHeaders] = useState({})
 	const [login, setLogin] = useState(false)
-	const [refresh, setRefresh] = useState(false)
 	const [menus, setMenus] = useState([
 		{ name: 'home', count: 1, order: 1 },
 		{ name: 'programming', order: 2 },
@@ -124,14 +121,8 @@ function App() {
 	const store = {
 		ready,
 		setReady,
-		posts,
-		setPosts,
-		headers,
-		setHeaders,
 		login,
 		setLogin,
-		refresh,
-		setRefresh,
 		menus,
 		setMenus,
 		resizeTextarea,
@@ -152,12 +143,12 @@ function App() {
 				setMenus(res.data)
 			})
 			.catch((e) => alert(e)) //실패
-	}, [location.pathname, refresh])
+	}, [location.pathname])
 
 	//주소 변경될 때, 토큰 체크하고 포스트 조회하기
 	useEffect(() => {
 		checkToken()
-	}, [location.pathname, location.search, refresh])
+	}, [location.pathname, location.search])
 
 	return (
 		<AppContext.Provider value={store}>

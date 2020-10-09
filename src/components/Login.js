@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import './Login.css'
 import { Switch, Route, useLocation, useHistory, Link } from 'react-router-dom'
 import { AppContext } from '../App'
+import GoogleLogin from 'react-google-login'
 
 function Login(props) {
     const store = React.useContext(AppContext)
@@ -181,6 +182,10 @@ function Login(props) {
         }
     }
 
+    const responseGoogle = res => {
+        console.log(res)
+    }
+
     return(
         <div id="background">
             <div id="loginWrapper">
@@ -211,6 +216,16 @@ function Login(props) {
                             ? <button style={{background: 'red'}} onClick={clickButton}>{buttonName}</button>
                             : <button onClick={clickButton}>{buttonName}</button>}
 
+                            {/* 구글로그인 */}
+                            <GoogleLogin
+                                clientId="108270088215314938854"    
+                                onSuccess={responseGoogle}
+                                onFailure={responseGoogle}
+                                cookiePolicy={'single_host_origin'}
+                                isSignedIn={true}
+                            />
+
+                            {/* 로그인 or 회원가입 */}
                             {buttonName === '로그인' &&
                                 <Link to="/register" className="loginLink">회원가입</Link>}
                             {buttonName === '회원가입' &&
