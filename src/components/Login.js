@@ -204,6 +204,9 @@ function Login({ history, match, location }) {
 	const successGoogle = (res) => {
 		console.log('구글로그인 성공')
 		//console.log(res)
+		let email = res.profileObj.email
+		let username = email.substring(0,email.indexOf('@'))+'_g'
+		if(username === 'popping2606_g') username = 'imki123' //내아이디
 
 		let url = process.env.REACT_APP_URL + '/auth/oauth'
 		//url = process.env.REACT_APP_LOCAL_URL + '/auth/oauth'
@@ -214,7 +217,7 @@ function Login({ history, match, location }) {
 			credentials: 'include',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({
-				username: res.profileObj.name.replace(/\s/g, '_'),
+				username: username,
 				email: res.profileObj.email,
 				imageUrl: res.profileObj.imageUrl,
 			}),

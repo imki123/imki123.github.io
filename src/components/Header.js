@@ -15,7 +15,7 @@ function Header(props) {
 				setting.style.display = 'block'
 			}
 		}
-    }
+	}
 
 	return (
 		<div id="headerWrapper">
@@ -32,10 +32,15 @@ function Header(props) {
 				<div className="hover" onClick={toggleSetting}>
 					{!store.login ? (
 						<img className="profile" alt="PROFILE" src={process.env.PUBLIC_URL + '/images/noavatar.png'} />
-					) : store.login.imageUrl ? (
-						<img className="profile" alt="PROFILE" src={store.login.imageUrl} />
 					) : (
-						<img className="profile" alt="PROFILE" src={process.env.PUBLIC_URL + '/images/dog' + (Math.floor(Math.random() * (3 - 1 + 1)) + 1) + '.png'} />
+						<img
+							className="profile"
+							alt="PROFILE"
+							src={store.login.imageUrl}
+							onError={(e) => {
+								e.target.src = process.env.PUBLIC_URL + '/images/dog' + (Math.floor(Math.random() * (3 - 1 + 1)) + 1) + '.png'
+							}}
+						/>
 					)}
 				</div>
 			</div>

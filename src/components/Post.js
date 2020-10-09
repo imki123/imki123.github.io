@@ -263,10 +263,14 @@ function Post({ match, location, history }) {
 							<div className="commentProfile">
 								{!store.login ? (
 									<img alt="PROFILE" src={process.env.PUBLIC_URL + '/images/noavatar.png'} />
-								) : store.login.imageUrl ? (
-									<img alt="PROFILE" src={store.login.imageUrl} />
 								) : (
-									<img alt="PROFILE" src={process.env.PUBLIC_URL + '/images/dog' + (Math.floor(Math.random() * (3 - 1 + 1)) + 1) + '.png'} />
+									<img
+										alt="PROFILE"
+										src={store.login.imageUrl}
+										onError={(e) => {
+											e.target.src = process.env.PUBLIC_URL + '/images/dog' + (Math.floor(Math.random() * (3 - 1 + 1)) + 1) + '.png'
+										}}
+									/>
 								)}
 							</div>
 							<div className="commentContent">

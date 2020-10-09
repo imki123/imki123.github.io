@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Comment.css'
 import { AppContext } from '../App'
 import Axios from 'axios'
@@ -6,12 +6,32 @@ import Axios from 'axios'
 function Comment(props) {
 	const store = React.useContext(AppContext)
 	const { comment, post, refreshComment } = props
+	const [ imageUrl, setImageUrl ] = useState('noimage')
 	let update = false
 	let date = comment.publishedDate.substring(0, 16).replace('T', ' ')
 	useEffect(() => {
 		const textarea = document.querySelector(`#comment_${post.postId}_${comment.commentId} textarea`)
 		textarea.value = comment.content
-	}, [comment, post])
+
+		//댓글 프로필 이미지 가져오기
+		if (comment.username) {
+			let url = process.env.REACT_APP_URL + '/auth/user'
+			//url = process.env.REACT_APP_LOCAL_URL + '/auth/user'
+			Axios.post(url, {
+				withCredentials: true, //CORS
+				data: {
+					username: comment.username,
+				},
+			})
+				.then((res) => {
+					if(!res.data.imageUrl) setImageUrl('noimage')
+					else setImageUrl(res.data.imageUrl)
+				})
+				.catch((e) => {
+					//console.log(e)
+				})
+		}
+	}, [comment, post.postId, setImageUrl])
 
 	const updateComment = (e) => {
 		//댓글 수정
@@ -67,12 +87,14 @@ function Comment(props) {
 				<div className="commentProfile">
 					{!comment.username ? (
 						<img alt="PROFILE" src={process.env.PUBLIC_URL + '/images/noavatar.png'} />
-					) : comment.username === 'imki123' ? (
-						<img alt="PROFILE" src={process.env.PUBLIC_URL + '/images/avatar_small.png'} />
-					) : comment.username === store.login.username && store.login.imageUrl ? (
-						<img alt="PROFILE" src={store.login.imageUrl} />
 					) : (
-						<img alt="PROFILE" src={process.env.PUBLIC_URL + '/images/dog' + (Math.floor(Math.random() * (3 - 1 + 1)) + 1) + '.png'} />
+						<img
+							alt="PROFILE"
+							src={imageUrl}
+							onError={(e) => {
+								e.target.src = process.env.PUBLIC_URL + '/images/dog' + (Math.floor(Math.random() * (3 - 1 + 1)) + 1) + '.png'
+							}}
+						/>
 					)}
 				</div>
 				<div className="commentContent">

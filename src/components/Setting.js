@@ -16,12 +16,6 @@ function Setting(props) {
 		clientId = '605411712139-eb3qqicskmkal2i9u26ppdhoq2jt0bd8.apps.googleusercontent.com'
 	}
 
-	/* const { signOut } = useGoogleLogout({
-		clientId: clientId,
-		onFailure: (res) => console.log(res),
-		onLogoutSuccess: (res, e) => console.log('success:', res, e),
-	}) */
-
 	const closeSetting = (e) => {
 		const settingWrapper = document.querySelector('#settingWrapper')
 		e.stopPropagation()
@@ -44,8 +38,6 @@ function Setting(props) {
 					if (res.status === 204) {
 						//로그아웃 하면 204
 						console.log('로그아웃 성공')
-						//구글 로그아웃
-						//signOut()
 						store.setLogin(false)
 					} else {
 						console.log('로그아웃 실패')
