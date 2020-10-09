@@ -11,8 +11,8 @@
 			// This script takes the current url and  converts the path and query
 			// string into just a query string, and then  redirects the browser
 			// to the new url with only a query string  and hash fragment,
-			// e.g. http://www.foo.tld/one/two?a=b& c=d#qwe, becomes
-			// http://www.foo.tld/?p=/one/two&  q=a=b~and~c=d#qwe
+			// e.g. http://www.foo.tld/one/two?a=b&c=d#qwe, becomes
+			// http://www.foo.tld/?p=/one/two&q=a=b~and~c=d#qwe
 			// Note: this 404.html file must be at least  512 bytes for it to work
 			// with Internet Explorer (it is currently >  512 bytes)
 
@@ -23,7 +23,7 @@
 			//  https://username.github.io/repo-name/one/two?  a=b&c=d#qwe becomes
 			// https://username.github.io/repo-name/? p=/one/two&q=a=b~and~c=d#qwe
 			// Otherwise, leave segmentCount as 0.
-			var segmentCount = 0
+			var segmentCount = 1
 
 			var l = window.location
 			l.replace(
