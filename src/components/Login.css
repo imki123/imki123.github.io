@@ -27,6 +27,7 @@
 	font-weight: bold;
 }
 .center {
+	font-size: 1rem;
 	margin-bottom: 10px;
 	font-weight: bold;
 	text-align: center;
@@ -81,4 +82,7 @@
 .googleLogin div {
     background-color: transparent !important;
 	padding: 0 10px !important;
+}
+.googleLogin span {
+	padding: 0 !important;
 }

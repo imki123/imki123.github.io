@@ -7,7 +7,7 @@ function NotFoundPage() {
 	const store = React.useContext(AppContext)
 	const history = useHistory()
 	useEffect(() => {
-		//console.log(`Not found page! https://imki123.github.io${process.env.PUBLIC_URL}`)
+		//console.log(`Not found page! https://imki123.github.io/`)
 		store.setReady(true)
 	})
 

@@ -247,7 +247,7 @@ function Login({ history, match, location }) {
 			<div id="loginWrapper">
 				<Switch>
 					<Route path={['/login', '/register', '/withdraw']}>
-						<div className="oAuth">
+						{(buttonName === '로그인' || buttonName === '회원가입') &&<div className="oAuth">
 							<div className="login">
 								{/* 구글로그인 */}
 								<GoogleLogin
@@ -260,7 +260,7 @@ function Login({ history, match, location }) {
 									isSignedIn={true}
 								/>
 							</div>
-						</div>
+						</div>}
 						<form className="login">
 							<div className="text">아이디</div>
 							{buttonName === '회원탈퇴' ? <div>{store.login.username}</div> : <input name="username" onChange={changeUsername} />}

@@ -4,6 +4,8 @@
     text-align: right;
     color: gray;
     padding: 0;
+    height: 1.2rem;
+    overflow: hidden;
 }
 .recentComment .postBody{
     height: 1.2rem;
