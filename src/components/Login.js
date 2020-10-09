@@ -3,6 +3,7 @@ import './Login.css'
 import { Switch, Route, Link } from 'react-router-dom'
 import { AppContext } from '../App'
 import GoogleLogin from 'react-google-login'
+import MoreVertIcon from '@material-ui/icons/MoreVert'
 
 function Login({ history, match, location }) {
 	const href = window.location.href
@@ -205,8 +206,8 @@ function Login({ history, match, location }) {
 		console.log('구글로그인 성공')
 		//console.log(res)
 		let email = res.profileObj.email
-		let username = email.substring(0,email.indexOf('@'))+'_g'
-		if(username === 'popping2606_g') username = 'imki123' //내아이디
+		let username = email.substring(0, email.indexOf('@')) + '_g'
+		if (username === 'popping2606_g') username = 'imki123' //내아이디
 
 		let url = process.env.REACT_APP_URL + '/auth/oauth'
 		//url = process.env.REACT_APP_LOCAL_URL + '/auth/oauth'
@@ -250,20 +251,28 @@ function Login({ history, match, location }) {
 			<div id="loginWrapper">
 				<Switch>
 					<Route path={['/login', '/register', '/withdraw']}>
-						{(buttonName === '로그인' || buttonName === '회원가입') &&<div className="oAuth">
-							<div className="login">
-								{/* 구글로그인 */}
-								<GoogleLogin
-									buttonText="Login with Google"
-									className="googleLogin"
-									clientId={clientId}
-									onSuccess={successGoogle}
-									onFailure={failureGoogle}
-									cookiePolicy={'single_host_origin'}
-									isSignedIn={true}
-								/>
+						{(buttonName === '로그인' || buttonName === '회원가입') && (
+							<div className="oAuth">
+								<div className="login">
+									{/* 구글로그인 */}
+									<GoogleLogin
+										buttonText="Login with Google"
+										className="googleLogin"
+										clientId={clientId}
+										onSuccess={successGoogle}
+										onFailure={failureGoogle}
+										cookiePolicy={'single_host_origin'}
+										isSignedIn={true}
+									/>
+									<div className="kakaoWarning">
+										<span style={{ color: 'red' }}>인앱 브라우저(카카오톡)</span>
+										는 구글 로그인을 지원하지 않습니다. 오류 발생 시 더보기(
+										<MoreVertIcon />
+										)를 눌러서 <span>다른 브라우저</span>에서 실행해주세요.
+									</div>
+								</div>
 							</div>
-						</div>}
+						)}
 						<form className="login">
 							<div className="text">아이디</div>
 							{buttonName === '회원탈퇴' ? <div>{store.login.username}</div> : <input name="username" onChange={changeUsername} />}
@@ -309,7 +318,7 @@ function Login({ history, match, location }) {
 
 							{browser === 'safari' && (
 								<div className="text" style={{ fontSize: '0.8rem', textAlign: 'center' }}>
-									(Safari의 경우 설정을 변경해주셔야 로그인이 가능합니다.
+									(Safari의 설정을 변경해야 로그인이 가능합니다.)
 									<br />
 									설정 → Safari → 개인 정보 보호 및 보안 → <br />
 									크로스 사이트 추적방지 OFF, 모든 쿠키 차단 OFF)

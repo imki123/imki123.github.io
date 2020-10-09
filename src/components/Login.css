@@ -26,6 +26,17 @@
 	margin-bottom: 10px;
 	font-weight: bold;
 }
+.kakaoWarning{
+	font-size: 0.8rem;
+	margin-top: 4px;
+}
+.kakaoWarning svg{
+	font-size: 1rem;
+	vertical-align: text-bottom;
+}
+.kakaoWarning span{
+	color:blue;
+}
 .center {
 	font-size: 1rem;
 	margin-bottom: 10px;
