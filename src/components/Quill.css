@@ -1,13 +1,13 @@
 .quill {
 	background: white;
 	height: 100%;
-    overflow: auto;
-    position: relative;
+	overflow: auto;
+	position: relative;
 }
-.quillTitle{
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+.quillTitle {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
 }
 [name='title'] {
 	width: 100%;
@@ -60,9 +60,9 @@
 	overflow: auto !important;
 	font-size: 0.85rem !important;
 	white-space: pre !important;
-	word-break: normal;
+	word-wrap: normal !important;
 }
 
-.ql-toolbat.ql-snow{
+.ql-toolbat.ql-snow {
 	padding: 0;
 }
