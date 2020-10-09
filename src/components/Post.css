@@ -146,6 +146,14 @@
 	justify-content: space-between;
 	flex-wrap: wrap;
 }
+.hiddenText{
+	position:absolute;
+	height: 0;
+	width: 0;
+	opacity: 0;
+	top: -10000000px;
+	left: 0;
+}
 @media(max-width: 500px){
 	.postContent{
 		padding: 0 0 20px;

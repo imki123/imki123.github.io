@@ -227,11 +227,11 @@ function Post({ match, location, history }) {
 					<Meta
 						data={{
 							title: '임기의 코딩 블로그 :D',
-							discription: 'imki123의 임기의 코딩 블로그입니다 :D',
+							description: 'imki123의 임기의 코딩 블로그입니다 :D',
 						}}
 					/>
 				) : (
-					<Meta data={{ title: post.title, discription: post.text, locale: 'ko' }} />
+					<Meta data={{ title: post.title, description: post.text, locale: 'ko' }} />
 				)}
 				{/* 태그 */}
 				<div className="nav">
@@ -257,6 +257,9 @@ function Post({ match, location, history }) {
 					{/* 본문 */}
 					<div id="editor">
 						<div ref={quillRef} />
+					</div>
+					<div className="hiddenText">
+						{post.text}
 					</div>
 
 					{/* 글 수정 삭제 버튼 */}

@@ -164,7 +164,7 @@ function App() {
 				<Meta
 					data={{
 						title: '임기의 코딩 블로그 :D',
-						discription: 'imki123의 임기의 코딩 블로그입니다 :D',
+						description: 'imki123의 임기의 코딩 블로그입니다 :D',
 						image: process.env.PUBLIC_URL + '/images/imcat_800x400.png',
 					}}
 				/>
