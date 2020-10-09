@@ -19,7 +19,7 @@ function Guide(props) {
 							<img alt="github" src={process.env.PUBLIC_URL + '/images/GitHub-Mark-32px.png'} /> <span>https://github.com/imki123</span>
 						</a>
 					</div>
-					<div id="introduction">A web programmer who dreams of being a wise developer.</div>
+					<div id="introduction">A web programmer who dreams of becoming a wise developer.</div>
 				</div>
 				<div className="menus">
 					<Menus menus={store.menus} />
