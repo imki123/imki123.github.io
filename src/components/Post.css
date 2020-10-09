@@ -146,6 +146,11 @@
 	justify-content: space-between;
 	flex-wrap: wrap;
 }
+@media(max-width: 500px){
+	.postContent{
+		padding: 0 0 20px;
+	}
+}
 
 @keyframes refresh {
 	0% {
