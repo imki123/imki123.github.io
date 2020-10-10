@@ -63,13 +63,14 @@ function Post({ match, location, history }) {
 							let contentScroll = content.scrollTop
 							let elemTop = elem.offsetTop
 							let dif = (elemTop - contentScroll) / 100
-							let frame 
+							let frame
 							//프레임이 혹시라도 안멈출 수 있어서 1초 후에 강제로 종료함
-							setTimeout(function(){
+							setTimeout(function () {
 								clearInterval(frame)
 							}, 1000)
 							if (elemTop > contentScroll) {
-								frame = setInterval(function () { //인터벌
+								frame = setInterval(function () {
+									//인터벌
 									if (content.scrollTop + dif >= elemTop || content.scrollTop >= content.scrollHeight - content.clientHeight) {
 										clearInterval(frame)
 									} else {
@@ -133,13 +134,17 @@ function Post({ match, location, history }) {
 		if (post) {
 			store.setReady(true)
 
-			//태그 찾아서 active
-			if(post.tags[1]){
-				const tag = document.querySelector(`a[href="/tags/${post.tags[1]}"]`)
-				if(tag) tag.classList.add('activeListManual')
-			}else if(post.tags[0]){
-				const tag = document.querySelector(`a[href="/tags/${post.tags[0]}"]`)
-				if(tag) tag.classList.add('activeListManual')
+			//태그 찾아서 activeListManual 적용
+			let tags
+			if (post.tags[1]) {
+				tags = document.querySelectorAll(`a[href="/tags/${post.tags[1]}"]`)
+			} else if (post.tags[0]) {
+				tags = document.querySelectorAll(`a[href="/tags/${post.tags[0]}"]`)
+			}
+			if (tags) {
+				for (let i of tags) {
+					i.classList.add('activeListManual')
+				}
 			}
 		}
 	})
@@ -250,7 +255,12 @@ function Post({ match, location, history }) {
 								),
 							)}
 					</div>
-					{post && post.publishedDate.substring(0, 16).replace('T', ' ')}
+					<div>
+						{/* 조회수 */}
+						{/* post.postId !== 1 &&  */<span>조회수: {post.views ? post.views +1: 1}{', '}</span>}
+						{/* 게시일자 */}
+						{post && post.publishedDate.substring(0, 16).replace('T', ' ')}
+					</div>
 				</div>
 				<h2 className="postTitle">{post.title}</h2>
 				<div className="postContent">
@@ -258,9 +268,7 @@ function Post({ match, location, history }) {
 					<div id="editor">
 						<div ref={quillRef} />
 					</div>
-					<div className="hiddenText">
-						{post.text}
-					</div>
+					<div className="hiddenText">{post.text}</div>
 
 					{/* 글 수정 삭제 버튼 */}
 					{store.login && store.login.username === 'imki123' && (
