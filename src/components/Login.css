@@ -29,6 +29,7 @@
 .kakaoWarning{
 	font-size: 0.8rem;
 	margin-top: 4px;
+	word-break: break-all;
 }
 .kakaoWarning svg{
 	font-size: 1rem;
@@ -36,6 +37,10 @@
 }
 .kakaoWarning span{
 	color:blue;
+}
+.kakaoWarning img{
+	width: 16px;
+	vertical-align: text-bottom;
 }
 .center {
 	font-size: 1rem;

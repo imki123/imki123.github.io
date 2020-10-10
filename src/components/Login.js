@@ -265,10 +265,10 @@ function Login({ history, match, location }) {
 										isSignedIn={true}
 									/>
 									<div className="kakaoWarning">
-										<span style={{ color: 'red' }}>인앱 브라우저(카카오톡)</span>
+										<span style={{ color: 'red' }}>인앱 브라우저(카카오톡 등)</span>
 										는 구글 로그인을 지원하지 않습니다. 오류 발생 시 더보기(
-										<MoreVertIcon />
-										)를 눌러서 <span>다른 브라우저</span>에서 실행해주세요.
+										<MoreVertIcon />, <img alt="" src={process.env.PUBLIC_URL + '/images/share.png'} />
+										)를 눌러서 <span>다른 브라우저(Chrome, Safari 등)</span>에서 실행해주세요.
 									</div>
 								</div>
 							</div>

@@ -52,6 +52,9 @@
 #content .ql-editor {
 	padding: 0;
 }
+#content .ql-editor a{
+	color: blue;
+}
 .ql-container {
 	font-size: inherit !important;
 }
