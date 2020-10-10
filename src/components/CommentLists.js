@@ -18,7 +18,7 @@ function CommentLists(props) {
 			//전체리스트면 Axios로 comments 가져옴
 			setRecentAll('recentAll')
 			let url = process.env.REACT_APP_URL + '/comments/recentAll'
-			url = process.env.REACT_APP_LOCAL_URL + '/comments/recentAll'
+			//url = process.env.REACT_APP_LOCAL_URL + '/comments/recentAll'
 			Axios.get(url)
 				.then((res) => {
 					//console.log(res.data)
