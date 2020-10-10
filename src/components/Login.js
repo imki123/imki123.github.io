@@ -3,17 +3,23 @@ import './Login.css'
 import { Switch, Route, Link } from 'react-router-dom'
 import { AppContext } from '../App'
 import GoogleLogin from 'react-google-login'
+import NaverLogin from 'react-naver-login'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 
 function Login({ history, match, location }) {
 	const href = window.location.href
 	let clientId
+	let naverId, naverUrl
 	if (href.indexOf('localhost') > -1) {
 		//로컬
 		clientId = '605411712139-7nr29rfs5ihfu9uoev3igr5hpf4ubkle.apps.googleusercontent.com'
+		naverId = '1GCn3_4FurDb9SXHyzlw'
+		naverUrl = 'http://localhost:3000/login'
 	} else {
 		//서버
 		clientId = '605411712139-eb3qqicskmkal2i9u26ppdhoq2jt0bd8.apps.googleusercontent.com'
+		naverId = 'kjVk1u480gzQO_XLX_hp'
+		naverUrl = 'https://imki123.github.io/login'
 	}
 	const store = React.useContext(AppContext)
 	let browser = ''
@@ -202,25 +208,20 @@ function Login({ history, match, location }) {
 		}
 	}
 
-	const successGoogle = (res) => {
-		console.log('구글로그인 성공')
-		//console.log(res)
-		let email = res.profileObj.email
-		let username = email.substring(0, email.indexOf('@')) + '_g'
-		if (username === 'popping2606_g') username = 'imki123' //내아이디
-
+	//user정보를 받아서 서버에 토큰을 요청하기
+	const sendOAuth = (user) => {
 		let url = process.env.REACT_APP_URL + '/auth/oauth'
 		//url = process.env.REACT_APP_LOCAL_URL + '/auth/oauth'
-		//구글로그인 성공시 토큰에 name, email, imageUrl 저장
+		//로그인 성공시 토큰에 name, email, imageUrl 저장
 		fetch(url, {
 			mode: 'cors',
 			method: 'POST',
 			credentials: 'include',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({
-				username: username,
-				email: res.profileObj.email,
-				imageUrl: res.profileObj.imageUrl,
+				username: user.username,
+				email: user.email,
+				imageUrl: user.imageUrl,
 			}),
 		})
 			.then((res) => {
@@ -241,9 +242,41 @@ function Login({ history, match, location }) {
 			})
 			.catch((e) => console.error(e))
 	}
+
+	const successGoogle = (res) => {
+		console.log('구글로그인 성공')
+		//console.log(res)
+		let email = res.profileObj.email
+		let username = email.substring(0, email.indexOf('@')) + '_g'
+		if (username === 'popping2606_g') username = 'imki123' //내아이디
+
+		let user = {
+			username: username,
+			email: email,
+			imageUrl: res.profileObj.imageUrl
+		}
+		sendOAuth(user)
+	}
 	const failureGoogle = (res) => {
-		console.log('구글로그인 실패')
-		console.log(res)
+		console.log('구글로그인 실패', res)
+	}
+	const successNaver = (res) => {
+		console.log('네이버로그인 성공')
+		//console.log(res)
+		let email = res.email
+		let username = email.substring(0, email.indexOf('@')) + '_n'
+		if (username === 'popping2606_n') username = 'imki123' //내아이디
+		//console.log(username)
+		
+		let user = {
+			username: username,
+			email: email,
+			imageUrl: res.profile_image
+		}
+		sendOAuth(user)
+	}
+	const failureNaver = (res) => {
+		console.log('네이버로그인 실패', res)
 	}
 
 	return (
@@ -263,6 +296,18 @@ function Login({ history, match, location }) {
 										onFailure={failureGoogle}
 										cookiePolicy={'single_host_origin'}
 										isSignedIn={true}
+									/>
+									<NaverLogin
+										clientId={naverId}
+										callbackUrl={naverUrl}
+										render={(props) => (
+											<div className="naverLogin" onClick={props.onClick}>
+												<img alt="" src={process.env.PUBLIC_URL + '/images/naver.png'} />
+												Login with Naver
+											</div>
+										)}
+										onSuccess={successNaver}
+										onFailure={failureNaver}
 									/>
 									<div className="kakaoWarning">
 										<span style={{ color: 'red' }}>인앱 브라우저(카카오톡 등)</span>

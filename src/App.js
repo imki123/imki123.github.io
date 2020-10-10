@@ -138,7 +138,7 @@ function App() {
 			.then((res) => {
 				setMenus(res.data)
 			})
-			.catch((e) => alert(e)) //실패
+			.catch((e) => console.log(e)) //실패
 
 		//페이지 이동할 때 activeListManual 스타일을 모두 지움
 		const tags = document.querySelectorAll('.activeListManual')

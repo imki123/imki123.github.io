@@ -85,11 +85,11 @@
 	margin-bottom: 40px;
 }
 .googleLogin{
-    font-size: 1.1rem !important;
-    font-weight: bold !important;
     color: black !important;
     width: 100%;
-    border: 1px solid black !important;
+	border: 1px solid black !important;
+	margin-bottom: 4px;
+	box-shadow: unset !important;
 }
 .googleLogin:hover{
     opacity: 0.7 !important;
@@ -101,4 +101,28 @@
 }
 .googleLogin span {
 	padding: 0 !important;
+    font-size: 1.1rem !important;
+    font-weight: bold !important;
+}
+.naverLogin{
+	width: 100%;
+	height: 40px;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	border: 0;
+	background: #1ec800;
+	color: white;
+	font-weight: bold;
+	font-size: 1.1rem;
+	margin-bottom: 4px;
+	cursor: pointer;
+	border-radius: 2px;
+}
+.naverLogin:hover{
+	opacity: 0.7 !important;
+}
+.naverLogin img{
+	width: 40px;
+	margin-right: 10px;
 }

@@ -27,7 +27,7 @@ function Tags({ match, location, history }) {
 					
 				}
 			})
-			.catch((e) => alert(e)) //실패
+			.catch((e) => console.log(e)) //실패
 	},[tag, location, history])
 	
 	useEffect(() => {

@@ -212,7 +212,7 @@ function Post({ match, location, history }) {
 			.catch((e) => {
 				//실패
 				if (svg) svg.classList.remove('refreshing') //refresh 애니메이션 끝
-				alert(e)
+				console.log(e)
 			})
 	}
 
