@@ -286,21 +286,6 @@ function Login({ history, match, location }) {
 						{(buttonName === '로그인' || buttonName === '회원가입') && (
 							<div className="oAuth">
 								<div className="login">
-									{/* 네이버로그인 */}
-									<div style={{ fontWeight: 'bold' }}>*** 네이버 로그인 테스트 중 ***</div>
-									<NaverLogin
-										clientId={naverId}
-										callbackUrl={naverUrl}
-										render={(props) => (
-											<div className="naverLogin" onClick={props.onClick}>
-												<img alt="" src={process.env.PUBLIC_URL + '/images/naver.png'} />
-												Login with Naver
-											</div>
-										)}
-										onSuccess={successNaver}
-										onFailure={failureNaver}
-									/>
-
 									{/* 구글로그인 */}
 									<GoogleLogin
 										buttonText="Login with Google"
@@ -316,6 +301,21 @@ function Login({ history, match, location }) {
 										<MoreVertIcon />, <img alt="" src={process.env.PUBLIC_URL + '/images/share.png'} />
 										)를 눌러서 <span>다른 브라우저(Chrome, Safari 등)</span>에서 실행해주세요.
 									</div>
+
+									{/* 네이버로그인 */}
+									{/* <div style={{ fontWeight: 'bold' }}>*** 네이버 로그인 테스트 중 ***</div>
+									<NaverLogin
+										clientId={naverId}
+										callbackUrl={naverUrl}
+										render={(props) => (
+											<div className="naverLogin" onClick={props.onClick}>
+												<img alt="" src={process.env.PUBLIC_URL + '/images/naver.png'} />
+												Login with Naver
+											</div>
+										)}
+										onSuccess={successNaver}
+										onFailure={failureNaver}
+									/> */}
 								</div>
 							</div>
 						)}
