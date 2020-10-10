@@ -184,6 +184,7 @@ function Post({ match, location, history }) {
 				.then((res) => {
 					console.log(`${post.postId} 댓글 추가 성공`)
 					refreshComment(null, setCommentCnt(res.data.comments.length)) //포스트 다시 불러오고 댓글 끝까지 보이기
+					comment.value = ''
 				})
 				.catch((e) => alert(e)) //실패
 		}
