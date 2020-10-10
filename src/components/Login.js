@@ -3,23 +3,17 @@ import './Login.css'
 import { Switch, Route, Link } from 'react-router-dom'
 import { AppContext } from '../App'
 import GoogleLogin from 'react-google-login'
-import NaverLogin from 'react-naver-login'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 
 function Login({ history, match, location }) {
 	const href = window.location.href
 	let clientId
-	let naverId, naverUrl
 	if (href.indexOf('localhost') > -1) {
 		//로컬
 		clientId = '605411712139-7nr29rfs5ihfu9uoev3igr5hpf4ubkle.apps.googleusercontent.com'
-		naverId = '1GCn3_4FurDb9SXHyzlw'
-		naverUrl = 'http://localhost:3000/login'
 	} else {
 		//서버
 		clientId = '605411712139-eb3qqicskmkal2i9u26ppdhoq2jt0bd8.apps.googleusercontent.com'
-		naverId = 'kjVk1u480gzQO_XLX_hp'
-		naverUrl = 'https://imki123.github.io/login'
 	}
 	const store = React.useContext(AppContext)
 	let browser = ''
@@ -260,22 +254,31 @@ function Login({ history, match, location }) {
 	const failureGoogle = (res) => {
 		console.log('구글로그인 실패', res)
 	}
-	const successNaver = (res) => {
-		console.log('네이버로그인 성공')
-		console.log(res)
-		let email = res.email
-		let username = email.substring(0, email.indexOf('@')) + '_n'
-		if (username === 'popping2606_n') username = 'imki123' //내아이디
 
-		let user = {
-			username: username,
-			email: email,
-			imageUrl: res.profile_image,
+	const naverLogin = e => {
+		const userinfo = document.querySelector('#userinfo')
+		if(userinfo && userinfo.value) {
+			//유저정보가 있으면 로그인 처리
+			let user = JSON.parse(userinfo.value)
+			console.log('네이버로그인 성공')
+			let email = user.email
+			let username = email.substring(0, email.indexOf('@')) + '_n'
+			if (username === 'popping2606_n') username = 'imki123' //내아이디
+			user = {
+				username: username,
+				email: email,
+				imageUrl: user.profile_image,
+			}
+			//console.log(user)
+			sendOAuth(user)
+		}else{ 
+			//유저정보가 없으면 네아로 요청하기
+			const naverIdLogin = document.querySelector('#naverIdLogin')
+			if(naverIdLogin){
+				console.log('네이버로그인 요청')
+				naverIdLogin.firstChild.click()
+			}
 		}
-		sendOAuth(user)
-	}
-	const failureNaver = (res) => {
-		console.log('네이버로그인 실패', res)
 	}
 
 	return (
@@ -303,6 +306,10 @@ function Login({ history, match, location }) {
 									</div>
 
 									{/* 네이버로그인 */}
+									<div className="naverLogin" onClick={naverLogin}>
+										<img alt="" src={process.env.PUBLIC_URL + '/images/naver.png'} />
+										Login with Naver
+									</div>
 									{/* <div style={{ fontWeight: 'bold' }}>*** 네이버 로그인 테스트 중 ***</div>
 									<NaverLogin
 										clientId={naverId}

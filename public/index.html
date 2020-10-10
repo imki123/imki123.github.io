@@ -6,14 +6,16 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="theme-color" content="#000000" />
 		<meta name="description" content="임기의 코딩 블로그입니다 :D" />
-		<meta property="image" content="%PUBLIC_URL%/images/imcat_800x400.png">
-		<meta property="og:image" content="%PUBLIC_URL%/images/imcat_800x400.png">
+		<meta property="image" content="%PUBLIC_URL%/images/imcat_800x400.png" />
+		<meta property="og:image" content="%PUBLIC_URL%/images/imcat_800x400.png" />
 		<!-- google search -->
 		<meta name="google-site-verification" content="HZicODInbBKemFyMPNAa0hZFqxXrvctIKQjKNGjc1g8" />
 
 		<link rel="apple-touch-icon" href="%PUBLIC_URL%/images/imcat.png" />
 		<link rel="stylesheet" href="%PUBLIC_URL%/styles/atom-one-dark.css" />
+		<link rel="stylesheet" href="%PUBLIC_URL%/styles/index.css" />
 		<script src="%PUBLIC_URL%/lib/highlight.pack.js"></script>
+		<script src="%PUBLIC_URL%/lib/naveridlogin_js_sdk_2.0.0.js"></script>
 		<!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
@@ -23,11 +25,55 @@
 
 		<!-- googld-AdSense -->
 		<!-- <script data-ad-client="ca-pub-3156014367299473" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
-
 	</head>
 
 	<body>
 		<noscript>You need to enable JavaScript to run this app.</noscript>
+		<!-- 네이버아이디로로그인 버튼 노출 영역 -->
+		<div id="naverIdLogin"></div>
+		<input id="userinfo" disabled />
+
+		<!-- //네이버아이디로로그인 버튼 노출 영역 -->
+
+		<!-- 네이버아디디로로그인 초기화 Script -->
+		<script type="text/javascript">
+			let naverId, naverUrl
+			if (window.location.href.indexOf('localhost') > -1) {
+				//로컬
+				googleId = '605411712139-7nr29rfs5ihfu9uoev3igr5hpf4ubkle.apps.googleusercontent.com'
+				naverId = '1GCn3_4FurDb9SXHyzlw'
+				naverUrl = 'http://localhost:3000/login'
+			} else {
+				//서버
+				googleId = '605411712139-eb3qqicskmkal2i9u26ppdhoq2jt0bd8.apps.googleusercontent.com'
+				naverId = 'kjVk1u480gzQO_XLX_hp'
+				naverUrl = 'https://imki123.github.io/login'
+			}
+			var naverLogin = new naver.LoginWithNaverId({
+				clientId: naverId,
+				callbackUrl: naverUrl,
+				isPopup: false /* 팝업을 통한 연동처리 여부 */,
+				loginButton: { color: 'green', type: 3, height: 60 } /* 로그인 버튼의 타입을 지정 */,
+			})
+
+			/* 설정정보를 초기화하고 연동을 준비 */
+			naverLogin.init()
+
+			/* (4) Callback의 처리. 정상적으로 Callback 처리가 완료될 경우 main page로 redirect(또는 Popup close) */
+			window.addEventListener('load', function () {
+				naverLogin.getLoginStatus(function (status) {
+					if (status) {
+						let user = naverLogin.user
+						const userinfo = document.querySelector('#userinfo')
+						if (userinfo) userinfo.value = JSON.stringify(user)
+					} else {
+						console.log('callback 처리에 실패하였습니다.')
+					}
+				})
+			})
+		</script>
+		<!-- // 네이버아이디로로그인 초기화 Script -->
+
 		<div id="root"></div>
 	</body>
 </html>
