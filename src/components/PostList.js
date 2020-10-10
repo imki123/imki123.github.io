@@ -15,7 +15,7 @@ function PostList(props) {
 						<span className="postTitle">{list.title}</span>
 					</div>
 					<span className="postDate">
-						{list.views ? list.views + 1 : 1}, {date}
+						{list.views ? list.views : 0}, {date}
 					</span>
 				</div>
 				<div className="postBody">{list.text}</div>
