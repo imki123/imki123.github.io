@@ -44,7 +44,7 @@ function CommentLists(props) {
 	}
 
 	return (
-		<div className={`recents recentComment ${recentAll}`}>
+		<div className={`post recents recentComment ${recentAll}`}>
 			<div className="postListTitle">최신 댓글 {list && <Link to="/comments">더보기</Link>}</div>
 			{comments &&
 				comments.map((i, idx) => (

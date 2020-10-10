@@ -14,7 +14,7 @@ import CommentLists from './CommentLists'
 
 function Content(props) {
 	const store = React.useContext(AppContext)
-	const location = useLocation()
+	const location = useLocation() //hash 사용
 
 	useEffect(() => {
 		const resize = () => {
@@ -23,17 +23,24 @@ function Content(props) {
 
 		window.addEventListener('resize', resize)
 		const loading = document.querySelector('#loading')
-		const view = document.querySelector('.post')
+		const views = document.querySelectorAll('.post')
 		if (store.ready) {
 			if (loading) loading.style.display = 'none'
-			if (view) view.style.display = 'block'
-
+			if (views) {
+				for(let i of views){
+					i.style.display = 'block'
+				}
+			}
 			setTimeout(function () {
 				store.resizeTextarea()
 			}, 10)
 		} else {
 			if (loading) loading.style.display = 'flex'
-			if (view) view.style.display = 'none'
+			if (views) {
+				for(let i of views){
+					i.style.display = 'none'
+				}
+			}
 		}
 		return window.removeEventListener('resize', resize)
 	}, [location.hash, store])
