@@ -7,6 +7,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://imki123.github.io/comments</loc>
+    <lastmod>2020-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://imki123.github.io/posts/16</loc>
     <lastmod>2020-10-10</lastmod>
     <changefreq>monthly</changefreq>
