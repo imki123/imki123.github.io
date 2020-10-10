@@ -7,7 +7,7 @@ const rootElement = document.getElementById('root')
 
 if (rootElement.hasChildNodes()) {
 	hydrate(
-		<BrowserRouter>
+		<BrowserRouter basename={process.env.PUBLIC_URL}>
 			<App />
 		</BrowserRouter>,
 		rootElement,

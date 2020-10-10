@@ -296,7 +296,7 @@ function Login({ history, match, location }) {
 										cookiePolicy={'single_host_origin'}
 										isSignedIn={true}
 									/>
-									<div className="kakaoWarning">
+									<div className="googleWarning">
 										<span style={{ color: 'red' }}>인앱 브라우저(카카오톡 등)</span>
 										는 <span>구글 로그인</span>을 지원하지 않습니다. 오류 발생 시 더보기(
 										<MoreVertIcon />, <img alt="" src={process.env.PUBLIC_URL + '/images/share.png'} />

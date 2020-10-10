@@ -11,7 +11,6 @@ import Login from './Login'
 import Quill from './Quill'
 import Tags from './Tags'
 import CommentLists from './CommentLists'
-import Oauth from './Oauth'
 
 function Content(props) {
 	const store = React.useContext(AppContext)

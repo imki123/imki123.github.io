@@ -26,19 +26,19 @@
 	margin-bottom: 10px;
 	font-weight: bold;
 }
-.kakaoWarning{
+.googleWarning{
 	font-size: 0.8rem;
 	margin-top: 4px;
 	word-break: break-all;
 }
-.kakaoWarning svg{
+.googleWarning svg{
 	font-size: 1rem;
 	vertical-align: text-bottom;
 }
-.kakaoWarning span{
+.googleWarning span{
 	color:blue;
 }
-.kakaoWarning img{
+.googleWarning img{
 	width: 16px;
 	vertical-align: text-bottom;
 }
