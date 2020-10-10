@@ -39,6 +39,10 @@ function Setting(props) {
 						//로그아웃 하면 204
 						console.log('로그아웃 성공')
 						store.setLogin(false)
+						const userinfo = document.querySelector('#userinfo')
+						if (userinfo) {
+							userinfo.value=''
+						}
 					} else {
 						console.log('로그아웃 실패')
 					}

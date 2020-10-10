@@ -25,15 +25,78 @@ function Login({ history, match, location }) {
 	const [checkPassword, setCheckPassword] = useState('')
 	const [checkPasswordConfirm, setCheckPasswordConfirm] = useState('')
 	const [buttonName, setButtonName] = useState('로그인')
+	const [userinfo, setUserinfo] = useState()
 
 	useEffect(() => {
-		store.setReady(true)
+		//로그인화면에서 로그인은 안되어있는데 유저정보가 있으면 로그인 처리
+		if (location.pathname === '/login' || location.pathname === '/login/') {
+			console.log('로그인화면에서')
+			if (!store.login) {
+				console.log('로그인은 안되어있는데')
+				const userinfo = document.querySelector('#userinfo')
+				if (userinfo && userinfo.value) {
+					console.log('유저정보가 있으면 로그인 처리')
+					//유저정보가 있으면 로그인 처리
+					let user = JSON.parse(userinfo.value)
+					console.log('네이버로그인 성공')
+					//console.log(user)
+					let email = user.email
+					let username = email.substring(0, email.indexOf('@')) + '_n'
+					if (username === 'popping2606_n') username = 'imki123' //내아이디
+					user = {
+						username: username,
+						email: email,
+						imageUrl: user.profile_image,
+					}
+					//console.log(user)
+					let url = process.env.REACT_APP_URL + '/auth/oauth'
+					//url = process.env.REACT_APP_LOCAL_URL + '/auth/oauth'
+					//로그인 성공시 토큰에 name, email, imageUrl 저장
+					fetch(url, {
+						mode: 'cors',
+						method: 'POST',
+						credentials: 'include',
+						headers: { 'Content-Type': 'application/json' },
+						body: JSON.stringify(user),
+					})
+						.then((res) => {
+							if (res.status === 200 || res.status === 201) {
+								//성공하면 아래 then 작동
+								res.json().then((res) => {
+									alert(res.username + '님 환영합니다 :D')
+									history.go(-1)
+									setUserinfo(res)
+								})
+							} else {
+								let message = '로그인에 실패했습니다 :('
+								if (res.status === 401) {
+									message += '\n로그인 정보를 확인해주세요.'
+								}
+								console.log(message)
+							}
+						})
+						.catch((e) => console.error(e))
+				}
+			}
+		}
+		//유저인포가 있으면 로그인처리
+		if (store) {
+			store.setReady(true)
+			if (userinfo) {
+				store.setLogin(userinfo)
+			}
+		}
 	})
+
 	useEffect(() => {
 		//이미 로그인이 되어있다면 스테이터스로 이동
-		if (store.login && location.pathname === '/login') {
-			history.replace('/loginStatus')
+		console.log(location.pathname)
+		if (location.pathname === '/login' || location.pathname === '/login/') {
+			if (store.login) {
+				history.replace('/loginStatus')
+			}
 		}
+
 		//로그인이 안되어있으면 로그인으로 이동
 		if (!store.login && location.pathname === '/loginStatus') {
 			history.replace('/login')
@@ -45,7 +108,7 @@ function Login({ history, match, location }) {
 		} else {
 			setButtonName('로그인')
 		}
-	}, [location, store.login, history])
+	}, [location, store.login, history, setUserinfo])
 
 	const changeUsername = (e) => {
 		const pattern = /[^a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣_]/g
@@ -202,7 +265,6 @@ function Login({ history, match, location }) {
 		}
 	}
 
-	//user정보를 받아서 서버에 토큰을 요청하기
 	const sendOAuth = (user) => {
 		let url = process.env.REACT_APP_URL + '/auth/oauth'
 		//url = process.env.REACT_APP_LOCAL_URL + '/auth/oauth'
@@ -255,9 +317,9 @@ function Login({ history, match, location }) {
 		console.log('구글로그인 실패', res)
 	}
 
-	const naverLogin = e => {
+	const naverLogin = (e) => {
 		const userinfo = document.querySelector('#userinfo')
-		if(userinfo && userinfo.value) {
+		if (userinfo && userinfo.value) {
 			//유저정보가 있으면 로그인 처리
 			let user = JSON.parse(userinfo.value)
 			console.log('네이버로그인 성공')
@@ -271,10 +333,10 @@ function Login({ history, match, location }) {
 			}
 			//console.log(user)
 			sendOAuth(user)
-		}else{ 
+		} else {
 			//유저정보가 없으면 네아로 요청하기
 			const naverIdLogin = document.querySelector('#naverIdLogin')
-			if(naverIdLogin){
+			if (naverIdLogin) {
 				console.log('네이버로그인 요청')
 				naverIdLogin.firstChild.click()
 			}
