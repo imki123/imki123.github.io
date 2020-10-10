@@ -253,7 +253,7 @@ function Login({ history, match, location }) {
 		let user = {
 			username: username,
 			email: email,
-			imageUrl: res.profileObj.imageUrl
+			imageUrl: res.profileObj.imageUrl,
 		}
 		sendOAuth(user)
 	}
@@ -266,11 +266,11 @@ function Login({ history, match, location }) {
 		let email = res.email
 		let username = email.substring(0, email.indexOf('@')) + '_n'
 		if (username === 'popping2606_n') username = 'imki123' //내아이디
-		
+
 		let user = {
 			username: username,
 			email: email,
-			imageUrl: res.profile_image
+			imageUrl: res.profile_image,
 		}
 		sendOAuth(user)
 	}
@@ -286,24 +286,8 @@ function Login({ history, match, location }) {
 						{(buttonName === '로그인' || buttonName === '회원가입') && (
 							<div className="oAuth">
 								<div className="login">
-									{/* 구글로그인 */}
-									<GoogleLogin
-										buttonText="Login with Google"
-										className="googleLogin"
-										clientId={clientId}
-										onSuccess={successGoogle}
-										onFailure={failureGoogle}
-										cookiePolicy={'single_host_origin'}
-										isSignedIn={true}
-									/>
-									<div className="googleWarning">
-										<span style={{ color: 'red' }}>인앱 브라우저(카카오톡 등)</span>
-										는 <span>구글 로그인</span>을 지원하지 않습니다. 오류 발생 시 더보기(
-										<MoreVertIcon />, <img alt="" src={process.env.PUBLIC_URL + '/images/share.png'} />
-										)를 눌러서 <span>다른 브라우저(Chrome, Safari 등)</span>에서 실행해주세요.
-									</div>
-									<br/><br/>
-									<div style={{fontWeight: 'bold'}}>*** 네이버 로그인 테스트 중 ***</div>
+									{/* 네이버로그인 */}
+									<div style={{ fontWeight: 'bold' }}>*** 네이버 로그인 테스트 중 ***</div>
 									<NaverLogin
 										clientId={naverId}
 										callbackUrl={naverUrl}
@@ -316,6 +300,22 @@ function Login({ history, match, location }) {
 										onSuccess={successNaver}
 										onFailure={failureNaver}
 									/>
+
+									{/* 구글로그인 */}
+									<GoogleLogin
+										buttonText="Login with Google"
+										className="googleLogin"
+										clientId={clientId}
+										onSuccess={successGoogle}
+										onFailure={failureGoogle}
+										cookiePolicy={'single_host_origin'}
+										isSignedIn={true}
+									/>
+									<div className="googleWarning">
+										<span style={{ color: 'red' }}>인앱 브라우저(카카오톡 등)</span>는 <span>구글 로그인</span>을 지원하지 않습니다. 오류 발생 시 더보기(
+										<MoreVertIcon />, <img alt="" src={process.env.PUBLIC_URL + '/images/share.png'} />
+										)를 눌러서 <span>다른 브라우저(Chrome, Safari 등)</span>에서 실행해주세요.
+									</div>
 								</div>
 							</div>
 						)}
