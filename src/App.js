@@ -61,15 +61,11 @@ function App() {
 		}
 
 		if (guideWrapper.style.left && guideWrapper.style.left.replace('px', '') > -100) {
-			console.log(guideWrapper.style.left)
-			console.log('close')
 			//메뉴 닫기
 			guideWrapper.parentNode.style.width = '0' // 회색 0
 			content.style.width = 'calc(100% - 16px)' //콘텐트 100% - 16px
 			guideWrapper.style.left = '-312px' // 메뉴 왼쪽으로
 		} else {
-			console.log(guideWrapper.style.left)
-			console.log('open')
 			//메뉴 열기
 			guideWrapper.style.left = '0px' // 메뉴 0
 			if (body.clientWidth < 500) {
