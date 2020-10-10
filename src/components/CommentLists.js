@@ -32,7 +32,7 @@ function CommentLists(props) {
 	}, [location, list])
 
 	useEffect(() => {
-		store.setReady(false)
+		if(store) store.setReady(false)
 		if (comments) {
 			store.setReady(true)
 		} else if (comments === '') store.setReady(true)

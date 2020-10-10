@@ -36,7 +36,7 @@ function Header(props) {
 						<img
 							className="profile"
 							alt="PROFILE"
-							src={store.login.imageUrl ? store.login.imageUrl : 'noimage'+Math.random()}
+							src={store.login.imageUrl ? store.login.imageUrl : 'noimage'+Math.floor(Math.random()*100)}
 							onError={(e) => {
 								e.target.src = process.env.PUBLIC_URL + '/images/dog' + (Math.floor(Math.random() * (3 - 1 + 1)) + 1) + '.png'
 							}}

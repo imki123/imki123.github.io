@@ -24,11 +24,11 @@ function Comment(props) {
 				},
 			})
 				.then((res) => {
-					if(!res.data.imageUrl) setImageUrl('noimage'+Math.random())
+					if(!res.data.imageUrl) setImageUrl('noimage'+Math.floor(Math.random()*100))
 					else setImageUrl(res.data.imageUrl)
 				})
 				.catch((e) => {
-					setImageUrl('noimage'+Math.random())
+					setImageUrl('noimage'+Math.floor(Math.random()*100))
 				})
 		}
 	}, [comment, post.postId, setImageUrl])
