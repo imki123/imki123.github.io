@@ -352,7 +352,7 @@ function Post({ match, location, history }) {
 				<div className="homeLists">
 					<Recents title="최신글" list={recents} />
 					<Recents title="인기글" list={popular} />
-					<CommentLists title="최근 댓글" list={recentComments} />
+					<CommentLists list={recentComments} />
 				</div>
 			)}
 		</>

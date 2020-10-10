@@ -130,11 +130,11 @@
 }
 .more {
 	text-align: center;
+	margin-top: 8px;
 }
 .moreButton {
 	color: blue;
 	font-size: 0.9rem;
-	padding-right: 8px;
 }
 .moreButton:hover {
 	cursor: pointer;

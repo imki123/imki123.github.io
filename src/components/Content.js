@@ -10,6 +10,7 @@ import NotFoundPage from './NotFoundPage'
 import Login from './Login'
 import Quill from './Quill'
 import Tags from './Tags'
+import CommentLists from './CommentLists'
 
 function Content(props) {
 	const store = React.useContext(AppContext)
@@ -75,6 +76,7 @@ function Content(props) {
 				<Route path={['/login', '/register', '/loginStatus', '/withdraw']} component={Login} />
 				<Route path="/quill/:postId?" component={Quill} />
 				<Route path="/tags/:tag" component={Tags} />
+				<Route path="/comments" component={CommentLists} />
 				<Route path="/" exact component={Post} />
 				<Route path="/posts/:postId" component={Post} />
 				<Route path="/NotFoundPage" component={NotFoundPage} />

@@ -1,3 +1,15 @@
+.recentAll{
+    width: 100% !important;
+}
+.recentComment .postListTitle{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.postListTitle a{
+    font-size: 0.8rem;
+    color: blue;
+}
 .recentComment .postTitle{
     font-weight: unset;
     font-size: 0.9rem;
