@@ -73,6 +73,10 @@
 .Emoji{
 	font-size: 0.9rem;
 }
+.Emoji span{
+	border-radius: 6px;
+	padding: 0 3px;
+}
 .EmojiLink{
 	font-size: 0.9rem;
 	padding: 0 8px;

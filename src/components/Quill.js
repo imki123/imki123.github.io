@@ -6,6 +6,7 @@ import { useQuill } from 'react-quilljs'
 import imageCompress from 'quill-image-compress'
 import { AppContext } from '../App'
 import Axios from 'axios'
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 
 function Quill({ match, location, history }) {
@@ -164,7 +165,7 @@ function Quill({ match, location, history }) {
 
 		//url에 POST 또는 PATCH 요청
 		let url = process.env.REACT_APP_URL + '/posts'
-		url = process.env.REACT_APP_LOCAL_URL + '/posts'
+		//url = process.env.REACT_APP_LOCAL_URL + '/posts'
 		let method = 'POST',
 			message = '글 작성 성공'
 		if (e.target.id === 'PATCH') {
@@ -245,6 +246,14 @@ function Quill({ match, location, history }) {
 			if (newSubMenu) newSubMenu.value = ''
 		}
 	}
+	const copied = e => {
+		//console.log(e.target)
+		let emoji = e.target
+		emoji.style.background = 'blue'
+		setTimeout(function(){
+			emoji.style.background = 'unset'
+		}, 1000)
+	}
 
 	return (
 		<div className="quill">
@@ -265,8 +274,34 @@ function Quill({ match, location, history }) {
 								새글 작성
 							</button>
 						)}
-						<span className="Emoji">😄 😆 🤣 🥰 😍 😝 😅 😭 👍 🐶 🐱 ⭐ ☀ ☁ 💧 🌧 ♥ ❤ 💕</span>
-						<span className="EmojiLink" onClick={()=>{window.open('https://copy.emojiall.com/ko/')}}>[이모지🔗]</span>
+						<span className="Emoji">
+                <CopyToClipboard text={"😄"}><span onClick={copied}>😄</span></CopyToClipboard>
+                <CopyToClipboard text={"🤣"}><span onClick={copied}>🤣</span></CopyToClipboard>
+                <CopyToClipboard text={"🥰"}><span onClick={copied}>🥰</span></CopyToClipboard>
+                <CopyToClipboard text={"😍"}><span onClick={copied}>😍</span></CopyToClipboard>
+                <CopyToClipboard text={"😝"}><span onClick={copied}>😝</span></CopyToClipboard>
+                <CopyToClipboard text={"😭"}><span onClick={copied}>😭</span></CopyToClipboard>
+                <CopyToClipboard text={"👍"}><span onClick={copied}>👍</span></CopyToClipboard>
+                <CopyToClipboard text={"🐕"}><span onClick={copied}>🐕</span></CopyToClipboard>
+                <CopyToClipboard text={"🐈"}><span onClick={copied}>🐈</span></CopyToClipboard>
+                <CopyToClipboard text={"☀"}><span onClick={copied}>☀</span></CopyToClipboard>
+                <CopyToClipboard text={"🌙"}><span onClick={copied}>🌙</span></CopyToClipboard>
+                <CopyToClipboard text={"⭐"}><span onClick={copied}>⭐</span></CopyToClipboard>
+                <CopyToClipboard text={"☁"}><span onClick={copied}>☁</span></CopyToClipboard>
+                <CopyToClipboard text={"🌧"}><span onClick={copied}>🌧</span></CopyToClipboard>
+                <CopyToClipboard text={"💧"}><span onClick={copied}>💧</span></CopyToClipboard>
+                <CopyToClipboard text={"♥"}><span onClick={copied}>♥</span></CopyToClipboard>
+                <CopyToClipboard text={"❤"}><span onClick={copied}>❤</span></CopyToClipboard>
+                <CopyToClipboard text={"💕"}><span onClick={copied}>💕</span></CopyToClipboard>
+              </span>
+              <span
+                className="EmojiLink"
+                onClick={() => {
+                  window.open('https://copy.emojiall.com/ko/')
+                }}
+              >
+                [이모지🔗]
+              </span>
 					</div>
 					<div>
 						메인메뉴:
