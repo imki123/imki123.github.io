@@ -30,13 +30,9 @@ function Login({ history, match, location }) {
 	useEffect(() => {
 		//로그인화면에서 로그인은 안되어있는데 유저정보가 있으면 로그인 처리
 		const userinfoElem = document.querySelector('#userinfo')
-		let frame
 		if (location.pathname === '/login' || location.pathname === '/login/') {
 			if (!store.login) {
-				/* setTimeout(() => {
-					clearInterval(frame)
-				}, 5000) */
-				frame = setInterval(function () {
+				let frame = setInterval(function () {
 					console.log('유저정보 체크')
 					if (userinfoElem && userinfoElem.value) {
 						//userinfo가 있으면 로그인 처리

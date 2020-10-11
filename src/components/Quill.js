@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/accessible-emoji */
 import React, { useEffect, useState } from 'react'
 import './Quill.css'
 import 'quill/dist/quill.snow.css'
@@ -163,7 +164,7 @@ function Quill({ match, location, history }) {
 
 		//url에 POST 또는 PATCH 요청
 		let url = process.env.REACT_APP_URL + '/posts'
-		//url = process.env.REACT_APP_LOCAL_URL + '/posts'
+		url = process.env.REACT_APP_LOCAL_URL + '/posts'
 		let method = 'POST',
 			message = '글 작성 성공'
 		if (e.target.id === 'PATCH') {
@@ -191,10 +192,6 @@ function Quill({ match, location, history }) {
 			.then((res) => {
 				alert(message) //성공
 				postId = res.data.postId
-				if (method === 'POST') {
-					//글 작성시 menus 카운트 증가
-					Axios()
-				}
 				if (postId > 1) {
 					history.push(`/posts/${postId}`) //수정 성공하면 해당 글로 이동함
 				} else {
@@ -256,18 +253,20 @@ function Quill({ match, location, history }) {
 			</div>
 			<div id="editor">
 				<div ref={quillRef} />
-				<div id="tags" className="no-drag">
+				<div id="tags">
 					<div id="tagsTitle">
 						tags
 						{postId !== undefined && Number(postId) >= 1 ? (
-							<button className="editorButton" onClick={clickPost} id="PATCH">
+							<button className="editorButton no-drag" onClick={clickPost} id="PATCH">
 								글 수정
 							</button>
 						) : (
-							<button className="editorButton" onClick={clickPost}>
+							<button className="editorButton no-drag" onClick={clickPost}>
 								새글 작성
 							</button>
 						)}
+						<span className="Emoji">😄 😆 🤣 🥰 😍 😝 😅 😭 👍 🐶 🐱 ⭐ ☀ ☁ 💧 🌧 ♥ ❤ 💕</span>
+						<span className="EmojiLink" onClick={()=>{window.open('https://copy.emojiall.com/ko/')}}>[이모지🔗]</span>
 					</div>
 					<div>
 						메인메뉴:

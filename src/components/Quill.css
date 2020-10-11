@@ -69,3 +69,15 @@
 .ql-toolbat.ql-snow {
 	padding: 0;
 }
+
+.Emoji{
+	font-size: 0.9rem;
+}
+.EmojiLink{
+	font-size: 0.9rem;
+	padding: 0 8px;
+	cursor: pointer;
+	cursor: alias;
+	color: blue;
+	text-decoration: underline;
+}

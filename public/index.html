@@ -1,174 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" href="%PUBLIC_URL%/images/imcat_64.png" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="theme-color" content="#000000" />
-		<meta name="description" content="임기의 코딩 블로그입니다 😄" />
-		<meta property="image" content="%PUBLIC_URL%/images/imcat_800x400.png" />
-		<meta property="og:image" content="%PUBLIC_URL%/images/imcat_800x400.png" />
-		<!-- google search -->
-		<meta name="google-site-verification" content="HZicODInbBKemFyMPNAa0hZFqxXrvctIKQjKNGjc1g8" />
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/images/imcat_64.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="임기의 코딩 블로그입니다 😄" />
+    <meta property="image" content="%PUBLIC_URL%/images/imcat_800x400.png" />
+    <meta property="og:image" content="%PUBLIC_URL%/images/imcat_800x400.png" />
+    <!-- google search -->
+    <meta name="google-site-verification" content="HZicODInbBKemFyMPNAa0hZFqxXrvctIKQjKNGjc1g8" />
 
-		<link rel="apple-touch-icon" href="%PUBLIC_URL%/images/imcat.png" />
-		<link rel="stylesheet" href="%PUBLIC_URL%/styles/atom-one-dark.css" />
-		<link rel="stylesheet" href="%PUBLIC_URL%/styles/index.css" />
-		<script src="%PUBLIC_URL%/lib/highlight.pack.js"></script>
-		<script src="%PUBLIC_URL%/lib/naveridlogin_js_sdk_2.0.0.js"></script>
-		<script src="%PUBLIC_URL%/lib/kakao.min.js"></script>
-		<!--
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/images/imcat.png" />
+    <link rel="stylesheet" href="%PUBLIC_URL%/styles/atom-one-dark.css" />
+    <link rel="stylesheet" href="%PUBLIC_URL%/styles/index.css" />
+    <script src="%PUBLIC_URL%/lib/highlight.pack.js"></script>
+    <!-- 네이버 로그인 스크립트 -->
+    <script src="%PUBLIC_URL%/lib/naveridlogin_js_sdk_2.0.0.js"></script>
+    <!-- 카카오 로그인 스크립트 -->
+    <script src="%PUBLIC_URL%/lib/kakao.min.js"></script>
+    <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-		<link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-		<title>임기의 코딩 블로그 😄</title>
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <title>임기의 코딩 블로그 😄</title>
 
-		<!-- googld-AdSense -->
-		<!-- <script data-ad-client="ca-pub-3156014367299473" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
+    <!-- googld-AdSense -->
+    <!-- <script data-ad-client="ca-pub-3156014367299473" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
 
-		<!-- Start Single Page Apps for GitHub Pages -->
-		<script type="text/javascript">
-			// Single Page Apps for GitHub Pages
-			// https://github.com/rafrex/spa-github-pages
-			// Copyright (c) 2016 Rafael Pedicini, licensed under the MIT License
-			// ----------------------------------------------------------------------
-			// This script checks to see if a redirect is present in the query string
-			// and converts it back into the correct url and adds it to the
-			// browser's history using window.history.replaceState(...),
-			// which won't cause the browser to attempt to load the new url.
-			// When the single page app is loaded further down in this file,
-			// the correct url will be waiting in the browser's history for
-			// the single page app to route accordingly.
-			;(function (l) {
-				if (l.search) {
-					var q = {}
-					l.search
-						.slice(1)
-						.split('&')
-						.forEach(function (v) {
-							var a = v.split('=')
-							q[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&')
-						})
-					if (q.p !== undefined) {
-						window.history.replaceState(null, null, l.pathname.slice(0, -1) + (q.p || '') + (q.q ? '?' + q.q : '') + l.hash)
-					}
-				}
-			})(window.location)
-		</script>
-		<!-- End Single Page Apps for GitHub Pages -->
-	</head>
+    <!-- Start Single Page Apps for GitHub Pages -->
+    <script type="text/javascript">
+      // Single Page Apps for GitHub Pages
+      // https://github.com/rafrex/spa-github-pages
+      // Copyright (c) 2016 Rafael Pedicini, licensed under the MIT License
+      // ----------------------------------------------------------------------
+      // This script checks to see if a redirect is present in the query string
+      // and converts it back into the correct url and adds it to the
+      // browser's history using window.history.replaceState(...),
+      // which won't cause the browser to attempt to load the new url.
+      // When the single page app is loaded further down in this file,
+      // the correct url will be waiting in the browser's history for
+      // the single page app to route accordingly.
+      ;(function (l) {
+        if (l.search) {
+          var q = {}
+          l.search
+            .slice(1)
+            .split('&')
+            .forEach(function (v) {
+              var a = v.split('=')
+              q[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&')
+            })
+          if (q.p !== undefined) {
+            window.history.replaceState(null, null, l.pathname.slice(0, -1) + (q.p || '') + (q.q ? '?' + q.q : '') + l.hash)
+          }
+        }
+      })(window.location)
+    </script>
+    <!-- End Single Page Apps for GitHub Pages -->
+  </head>
 
-	<body>
-		<noscript>You need to enable JavaScript to run this app.</noscript>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
 
-		<!-- 네이버아이디로로그인 버튼 노출 영역 -->
-		<div id="naverIdLogin" class="hidden"></div>
-		<input id="userinfo" class="hidden" value="" />
-		<!-- //네이버아이디로로그인 버튼 노출 영역 -->
+    <!-- 네이버아이디로로그인 버튼 노출 영역 -->
+    <div id="naverIdLogin" class="hidden"></div>
+    <input id="userinfo" class="hidden" value="" />
+    <!-- //네이버아이디로로그인 버튼 노출 영역 -->
 
-		<!-- 네이버아디디로로그인 초기화 Script -->
-		<script type="text/javascript">
-			let naverId, callBackUrl
-			if (window.location.href.indexOf('localhost') > -1) {
-				//로컬
-				googleId = '605411712139-7nr29rfs5ihfu9uoev3igr5hpf4ubkle.apps.googleusercontent.com'
-				naverId = '1GCn3_4FurDb9SXHyzlw'
-				callBackUrl = 'http://localhost:3000/login'
-			} else {
-				//서버
-				googleId = '605411712139-eb3qqicskmkal2i9u26ppdhoq2jt0bd8.apps.googleusercontent.com'
-				naverId = 'kjVk1u480gzQO_XLX_hp'
-				callBackUrl = 'https://imki123.github.io/login'
-			}
-			var naverLogin = new naver.LoginWithNaverId({
-				clientId: naverId,
-				callbackUrl: callBackUrl,
-				isPopup: false /* 팝업을 통한 연동처리 여부 */,
-				loginButton: { color: 'green', type: 3, height: 60 } /* 로그인 버튼의 타입을 지정 */,
-			})
+    <!-- 네이버아디디로로그인 초기화 Script -->
+    <script type="text/javascript">
+      let naverId, callBackUrl
+      if (window.location.href.indexOf('localhost') > -1) {
+        //로컬
+        googleId = '605411712139-7nr29rfs5ihfu9uoev3igr5hpf4ubkle.apps.googleusercontent.com'
+        naverId = '1GCn3_4FurDb9SXHyzlw'
+        callBackUrl = 'http://localhost:3000/login'
+      } else {
+        //서버
+        googleId = '605411712139-eb3qqicskmkal2i9u26ppdhoq2jt0bd8.apps.googleusercontent.com'
+        naverId = 'kjVk1u480gzQO_XLX_hp'
+        callBackUrl = 'https://imki123.github.io/login'
+      }
+      var naverLogin = new naver.LoginWithNaverId({
+        clientId: naverId,
+        callbackUrl: callBackUrl,
+        isPopup: false /* 팝업을 통한 연동처리 여부 */,
+        loginButton: { color: 'green', type: 3, height: 60 } /* 로그인 버튼의 타입을 지정 */,
+      })
 
-			/* 설정정보를 초기화하고 연동을 준비 */
-			naverLogin.init()
+      /* 설정정보를 초기화하고 연동을 준비 */
+      naverLogin.init()
 
-			/* (4) Callback의 처리. 정상적으로 Callback 처리가 완료될 경우 main page로 redirect(또는 Popup close) */
-			window.addEventListener('load', function () {
-				naverLogin.getLoginStatus(function (status) {
-					if (status) {
-						let user = naverLogin.user
-						user.host = 'naver'
-						const userinfo = document.querySelector('#userinfo')
-						if (userinfo) userinfo.value = JSON.stringify(user)
-					} else {
-						//console.log('callback 처리에 실패하였습니다.')
-					}
-				})
-			})
+      /* (4) Callback의 처리. 정상적으로 Callback 처리가 완료될 경우 main page로 redirect(또는 Popup close) */
+      window.addEventListener('load', function () {
+        naverLogin.getLoginStatus(function (status) {
+          if (status) {
+            let user = naverLogin.user
+            user.host = 'naver'
+            const userinfo = document.querySelector('#userinfo')
+            if (userinfo) userinfo.value = JSON.stringify(user)
+          } else {
+            //console.log('callback 처리에 실패하였습니다.')
+          }
+        })
+      })
 
-			//네이버 아이디 로그아웃
-			function naverIdLogout(naverLogin) {
-				//console.log('naverIdLogout:',naverLogin)
-				naverLogin.logout()
-			}
-		</script>
-		<!-- // 네이버아이디로로그인 초기화 Script -->
+      //네이버 아이디 로그아웃
+      function naverIdLogout(naverLogin) {
+        //console.log('naverIdLogout:',naverLogin)
+        naverLogin.logout()
+      }
+    </script>
+    <!-- // 네이버아이디로로그인 초기화 Script -->
 
-		<!-- 네이버 아이디 로그아웃 -->
-		<div id="naverIdLogout" class="hidden" onclick="naverIdLogout(naverLogin)"></div>
-		<!-- // 네이버 아이디 로그아웃 -->
+    <!-- 네이버 아이디 로그아웃 -->
+    <div id="naverIdLogout" class="hidden" onclick="naverIdLogout(naverLogin)"></div>
+    <!-- // 네이버 아이디 로그아웃 -->
 
-		<!-- 카카오 로그인 초기화 Script -->
-		<div id="kakaoLogin" class="hidden" onclick="kakaoLogin()"></div>
-		<div id="kakaoLogout" class="hidden" onclick="kakaoLogout()"></div>
-		<script>
-			Kakao.init('0d74caaceac5f0f14c0d6a667a9dbdee')
-			Kakao.isInitialized()
+    <!-- 카카오 로그인 초기화 Script -->
+    <div id="kakaoLogin" class="hidden" onclick="kakaoLogin()"></div>
+    <div id="kakaoLogout" class="hidden" onclick="kakaoLogout()"></div>
+    <script>
+      // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
+      Kakao.init('0d74caaceac5f0f14c0d6a667a9dbdee')
+      // SDK 초기화 여부를 판단합니다.
+      //console.log(Kakao.isInitialized())
 
-			function kakaoLogin() {
-				//로그인하고
-				Kakao.Auth.login({
-					success: function (response) {
-						//console.log(response)
-						//사용자 정보 가져오기
-						Kakao.API.request({
-							url: '/v2/user/me',
-							success: function (response) {
-								let user = response.kakao_account
-								//console.log(user)
-								user.host = 'kakao'
-								const userinfo = document.querySelector('#userinfo')
-								if (userinfo) userinfo.value = JSON.stringify(user)
-							},
-							fail: function (error) {
-								//console.log(error)
-							},
-						})
-					},
-					fail: function (error) {
-						//console.log(error)
-					},
-				})
-			}
-			function kakaoLogout() {
-				if (Kakao.Auth.getAccessToken()) {
-					//토큰이 있으면
-					Kakao.API.request({
-						//로그아웃
-						url: '/v1/user/unlink',
-						success: function (response) {
-							//console.log(response)
-						},
-						fail: function (error) {
-							console.log(error)
-						},
-					})
-					//토큰 삭제
-					Kakao.Auth.setAccessToken(undefined)
-				}
-			}
-		</script>
-		<!-- // 카카오 로그인 초기화 Script -->
+function kakaoLogin() {
+  //로그인하고
+  Kakao.Auth.login({
+    success: function (response) {
+      //console.log(response)
+      //사용자 정보 가져오기
+      Kakao.API.request({
+        url: '/v2/user/me',
+        success: function (response) {
+          let user = response.kakao_account
+          //console.log(user)
+          user.host = 'kakao' //다른 로그인 서비스와 구분하기 위해서 개인적으로 추가했음
+          const userinfo = document.querySelector('#userinfo')
+          if (userinfo) userinfo.value = JSON.stringify(user)
+        },
+        fail: function (error) {
+          //console.log(error)
+        },
+      })
+    },
+    fail: function (error) {
+      //console.log(error)
+    },
+  })
+}
+function kakaoLogout() {
+  if (Kakao.Auth.getAccessToken()) {
+    //토큰이 있으면
+    Kakao.API.request({
+      //로그아웃
+      url: '/v1/user/unlink',
+      success: function (response) {
+        //console.log(response)
+      },
+      fail: function (error) {
+        console.log(error)
+      },
+    })
+    //토큰 삭제
+    Kakao.Auth.setAccessToken(undefined)
+  }
+}
+</script>
+    <!-- // 카카오 로그인 초기화 Script -->
 
-		<div id="root"></div>
-	</body>
+    <div id="root"></div>
+  </body>
 </html>
