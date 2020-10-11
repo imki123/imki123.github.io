@@ -29,20 +29,20 @@ function Login({ history, match, location }) {
 
 	useEffect(() => {
 		//로그인화면에서 로그인은 안되어있는데 네이버 유저정보가 있으면 로그인 처리
+		const userinfoElem = document.querySelector('#userinfo')
 		let frame
 		if (location.pathname === '/login' || location.pathname === '/login/') {
 			if (!store.login) {
-				const userinfo = document.querySelector('#userinfo')
 				setTimeout(() => {
 					clearInterval(frame)
 				}, 5000)
 				frame = setInterval(function () {
 					console.log('네이버 로그인 체크')
-					if (userinfo && userinfo.value) {
+					if (userinfoElem && userinfoElem.value) {
 						//userinfo가 있으면 로그인 처리
 						//새로고침되거나, 네이버로그인 버튼을 누르면 userinfo를 가져옴
 						clearInterval(frame) //userinfo 있으면 로그인 체크 중지
-						let user = JSON.parse(userinfo.value)
+						let user = JSON.parse(userinfoElem.value)
 						let email = user.email
 						let username = email.substring(0, email.indexOf('@')) + '_n'
 						if (username === 'popping2606_n') username = 'imki123' //내아이디
@@ -68,8 +68,8 @@ function Login({ history, match, location }) {
 									//성공하면 아래 then 작동
 									res.json().then((res) => {
 										alert(res.username + '님 환영합니다 :D')
+										setUserinfo(user)
 										history.replace('/') //네이버 로그인 시 홈으로 이동
-										setUserinfo(res)
 									})
 								} else {
 									let message = '로그인에 실패했습니다 :('
@@ -82,6 +82,10 @@ function Login({ history, match, location }) {
 							.catch((e) => console.error(e))
 					}
 				}, 1000)
+			}
+		}else if (location.pathname === '/loginStatus' || location.pathname === '/loginStatus/') {
+			if (userinfoElem && !userinfoElem.value) {
+				setUserinfo(false)
 			}
 		}
 	}, [store.login, location, history])
@@ -106,7 +110,7 @@ function Login({ history, match, location }) {
 
 		//로그인이 안되어있으면 로그인으로 이동
 		if (location.pathname === '/loginStatus' || location.pathname === '/loginStatus/') {
-			console.log(store.login)
+			//console.log(store.login)
 			if (!store.login) {
 				setTimeout(function () {
 					if (!store.login) {
@@ -279,7 +283,18 @@ function Login({ history, match, location }) {
 		}
 	}
 
-	const sendOAuth = (user) => {
+	const successGoogle = (res) => {
+		console.log('구글 로그인 성공')
+		//console.log(res)
+		let email = res.profileObj.email
+		let username = email.substring(0, email.indexOf('@')) + '_g'
+		if (username === 'popping2606_g') username = 'imki123' //내아이디
+
+		let user = {
+			username: username,
+			email: email,
+			imageUrl: res.profileObj.imageUrl,
+		}
 		let url = process.env.REACT_APP_URL + '/auth/oauth'
 		//url = process.env.REACT_APP_LOCAL_URL + '/auth/oauth'
 		//로그인 성공시 토큰에 name, email, imageUrl 저장
@@ -311,21 +326,6 @@ function Login({ history, match, location }) {
 				}
 			})
 			.catch((e) => console.error(e))
-	}
-
-	const successGoogle = (res) => {
-		console.log('구글 로그인 성공')
-		//console.log(res)
-		let email = res.profileObj.email
-		let username = email.substring(0, email.indexOf('@')) + '_g'
-		if (username === 'popping2606_g') username = 'imki123' //내아이디
-
-		let user = {
-			username: username,
-			email: email,
-			imageUrl: res.profileObj.imageUrl,
-		}
-		sendOAuth(user)
 	}
 	const failureGoogle = (res) => {
 		console.log('구글 로그인 실패', res)
@@ -363,7 +363,7 @@ function Login({ history, match, location }) {
 										isSignedIn={true}
 									/>
 									<div className="googleWarning">
-										<span style={{ color: 'red' }}>인앱 브라우저(카카오톡 등)</span>는 <span>구글 로그인</span>을 지원하지 않습니다. 오류 발생 시 더보기(
+										구글 로그인은 <span style={{ color: 'red' }}>인앱 브라우저(카카오톡 등)</span>에서 지원되지 않습니다. 오류 발생 시 더보기(
 										<MoreVertIcon />, <img alt="" src={process.env.PUBLIC_URL + '/images/share.png'} />
 										)를 눌러서 <span>다른 브라우저(Chrome, Safari 등)</span>에서 실행해주세요.
 									</div>
@@ -424,7 +424,7 @@ function Login({ history, match, location }) {
 						</form>
 					</Route>
 					<Route path={['/loginStatus']}>
-						{store.login ? (
+						{(store.login)? (
 							<div className="center">
 								{store.login.username}님은 현재 <span style={{ color: 'green' }}>로그인</span> 되어있습니다 :D
 								<br />
