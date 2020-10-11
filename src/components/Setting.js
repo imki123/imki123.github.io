@@ -39,6 +39,8 @@ function Setting(props) {
 						//로그아웃 하면 204
 						console.log('로그아웃 성공')
 						store.setLogin(false)
+						
+						//네이버 로그아웃
 						const userinfo = document.querySelector('#userinfo')
 						if (userinfo) userinfo.value = ''
 						const naverIdLogout = document.querySelector('#naverIdLogout')

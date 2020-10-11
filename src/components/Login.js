@@ -84,7 +84,7 @@ function Login({ history, match, location }) {
 				}, 1000)
 			}
 		}
-	},[store.login, location, history])
+	}, [store.login, location, history])
 
 	useEffect(() => {
 		//유저인포가 있으면 로그인처리
@@ -105,8 +105,15 @@ function Login({ history, match, location }) {
 		}
 
 		//로그인이 안되어있으면 로그인으로 이동
-		if (!store.login && location.pathname === '/loginStatus') {
-			history.replace('/login')
+		if (location.pathname === '/loginStatus' || location.pathname === '/loginStatus/') {
+			console.log(store.login)
+			if (!store.login) {
+				setTimeout(function () {
+					if (!store.login) {
+						history.replace('/login')
+					}
+				}, 1000)
+			}
 		}
 		if (location.pathname.indexOf('register') > -1) {
 			setButtonName('회원가입')
@@ -115,7 +122,7 @@ function Login({ history, match, location }) {
 		} else {
 			setButtonName('로그인')
 		}
-	}, [location, store.login, history, setUserinfo])
+	}, [location, store.login, history])
 
 	const changeUsername = (e) => {
 		const pattern = /[^a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣_]/g
