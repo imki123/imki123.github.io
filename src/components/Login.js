@@ -97,9 +97,9 @@ function Login({ history, match, location }) {
 									res.json().then((res) => {
 										alert(res.username + '님 환영합니다 :D')
 										setUserinfo(res)
-										if (user.host === 'naver') history.replace('/')
-										//네이버 로그인 시 홈으로 이동
-										else history.go(-1) //뒤로가기
+										//로그인 시 홈으로 이동
+										history.replace('/')
+										//history.go(-1) //뒤로가기
 									})
 								} else {
 									let message = '로그인에 실패했습니다 :('
