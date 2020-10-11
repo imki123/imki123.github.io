@@ -28,57 +28,65 @@ function Login({ history, match, location }) {
 	const [userinfo, setUserinfo] = useState()
 
 	useEffect(() => {
-		//로그인화면에서 로그인은 안되어있는데 유저정보가 있으면 로그인 처리
+		//로그인화면에서 로그인은 안되어있는데 네이버 유저정보가 있으면 로그인 처리
+		let frame
 		if (location.pathname === '/login' || location.pathname === '/login/') {
-			console.log('로그인화면에서')
 			if (!store.login) {
-				console.log('로그인은 안되어있는데')
 				const userinfo = document.querySelector('#userinfo')
-				if (userinfo && userinfo.value) {
-					console.log('유저정보가 있으면 로그인 처리')
-					//유저정보가 있으면 로그인 처리
-					let user = JSON.parse(userinfo.value)
-					console.log('네이버로그인 성공')
-					//console.log(user)
-					let email = user.email
-					let username = email.substring(0, email.indexOf('@')) + '_n'
-					if (username === 'popping2606_n') username = 'imki123' //내아이디
-					user = {
-						username: username,
-						email: email,
-						imageUrl: user.profile_image,
-					}
-					//console.log(user)
-					let url = process.env.REACT_APP_URL + '/auth/oauth'
-					//url = process.env.REACT_APP_LOCAL_URL + '/auth/oauth'
-					//로그인 성공시 토큰에 name, email, imageUrl 저장
-					fetch(url, {
-						mode: 'cors',
-						method: 'POST',
-						credentials: 'include',
-						headers: { 'Content-Type': 'application/json' },
-						body: JSON.stringify(user),
-					})
-						.then((res) => {
-							if (res.status === 200 || res.status === 201) {
-								//성공하면 아래 then 작동
-								res.json().then((res) => {
-									alert(res.username + '님 환영합니다 :D')
-									history.go(-1)
-									setUserinfo(res)
-								})
-							} else {
-								let message = '로그인에 실패했습니다 :('
-								if (res.status === 401) {
-									message += '\n로그인 정보를 확인해주세요.'
-								}
-								console.log(message)
-							}
+				setTimeout(() => {
+					clearInterval(frame)
+				}, 5000)
+				frame = setInterval(function () {
+					console.log('네이버 로그인 체크')
+					if (userinfo && userinfo.value) {
+						//userinfo가 있으면 로그인 처리
+						//새로고침되거나, 네이버로그인 버튼을 누르면 userinfo를 가져옴
+						clearInterval(frame) //userinfo 있으면 로그인 체크 중지
+						let user = JSON.parse(userinfo.value)
+						let email = user.email
+						let username = email.substring(0, email.indexOf('@')) + '_n'
+						if (username === 'popping2606_n') username = 'imki123' //내아이디
+						console.log('네이버 로그인 성공:', username)
+						user = {
+							username: username,
+							email: email,
+							imageUrl: user.profile_image,
+						}
+						//console.log(user)
+						let url = process.env.REACT_APP_URL + '/auth/oauth'
+						//url = process.env.REACT_APP_LOCAL_URL + '/auth/oauth'
+						//로그인 성공시 토큰에 name, email, imageUrl 저장
+						fetch(url, {
+							mode: 'cors',
+							method: 'POST',
+							credentials: 'include',
+							headers: { 'Content-Type': 'application/json' },
+							body: JSON.stringify(user),
 						})
-						.catch((e) => console.error(e))
-				}
+							.then((res) => {
+								if (res.status === 200 || res.status === 201) {
+									//성공하면 아래 then 작동
+									res.json().then((res) => {
+										alert(res.username + '님 환영합니다 :D')
+										history.replace('/') //네이버 로그인 시 홈으로 이동
+										setUserinfo(res)
+									})
+								} else {
+									let message = '로그인에 실패했습니다 :('
+									if (res.status === 401) {
+										message += '\n로그인 정보를 확인해주세요.'
+									}
+									console.log(message)
+								}
+							})
+							.catch((e) => console.error(e))
+					}
+				}, 1000)
 			}
 		}
+	},[store.login, location, history])
+
+	useEffect(() => {
 		//유저인포가 있으면 로그인처리
 		if (store) {
 			store.setReady(true)
@@ -90,7 +98,6 @@ function Login({ history, match, location }) {
 
 	useEffect(() => {
 		//이미 로그인이 되어있다면 스테이터스로 이동
-		console.log(location.pathname)
 		if (location.pathname === '/login' || location.pathname === '/login/') {
 			if (store.login) {
 				history.replace('/loginStatus')
@@ -300,7 +307,7 @@ function Login({ history, match, location }) {
 	}
 
 	const successGoogle = (res) => {
-		console.log('구글로그인 성공')
+		console.log('구글 로그인 성공')
 		//console.log(res)
 		let email = res.profileObj.email
 		let username = email.substring(0, email.indexOf('@')) + '_g'
@@ -314,32 +321,14 @@ function Login({ history, match, location }) {
 		sendOAuth(user)
 	}
 	const failureGoogle = (res) => {
-		console.log('구글로그인 실패', res)
+		console.log('구글 로그인 실패', res)
 	}
 
 	const naverLogin = (e) => {
-		const userinfo = document.querySelector('#userinfo')
-		if (userinfo && userinfo.value) {
-			//유저정보가 있으면 로그인 처리
-			let user = JSON.parse(userinfo.value)
-			console.log('네이버로그인 성공')
-			let email = user.email
-			let username = email.substring(0, email.indexOf('@')) + '_n'
-			if (username === 'popping2606_n') username = 'imki123' //내아이디
-			user = {
-				username: username,
-				email: email,
-				imageUrl: user.profile_image,
-			}
-			//console.log(user)
-			sendOAuth(user)
-		} else {
-			//유저정보가 없으면 네아로 요청하기
-			const naverIdLogin = document.querySelector('#naverIdLogin')
-			if (naverIdLogin) {
-				console.log('네이버로그인 요청')
-				naverIdLogin.firstChild.click()
-			}
+		const naverIdLogin = document.querySelector('#naverIdLogin')
+		if (naverIdLogin) {
+			console.log('네이버 로그인 요청')
+			naverIdLogin.firstChild.click()
 		}
 	}
 
@@ -351,7 +340,12 @@ function Login({ history, match, location }) {
 						{(buttonName === '로그인' || buttonName === '회원가입') && (
 							<div className="oAuth">
 								<div className="login">
-									{/* 구글로그인 */}
+									{/* 네이버 로그인 */}
+									<div className="naverLogin" onClick={naverLogin}>
+										<img alt="" src={process.env.PUBLIC_URL + '/images/naver.png'} />
+										Login with Naver
+									</div>
+									{/* 구글 로그인 */}
 									<GoogleLogin
 										buttonText="Login with Google"
 										className="googleLogin"
@@ -366,25 +360,6 @@ function Login({ history, match, location }) {
 										<MoreVertIcon />, <img alt="" src={process.env.PUBLIC_URL + '/images/share.png'} />
 										)를 눌러서 <span>다른 브라우저(Chrome, Safari 등)</span>에서 실행해주세요.
 									</div>
-
-									{/* 네이버로그인 */}
-									<div className="naverLogin" onClick={naverLogin}>
-										<img alt="" src={process.env.PUBLIC_URL + '/images/naver.png'} />
-										Login with Naver
-									</div>
-									{/* <div style={{ fontWeight: 'bold' }}>*** 네이버 로그인 테스트 중 ***</div>
-									<NaverLogin
-										clientId={naverId}
-										callbackUrl={naverUrl}
-										render={(props) => (
-											<div className="naverLogin" onClick={props.onClick}>
-												<img alt="" src={process.env.PUBLIC_URL + '/images/naver.png'} />
-												Login with Naver
-											</div>
-										)}
-										onSuccess={successNaver}
-										onFailure={failureNaver}
-									/> */}
 								</div>
 							</div>
 						)}
