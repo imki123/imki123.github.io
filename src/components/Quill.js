@@ -275,24 +275,24 @@ function Quill({ match, location, history }) {
 							</button>
 						)}
 						<span className="Emoji">
-                <CopyToClipboard text={"😄"}><span onClick={copied}>😄</span></CopyToClipboard>
-                <CopyToClipboard text={"🤣"}><span onClick={copied}>🤣</span></CopyToClipboard>
-                <CopyToClipboard text={"🥰"}><span onClick={copied}>🥰</span></CopyToClipboard>
-                <CopyToClipboard text={"😍"}><span onClick={copied}>😍</span></CopyToClipboard>
-                <CopyToClipboard text={"😝"}><span onClick={copied}>😝</span></CopyToClipboard>
-                <CopyToClipboard text={"😭"}><span onClick={copied}>😭</span></CopyToClipboard>
-                <CopyToClipboard text={"👍"}><span onClick={copied}>👍</span></CopyToClipboard>
-                <CopyToClipboard text={"🐕"}><span onClick={copied}>🐕</span></CopyToClipboard>
-                <CopyToClipboard text={"🐈"}><span onClick={copied}>🐈</span></CopyToClipboard>
-                <CopyToClipboard text={"☀"}><span onClick={copied}>☀</span></CopyToClipboard>
-                <CopyToClipboard text={"🌙"}><span onClick={copied}>🌙</span></CopyToClipboard>
-                <CopyToClipboard text={"⭐"}><span onClick={copied}>⭐</span></CopyToClipboard>
-                <CopyToClipboard text={"☁"}><span onClick={copied}>☁</span></CopyToClipboard>
-                <CopyToClipboard text={"🌧"}><span onClick={copied}>🌧</span></CopyToClipboard>
-                <CopyToClipboard text={"💧"}><span onClick={copied}>💧</span></CopyToClipboard>
-                <CopyToClipboard text={"♥"}><span onClick={copied}>♥</span></CopyToClipboard>
-                <CopyToClipboard text={"❤"}><span onClick={copied}>❤</span></CopyToClipboard>
-                <CopyToClipboard text={"💕"}><span onClick={copied}>💕</span></CopyToClipboard>
+                <CopyToClipboard options={{format: 'text/plain'}} text={"😄"}><span onClick={copied}>😄</span></CopyToClipboard>
+                <CopyToClipboard options={{format: 'text/plain'}} text={"🤣"}><span onClick={copied}>🤣</span></CopyToClipboard>
+                <CopyToClipboard options={{format: 'text/plain'}} text={"🥰"}><span onClick={copied}>🥰</span></CopyToClipboard>
+                <CopyToClipboard options={{format: 'text/plain'}} text={"😍"}><span onClick={copied}>😍</span></CopyToClipboard>
+                <CopyToClipboard options={{format: 'text/plain'}} text={"😝"}><span onClick={copied}>😝</span></CopyToClipboard>
+                <CopyToClipboard options={{format: 'text/plain'}} text={"😭"}><span onClick={copied}>😭</span></CopyToClipboard>
+                <CopyToClipboard options={{format: 'text/plain'}} text={"👍"}><span onClick={copied}>👍</span></CopyToClipboard>
+                <CopyToClipboard options={{format: 'text/plain'}} text={"🐕"}><span onClick={copied}>🐕</span></CopyToClipboard>
+                <CopyToClipboard options={{format: 'text/plain'}} text={"🐈"}><span onClick={copied}>🐈</span></CopyToClipboard>
+                <CopyToClipboard options={{format: 'text/plain'}} text={"☀"}><span onClick={copied}>☀</span></CopyToClipboard>
+                <CopyToClipboard options={{format: 'text/plain'}} text={"🌙"}><span onClick={copied}>🌙</span></CopyToClipboard>
+                <CopyToClipboard options={{format: 'text/plain'}} text={"⭐"}><span onClick={copied}>⭐</span></CopyToClipboard>
+                <CopyToClipboard options={{format: 'text/plain'}} text={"☁"}><span onClick={copied}>☁</span></CopyToClipboard>
+                <CopyToClipboard options={{format: 'text/plain'}} text={"🌧"}><span onClick={copied}>🌧</span></CopyToClipboard>
+                <CopyToClipboard options={{format: 'text/plain'}} text={"💧"}><span onClick={copied}>💧</span></CopyToClipboard>
+                <CopyToClipboard options={{format: 'text/plain'}} text={"♥"}><span onClick={copied}>♥</span></CopyToClipboard>
+                <CopyToClipboard options={{format: 'text/plain'}} text={"❤"}><span onClick={copied}>❤</span></CopyToClipboard>
+                <CopyToClipboard options={{format: 'text/plain'}} text={"💕"}><span onClick={copied}>💕</span></CopyToClipboard>
               </span>
               <span
                 className="EmojiLink"
