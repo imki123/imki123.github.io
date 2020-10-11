@@ -118,6 +118,7 @@
 	margin-bottom: 4px;
 	cursor: pointer;
 	border-radius: 2px;
+	font-family: Roboto, sans-serif;
 }
 .naverLogin:hover{
 	opacity: 0.7 !important;

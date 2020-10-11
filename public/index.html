@@ -60,9 +60,10 @@
 
 	<body>
 		<noscript>You need to enable JavaScript to run this app.</noscript>
+
 		<!-- 네이버아이디로로그인 버튼 노출 영역 -->
-		<div id="naverIdLogin"></div>
-		<input id="userinfo" value=""/>
+		<div id="naverIdLogin" class="hidden"></div>
+		<input id="userinfo" class="hidden" value="" />
 		<!-- //네이버아이디로로그인 버튼 노출 영역 -->
 
 		<!-- 네이버아디디로로그인 초기화 Script -->
@@ -101,8 +102,18 @@
 					}
 				})
 			})
+
+			//네이버 아이디 로그아웃
+			function naverIdLogout(naverLogin) {
+				//console.log('naverIdLogout:',naverLogin)
+				naverLogin.logout()
+			}
 		</script>
 		<!-- // 네이버아이디로로그인 초기화 Script -->
+
+		<!-- 네이버 아이디 로그아웃 -->
+		<div id="naverIdLogout" class="hidden" onclick="naverIdLogout(naverLogin)"></div>
+		<!-- // 네이버 아이디 로그아웃 -->
 
 		<div id="root"></div>
 	</body>

@@ -40,9 +40,9 @@ function Setting(props) {
 						console.log('로그아웃 성공')
 						store.setLogin(false)
 						const userinfo = document.querySelector('#userinfo')
-						if (userinfo) {
-							userinfo.value=''
-						}
+						if (userinfo) userinfo.value = ''
+						const naverIdLogout = document.querySelector('#naverIdLogout')
+						if (naverIdLogout) naverIdLogout.click()
 					} else {
 						console.log('로그아웃 실패')
 					}
@@ -67,6 +67,7 @@ function Setting(props) {
 					{store.login && (
 						<div onClick={logout}>
 							<GoogleLogout
+								icon={false}
 								buttonText="로그아웃"
 								className="settingList googleLogout"
 								clientId={clientId}

@@ -1,4 +1,5 @@
-#naverIdLogin, #userinfo{
+.hidden{
     position: absolute;
     top: -1000000px;
+    opacity: 0;
 }

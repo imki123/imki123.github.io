@@ -341,14 +341,14 @@ function Login({ history, match, location }) {
 							<div className="oAuth">
 								<div className="login">
 									{/* 네이버 로그인 */}
-									<div className="naverLogin" onClick={naverLogin}>
+									<div className="naverLogin no-drag" onClick={naverLogin}>
 										<img alt="" src={process.env.PUBLIC_URL + '/images/naver.png'} />
-										Login with Naver
+										Log in with Naver
 									</div>
 									{/* 구글 로그인 */}
 									<GoogleLogin
-										buttonText="Login with Google"
-										className="googleLogin"
+										buttonText="Log in with Google"
+										className="googleLogin no-drag"
 										clientId={clientId}
 										onSuccess={successGoogle}
 										onFailure={failureGoogle}
