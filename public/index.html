@@ -16,6 +16,7 @@
 		<link rel="stylesheet" href="%PUBLIC_URL%/styles/index.css" />
 		<script src="%PUBLIC_URL%/lib/highlight.pack.js"></script>
 		<script src="%PUBLIC_URL%/lib/naveridlogin_js_sdk_2.0.0.js"></script>
+		<script src="%PUBLIC_URL%/lib/kakao.min.js"></script>
 		<!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
@@ -68,21 +69,21 @@
 
 		<!-- 네이버아디디로로그인 초기화 Script -->
 		<script type="text/javascript">
-			let naverId, naverUrl
+			let naverId, callBackUrl
 			if (window.location.href.indexOf('localhost') > -1) {
 				//로컬
 				googleId = '605411712139-7nr29rfs5ihfu9uoev3igr5hpf4ubkle.apps.googleusercontent.com'
 				naverId = '1GCn3_4FurDb9SXHyzlw'
-				naverUrl = 'http://localhost:3000/login'
+				callBackUrl = 'http://localhost:3000/login'
 			} else {
 				//서버
 				googleId = '605411712139-eb3qqicskmkal2i9u26ppdhoq2jt0bd8.apps.googleusercontent.com'
 				naverId = 'kjVk1u480gzQO_XLX_hp'
-				naverUrl = 'https://imki123.github.io/login'
+				callBackUrl = 'https://imki123.github.io/login'
 			}
 			var naverLogin = new naver.LoginWithNaverId({
 				clientId: naverId,
-				callbackUrl: naverUrl,
+				callbackUrl: callBackUrl,
 				isPopup: false /* 팝업을 통한 연동처리 여부 */,
 				loginButton: { color: 'green', type: 3, height: 60 } /* 로그인 버튼의 타입을 지정 */,
 			})
@@ -95,6 +96,7 @@
 				naverLogin.getLoginStatus(function (status) {
 					if (status) {
 						let user = naverLogin.user
+						user.host = 'naver'
 						const userinfo = document.querySelector('#userinfo')
 						if (userinfo) userinfo.value = JSON.stringify(user)
 					} else {
@@ -114,6 +116,58 @@
 		<!-- 네이버 아이디 로그아웃 -->
 		<div id="naverIdLogout" class="hidden" onclick="naverIdLogout(naverLogin)"></div>
 		<!-- // 네이버 아이디 로그아웃 -->
+
+		<!-- 카카오 로그인 초기화 Script -->
+		<div id="kakaoLogin" class="hidden" onclick="kakaoLogin()"></div>
+		<div id="kakaoLogout" class="hidden" onclick="kakaoLogout()"></div>
+		<script>
+			Kakao.init('0d74caaceac5f0f14c0d6a667a9dbdee')
+			Kakao.isInitialized()
+
+			function kakaoLogin() {
+				//로그인하고
+				Kakao.Auth.login({
+					success: function (response) {
+						//console.log(response)
+						//사용자 정보 가져오기
+						Kakao.API.request({
+							url: '/v2/user/me',
+							success: function (response) {
+								let user = response.kakao_account
+								//console.log(user)
+								user.host = 'kakao'
+								const userinfo = document.querySelector('#userinfo')
+								if (userinfo) userinfo.value = JSON.stringify(user)
+							},
+							fail: function (error) {
+								//console.log(error)
+							},
+						})
+					},
+					fail: function (error) {
+						//console.log(error)
+					},
+				})
+			}
+			function kakaoLogout() {
+				if (Kakao.Auth.getAccessToken()) {
+					//토큰이 있으면
+					Kakao.API.request({
+						//로그아웃
+						url: '/v1/user/unlink',
+						success: function (response) {
+							//console.log(response)
+						},
+						fail: function (error) {
+							console.log(error)
+						},
+					})
+					//토큰 삭제
+					Kakao.Auth.setAccessToken(undefined)
+				}
+			}
+		</script>
+		<!-- // 카카오 로그인 초기화 Script -->
 
 		<div id="root"></div>
 	</body>

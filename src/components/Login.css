@@ -97,7 +97,7 @@
 }
 .googleLogin div {
     background-color: transparent !important;
-	padding: 0 10px !important;
+	padding: 0 11px !important;
 }
 .googleLogin span {
 	padding: 0 !important;
@@ -112,6 +112,7 @@
 	align-items: center;
 	border: 0;
 	background: #1ec800;
+	border: 1px solid #1aaa00;
 	color: white;
 	font-weight: bold;
 	font-size: 1.1rem;
@@ -126,4 +127,12 @@
 .naverLogin img{
 	width: 40px;
 	margin-right: 10px;
+}
+.kakaoLogin{
+	background: #fee500;
+	color: black;
+	border: 1px solid #c0ad00;
+}
+.kakaoLogin img{
+	height: 38px;
 }

@@ -28,31 +28,53 @@ function Login({ history, match, location }) {
 	const [userinfo, setUserinfo] = useState()
 
 	useEffect(() => {
-		//로그인화면에서 로그인은 안되어있는데 네이버 유저정보가 있으면 로그인 처리
+		//로그인화면에서 로그인은 안되어있는데 유저정보가 있으면 로그인 처리
 		const userinfoElem = document.querySelector('#userinfo')
 		let frame
 		if (location.pathname === '/login' || location.pathname === '/login/') {
 			if (!store.login) {
-				setTimeout(() => {
+				/* setTimeout(() => {
 					clearInterval(frame)
-				}, 5000)
+				}, 5000) */
 				frame = setInterval(function () {
-					console.log('네이버 로그인 체크')
+					console.log('유저정보 체크')
 					if (userinfoElem && userinfoElem.value) {
 						//userinfo가 있으면 로그인 처리
-						//새로고침되거나, 네이버로그인 버튼을 누르면 userinfo를 가져옴
+						//새로고침되거나, 로그인 버튼을 누르면 userinfo를 가져옴
 						clearInterval(frame) //userinfo 있으면 로그인 체크 중지
 						let user = JSON.parse(userinfoElem.value)
-						let email = user.email
-						let username = email.substring(0, email.indexOf('@')) + '_n'
-						if (username === 'popping2606_n') username = 'imki123' //내아이디
-						console.log('네이버 로그인 성공:', username)
-						user = {
-							username: username,
-							email: email,
-							imageUrl: user.profile_image,
+
+						if (user.host === 'naver') {
+							let email = user.email
+							let username = email.substring(0, email.indexOf('@')) + '_n'
+							if (username === 'popping2606_n') username = 'imki123' //내아이디
+							console.log('네이버 로그인 성공:', username)
+							user = {
+								username: username,
+								email: email,
+								imageUrl: user.profile_image,
+								host: user.host,
+							}
+						} else {
+							let email = user.email
+							let username
+							if (email) {
+								username = email.substring(0, email.indexOf('@')) + '_k'
+								if (username === 'popping2606_k') username = 'imki123' //내아이디
+							} else {
+								username = user.profile.nickname + '_k'
+							}
+
+							console.log('카카오 로그인 성공:', username)
+							user = {
+								username: username,
+								email: email,
+								imageUrl: user.profile.thumbnail_image_url,
+								host: user.host,
+							}
 						}
 						//console.log(user)
+
 						let url = process.env.REACT_APP_URL + '/auth/oauth'
 						//url = process.env.REACT_APP_LOCAL_URL + '/auth/oauth'
 						//로그인 성공시 토큰에 name, email, imageUrl 저장
@@ -68,8 +90,10 @@ function Login({ history, match, location }) {
 									//성공하면 아래 then 작동
 									res.json().then((res) => {
 										alert(res.username + '님 환영합니다 :D')
-										setUserinfo(user)
-										history.replace('/') //네이버 로그인 시 홈으로 이동
+										setUserinfo(res)
+										if (user.host === 'naver') history.replace('/')
+										//네이버 로그인 시 홈으로 이동
+										else history.go(-1) //뒤로가기
 									})
 								} else {
 									let message = '로그인에 실패했습니다 :('
@@ -83,7 +107,7 @@ function Login({ history, match, location }) {
 					}
 				}, 1000)
 			}
-		}else if (location.pathname === '/loginStatus' || location.pathname === '/loginStatus/') {
+		} else if (location.pathname === '/loginStatus' || location.pathname === '/loginStatus/') {
 			if (userinfoElem && !userinfoElem.value) {
 				setUserinfo(false)
 			}
@@ -338,6 +362,13 @@ function Login({ history, match, location }) {
 			naverIdLogin.firstChild.click()
 		}
 	}
+	const kakaoLogin = (e) => {
+		const kakaoLogin = document.querySelector('#kakaoLogin')
+		if (kakaoLogin) {
+			console.log('카카오 로그인 요청')
+			kakaoLogin.click()
+		}
+	}
 
 	return (
 		<div id="background">
@@ -351,6 +382,11 @@ function Login({ history, match, location }) {
 									<div className="naverLogin no-drag" onClick={naverLogin}>
 										<img alt="" src={process.env.PUBLIC_URL + '/images/naver.png'} />
 										Log in with Naver
+									</div>
+									{/* 카카오 로그인 */}
+									<div className="naverLogin kakaoLogin no-drag" onClick={kakaoLogin}>
+										<img alt="" src={process.env.PUBLIC_URL + '/images/kakao.png'} />
+										Log in with Kakao
 									</div>
 									{/* 구글 로그인 */}
 									<GoogleLogin
@@ -424,7 +460,7 @@ function Login({ history, match, location }) {
 						</form>
 					</Route>
 					<Route path={['/loginStatus']}>
-						{(store.login)? (
+						{store.login ? (
 							<div className="center">
 								{store.login.username}님은 현재 <span style={{ color: 'green' }}>로그인</span> 되어있습니다 :D
 								<br />

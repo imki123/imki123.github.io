@@ -40,11 +40,18 @@ function Setting(props) {
 						console.log('로그아웃 성공')
 						store.setLogin(false)
 						
-						//네이버 로그아웃
+						//유저정보 지우기
 						const userinfo = document.querySelector('#userinfo')
 						if (userinfo) userinfo.value = ''
+
+						//네이버 로그아웃
 						const naverIdLogout = document.querySelector('#naverIdLogout')
 						if (naverIdLogout) naverIdLogout.click()
+
+						//카카오 로그아웃
+						const kakaoLogout = document.querySelector('#kakaoLogout')
+						if (kakaoLogout) kakaoLogout.click()
+
 					} else {
 						console.log('로그아웃 실패')
 					}
