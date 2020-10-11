@@ -61,16 +61,22 @@ function Login({ history, match, location }) {
 							if (email) {
 								username = email.substring(0, email.indexOf('@')) + '_k'
 								if (username === 'popping2606_k') username = 'imki123' //내아이디
+								console.log('카카오 로그인 성공:', username)
+								user = {
+									username: username,
+									email: email,
+									imageUrl: user.profile.thumbnail_image_url,
+									host: user.host,
+								}
 							} else {
-								username = user.profile.nickname + '_k'
-							}
-
-							console.log('카카오 로그인 성공:', username)
-							user = {
-								username: username,
-								email: email,
-								imageUrl: user.profile.thumbnail_image_url,
-								host: user.host,
+								console.log('이메일 정보 없음. 로그아웃.')
+								alert('이메일이 없으면 로그인이 불가합니다. 이메일 동의 부탁드려요.')
+								//카카오 로그아웃
+								const kakaoLogout = document.querySelector('#kakaoLogout')
+								if (kakaoLogout) kakaoLogout.click()
+								userinfoElem.value = ''
+								history.replace()
+								return
 							}
 						}
 						//console.log(user)
