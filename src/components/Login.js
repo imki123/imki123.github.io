@@ -70,7 +70,7 @@ function Login({ history, match, location }) {
 								}
 							} else {
 								console.log('이메일 정보 없음. 로그아웃.')
-								alert('이메일이 없으면 로그인이 불가합니다. 이메일 동의 부탁드려요.')
+								alert('이메일이 없으면 로그인이 불가해요. 이메일 동의 부탁드려요 😄')
 								//카카오 로그아웃
 								const kakaoLogout = document.querySelector('#kakaoLogout')
 								if (kakaoLogout) kakaoLogout.click()
@@ -95,11 +95,11 @@ function Login({ history, match, location }) {
 								if (res.status === 200 || res.status === 201) {
 									//성공하면 아래 then 작동
 									res.json().then((res) => {
-										alert(res.username + '님 환영합니다 :D')
-										setUserinfo(res)
+										alert(res.username + '님 환영합니다 😄')
 										//로그인 시 홈으로 이동
 										history.replace('/')
 										//history.go(-1) //뒤로가기
+										setUserinfo(res)
 									})
 								} else {
 									let message = '로그인에 실패했습니다 :('
@@ -231,7 +231,7 @@ function Login({ history, match, location }) {
 						if (res.status === 200 || res.status === 201) {
 							//성공하면 아래 then 작동
 							res.json().then((res) => {
-								alert(res.username + '님의 회원가입에 성공했습니다 :D')
+								alert(res.username + '님의 회원가입에 성공했습니다 😄')
 								history.go(-1)
 							})
 						} else {
@@ -262,7 +262,7 @@ function Login({ history, match, location }) {
 						.then((res) => {
 							if (res.status === 200) {
 								//삭제하면 Ok
-								alert('계정이 탈퇴되었습니다. 또 들러 주세요 :D')
+								alert('계정이 탈퇴되었습니다. 또 들러 주세요 😄')
 								history.push('/')
 							} else {
 								let message = '탈퇴에 실패했습니다 :('
@@ -295,7 +295,7 @@ function Login({ history, match, location }) {
 							//성공하면 아래 then 작동
 							res.json().then((res) => {
 								store.setLogin(res)
-								alert(res.username + '님 환영합니다 :D')
+								alert(res.username + '님 환영합니다 😄')
 								history.go(-1)
 							})
 						} else {
@@ -343,7 +343,7 @@ function Login({ history, match, location }) {
 				if (res.status === 200 || res.status === 201) {
 					//성공하면 아래 then 작동
 					res.json().then((res) => {
-						alert(res.username + '님 환영합니다 :D')
+						alert(res.username + '님 환영합니다 😄')
 						history.go(-1)
 						store.setLogin(res)
 					})
@@ -468,7 +468,7 @@ function Login({ history, match, location }) {
 					<Route path={['/loginStatus']}>
 						{store.login ? (
 							<div className="center">
-								{store.login.username}님은 현재 <span style={{ color: 'green' }}>로그인</span> 되어있습니다 :D
+								{store.login.username}님은 현재 <span style={{ color: 'green' }}>로그인</span> 되어있습니다 😄
 								<br />
 								<span style={{ fontSize: '0.8rem' }}>(로그인은 최대 일주일간 유지됩니다.)</span>
 							</div>

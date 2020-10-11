@@ -11,7 +11,7 @@ function Guide(props) {
 		<div id="guideBack" onClick={store.closeMenuMobile}>
 			<div id="guideWrapper" className="slideMenu">
 				<div id="avatar">
-					<img alt="avatar" src={process.env.PUBLIC_URL + '/images/avatar.png'} title="Hello :D" />
+					<img alt="avatar" src={process.env.PUBLIC_URL + '/images/avatar.png'} title="Hello 😄" />
 					<div id="name">Im kiyoung</div>
 					<div id="nickName">imki123</div>
 					<div id="github">

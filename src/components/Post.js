@@ -232,8 +232,8 @@ function Post({ match, location, history }) {
 				{location.pathname === '/' ? (
 					<Meta
 						data={{
-							title: '임기의 코딩 블로그 :D',
-							description: 'imki123의 임기의 코딩 블로그입니다 :D',
+							title: '임기의 코딩 블로그 😄',
+							description: 'imki123의 임기의 코딩 블로그입니다 😄',
 						}}
 					/>
 				) : (
@@ -315,7 +315,7 @@ function Post({ match, location, history }) {
 										로그인
 									</button>
 								)}
-								{store.login ? <textarea onChange={store.resizeTextarea} placeholder=" 댓글을 남겨주세요 :D" /> : <textarea readOnly placeholder=" 로그인 후에 댓글을 남겨주세요 :D" />}
+								{store.login ? <textarea onChange={store.resizeTextarea} placeholder=" 댓글을 남겨주세요 😄" /> : <textarea readOnly placeholder=" 로그인 후에 댓글을 남겨주세요 😄" />}
 							</div>
 						</div>
 						<div className="commentButtons">
