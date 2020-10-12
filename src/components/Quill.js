@@ -6,7 +6,6 @@ import { useQuill } from 'react-quilljs'
 import imageCompress from 'quill-image-compress'
 import { AppContext } from '../App'
 import Axios from 'axios'
-import { CopyToClipboard } from 'react-copy-to-clipboard'
 import Emoji from './Emoji'
 
 function Quill({ match, location, history }) {
@@ -245,14 +244,6 @@ function Quill({ match, location, history }) {
       const newSubMenu = document.querySelector('[name=newSubMenu]')
       if (newSubMenu) newSubMenu.value = ''
     }
-  }
-  const copied = (e) => {
-    //console.log(e.target)
-    let emoji = e.target
-    emoji.style.background = 'blue'
-    setTimeout(function () {
-      emoji.style.background = 'unset'
-    }, 1000)
   }
 
   return (

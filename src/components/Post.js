@@ -11,7 +11,6 @@ import Meta from './Meta'
 import Recents from './Recents'
 import CommentLists from './CommentLists'
 import Emoji from './Emoji'
-import CopyToClipboard from 'react-copy-to-clipboard'
 
 function Post({ match, location, history }) {
   const store = React.useContext(AppContext)
@@ -228,15 +227,6 @@ function Post({ match, location, history }) {
   useEffect(() => {
     store.resizeTextarea()
   }, [commentCnt, store, comments])
-
-  const copied = (e) => {
-    //console.log(e.target)
-    let emoji = e.target
-    emoji.style.background = 'blue'
-    setTimeout(function () {
-      emoji.style.background = 'unset'
-    }, 1000)
-  }
 
   return (
     <>

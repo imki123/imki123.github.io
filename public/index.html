@@ -71,20 +71,16 @@
 
     <!-- 네이버아디디로로그인 초기화 Script -->
     <script type="text/javascript">
-      let naverId, callBackUrl
+      let callBackUrl
       if (window.location.href.indexOf('localhost') > -1) {
         //로컬
-        googleId = '605411712139-7nr29rfs5ihfu9uoev3igr5hpf4ubkle.apps.googleusercontent.com'
-        naverId = '1GCn3_4FurDb9SXHyzlw'
         callBackUrl = 'http://localhost:3000/login'
       } else {
         //서버
-        googleId = '605411712139-eb3qqicskmkal2i9u26ppdhoq2jt0bd8.apps.googleusercontent.com'
-        naverId = 'kjVk1u480gzQO_XLX_hp'
         callBackUrl = 'https://imki123.github.io/login'
       }
       var naverLogin = new naver.LoginWithNaverId({
-        clientId: naverId,
+        clientId: 'kjVk1u480gzQO_XLX_hp',
         callbackUrl: callBackUrl,
         isPopup: false /* 팝업을 통한 연동처리 여부 */,
         loginButton: { color: 'green', type: 3, height: 60 } /* 로그인 버튼의 타입을 지정 */,
