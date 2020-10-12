@@ -42,6 +42,10 @@ function Setting(props) {
             //카카오 로그아웃
             const kakaoLogout = document.querySelector('#kakaoLogout')
             if (kakaoLogout) kakaoLogout.click()
+
+            //구르 로그아웃
+            const googleLogout = document.querySelector('#googleLogout')
+            if (googleLogout) googleLogout.click()
           } else {
             console.log('로그아웃 실패')
           }
@@ -64,8 +68,9 @@ function Setting(props) {
             </Link>
           )}
           {store.login && (
-            <div onClick={logout}>
-              <GoogleLogout
+            <div onClick={logout} className="settingList">
+              로그아웃
+              {/* <GoogleLogout
                 icon={false}
                 buttonText="로그아웃"
                 className="settingList googleLogout"
@@ -77,7 +82,7 @@ function Setting(props) {
                   console.log(res)
                 }}
                 cookiePolicy={'single_host_origin'}
-              />
+              /> */}
             </div>
           )}
           {!store.login && (

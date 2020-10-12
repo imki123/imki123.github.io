@@ -42,7 +42,7 @@ function Login({ history, match, location }) {
                 imageUrl: user.profile_image,
                 host: user.host,
               }
-            } else {
+            } else if(user.host === 'kakao'){
               let email = user.email
               let username
               if (email) {
@@ -64,6 +64,18 @@ function Login({ history, match, location }) {
                 userinfoElem.value = ''
                 history.replace()
                 return
+              }
+            }else{
+              let email = user.email
+              let username = email.substring(0, email.indexOf('@')) + '_g'
+              if (username === 'popping2606_g') username = 'imki123' //내아이디
+              console.log('구글 로그인 성공:', username)
+              user = {
+                username: username,
+                email: email,
+                name: user.name,
+                imageUrl: user.imageUrl,
+                host: user.host,
               }
             }
             //console.log(user)
@@ -362,6 +374,13 @@ function Login({ history, match, location }) {
       kakaoLogin.click()
     }
   }
+  const googleLogin = (e) => {
+    const googleLogin = document.querySelector('#googleLogin')
+    if (googleLogin) {
+      console.log('구글 로그인 요청')
+      googleLogin.firstChild.click()
+    }
+  }
 
   return (
     <div id="background">
@@ -382,7 +401,11 @@ function Login({ history, match, location }) {
                     Log in with Kakao
                   </div>
                   {/* 구글 로그인 */}
-                  <GoogleLogin
+                  <div className="naverLogin googleLogin no-drag" onClick={googleLogin}>
+                    <img alt="" src={process.env.PUBLIC_URL + '/images/google.png'} />
+                    Log in with Google
+                  </div>
+                  {/* <GoogleLogin
                     buttonText="Log in with Google"
                     className="googleLogin no-drag"
                     clientId="605411712139-eb3qqicskmkal2i9u26ppdhoq2jt0bd8.apps.googleusercontent.com"
@@ -390,7 +413,7 @@ function Login({ history, match, location }) {
                     onFailure={failureGoogle}
                     cookiePolicy={'single_host_origin'}
                     isSignedIn={true}
-                  />
+                  /> */}
                   <div className="googleWarning">
                     구글 로그인은 <span style={{ color: 'red' }}>인앱 브라우저(카카오톡 등)</span>에서 지원되지 않습니다. 오류 발생 시 더보기(
                     <MoreVertIcon />, <img alt="" src={process.env.PUBLIC_URL + '/images/share.png'} />

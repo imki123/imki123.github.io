@@ -9,14 +9,19 @@ function PostList(props) {
 	return (
 		<Link to={`/posts/${list.postId}`}>
 			<div className="postList no-drag">
+				<div className="postListTags">
+					<span className="postTags">
+						Tag : {list.tags[0]}{list.tags[1] ? `, ${list.tags[1]}` : ''}
+					</span>
+					<span className="postDate">
+					{list.views ? list.views : 0}, {date}
+					</span>
+				</div>
 				<div className="postListHeader">
 					<div>
 						<span className="postId">{no}.</span>
 						<span className="postTitle">{list.title}</span>
 					</div>
-					<span className="postDate">
-						{list.views ? list.views : 0}, {date}
-					</span>
 				</div>
 				<div className="postBody">{list.text}</div>
 			</div>

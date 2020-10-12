@@ -136,3 +136,12 @@
 .kakaoLogin img{
 	height: 38px;
 }
+.googleLogin{
+	background: white;
+	color: black;
+	border: 1px solid black;
+}
+.googleLogin img{
+	height: 38px;
+	padding: 4px; 
+}
