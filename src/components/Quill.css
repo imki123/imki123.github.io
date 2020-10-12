@@ -1,71 +1,75 @@
 .quill {
-	background: white;
-	height: 100%;
-	overflow: auto;
-	position: relative;
+  background: white;
+  height: 100%;
+  overflow: auto;
+  position: relative;
 }
 .quillTitle {
-	display: flex;
-	justify-content: space-between;
-	align-items: flex-end;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 [name='title'] {
-	width: 100%;
-	font-size: 1.2rem;
-	font-weight: bold;
-	border: 0px;
-	border-bottom: 1px solid black;
-	outline: none;
-	margin: 12px 0 0;
+  width: 100%;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: 0px;
+  border-bottom: 1px solid black;
+  outline: none;
+  margin: 12px 0 0;
 }
 #editor {
-	height: calc(100% - 200px);
+  height: calc(100% - 200px);
 }
 #tags {
-	margin: 10px 0;
+  margin: 10px 0;
 }
 #tagsTitle {
-	font-size: 1.2rem;
-	font-weight: bold;
-	margin-right: 12px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-right: 12px;
 }
 #editor label {
-	margin-right: 12px;
-	display: inline-flex;
-	align-items: center;
-	cursor: pointer;
+  margin-right: 12px;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
 }
 #editor label:hover {
-	text-decoration: underline;
+  text-decoration: underline;
 }
 #editor label input {
-	cursor: pointer;
+  cursor: pointer;
 }
 .editorButton {
-	border: 0px;
-	border-radius: 5px;
-	background: #84ff84;
-	height: 30px;
-	font-size: 0.9rem;
-	margin-left: 12px;
+  border: 0px;
+  border-radius: 5px;
+  background: #84ff84;
+  height: 30px;
+  font-size: 0.9rem;
+  margin-left: 12px;
 }
 #content .ql-editor {
-	padding: 0;
+  padding: 0;
 }
-#content .ql-editor a{
-	color: blue;
+#content .ql-editor a {
+  color: blue;
+}
+.quill .ql-editor,
+.quill .ql-container {
+  min-height: 300px;
 }
 .ql-container {
-	font-size: inherit !important;
+  font-size: inherit !important;
 }
 .ql-syntax {
-	width: 100%;
-	overflow: auto !important;
-	font-size: 0.85rem !important;
-	white-space: pre !important;
-	word-wrap: normal !important;
+  width: 100%;
+  overflow: auto !important;
+  font-size: 0.85rem !important;
+  white-space: pre !important;
+  word-wrap: normal !important;
 }
 
 .ql-toolbat.ql-snow {
-	padding: 0;
+  padding: 0;
 }
