@@ -64,12 +64,12 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
 
-    <!-- 네이버아이디로로그인 버튼 노출 영역 -->
-    <div id="naverIdLogin" class="hidden"></div>
+    <!-- OAuth 유저정보 -->
     <input id="userinfo" class="hidden" value="" />
-    <!-- //네이버아이디로로그인 버튼 노출 영역 -->
 
     <!-- 네이버아디디로로그인 초기화 Script -->
+    <div id="naverIdLogin" class="hidden"></div>
+    <div id="naverIdLogout" class="hidden" onclick="naverIdLogout()"></div>
     <script type="text/javascript">
       let callBackUrl
       if (window.location.href.indexOf('localhost') > -1) {
@@ -104,16 +104,11 @@
       })
 
       //네이버 아이디 로그아웃
-      function naverIdLogout(naverLogin) {
-        //console.log('naverIdLogout:',naverLogin)
+      function naverIdLogout() {
         naverLogin.logout()
       }
     </script>
     <!-- // 네이버아이디로로그인 초기화 Script -->
-
-    <!-- 네이버 아이디 로그아웃 -->
-    <div id="naverIdLogout" class="hidden" onclick="naverIdLogout(naverLogin)"></div>
-    <!-- // 네이버 아이디 로그아웃 -->
 
     <!-- 카카오 로그인 초기화 Script -->
     <div id="kakaoLogin" class="hidden" onclick="kakaoLogin()"></div>
@@ -124,49 +119,49 @@
       // SDK 초기화 여부를 판단합니다.
       //console.log(Kakao.isInitialized())
 
-function kakaoLogin() {
-  //로그인하고
-  Kakao.Auth.login({
-    success: function (response) {
-      //console.log(response)
-      //사용자 정보 가져오기
-      Kakao.API.request({
-        url: '/v2/user/me',
-        success: function (response) {
-          let user = response.kakao_account
-          //console.log(user)
-          user.host = 'kakao' //다른 로그인 서비스와 구분하기 위해서 개인적으로 추가했음
-          const userinfo = document.querySelector('#userinfo')
-          if (userinfo) userinfo.value = JSON.stringify(user)
-        },
-        fail: function (error) {
-          //console.log(error)
-        },
-      })
-    },
-    fail: function (error) {
-      //console.log(error)
-    },
-  })
-}
-function kakaoLogout() {
-  if (Kakao.Auth.getAccessToken()) {
-    //토큰이 있으면
-    Kakao.API.request({
-      //로그아웃
-      url: '/v1/user/unlink',
-      success: function (response) {
-        //console.log(response)
-      },
-      fail: function (error) {
-        console.log(error)
-      },
-    })
-    //토큰 삭제
-    Kakao.Auth.setAccessToken(undefined)
-  }
-}
-</script>
+      function kakaoLogin() {
+        //로그인하고
+        Kakao.Auth.login({
+          success: function (response) {
+            //console.log(response)
+            //사용자 정보 가져오기
+            Kakao.API.request({
+              url: '/v2/user/me',
+              success: function (response) {
+                let user = response.kakao_account
+                //console.log(user)
+                user.host = 'kakao' //다른 로그인 서비스와 구분하기 위해서 개인적으로 추가했음
+                const userinfo = document.querySelector('#userinfo')
+                if (userinfo) userinfo.value = JSON.stringify(user)
+              },
+              fail: function (error) {
+                //console.log(error)
+              },
+            })
+          },
+          fail: function (error) {
+            //console.log(error)
+          },
+        })
+      }
+      function kakaoLogout() {
+        if (Kakao.Auth.getAccessToken()) {
+          //토큰이 있으면
+          Kakao.API.request({
+            //로그아웃
+            url: '/v1/user/unlink',
+            success: function (response) {
+              //console.log(response)
+            },
+            fail: function (error) {
+              console.log(error)
+            },
+          })
+          //토큰 삭제
+          Kakao.Auth.setAccessToken(undefined)
+        }
+      }
+    </script>
     <!-- // 카카오 로그인 초기화 Script -->
 
     <div id="root"></div>
