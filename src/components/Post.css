@@ -43,6 +43,7 @@
 .EmojiDiv{
 	border-top: 2px dotted green;
 	padding: 20px 8px 0px;
+	text-align: right;
 }
 .writeComment {
 	display: flex;

@@ -1,0 +1,16 @@
+.Emoji{
+	font-size: 0.9rem;
+}
+.Emoji span{
+	border-radius: 6px;
+  padding: 0 3px;
+  cursor: pointer;
+}
+.Emoji .EmojiLink{
+	font-size: 0.9rem;
+	padding: 0 8px;
+	cursor: pointer;
+	cursor: alias;
+	color: blue;
+	text-decoration: underline;
+}

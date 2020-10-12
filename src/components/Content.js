@@ -61,16 +61,16 @@ function Content(props) {
 
 	return (
 		<div id="content" className="slideMenu">
-			{/* FAB */}
+			{/* FABs */}
 			{store.login && store.login.username === 'imki123' && (
-				<Link id="postFAB" className="hover" to="/quill">
+				<Link id="postFAB" className="hover FAB" to="/quill">
 					<AddCircleOutlineIcon />
 				</Link>
 			)}
-			<div id="scrollFAB" className="hover" onClick={scrollUp}>
+			<div id="scrollFAB" className="hover FAB" onClick={scrollUp}>
 				<ArrowUpwardIcon />
 			</div>
-			<div id="menuFAB" className="hover" onClick={store.slideMenu}>
+			<div id="menuFAB" className="hover FAB" onClick={store.slideMenu}>
 				<img alt="MENU" src={process.env.PUBLIC_URL + '/images/guide_icon.png'} />
 			</div>
 

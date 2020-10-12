@@ -8,58 +8,36 @@
 	right: 0px;
 }
 
+.FAB{
+	z-index: 1;
+	position: fixed;
+	display: flex;
+	justify-content: center;
+	align-items: center;	
+	width: 40px;
+	height: 40px;
+	background: rgba(180, 255, 180, 0.6);
+	border-radius: 50%;
+	box-shadow: 5px 5px 5px 0 grey;
+	right: 8px;
+}
+.FAB svg{
+	color: #606060;
+	font-size: 30px;
+}
+.FAB img{
+	width: 26px;
+}
 #postFAB {
-	z-index: 1;
-	position: fixed;
-	display: flex;
-	justify-content: center;
-	align-items: center;
 	bottom: 140px;
-	right: 8px;
-	width: 40px;
-	height: 40px;
-	background: #b4ffb4;
-	border-radius: 50%;
-	box-shadow: 5px 5px 5px 0 grey;
 }
-#postFAB svg {
-	color: #606060;
-	font-size: 30px;
-}
-
 #scrollFAB {
-	z-index: 1;
-	position: fixed;
-	display: flex;
-	justify-content: center;
-	align-items: center;
 	bottom: 90px;
-	right: 8px;
-	width: 40px;
-	height: 40px;
-	background: #b4ffb4;
-	border-radius: 50%;
-	box-shadow: 5px 5px 5px 0 grey;
 }
-#scrollFAB svg {
-	color: #606060;
-	font-size: 30px;
+#menuFAB {
+	bottom: 40px;
 }
 
-#menuFAB {
-	z-index: 1;
-	position: fixed;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	bottom: 40px;
-	right: 8px;
-	width: 40px;
-	height: 40px;
-	background: #b4ffb4;
-	border-radius: 50%;
-	box-shadow: 5px 5px 5px 0 grey;
-}
 #loading {
 	width: 100%;
 	height: 100%;

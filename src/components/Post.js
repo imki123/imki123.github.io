@@ -10,6 +10,7 @@ import Axios from 'axios'
 import Meta from './Meta'
 import Recents from './Recents'
 import CommentLists from './CommentLists'
+import Emoji from './Emoji'
 import CopyToClipboard from 'react-copy-to-clipboard'
 
 function Post({ match, location, history }) {
@@ -228,14 +229,14 @@ function Post({ match, location, history }) {
     store.resizeTextarea()
   }, [commentCnt, store, comments])
 
-	const copied = e => {
-		//console.log(e.target)
-		let emoji = e.target
-		emoji.style.background = 'blue'
-		setTimeout(function(){
-			emoji.style.background = 'unset'
-		}, 1000)
-	}
+  const copied = (e) => {
+    //console.log(e.target)
+    let emoji = e.target
+    emoji.style.background = 'blue'
+    setTimeout(function () {
+      emoji.style.background = 'unset'
+    }, 1000)
+  }
 
   return (
     <>
@@ -319,34 +320,7 @@ function Post({ match, location, history }) {
         {location.pathname !== '/' && (
           <>
             <div className="EmojiDiv">
-              <span className="Emoji">
-                <CopyToClipboard options={{format: 'text/plain'}} text={"😄"}><span onClick={copied}>😄</span></CopyToClipboard>
-                <CopyToClipboard options={{format: 'text/plain'}} text={"🤣"}><span onClick={copied}>🤣</span></CopyToClipboard>
-                <CopyToClipboard options={{format: 'text/plain'}} text={"🥰"}><span onClick={copied}>🥰</span></CopyToClipboard>
-                <CopyToClipboard options={{format: 'text/plain'}} text={"😍"}><span onClick={copied}>😍</span></CopyToClipboard>
-                <CopyToClipboard options={{format: 'text/plain'}} text={"😝"}><span onClick={copied}>😝</span></CopyToClipboard>
-                <CopyToClipboard options={{format: 'text/plain'}} text={"😭"}><span onClick={copied}>😭</span></CopyToClipboard>
-                <CopyToClipboard options={{format: 'text/plain'}} text={"👍"}><span onClick={copied}>👍</span></CopyToClipboard>
-                <CopyToClipboard options={{format: 'text/plain'}} text={"🐕"}><span onClick={copied}>🐕</span></CopyToClipboard>
-                <CopyToClipboard options={{format: 'text/plain'}} text={"🐈"}><span onClick={copied}>🐈</span></CopyToClipboard>
-                <CopyToClipboard options={{format: 'text/plain'}} text={"☀"}><span onClick={copied}>☀</span></CopyToClipboard>
-                <CopyToClipboard options={{format: 'text/plain'}} text={"🌙"}><span onClick={copied}>🌙</span></CopyToClipboard>
-                <CopyToClipboard options={{format: 'text/plain'}} text={"⭐"}><span onClick={copied}>⭐</span></CopyToClipboard>
-                <CopyToClipboard options={{format: 'text/plain'}} text={"☁"}><span onClick={copied}>☁</span></CopyToClipboard>
-                <CopyToClipboard options={{format: 'text/plain'}} text={"🌧"}><span onClick={copied}>🌧</span></CopyToClipboard>
-                <CopyToClipboard options={{format: 'text/plain'}} text={"💧"}><span onClick={copied}>💧</span></CopyToClipboard>
-                <CopyToClipboard options={{format: 'text/plain'}} text={"♥"}><span onClick={copied}>♥</span></CopyToClipboard>
-                <CopyToClipboard options={{format: 'text/plain'}} text={"❤"}><span onClick={copied}>❤</span></CopyToClipboard>
-                <CopyToClipboard options={{format: 'text/plain'}} text={"💕"}><span onClick={copied}>💕</span></CopyToClipboard>
-              </span>
-              <span
-                className="EmojiLink"
-                onClick={() => {
-                  window.open('https://copy.emojiall.com/ko/')
-                }}
-              >
-                [이모지🔗]
-              </span>
+                <Emoji emojis={'😄,🤣,🥰,😍,😝,😭,👍,🐕,🐈,☀,🌙,⭐,☁,🌧,💧,♥,❤,💕'} />
             </div>
             <div className="writeComment">
               <div className="commentProfile">
