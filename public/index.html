@@ -20,8 +20,8 @@
     <!-- 카카오 로그인 스크립트 -->
     <script src="%PUBLIC_URL%/lib/kakao.min.js"></script>
     <!-- 구글 로그인 스크립트, react-snap때문에 Google API에 localhost:45678 추가해야함 -->
-    <meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id" content="605411712139-eb3qqicskmkal2i9u26ppdhoq2jt0bd8.apps.googleusercontent.com">
+    <meta name="google-signin-scope" content="profile email" />
+    <meta name="google-signin-client_id" content="605411712139-eb3qqicskmkal2i9u26ppdhoq2jt0bd8.apps.googleusercontent.com" />
     <script src="%PUBLIC_URL%/lib/google.platform.js"></script>
     <!-- <script src="https://apis.google.com/js/platform.js"></script> -->
     <!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
@@ -177,7 +177,7 @@
     <script>
       function onSignIn(googleUser) {
         // Useful data for your client-side scripts:
-        var profile = googleUser.getBasicProfile();
+        var profile = googleUser.getBasicProfile()
         let user = {
           name: profile.getName(),
           email: profile.getEmail(),
@@ -189,13 +189,13 @@
         if (userinfo) userinfo.value = JSON.stringify(user)
 
         // The ID token you need to pass to your backend:
-        var id_token = googleUser.getAuthResponse().id_token;
+        var id_token = googleUser.getAuthResponse().id_token
       }
       function signOut() {
-        var auth2 = gapi.auth2.getAuthInstance();
+        var auth2 = gapi.auth2.getAuthInstance()
         auth2.signOut().then(function () {
-          console.log('User signed out.');
-        });
+          console.log('User signed out.')
+        })
       }
     </script>
     <!-- // 구글 로그인 초기화 Script -->
