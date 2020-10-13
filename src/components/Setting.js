@@ -42,7 +42,7 @@ function Setting(props) {
             const kakaoLogout = document.querySelector('#kakaoLogout')
             if (kakaoLogout) kakaoLogout.click()
 
-            //구르 로그아웃
+            //구글 로그아웃
             const googleLogout = document.querySelector('#googleLogout')
             if (googleLogout) googleLogout.click()
           } else {

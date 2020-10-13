@@ -116,10 +116,14 @@
 
       //네이버 아이디 로그아웃
       function naverIdLogout() {
-        naverLogin.logout()
+        naverLogin.logout() //로그인 정보를 지우고
+        const win = window.open('https://nid.naver.com/nidlogin.logout') //실제로 네이버 로그아웃
+        setTimeout(function(){
+          win.close() //팝업창 닫아주기
+        },1)
       }
     </script>
-    <!-- // 네이버아이디로로그인 초기화 Script -->
+    <!-- // 네이버 아이디로 로그인 초기화 Script -->
 
     <!-- 카카오 로그인 초기화 Script -->
     <div id="kakaoLogin" class="hidden" onclick="kakaoLogin()"></div>
