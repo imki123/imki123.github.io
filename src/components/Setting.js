@@ -2,7 +2,6 @@ import React from 'react'
 import './Setting.css'
 import { Link } from 'react-router-dom'
 import { AppContext } from '../App'
-import { GoogleLogout } from 'react-google-login'
 
 function Setting(props) {
   const store = React.useContext(AppContext)
@@ -42,6 +41,10 @@ function Setting(props) {
             //카카오 로그아웃
             const kakaoLogout = document.querySelector('#kakaoLogout')
             if (kakaoLogout) kakaoLogout.click()
+
+            //구르 로그아웃
+            const googleLogout = document.querySelector('#googleLogout')
+            if (googleLogout) googleLogout.click()
           } else {
             console.log('로그아웃 실패')
           }
@@ -64,20 +67,8 @@ function Setting(props) {
             </Link>
           )}
           {store.login && (
-            <div onClick={logout}>
-              <GoogleLogout
-                icon={false}
-                buttonText="로그아웃"
-                className="settingList googleLogout"
-                clientId="605411712139-eb3qqicskmkal2i9u26ppdhoq2jt0bd8.apps.googleusercontent.com"
-                onSuccess={(res) => {
-                  console.log('logout')
-                }}
-                onFailure={(res) => {
-                  console.log(res)
-                }}
-                cookiePolicy={'single_host_origin'}
-              />
+            <div onClick={logout} className="settingList">
+              로그아웃
             </div>
           )}
           {!store.login && (
