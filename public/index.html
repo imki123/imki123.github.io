@@ -19,12 +19,9 @@
     <script src="%PUBLIC_URL%/lib/naveridlogin_js_sdk_2.0.0.js"></script>
     <!-- 카카오 로그인 스크립트 -->
     <script src="%PUBLIC_URL%/lib/kakao.min.js"></script>
-    <!-- 구글 로그인 스크립트, react-snap때문에 Google API에 localhost:45678 추가해야함 -->
+    <!-- 구글 로그인 메타태그 -->
     <meta name="google-signin-scope" content="profile email" />
     <meta name="google-signin-client_id" content="605411712139-eb3qqicskmkal2i9u26ppdhoq2jt0bd8.apps.googleusercontent.com" />
-    <script src="%PUBLIC_URL%/lib/google.platform.js"></script>
-    <!-- <script src="https://apis.google.com/js/platform.js"></script> -->
-    <!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
 
     <!--
       manifest.json provides metadata used when your web app is installed on a
@@ -172,8 +169,23 @@
     <!-- // 카카오 로그인 초기화 Script -->
 
     <!-- 구글 로그인 초기화 Script -->
-    <div id="googleLogin" class="g-signin2 hidden" data-onsuccess="onSignIn" data-theme="dark"></div>
+    <div id="googleLogin"></div>
     <div id="googleLogout" onClick="signOut()"></div>
+    <script>
+      if (navigator.userAgent !== 'ReactSnap') {
+        // some code to dynamically load a script
+        // 구글 로그인 스크립트
+        let myScript = document.createElement('script')
+        myScript.setAttribute('src', 'https://apis.google.com/js/platform.js')
+        myScript.setAttribute('async', true)
+        myScript.setAttribute('defer', true)
+        document.body.appendChild(myScript)
+
+        let googleLogin = document.querySelector('#googleLogin')
+        if(googleLogin) googleLogin.innerHTML = `<div class="g-signin2 hidden" data-onsuccess="onSignIn" data-theme="dark"></div>`
+      }
+    </script>
+
     <script>
       function onSignIn(googleUser) {
         // Useful data for your client-side scripts:
@@ -193,8 +205,12 @@
       }
       function signOut() {
         var auth2 = gapi.auth2.getAuthInstance()
+        console.log(auth2)
         auth2.signOut().then(function () {
-          console.log('User signed out.')
+          //console.log('User signed out.')
+        })
+        auth2.disconnect().then(() => {
+          //console.log('disconnected')
         })
       }
     </script>

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import './Login.css'
 import { Switch, Route, Link } from 'react-router-dom'
 import { AppContext } from '../App'
-import GoogleLogin from 'react-google-login'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 
 function Login({ history, match, location }) {
@@ -21,7 +20,7 @@ function Login({ history, match, location }) {
   useEffect(() => {
     //로그인화면에서 로그인은 안되어있는데 유저정보가 있으면 로그인 처리
     const userinfoElem = document.querySelector('#userinfo')
-    if (location.pathname === '/login' || location.pathname === '/login/') {
+    if (location.pathname === '/login' || location.pathname === '/login/' || location.pathname === '/register' || location.pathname === '/register/') {
       if (!store.login) {
         let frame = setInterval(function () {
           console.log('유저정보 체크')
@@ -42,7 +41,7 @@ function Login({ history, match, location }) {
                 imageUrl: user.profile_image,
                 host: user.host,
               }
-            } else if(user.host === 'kakao'){
+            } else if (user.host === 'kakao') {
               let email = user.email
               let username
               if (email) {
@@ -65,7 +64,7 @@ function Login({ history, match, location }) {
                 history.replace()
                 return
               }
-            }else{
+            } else {
               let email = user.email
               let username = email.substring(0, email.indexOf('@')) + '_g'
               if (username === 'popping2606_g') username = 'imki123' //내아이디
@@ -312,54 +311,6 @@ function Login({ history, match, location }) {
     }
   }
 
-  const successGoogle = (res) => {
-    console.log('구글 로그인 성공')
-    //console.log(res)
-    let email = res.profileObj.email
-    let username = email.substring(0, email.indexOf('@')) + '_g'
-    if (username === 'popping2606_g') username = 'imki123' //내아이디
-
-    let user = {
-      username: username,
-      email: email,
-      imageUrl: res.profileObj.imageUrl,
-    }
-    let url = process.env.REACT_APP_URL + '/auth/oauth'
-    //url = process.env.REACT_APP_LOCAL_URL + '/auth/oauth'
-    //로그인 성공시 토큰에 name, email, imageUrl 저장
-    fetch(url, {
-      mode: 'cors',
-      method: 'POST',
-      credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        username: user.username,
-        email: user.email,
-        imageUrl: user.imageUrl,
-      }),
-    })
-      .then((res) => {
-        if (res.status === 200 || res.status === 201) {
-          //성공하면 아래 then 작동
-          res.json().then((res) => {
-            alert(res.username + '님 환영합니다 😄')
-            history.go(-1)
-            store.setLogin(res)
-          })
-        } else {
-          let message = '로그인에 실패했습니다 :('
-          if (res.status === 401) {
-            message += '\n로그인 정보를 확인해주세요.'
-          }
-          console.log(message)
-        }
-      })
-      .catch((e) => console.error(e))
-  }
-  const failureGoogle = (res) => {
-    console.log('구글 로그인 실패', res)
-  }
-
   const naverLogin = (e) => {
     const naverIdLogin = document.querySelector('#naverIdLogin')
     if (naverIdLogin) {
@@ -378,7 +329,7 @@ function Login({ history, match, location }) {
     const googleLogin = document.querySelector('#googleLogin')
     if (googleLogin) {
       console.log('구글 로그인 요청')
-      googleLogin.firstChild.click()
+      googleLogin.firstChild.firstChild.click()
     }
   }
 
@@ -405,15 +356,6 @@ function Login({ history, match, location }) {
                     <img alt="" src={process.env.PUBLIC_URL + '/images/google.png'} />
                     Log in with Google
                   </div>
-                  {/* <GoogleLogin
-                    buttonText="Log in with Google"
-                    className="googleLogin no-drag"
-                    clientId="605411712139-eb3qqicskmkal2i9u26ppdhoq2jt0bd8.apps.googleusercontent.com"
-                    onSuccess={successGoogle}
-                    onFailure={failureGoogle}
-                    cookiePolicy={'single_host_origin'}
-                    isSignedIn={true}
-                  /> */}
                   <div className="googleWarning">
                     구글 로그인은 <span style={{ color: 'red' }}>인앱 브라우저(카카오톡 등)</span>에서 지원되지 않습니다. 오류 발생 시 더보기(
                     <MoreVertIcon />, <img alt="" src={process.env.PUBLIC_URL + '/images/share.png'} />
