@@ -235,11 +235,11 @@ function Post({ match, location, history }) {
           <Meta
             data={{
               title: '임기의 코딩 블로그 😄',
-              description: 'imki123의 임기의 코딩 블로그입니다 😄',
+              description: '임기의 코딩 블로그에 오신 것을 환영합니다 😄',
             }}
           />
         ) : (
-          <Meta data={{ title: post.title, description: post.text, locale: 'ko' }} />
+          <Meta data={{ title: post.title, description: post.text}} />
         )}
         {/* 태그 */}
         <div className="nav">

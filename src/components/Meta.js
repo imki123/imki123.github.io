@@ -22,14 +22,14 @@ const Meta = ({ data }) => {
 		<Helmet titleTemplate="%s">
 			<html lang={lang} />
 			<title>{title}</title>
-			<meta name="description" content={description} />
+			<meta name="description" content={title+' '+description} />
 			{canonical ? <link rel="canonical" href={canonical} /> : null}
 			{image ? <link rel="image_src" href={image} /> : null}
 			{image ? <meta itemprop="image" content={image} /> : null}
 
 			<meta property="og:site_name" content="YOUR WEB SITE" />
 			<meta property="og:title" content={title} />
-			{description ? <meta property="og:description" content={description} /> : null}
+			{description ? <meta property="og:description" content={title+' '+description} /> : null}
 			{canonical ? <meta property="og:url" content={canonical} /> : null}
 			<meta property="og:locale" content={locales[lang]} />
 			<meta property="og:type" content={type} />
@@ -41,7 +41,7 @@ const Meta = ({ data }) => {
 			{/* change type of twitter if there is no image? */}
 			<meta name="twitter:card" content="summary_large_image" />
 			<meta name="twitter:title" content={title} />
-			{description ? <meta name="twitter:description" content={description} /> : null}
+			{description ? <meta name="twitter:description" content={title+' '+description} /> : null}
 			{image ? <meta name="twitter:image" content={image} /> : null}
 			<meta name="twitter:site" content="@YOURWEBSITE" />
 			{canonical ? <link rel="alternate" href={data.canonical} hreflang={lang} /> : null}

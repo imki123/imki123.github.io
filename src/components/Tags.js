@@ -5,11 +5,13 @@ import Paging from './Paging'
 import PostList from './PostList'
 
 import './Tags.css'
+import Meta from './Meta';
 
 function Tags({ match, location, history }) {
 	const store = React.useContext(AppContext)
 	const { tag } = match.params
 	const [lists, setLists] = useState([])
+	const [titles, setTitles] = useState('')
 	useEffect(() => {
 		
 		let url = process.env.REACT_APP_URL + '/posts/tag/' + tag + location.search
@@ -24,7 +26,11 @@ function Tags({ match, location, history }) {
 					history.go(-1)
 				}else{
 					setLists(res.data.list)
-					
+					let tempTitles = ''
+					for(let i of res.data.list){
+						tempTitles += ' '+i.title
+					}
+					setTitles(tempTitles)
 				}
 			})
 			.catch((e) => console.log(e)) //실패
@@ -39,7 +45,8 @@ function Tags({ match, location, history }) {
 
 	return (
 		<div className="postListWrapper">
-			<div className="postListTitle">{tag.substring(0,1).toUpperCase() + tag.substring(1)}</div>
+			<Meta data={{ title: tag+' 목록', description: titles}} />
+			<div className="postListTitle">{tag.substring(0,1).toUpperCase() + tag.substring(1)+' 목록'}</div>
 			{lists && lists.map((i, idx) => <PostList no={lists.length - idx} list={i} key={i.postId} />)}
 			{<Paging postCount={lists.length} />}
 		</div>

@@ -23,6 +23,7 @@ function CommentLists(props) {
         .then((res) => {
           //console.log('comments:', res.data)
           setComments(res.data)
+          setCommentCnt(20)
           if (!res.data) {
             setComments('')
           }
