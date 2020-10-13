@@ -25,6 +25,11 @@
 .postList:hover {
 	background: #b3ffb3;
 }
+.postListTags{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
 .postListHeader {
 	display: flex;
 	justify-content: space-between;
@@ -41,6 +46,11 @@
 	padding: 0 8px;
 	font-size: 1rem;
 	font-weight: bold;
+}
+.postTags{
+	color: gray;
+	font-size: 0.8rem;
+	padding-right: 4px;
 }
 .postDate {
 	white-space: nowrap;
