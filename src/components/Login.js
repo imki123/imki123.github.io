@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './Login.css'
-import { Switch, Route, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { AppContext } from '../App'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 
@@ -32,14 +32,26 @@ function Login({ history, match, location }) {
 
             if (user.host === 'naver') {
               let email = user.email
-              let username = email.substring(0, email.indexOf('@')) + '_n'
-              if (username === 'popping2606_n') username = 'imki123' //내아이디
-              console.log('네이버 로그인 성공:', username)
-              user = {
-                username: username,
-                email: email,
-                imageUrl: user.profile_image,
-                host: user.host,
+              let username
+              if (email) {
+                username = email.substring(0, email.indexOf('@')) + '_n'
+                if (username === 'popping2606_n') username = 'imki123' //내아이디
+                console.log('네이버 로그인 성공:', username)
+                user = {
+                  username: username,
+                  email: email,
+                  imageUrl: user.profile_image,
+                  host: user.host,
+                }
+              } else {
+                console.log('이메일 정보 없음. 로그아웃.')
+                alert('이메일이 없으면 로그인이 불가해요. 이메일 동의 부탁드려요 😄')
+                //네이버 로그아웃
+                const naverLogout = document.querySelector('#naverLogout')
+                if (naverLogout) naverLogout.click()
+                userinfoElem.value = ''
+                history.replace()
+                return
               }
             } else if (user.host === 'kakao') {
               let email = user.email
@@ -94,10 +106,10 @@ function Login({ history, match, location }) {
                   //성공하면 아래 then 작동
                   res.json().then((res) => {
                     alert(res.username + '님 환영합니다 😄')
+                    setUserinfo(res)
                     //로그인 시 홈으로 이동
                     history.replace('/')
                     //history.go(-1) //뒤로가기
-                    setUserinfo(res)
                   })
                 } else {
                   let message = '로그인에 실패했습니다 :('
@@ -334,10 +346,27 @@ function Login({ history, match, location }) {
   }
 
   return (
-    <Switch>
-      <Route path={['/login', '/register', '/withdraw']}>
-        <div className="background">
-          <div className="loginWrapper">
+    <div id="background">
+      <div id="loginWrapper">
+        {location.pathname.indexOf('/loginStatus') > -1? (
+          <>
+            {store.login ? (
+              <div className="center">
+                {store.login.username}님은 현재 <span style={{ color: 'green' }}>로그인</span> 되어있습니다 😄
+                <br />
+                <span style={{ fontSize: '0.8rem' }}>(로그인은 최대 일주일간 유지됩니다.)</span>
+              </div>
+            ) : (
+              <div className="login center">
+                재 로그인이 필요합니다
+                <Link to="/login" className="loginLink">
+                  로그인
+                </Link>
+              </div>
+            )}
+          </>
+        ) : (
+          <>
             {(buttonName === '로그인' || buttonName === '회원가입') && (
               <div className="oAuth">
                 <div className="login">
@@ -416,30 +445,10 @@ function Login({ history, match, location }) {
                 </div>
               )}
             </form>
-          </div>
-        </div>
-      </Route>
-      <Route path={['/loginStatus']}>
-        <div className="background">
-          <div className="loginWrapper">
-            {store.login ? (
-              <div className="center">
-                {store.login.username}님은 현재 <span style={{ color: 'green' }}>로그인</span> 되어있습니다 😄
-                <br />
-                <span style={{ fontSize: '0.8rem' }}>(로그인은 최대 일주일간 유지됩니다.)</span>
-              </div>
-            ) : (
-              <div className="login center">
-                재 로그인이 필요합니다
-                <Link to="/login" className="loginLink">
-                  로그인
-                </Link>
-              </div>
-            )}
-          </div>
-        </div>
-      </Route>
-    </Switch>
+          </>
+        )}
+      </div>
+    </div>
   )
 }
 export default React.memo(Login)
