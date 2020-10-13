@@ -26,8 +26,16 @@
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <title>임기의 코딩 블로그 😄</title>
 
-    <!-- googld-AdSense -->
-    <!-- <script data-ad-client="ca-pub-3156014367299473" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
+    <script>
+      if (navigator.userAgent !== 'ReactSnap') {
+        // some code to dynamically load a script
+        //googld-AdSense
+        let myScript = document.createElement("script");
+        myScript.setAttribute("src", "https://www.example.com/foo.js");
+        myScript.setAttribute("data-ad-client", "ca-pub-3156014367299473");
+        document.body.appendChild(myScript);
+      }
+    </script>
 
     <!-- Start Single Page Apps for GitHub Pages -->
     <script type="text/javascript">
