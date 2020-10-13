@@ -334,10 +334,10 @@ function Login({ history, match, location }) {
   }
 
   return (
-    <div id="background">
-      <div id="loginWrapper">
-        <Switch>
-          <Route path={['/login', '/register', '/withdraw']}>
+    <Switch>
+      <Route path={['/login', '/register', '/withdraw']}>
+        <div className="background">
+          <div className="loginWrapper">
             {(buttonName === '로그인' || buttonName === '회원가입') && (
               <div className="oAuth">
                 <div className="login">
@@ -416,8 +416,12 @@ function Login({ history, match, location }) {
                 </div>
               )}
             </form>
-          </Route>
-          <Route path={['/loginStatus']}>
+          </div>
+        </div>
+      </Route>
+      <Route path={['/loginStatus']}>
+        <div className="background">
+          <div className="loginWrapper">
             {store.login ? (
               <div className="center">
                 {store.login.username}님은 현재 <span style={{ color: 'green' }}>로그인</span> 되어있습니다 😄
@@ -432,10 +436,10 @@ function Login({ history, match, location }) {
                 </Link>
               </div>
             )}
-          </Route>
-        </Switch>
-      </div>
-    </div>
+          </div>
+        </div>
+      </Route>
+    </Switch>
   )
 }
 export default React.memo(Login)
