@@ -2,6 +2,7 @@ import React from 'react'
 import './Header.css'
 import { Link } from 'react-router-dom'
 import { AppContext } from '../App'
+import MenuIcon from '@material-ui/icons/Menu';
 
 function Header(props) {
 	const store = React.useContext(AppContext)
@@ -20,8 +21,8 @@ function Header(props) {
 	return (
 		<div id="headerWrapper">
 			<div id="header">
-				<div className="hover" onClick={store.slideMenu}>
-					<img id="menu" alt="MENU" src={process.env.PUBLIC_URL + '/images/guide_icon.png'} />
+				<div className="menu hover" onClick={store.slideMenu}>
+					<MenuIcon/>
 				</div>
 				<Link to="/">
 					<div id="title" className="hover" onClick={store.closeMenuMobile}>

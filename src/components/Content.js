@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward'
 import './Content.css'
-import { Link, Route, useLocation, Switch } from 'react-router-dom'
+import { Link, Route, useLocation, Switch, useHistory } from 'react-router-dom'
 import { AppContext } from '../App'
 
 import Post from './Post'
@@ -11,10 +11,13 @@ import Login from './Login'
 import Quill from './Quill'
 import Tags from './Tags'
 import CommentLists from './CommentLists'
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import MenuIcon from '@material-ui/icons/Menu';
 
 function Content(props) {
 	const store = React.useContext(AppContext)
 	const location = useLocation() //hash 사용
+	const history = useHistory()
 
 	useEffect(() => {
 		const resize = () => {
@@ -70,9 +73,13 @@ function Content(props) {
 			<div id="scrollFAB" className="hover FAB" onClick={scrollUp}>
 				<ArrowUpwardIcon />
 			</div>
-			<div id="menuFAB" className="hover FAB" onClick={store.slideMenu}>
-				<img alt="MENU" src={process.env.PUBLIC_URL + '/images/guide_icon.png'} />
+			<div id="backFAB" className="hover FAB" onClick={()=>{history.go(-1)}}>
+				<ArrowBackIcon/>
 			</div>
+			<div id="menuFAB" className="hover FAB" onClick={store.slideMenu}>
+				<MenuIcon/>
+			</div>
+			
 
 			{/* 로딩 */}
 			<div id="loading">

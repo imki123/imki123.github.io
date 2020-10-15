@@ -15,9 +15,9 @@
     background: #b4ffb4;
 }
 
-#menu{
-    width: 32px; 
-    height: 32px;
+.menu svg{
+    color: #606060;
+    font-size: 30px;
 }
 .profile{
     width: 40px;

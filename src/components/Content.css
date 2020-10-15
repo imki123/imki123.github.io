@@ -29,14 +29,18 @@
 	width: 26px;
 }
 #postFAB {
-	bottom: 140px;
+	bottom: 190px;
 }
 #scrollFAB {
+	bottom: 140px;
+}
+#backFAB{
 	bottom: 90px;
 }
 #menuFAB {
 	bottom: 40px;
 }
+
 
 #loading {
 	width: 100%;
