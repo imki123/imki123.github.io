@@ -18,11 +18,9 @@ function Tags({ match, location, history }) {
 	useEffect(() => {
 		setLists([])
 		const search = queryString.parse(location.search)
-		if(!search.page || Number(search.page) < 1){
-			setPage(1)
-		}else{
-			setPage(Number(search.page))
-		}
+		let pageNum = parseInt(search.page)  || '1' //페이지를 숫자로 변환. 없다면 1
+		if (pageNum < 1) pageNum = 1
+		setPage(pageNum)
 		
 
 		let url = process.env.REACT_APP_URL + '/posts/tag/' + tag + location.search
