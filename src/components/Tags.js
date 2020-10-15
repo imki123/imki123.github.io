@@ -18,7 +18,7 @@ function Tags({ match, location, history }) {
 	useEffect(() => {
 		setLists([])
 		const search = queryString.parse(location.search)
-		let pageNum = parseInt(search.page)  || '1' //페이지를 숫자로 변환. 없다면 1
+		let pageNum = parseInt(search.page) || 1 //페이지를 숫자로 변환. 없다면 1
 		if (pageNum < 1) pageNum = 1
 		setPage(pageNum)
 		

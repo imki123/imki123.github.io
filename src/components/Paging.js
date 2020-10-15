@@ -11,7 +11,7 @@ function Paging(props) {
   const pages = []
   let page = 1
   if (postCount) {
-    page = parseInt(search.page) || '1' //페이지를 숫자로 변환. 없다면 1
+    page = parseInt(search.page) || 1 //페이지를 숫자로 변환. 없다면 1
     if (page < 1) page = 1
     const startPost = postCount - (page - 1) * 10
     paging = {
@@ -27,7 +27,7 @@ function Paging(props) {
   }
 
   useEffect(() => {
-    const links = document.querySelectorAll('.paging a')
+		const links = document.querySelectorAll('.paging a')
     for (let i = 0; i < links.length; i++) {
       if (parseInt(links[i].innerHTML) === page) {
         links[i].className = 'activePage'
