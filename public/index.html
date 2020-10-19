@@ -10,6 +10,8 @@
     <meta property="og:image" content="%PUBLIC_URL%/images/imcat_800x400.png" />
     <!-- google search -->
     <meta name="google-site-verification" content="HZicODInbBKemFyMPNAa0hZFqxXrvctIKQjKNGjc1g8" />
+    <!-- naver search -->
+    <meta name="naver-site-verification" content="6a36bfcd58834db8c5d1e177f7e2bb50f07c18bb" />
 
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/images/imcat.png" />
     <link rel="stylesheet" href="%PUBLIC_URL%/styles/atom-one-dark.css" />
@@ -68,10 +70,10 @@
       // google-AdSense
       if (navigator.userAgent !== 'ReactSnap') {
         // some code to dynamically load a script
-        let myScript = document.createElement("script");
-        myScript.setAttribute("src", "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js");
-        myScript.setAttribute("data-ad-client", "ca-pub-3156014367299473");
-        document.body.appendChild(myScript);
+        let myScript = document.createElement('script')
+        myScript.setAttribute('src', 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js')
+        myScript.setAttribute('data-ad-client', 'ca-pub-3156014367299473')
+        document.body.appendChild(myScript)
       }
     </script>
 
@@ -118,9 +120,9 @@
       function naverIdLogout() {
         naverLogin.logout() //로그인 정보를 지우고
         const win = window.open('https://nid.naver.com/nidlogin.logout') //실제로 네이버 로그아웃
-        setTimeout(function(){
+        setTimeout(function () {
           win.close() //팝업창 닫아주기
-        },1)
+        }, 1)
       }
     </script>
     <!-- // 네이버 아이디로 로그인 초기화 Script -->
@@ -193,7 +195,7 @@
         document.body.appendChild(myScript)
 
         let googleLogin = document.querySelector('#googleLogin')
-        if(googleLogin) googleLogin.innerHTML = `<div class="g-signin2 hidden" data-onsuccess="onSignIn" data-theme="dark"></div>`
+        if (googleLogin) googleLogin.innerHTML = `<div class="g-signin2 hidden" data-onsuccess="onSignIn" data-theme="dark"></div>`
       }
     </script>
 
