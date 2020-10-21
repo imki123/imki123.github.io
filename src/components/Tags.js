@@ -55,7 +55,7 @@ function Tags({ match, location, history }) {
 
 	return (
 		<div className="postListWrapper">
-			<Meta data={{ title: tag+' 목록', description: titles}} />
+			<Meta data={{ title: tag+' 목록', description: titles, canonical: `tags/${tag}`}} />
 			<div className="postListTitle">{tag.substring(0,1).toUpperCase() + tag.substring(1)+' 목록'}</div>
 			{lists && lists.map((i, idx) => <PostList no={postCount - idx - ((page-1)*10)} list={i} key={i.postId} />)}
 			{<Paging postCount={postCount} />}

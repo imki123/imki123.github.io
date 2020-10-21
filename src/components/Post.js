@@ -236,10 +236,11 @@ function Post({ match, location, history }) {
             data={{
               title: '임기의 코딩 블로그',
               description: post.text,
+              canonical: '',
             }}
           />
         ) : (
-          <Meta data={{ title: post.title, description: post.text}} />
+          <Meta data={{ title: post.title, description: post.text, canonical: `posts/${post.postId}`}} />
         )}
         {/* 태그 */}
         <div className="nav">

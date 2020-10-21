@@ -57,6 +57,7 @@ function CommentLists(props) {
           data={{
             title: '최근 댓글 목록',
             description: comments && comments.reduce((a, b) => a + ' / ' + b.content, ''),
+            canonical: `comments`
           }}
         />
       )}
