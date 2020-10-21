@@ -234,8 +234,8 @@ function Post({ match, location, history }) {
         {location.pathname === '/' ? (
           <Meta
             data={{
-              title: '임기의 코딩 블로그 😄',
-              description: '임기의 코딩 블로그에 오신 것을 환영합니다 😄',
+              title: '임기의 코딩 블로그',
+              description: post.text,
             }}
           />
         ) : (

@@ -3,6 +3,7 @@ import './Login.css'
 import { Link } from 'react-router-dom'
 import { AppContext } from '../App'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
+import Meta from './Meta'
 
 function Login({ history, match, location }) {
   const store = React.useContext(AppContext)
@@ -348,7 +349,13 @@ function Login({ history, match, location }) {
   return (
     <div id="background">
       <div id="loginWrapper">
-        {location.pathname.indexOf('/loginStatus') > -1? (
+        <Meta
+          data={{
+            title: '임기의 코딩 블로그',
+            description: '네이버, 카카오, 구글 계정으로 로그인 해보세요!',
+          }}
+        />
+        {location.pathname.indexOf('/loginStatus') > -1 ? (
           <>
             {store.login ? (
               <div className="center">

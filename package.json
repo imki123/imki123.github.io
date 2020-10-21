@@ -28,11 +28,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
+    "postbuild": "react-snap && react-snap-sitemap --base-url=https://imki123.github.io/",
     "deploy": "gh-pages -d build",
-    "postbuild": "react-snap && react-snap-sitemap --base-url=https://imki123.github.io/"
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
