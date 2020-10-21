@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AppContext } from '../App'
 import './CommentLists.css'
+import Meta from './Meta'
 
 function CommentLists(props) {
   const store = React.useContext(AppContext)
@@ -51,6 +52,14 @@ function CommentLists(props) {
 
   return (
     <div className={`post recents recentComment ${recentAll}`}>
+      {location && (location.pathname === '/comments' || location.pathname === '/comments/') && (
+        <Meta
+          data={{
+            title: '최근 댓글 목록',
+            description: comments && comments.reduce((a, b) => a + ' / ' + b.content, ''),
+          }}
+        />
+      )}
       <div className="postListTitle">최신 댓글 {list && <Link to="/comments">더보기</Link>}</div>
       {comments &&
         comments.map((i, idx) => (
