@@ -8,12 +8,12 @@
       "type": "image/x-icon"
     },
     {
-      "src": "/blog_imki123/images/imcat_120.png",
+      "src": "imcat_120.png",
       "type": "image/png",
       "sizes": "120x120"
     },
     {
-      "src": "/blog_imki123/images/imcat_120.png",
+      "src": "imcat_120.png",
       "type": "image/png",
       "sizes": "120x120"
     }
