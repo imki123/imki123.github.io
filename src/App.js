@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react'
-import './App.css'
+import './App.scss'
 import { useLocation } from 'react-router-dom'
 
 import Header from './components/Header'

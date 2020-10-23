@@ -15,18 +15,18 @@ body {
 
 a {
 	cursor: pointer;
-}
-a:link {
-	color: inherit;
-	text-decoration: inherit;
-}
-a:visited {
-	color: inherit;
-	text-decoration: inherit;
-}
-a:hover {
-	color: inherit;
-	text-decoration: inherit;
+	&:link {
+		color: inherit;
+		text-decoration: inherit;
+	}
+	&:visited {
+		color: inherit;
+		text-decoration: inherit;
+	}
+	&:hover {
+		color: inherit;
+		text-decoration: inherit;
+	}
 }
 
 p {
@@ -52,9 +52,9 @@ textarea {
 	font: inherit;
 	padding: 0;
 	border: 1px solid gray;
-}
-textarea:focus {
-	outline: 1px solid green;
+	&:focus {
+		outline: 1px solid green;
+	}
 }
 
 #app {
@@ -72,7 +72,4 @@ textarea:focus {
 		width: 1280px !important;
 		margin: auto !important;
 	}
-}
-
-@media (max-width: 500px) {
 }
