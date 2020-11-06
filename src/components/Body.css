@@ -2,10 +2,10 @@
     position: relative;
     top: 0;
     left: 0;
-    z-index: 0;
     display: flex;
+    justify-content: center;
+    align-items: flex-start;
     width: 100%;
-    height: calc(100vh - 48px);
-    overflow-x: hidden;
-    overflow-y: auto;
+    height: calc(100% - 48px);
+    overflow: auto;
 }
