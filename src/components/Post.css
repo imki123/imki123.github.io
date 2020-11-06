@@ -14,7 +14,7 @@
 	padding: 20px 4px;
 	border-radius: 8px;
 	background: white;
-	box-shadow: 0px 2px 2px 1px gray;
+	box-shadow: 2px 2px 3px 1px grey;
 }
 .post #editor>div:nth-child(1) {
 	display: none;

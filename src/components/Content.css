@@ -1,8 +1,9 @@
 #content {
-	width: calc(100% - 312px - 16px);
-	height: calc(100vh - 48px - 16px);
+	max-width: calc(1280px - 16px);
+	width: calc(1280px - 312px - 16px);
 	overflow: visible;
 	margin: 8px;
+	margin-left: calc(8px + 312px + 24px);
 	position: relative;
 	top: 0px;
 	right: 0px;

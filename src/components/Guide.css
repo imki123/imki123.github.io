@@ -8,17 +8,18 @@
     z-index: 10;
 }
 #guideWrapper{
-    height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
-    position: relative;
-    z-index: 15;
+    position: absolute;
+    z-index: 10;
     top: 0;
     left: -312px;
 
     width: 312px;
-    padding-top: 8px; 
+    margin-top: 8px; 
     background: white;
+    border-radius: 8px;
+    box-shadow: 2px 2px 3px 1px grey;
 }
 #avatar{
     width: 100%;
@@ -87,6 +88,6 @@
         width: 0px;
     }
     #guideWrapper{
-        left: 0;
+        left: calc((100% - 1280px) / 2 + 16px);
     }
 }
