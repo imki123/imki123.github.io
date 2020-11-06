@@ -136,15 +136,23 @@ function Post({ match, location, history }) {
     if (post) {
       store.setReady(true)
 
-      //태그 찾아서 activeListManual 적용
-      let tags
-      if (post.tags[1]) {
-        tags = document.querySelectorAll(`a[href="/tags/${post.tags[1]}"]`)
-      } else if (post.tags[0]) {
-        tags = document.querySelectorAll(`a[href="/tags/${post.tags[0]}"]`)
-      }
+      //페이지 이동할 때 activeListManual 스타일을 모두 지움
+      const tags = document.querySelectorAll('.activeListManual')
       if (tags) {
         for (let i of tags) {
+          i.classList.remove('activeListManual')
+        }
+      }
+
+      //태그 찾아서 activeListManual 적용
+      let activeTags
+      if (post.tags[1]) {
+        activeTags = document.querySelectorAll(`a[href="/tags/${post.tags[1]}"]`)
+      } else if (post.tags[0]) {
+        activeTags = document.querySelectorAll(`a[href="/tags/${post.tags[0]}"]`)
+      }
+      if (activeTags) {
+        for (let i of activeTags) {
           i.classList.add('activeListManual')
         }
       }
@@ -240,7 +248,7 @@ function Post({ match, location, history }) {
             }}
           />
         ) : (
-          <Meta data={{ title: post.title, description: post.text, canonical: `posts/${post.postId}`}} />
+          <Meta data={{ title: post.title, description: post.text, canonical: `posts/${post.postId}` }} />
         )}
         {/* 태그 */}
         <div className="nav">
@@ -311,7 +319,7 @@ function Post({ match, location, history }) {
         {location.pathname !== '/' && (
           <>
             <div className="EmojiDiv">
-                <Emoji emojis={'😄,🤣,🥰,😍,😝,😭,👍,🐕,🐈,☀,🌙,⭐,☁,🌧,💧,♥,❤,💕'} />
+              <Emoji emojis={'😄,🤣,🥰,😍,😝,😭,👍,🐕,🐈,☀,🌙,⭐,☁,🌧,💧,♥,❤,💕'} />
             </div>
             <div className="writeComment">
               <div className="commentProfile">
