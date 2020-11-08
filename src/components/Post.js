@@ -243,12 +243,14 @@ function Post({ match, location, history }) {
           <Meta
             data={{
               title: '임기의 코딩 블로그',
-              description: post.text,
+              description: post.text ? post.text.replace(/\n/g, ' ') : '',
               canonical: '',
             }}
           />
         ) : (
-          <Meta data={{ title: post.title, description: post.text, canonical: `posts/${post.postId}` }} />
+          <Meta data={{ title: post.title, 
+            description: post.text ? post.text.replace(/\n/g, ' ') : '', 
+            canonical: `posts/${post.postId}` }} />
         )}
         {/* 태그 */}
         <div className="nav">
