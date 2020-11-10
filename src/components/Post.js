@@ -59,7 +59,7 @@ function Post({ match, location, history }) {
           //hash가 있으면 해당 엘리먼트로 스크롤
           setTimeout(function () {
             //postBody가 로드된 이후에 스크롤이 되야해서 0.01초 타임아웃 추가..
-            const content = document.querySelector('#content')
+            const content = document.body
             const elem = document.querySelector(location.hash)
             if (content && elem) {
               let contentScroll = content.scrollTop
@@ -69,7 +69,7 @@ function Post({ match, location, history }) {
               //프레임이 혹시라도 안멈출 수 있어서 1초 후에 강제로 종료함
               setTimeout(function () {
                 clearInterval(frame)
-              }, 1000)
+              }, 1100)
               if (elemTop > contentScroll) {
                 frame = setInterval(function () {
                   //인터벌

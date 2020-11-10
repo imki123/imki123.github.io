@@ -99,8 +99,6 @@ function App() {
       //모바일
       guideWrapper.style.left = '-300px' // 메뉴 0
       content.style.width = 'calc(100% - 16px)'
-    } else {
-      content.style.width = 'calc(100% - 300px - 16px)'
     }
   }
   const checkToken = (func) => {
