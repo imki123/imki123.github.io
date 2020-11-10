@@ -174,4 +174,16 @@
     <changefreq>always</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://imki123.github.io/catbook</loc>
+    <lastmod>2020-11-11</lastmod>
+    <changefreq>always</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://imki123.github.io/onandoff</loc>
+    <lastmod>2020-11-11</lastmod>
+    <changefreq>always</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
