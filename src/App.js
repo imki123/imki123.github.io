@@ -48,7 +48,7 @@ function App() {
   const slideMenu = () => {
     //메뉴버튼 클릭 시 메뉴 보이기 & 숨기기
     //guideWrapper는 PC에서 width조절, 모바일에서 absolute left조절
-    const body = document.querySelector('#body')
+    const body = document.body
     const guideBack = document.querySelector('#guideBack')
     const guideWrapper = document.querySelector('#guideWrapper')
     const content = document.querySelector('#content')
@@ -65,6 +65,12 @@ function App() {
 
     //모바일 메뉴 동작
     if (body.clientWidth < 500) {
+			//맨 위로 스크롤 0.1초
+			let diff = body.scrollTop/10
+			const interval = setInterval(() => {
+				body.scrollTop -= diff
+				if(body.scrollTop <= 0) clearInterval(interval)
+			}, 10)
       if (guideWrapper.style.left && guideWrapper.style.left.replace('px', '') > -100) {
         guideWrapper.style.left = '-300px' // 메뉴 0
         content.style.width = 'calc(100% - 16px)'
