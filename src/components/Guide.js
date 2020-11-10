@@ -38,6 +38,16 @@ function Guide(props) {
 					<OpenInNewIcon />
 				</div>
 			</a>
+			<a href="https://imki123.github.io/onandoff" className="list"
+										onClick={e => {e.preventDefault(); window.open("https://imki123.github.io/onandoff")}}>
+				<div className="menuLink">
+					<div>
+						<img alt="onandoff" src={process.env.PUBLIC_URL + '/images/imcat_64.png'} />
+						OnAndOff
+					</div>
+					<OpenInNewIcon />
+				</div>
+			</a>
 		</div>
 	</div>
 	</>
