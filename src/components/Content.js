@@ -50,14 +50,14 @@ function Content(props) {
 
 	const scrollUp = (e) => {
 		// content의 스크롤을 가장 위로
-		const content = document.querySelector('#content')
-		let contentScroll = content.scrollTop
+		const body = document.body
+		let contentScroll = body.scrollTop
 		let dif = contentScroll / 50
 		const frame = setInterval(function () {
-			if (content.scrollTop <= 0) {
+			if (body.scrollTop <= 0) {
 				clearInterval(frame)
 			} else {
-				content.scrollTop -= dif
+				body.scrollTop -= dif
 			}
 		}, 10)
 	}
