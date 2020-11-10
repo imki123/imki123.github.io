@@ -11,6 +11,7 @@ body {
 	background: #f0f0f0;
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 	line-height: 120%;
+	overflow: auto;
 }
 
 a {
@@ -60,15 +61,15 @@ textarea {
 #app {
 	position: relative;
 	width: 100%;
+	height: 100%;
 }
 
 .slideMenu {
-	transition: width 0.5s ease, left 0.5s ease;
+	transition: width 0.5s ease, left 0.5s ease, box-shadow 0.5s ease;
 }
 
 @media (min-width: 1280px) {
-	#header,
-	#body {
+	#header{
 		width: 1280px !important;
 		margin: auto !important;
 	}

@@ -1,92 +1,94 @@
-#guideBack{
-    height: 100%;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 0;
-    background: rgba(0, 0, 0, 0.705);
-    z-index: 10;
+#guideBack {
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 0;
+  background: rgba(0, 0, 0, 0.705);
+  z-index: 10;
 }
-#guideWrapper{
-    height: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
+#guideWrapper {
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  width: 300px;
+  margin-top: 8px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 2px 2px 3px 1px grey;
+}
+@media (max-width: 500px) {
+  #guideWrapper {
     position: absolute;
     z-index: 10;
     top: 0;
-    left: -312px;
-
-    width: 312px;
-    padding-top: 8px; 
-    background: white;
+    left: -300px;
+  }
 }
-#avatar{
-    width: 100%;
-    padding: 16px;
+#avatar {
+  width: 100%;
+  padding: 16px;
 }
-#avatar div{
-    padding: 4px 0;
+#avatar div {
+  padding: 4px 0;
 }
-#avatar img{
-    width: 100%;
-    border-radius: 50%;
+#avatar img {
+  width: 100%;
+  border-radius: 50%;
 }
-#name{
-    font-size: 1.5rem;
-    font-weight: bold;
+#name {
+  font-size: 1.5rem;
+  font-weight: bold;
 }
-#nickName{
-    color: #5e5e5e;
+#nickName {
+  color: #5e5e5e;
 }
-#github img{
-    width: 24px;
-    vertical-align: bottom;
+#github img {
+  width: 24px;
+  vertical-align: bottom;
 }
-#github span{
-    color: #5050ff;
-    text-decoration: underline;
-    font-size: 0.9rem;
+#github span {
+  color: #5050ff;
+  text-decoration: underline;
+  font-size: 0.9rem;
 }
-#introduction{
-    margin-top: 8px;
+#introduction {
+  margin-top: 8px;
 }
 
-.menus{
-    overflow-x: hidden;
-    display: flex;
-    flex-direction: column;
-    padding: 8px 0 8px;
-    border-top: 1px solid green;
+.menus {
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 0 8px;
+  border-top: 1px solid green;
 }
 
-.menuLink{
-    min-height: 21px;
-    width: 100%;
-    overflow: hidden;
-    font-weight: bold;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.menuLink {
+  min-height: 21px;
+  width: 100%;
+  overflow: hidden;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.menuLink img{
-    width: 32px;
-    height: 32px;
-    margin-right: 8px;
+.menuLink img {
+  width: 32px;
+  height: 32px;
+  margin-right: 8px;
 }
-.menuLink svg{
-    font-size: 24px;
-    color: #444444;
+.menuLink svg {
+  font-size: 24px;
+  color: #444444;
 }
-.menuLink div{
-    display: flex;
-    align-items: center;
+.menuLink div {
+  display: flex;
+  align-items: center;
 }
 
-@media(min-width: 500px){
-    #guideBack{
-        width: 0px;
-    }
-    #guideWrapper{
-        left: 0;
-    }
+@media (min-width: 500px) {
+  #guideBack {
+    width: 0px;
+  }
 }
