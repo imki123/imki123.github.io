@@ -201,21 +201,6 @@ function Quill({ match, location, history }) {
       .catch((e) => alert(e)) //실패
   }
 
-  // 화면 리사이즈시 editor 아래 마진 변경
-  useEffect(() => {
-    const editor = document.querySelector('#editor')
-    const toolbar = document.querySelector('.ql-toolbar')
-    if (editor && toolbar) {
-      editor.style.marginBottom = toolbar.clientHeight + 10 + 'px'
-    }
-    window.removeEventListener('resize', function () {})
-    window.addEventListener('resize', function () {
-      if (editor && toolbar) {
-        editor.style.marginBottom = toolbar.clientHeight + 10 + 'px'
-      }
-    })
-  }, [location])
-
   //메인메뉴 추가시 라디오박스 체크 해제, 띄어쓰기를 _로 변경
   const changeMainMenu = (e) => {
     if (store.menus) {

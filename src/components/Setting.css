@@ -1,5 +1,5 @@
 #settingWrapper{
-    position: absolute;
+    position: fixed;
     display: none;
     top: 0px;
     bottom: 0px;

@@ -65,12 +65,12 @@ function App() {
 
     //모바일 메뉴 동작
     if (body.clientWidth < 500) {
-			//맨 위로 스크롤 0.1초
-			let diff = body.scrollTop/10
-			const interval = setInterval(() => {
-				body.scrollTop -= diff
-				if(body.scrollTop <= 0) clearInterval(interval)
-			}, 10)
+      //맨 위로 스크롤 0.1초
+      let diff = body.scrollTop / 10
+      const interval = setInterval(() => {
+        body.scrollTop -= diff
+        if (body.scrollTop <= 0) clearInterval(interval)
+      }, 10)
       if (guideWrapper.style.left && guideWrapper.style.left.replace('px', '') > -100) {
         guideWrapper.style.left = '-300px' // 메뉴 0
         content.style.width = 'calc(100% - 16px)'
@@ -83,8 +83,8 @@ function App() {
       if (guideWrapper.clientWidth > 0) {
         //메뉴닫기
         guideWrapper.style.width = 0
-				guideWrapper.style.boxShadow = 'unset'
-				content.style.width = `calc(1280px - 16px)`
+        guideWrapper.style.boxShadow = 'unset'
+        content.style.width = `calc(1280px - 16px)`
       } else {
         //메뉴열기
         content.style.width = `calc(1280px - 300px - 16px)`
@@ -162,23 +162,48 @@ function App() {
   }, [location.pathname, location.search])
 
   useEffect(() => {
-    const resizeEvent = window.addEventListener('resize', function () {
+    const content = document.querySelector('#content')
+    const editor = document.querySelector('#editor')
+    const toolbar = document.querySelector('.ql-toolbar')
+
+    if (content) {
+      content.style.height = window.innerHeight - 48 - 16 + 'px'
+    }
+    if (editor && toolbar) {
+      editor.style.marginBottom = toolbar.clientHeight + 10 + 'px'
+    }
+    
+    //리사이즈시에 동작
+    const resize = () => {
+      //윈도우 사이즈에 맞춰서 콘텐트 사이즈 설정해줌
+      if (content) {
+        content.style.height = window.innerHeight - 48 - 16 + 'px'
+      }
+      //댓글 textarea 사이즈 조정
+      store.resizeTextarea()
+
+      //화면 리사이즈 되면 모바일, PC 바꾸기
       const body = document.querySelector('#body')
       const guideBack = document.querySelector('#guideBack')
       const guideWrapper = document.querySelector('#guideWrapper')
-      const content = document.querySelector('#content')
-			guideBack.style.width = '0' // 회색 0
-			guideWrapper.style.width = '300px'
+      guideBack.style.width = '0' // 회색 0
+      guideWrapper.style.width = '300px'
       if (body.clientWidth < 500) {
         //모바일
-				guideWrapper.style.left = '-300px'
+        guideWrapper.style.left = '-300px'
         content.style.width = 'calc(100% - 16px)'
       } else {
-				content.style.width = 'calc(100% - 300px - 16px)'
-				content.style.maxWidth = 'calc(1280px - 300px - 16px)'
+        content.style.width = 'calc(100% - 300px - 16px)'
+        content.style.maxWidth = 'calc(1280px - 300px - 16px)'
       }
-    })
-    return window.removeEventListener('resize', resizeEvent)
+
+      // Quill editor 아래 마진 변경
+      if (editor && toolbar) {
+        editor.style.marginBottom = toolbar.clientHeight + 10 + 'px'
+      }
+    }
+    window.addEventListener('resize', resize)
+    return () => window.removeEventListener('resize', resize)
   })
   return (
     <AppContext.Provider value={store}>

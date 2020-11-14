@@ -20,11 +20,6 @@ function Content(props) {
 	const history = useHistory()
 
 	useEffect(() => {
-		const resize = () => {
-			store.resizeTextarea()
-		}
-
-		window.addEventListener('resize', resize)
 		const loading = document.querySelector('#loading')
 		const views = document.querySelectorAll('.post')
 		if (store.ready) {
@@ -45,7 +40,6 @@ function Content(props) {
 				}
 			}
 		}
-		return window.removeEventListener('resize', resize)
 	}, [location.hash, store])
 
 	const scrollUp = (e) => {
