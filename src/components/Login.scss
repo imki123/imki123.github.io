@@ -21,10 +21,34 @@
 	max-width: 360px;
 	width: 90%;
 	margin: auto;
-}
-.login .text {
-	margin-bottom: 10px;
-	font-weight: bold;
+	.text {
+		margin-bottom: 10px;
+		font-weight: bold;
+	}
+	input {
+		border: 0;
+		border-bottom: 1px solid black;
+		outline: none;
+		font-size: inherit;
+		background: transparent;
+	}
+	.loginLink {
+		color: blue;
+		text-decoration: underline;
+		text-align: right;
+		font-size: 0.9rem;
+		padding-top: 4px;
+	}
+	button {
+		border: 1px solid black;
+		border-radius: 20px;
+		background: #42ff42;
+		cursor: pointer;
+		height: 40px;
+		text-align: center !important;
+		font-size: inherit;
+		outline: none;
+	}
 }
 .googleWarning{
 	font-size: 0.8rem;
@@ -54,30 +78,9 @@
 	height: 21px;
 	color: red;
 }
-.login input {
-	border: 0;
-	border-bottom: 1px solid black;
-	outline: none;
-	font-size: inherit;
-	background: transparent;
-}
+.login 
 
-.login .loginLink {
-	color: blue;
-	text-decoration: underline;
-	text-align: right;
-	font-size: 0.9rem;
-	padding-top: 4px;
-}
-.login button {
-	border: 1px solid black;
-	border-radius: 20px;
-	background: #42ff42;
-	cursor: pointer;
-	height: 40px;
-	font-size: inherit;
-	outline: none;
-}
+
 .red {
 	background: red !important;
 }

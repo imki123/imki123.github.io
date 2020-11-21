@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { AppContext } from '../App'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 import Meta from './Meta'
+import { Button } from '@material-ui/core'
 
 function Login({ history, match, location }) {
   const store = React.useContext(AppContext)
@@ -423,11 +424,11 @@ function Login({ history, match, location }) {
 
               {/* 버튼 */}
               {buttonName === '회원탈퇴' ? (
-                <button style={{ background: 'red' }} onClick={clickButton}>
+                <Button variant="contained" color="primary" style={{ background: 'red' }} onClick={clickButton}>
                   {buttonName}
-                </button>
+                </Button>
               ) : (
-                <button onClick={clickButton}>{buttonName}</button>
+                <Button variant="contained" color="primary" onClick={clickButton}>{buttonName}</Button>
               )}
 
               {/* 로그인 or 회원가입 */}
