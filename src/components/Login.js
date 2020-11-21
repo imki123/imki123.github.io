@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import './Login.css'
+import './Login.scss'
 import { Link } from 'react-router-dom'
 import { AppContext } from '../App'
 import MoreVertIcon from '@material-ui/icons/MoreVert'

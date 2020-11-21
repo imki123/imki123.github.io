@@ -1,5 +1,5 @@
 import React from 'react'
-import './PostList.css'
+import './PostList.scss'
 import { Link } from 'react-router-dom'
 
 function PostList(props) {

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import React, { useEffect, useState } from 'react'
-import './Quill.css'
+import './Quill.scss'
 import 'quill/dist/quill.snow.css'
 import { useQuill } from 'react-quilljs'
 import imageCompress from 'quill-image-compress'

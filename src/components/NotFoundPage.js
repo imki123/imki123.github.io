@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { AppContext } from '../App'
-import './NotFoundPage.css'
+import './NotFoundPage.scss'
 
 function NotFoundPage() {
 	const store = React.useContext(AppContext)

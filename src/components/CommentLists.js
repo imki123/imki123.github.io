@@ -2,7 +2,7 @@ import Axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AppContext } from '../App'
-import './CommentLists.css'
+import './CommentLists.scss'
 import Meta from './Meta'
 
 function CommentLists(props) {

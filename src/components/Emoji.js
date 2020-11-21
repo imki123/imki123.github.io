@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react'
-import './Emoji.css'
+import './Emoji.scss'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 function Emoji(props) {

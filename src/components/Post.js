@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import React, { useEffect, useState } from 'react'
-import './Post.css'
+import './Post.scss'
 import { Link } from 'react-router-dom'
 import { useQuill } from 'react-quilljs'
 import Comment from './Comment'

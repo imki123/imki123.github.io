@@ -1,5 +1,5 @@
 import React from 'react'
-import './Recents.css'
+import './Recents.scss'
 
 import PostList from './PostList'
 
