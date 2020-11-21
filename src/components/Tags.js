@@ -4,7 +4,7 @@ import { AppContext } from '../App'
 import Paging from './Paging'
 import PostList from './PostList'
 
-import './Tags.css'
+import './Tags.scss'
 import Meta from './Meta';
 import queryString from 'query-string';
 

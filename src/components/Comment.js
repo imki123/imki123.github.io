@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import './Comment.css'
+import './Comment.scss'
 import { AppContext } from '../App'
 import Axios from 'axios'
 import { resizeTextarea } from '../utils/util'

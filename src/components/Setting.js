@@ -1,7 +1,8 @@
 import React from 'react'
-import './Setting.css'
+import './Setting.scss'
 import { Link } from 'react-router-dom'
 import { AppContext } from '../App'
+import { Button } from '@material-ui/core'
 
 function Setting(props) {
   const store = React.useContext(AppContext)
@@ -56,32 +57,30 @@ function Setting(props) {
   return (
     <div id="settingWrapper" onClick={closeSetting}>
       <div id="setting">
-        <div id="settingListWrapper">
-          {store.login ? (
-            <Link className="settingList" to="/loginStatus">
-              {store.login.username}
-            </Link>
-          ) : (
-            <Link className="settingList" to="/login">
-              로그인
-            </Link>
-          )}
-          {store.login && (
-            <div onClick={logout} className="settingList">
-              로그아웃
-            </div>
-          )}
-          {!store.login && (
-            <Link className="settingList" to="/register">
-              회원가입
-            </Link>
-          )}
-          {store.login && !store.login.oAuth && (
-            <Link className="settingList" to="/withdraw">
-              회원탈퇴
-            </Link>
-          )}
-        </div>
+        {store.login ? (
+          <Link to="/loginStatus">
+            <Button className="settingList">{store.login.username}</Button>
+          </Link>
+        ) : (
+          <Link to="/login">
+            <Button className="settingList">로그인</Button>
+          </Link>
+        )}
+        {store.login && (
+          <Button onClick={logout} className="settingList">
+            로그아웃
+          </Button>
+        )}
+        {!store.login && (
+          <Link to="/register">
+            <Button className="settingList">회원가입</Button>
+          </Link>
+        )}
+        {store.login && !store.login.oAuth && (
+          <Link to="/withdraw">
+            <Button className="settingList">회원탈퇴</Button>
+          </Link>
+        )}
       </div>
     </div>
   )

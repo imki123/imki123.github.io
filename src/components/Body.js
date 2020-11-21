@@ -1,5 +1,5 @@
 import React from 'react'
-import './Body.css'
+import './Body.scss'
 
 function Body(props) {
 	return(

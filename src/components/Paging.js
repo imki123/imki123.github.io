@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import './Paging.css'
+import './Paging.scss'
 import { NavLink, useLocation } from 'react-router-dom'
 import queryString from 'query-string'
 

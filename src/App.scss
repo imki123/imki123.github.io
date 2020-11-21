@@ -20,13 +20,23 @@ body {
   height: 100%;
 
   button {
+		text-align: left;
 		border-radius: 12px;
+		text-transform: unset;
+		line-height: unset;
   }
   .MuiButton-root {
-    min-width: unset;
+		min-width: unset;
+		font-family: inherit;
 	}
 	.MuiButton-text {
 		padding: 4px 6px;
+	}
+	.MuiButton-containedPrimary{
+		color: black;
+		&:hover{
+			background-color: #3bdb3b;
+		} 
 	}
 
 	a {
@@ -54,21 +64,21 @@ body {
 		user-select: none;
 	}
 	
-	textarea {
-		width: 100%;
-		overflow: visible;
-		resize: none;
-		font-size: 16px;
-		font: inherit;
-		padding: 0;
-		border: 1px solid gray;
-		&:focus {
-			outline: 1px solid green;
-		}
-	}
-
 	.slideMenu {
 		transition: width 0.5s ease, left 0.5s ease, box-shadow 0.5s ease;
+	}
+}
+
+textarea {
+	width: 100%;
+	overflow: visible;
+	resize: none;
+	font-size: 16px;
+	font: inherit;
+	padding: 0;
+	border: 1px solid gray;
+	&:focus {
+		outline: 1px solid green;
 	}
 }
 

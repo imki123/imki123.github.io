@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import React, { useEffect, useState } from 'react'
-import './Post.css'
+import './Post.scss'
 import { Link } from 'react-router-dom'
 import { useQuill } from 'react-quilljs'
 import Comment from './Comment'
@@ -12,6 +12,7 @@ import Recents from './Recents'
 import CommentLists from './CommentLists'
 import Emoji from './Emoji'
 import { resizeTextarea } from '../utils/util'
+import { Button } from '@material-ui/core'
 
 function Post({ match, location, history }) {
   const store = React.useContext(AppContext)
@@ -249,9 +250,7 @@ function Post({ match, location, history }) {
             }}
           />
         ) : (
-          <Meta data={{ title: post.title, 
-            description: post.text ? post.text.replace(/\n/g, ' ') : '', 
-            canonical: `posts/${post.postId}` }} />
+          <Meta data={{ title: post.title, description: post.text ? post.text.replace(/\n/g, ' ') : '', canonical: `posts/${post.postId}` }} />
         )}
         {/* 태그 */}
         <div className="nav">
@@ -342,14 +341,16 @@ function Post({ match, location, history }) {
                 {store.login ? (
                   <span className="commentUsername">{store.login.username}</span>
                 ) : (
-                  <button
+                  <Button
+                    variant="contained"
+                    color="primary"
                     className="loginButton"
                     onClick={() => {
                       history.push('/login')
                     }}
                   >
                     로그인
-                  </button>
+                  </Button>
                 )}
                 {store.login ? <textarea onChange={resizeTextarea} placeholder=" 댓글을 남겨주세요 😄" /> : <textarea readOnly placeholder=" 로그인 후에 댓글을 남겨주세요 😄" />}
               </div>
