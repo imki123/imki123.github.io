@@ -13,6 +13,7 @@ import Tags from './Tags'
 import CommentLists from './CommentLists'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import MenuIcon from '@material-ui/icons/Menu';
+import { resizeTextarea, slideMenu } from '../utils/util'
 
 function Content(props) {
 	const store = React.useContext(AppContext)
@@ -30,7 +31,7 @@ function Content(props) {
 				}
 			}
 			setTimeout(function () {
-				store.resizeTextarea()
+				resizeTextarea()
 			}, 10)
 		} else {
 			if (loading) loading.style.display = 'flex'
@@ -70,7 +71,7 @@ function Content(props) {
 			<div id="backFAB" className="hover FAB" onClick={()=>{history.go(-1)}}>
 				<ArrowBackIcon/>
 			</div>
-			<div id="menuFAB" className="hover FAB" onClick={store.slideMenu}>
+			<div id="menuFAB" className="hover FAB" onClick={slideMenu}>
 				<MenuIcon/>
 			</div>
 			

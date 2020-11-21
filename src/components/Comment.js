@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './Comment.css'
 import { AppContext } from '../App'
 import Axios from 'axios'
+import { resizeTextarea } from '../utils/util'
 
 function Comment(props) {
 	const store = React.useContext(AppContext)
@@ -109,7 +110,7 @@ function Comment(props) {
 						{' '}
 						- {date} {comment.updated && '(수정됨)'}
 					</span>
-					<textarea readOnly onChange={store.resizeTextarea} />
+					<textarea readOnly onChange={resizeTextarea} />
 				</div>
 			</div>
 			{((comment.username && comment.username === store.login.username) || store.login.username === 'imki123') && (

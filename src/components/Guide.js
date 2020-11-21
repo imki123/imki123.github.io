@@ -3,13 +3,14 @@ import './Guide.css'
 import { AppContext } from '../App'
 import Menus from './Menus'
 import OpenInNewIcon from '@material-ui/icons/OpenInNew'
+import { closeMenuMobile } from '../utils/util'
 
 function Guide(props) {
 	const store = React.useContext(AppContext)
 
 	return (
 		<>
-		<div id="guideBack" onClick={store.closeMenuMobile}>
+		<div id="guideBack" onClick={closeMenuMobile}>
 			
 		</div>
 		<div id="guideWrapper" className="slideMenu">

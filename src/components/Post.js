@@ -11,6 +11,7 @@ import Meta from './Meta'
 import Recents from './Recents'
 import CommentLists from './CommentLists'
 import Emoji from './Emoji'
+import { resizeTextarea } from '../utils/util'
 
 function Post({ match, location, history }) {
   const store = React.useContext(AppContext)
@@ -233,7 +234,7 @@ function Post({ match, location, history }) {
 
   //댓글 더보기, 댓글 새로고침 하면 리사이즈
   useEffect(() => {
-    store.resizeTextarea()
+    resizeTextarea()
   }, [commentCnt, store, comments])
 
   return (
@@ -350,7 +351,7 @@ function Post({ match, location, history }) {
                     로그인
                   </button>
                 )}
-                {store.login ? <textarea onChange={store.resizeTextarea} placeholder=" 댓글을 남겨주세요 😄" /> : <textarea readOnly placeholder=" 로그인 후에 댓글을 남겨주세요 😄" />}
+                {store.login ? <textarea onChange={resizeTextarea} placeholder=" 댓글을 남겨주세요 😄" /> : <textarea readOnly placeholder=" 로그인 후에 댓글을 남겨주세요 😄" />}
               </div>
             </div>
             <div className="commentButtons">
