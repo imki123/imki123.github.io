@@ -3,6 +3,14 @@
 	border-radius: 8px;
 	background: white;
 	box-shadow: 0px 2px 2px 1px gray;
+	&>a{
+		display: block;
+		width: 100%;
+		border-bottom: 1px solid black;
+	}
+	button{
+		width: 100%;
+	}
 }
 @media (max-width: 500px) {
 	.postListWrapper {
@@ -17,12 +25,13 @@
 }
 
 .postList {
+	display: block !important;
 	font-size: 0.9rem;
 	border-bottom: 1px solid grey;
 	padding-top: 8px;
 }
 .postList:hover {
-	background: #b3ffb3;
+	background: #b3ffb3 !important;
 }
 .postListTags{
 	display: flex;

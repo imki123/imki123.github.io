@@ -1,6 +1,7 @@
 import React from 'react'
 import './PostList.scss'
 import { Link } from 'react-router-dom'
+import { Button } from '@material-ui/core'
 
 function PostList(props) {
 	const { list, no } = props
@@ -8,7 +9,7 @@ function PostList(props) {
 
 	return (
 		<Link to={`/posts/${list.postId}`}>
-			<div className="postList no-drag">
+			<Button className="postList no-drag">
 				<div className="postListTags">
 					<span className="postTags">
 						Tag : {list.tags[0]}{list.tags[1] ? `, ${list.tags[1]}` : ''}
@@ -24,7 +25,7 @@ function PostList(props) {
 					</div>
 				</div>
 				<div className="postBody">{list.text}</div>
-			</div>
+			</Button>
 		</Link>
 	)
 }
