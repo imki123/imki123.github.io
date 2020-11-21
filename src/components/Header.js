@@ -23,7 +23,7 @@ function Header(props) {
 	return (
 		<div id="headerWrapper">
 			<div id="header">
-				<Button className="menu" onClick={slideMenu} disableElevation>
+				<Button className="menu" onClick={slideMenu}>
 					<MenuIcon/>
 				</Button>
 				<Link to="/">
@@ -33,7 +33,7 @@ function Header(props) {
 						임기의 코딩 블로그
 					</Button>
 				</Link>
-				<Button className="hover" onClick={toggleSetting} disableElevation>
+				<Button className="hover" onClick={toggleSetting}>
 					{!store.login ? (
 						<img className="profile" alt="PROFILE" src={process.env.PUBLIC_URL + '/images/noavatar.png'} />
 					) : (

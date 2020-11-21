@@ -23,7 +23,8 @@ body {
 		border-radius: 12px;
   }
   .MuiButton-root {
-    min-width: unset;
+		min-width: unset;
+		font-family: inherit;
 	}
 	.MuiButton-text {
 		padding: 4px 6px;
