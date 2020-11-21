@@ -1,7 +1,9 @@
 .list{
-    padding: 8px 8px 8px 16px;
     display: flex;
     justify-content: space-between;
+    button{
+        padding: 8px 8px 8px 16px !important
+    }
 }
 .list:hover{
     background: #42ff42;
