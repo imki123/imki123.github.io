@@ -1,9 +1,10 @@
 import React from 'react'
-import './Header.css'
+import './Header.scss'
 import { Link } from 'react-router-dom'
 import { AppContext } from '../App'
 import MenuIcon from '@material-ui/icons/Menu';
 import { closeMenuMobile, slideMenu } from '../utils/util'
+import { Button } from '@material-ui/core'
 
 function Header(props) {
 	const store = React.useContext(AppContext)
@@ -22,16 +23,17 @@ function Header(props) {
 	return (
 		<div id="headerWrapper">
 			<div id="header">
-				<div className="menu hover" onClick={slideMenu}>
+				<Button className="menu" onClick={slideMenu} disableElevation>
 					<MenuIcon/>
-				</div>
+				</Button>
 				<Link to="/">
-					<div id="title" className="hover" onClick={closeMenuMobile}>
-						<img id="logo" alt="logo" src={process.env.PUBLIC_URL + '/images/imcat_64.png'} />
+					<Button id="title" 
+						startIcon={<img id="logo" alt="logo" src={process.env.PUBLIC_URL + '/images/imcat_64.png'} />}
+						onClick={closeMenuMobile} >
 						임기의 코딩 블로그
-					</div>
+					</Button>
 				</Link>
-				<div className="hover" onClick={toggleSetting}>
+				<Button className="hover" onClick={toggleSetting} disableElevation>
 					{!store.login ? (
 						<img className="profile" alt="PROFILE" src={process.env.PUBLIC_URL + '/images/noavatar.png'} />
 					) : (
@@ -44,7 +46,7 @@ function Header(props) {
 							}}
 						/>
 					)}
-				</div>
+				</Button>
 			</div>
 		</div>
 	)

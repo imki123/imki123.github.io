@@ -15,17 +15,19 @@
     background: #b4ffb4;
 }
 
-.menu svg{
-    color: #606060;
-    font-size: 30px;
+.menu{
+    svg{
+        color: #606060;
+        font-size: 30px;
+    }
 }
+
 .profile{
     width: 40px;
     height: 40px;
     border-radius: 50%;
     position: relative;
     top: 2px;
-    z-index: 20;
 }
 
 #title{
@@ -39,9 +41,4 @@
 #logo{
     width: 32px;
     height: 32px;
-    margin-right: 8px;
-}
-.hover:hover, button:hover{
-    opacity: 0.7;
-    cursor: pointer;
 }

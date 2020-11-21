@@ -105,3 +105,37 @@ export const checkToken = (login, setLogin) => {
       console.log(e)
     })
 }
+
+
+//리사이즈시에 동작
+export const resize = () => {
+  //윈도우 사이즈에 맞춰서 콘텐트 사이즈 설정해줌
+  const content = document.querySelector('#content')
+  if (content) {
+    content.style.height = window.innerHeight - 48 - 16 + 'px'
+  }
+  //댓글 textarea 사이즈 조정
+  resizeTextarea()
+
+  //화면 리사이즈 되면 모바일, PC 바꾸기
+  const body = document.querySelector('#body')
+  const guideBack = document.querySelector('#guideBack')
+  const guideWrapper = document.querySelector('#guideWrapper')
+  guideBack.style.width = '0' // 회색 0
+  guideWrapper.style.width = '300px'
+  if (body.clientWidth < 500) {
+    //모바일
+    guideWrapper.style.left = '-300px'
+    content.style.width = 'calc(100% - 16px)'
+  } else {
+    content.style.width = 'calc(100% - 300px - 16px)'
+    content.style.maxWidth = 'calc(1280px - 300px - 16px)'
+  }
+
+  // Quill editor 아래 마진 변경
+  const editor = document.querySelector('#editor')
+  const toolbar = document.querySelector('.ql-toolbar')
+  if (editor && toolbar) {
+    editor.style.marginBottom = toolbar.clientHeight + 10 + 'px'
+  }
+}

@@ -1,76 +1,81 @@
 * {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 html,
 body {
-	height: 100%;
-	width: 100%;
-	margin: 0px;
-	color: #202020;
-	font-size: 16px;
-	background: #f0f0f0;
-	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-	line-height: 120%;
-	overflow: auto;
-}
-
-a {
-	cursor: pointer;
-	&:link {
-		color: inherit;
-		text-decoration: inherit;
-	}
-	&:visited {
-		color: inherit;
-		text-decoration: inherit;
-	}
-	&:hover {
-		color: inherit;
-		text-decoration: inherit;
-	}
-}
-
-p {
-	min-height: 21px;
-	margin: 0px;
-}
-
-img,
-button,
-.no-drag {
-	-ms-user-select: none;
-	-moz-user-select: -moz-none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	user-select: none;
-}
-
-textarea {
-	width: 100%;
-	overflow: visible;
-	resize: none;
-	font-size: 16px;
-	font: inherit;
-	padding: 0;
-	border: 1px solid gray;
-	&:focus {
-		outline: 1px solid green;
-	}
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+  color: #202020;
+  font-size: 16px;
+  background: #f0f0f0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  line-height: 120%;
+  overflow: auto;
 }
 
 #app {
-	position: relative;
-	width: 100%;
-	height: 100%;
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  button {
+		border-radius: 12px;
+  }
+  .MuiButton-root {
+    min-width: unset;
+	}
+	.MuiButton-text {
+		padding: 4px 6px;
+	}
+
+	a {
+		cursor: pointer;
+		&:link,
+		&:visited,
+		&:hover {
+			color: inherit;
+			text-decoration: inherit;
+		}
+	}
+	
+	p {
+		min-height: 21px;
+		margin: 0px;
+	}
+	
+	img,
+	button,
+	.no-drag {
+		-ms-user-select: none;
+		-moz-user-select: -moz-none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		user-select: none;
+	}
+	
+	textarea {
+		width: 100%;
+		overflow: visible;
+		resize: none;
+		font-size: 16px;
+		font: inherit;
+		padding: 0;
+		border: 1px solid gray;
+		&:focus {
+			outline: 1px solid green;
+		}
+	}
+
+	.slideMenu {
+		transition: width 0.5s ease, left 0.5s ease, box-shadow 0.5s ease;
+	}
 }
 
-.slideMenu {
-	transition: width 0.5s ease, left 0.5s ease, box-shadow 0.5s ease;
-}
 
 @media (min-width: 1280px) {
-	#header{
-		width: 1280px !important;
-		margin: auto !important;
-	}
+  #header {
+    width: 1280px !important;
+    margin: auto !important;
+  }
 }
