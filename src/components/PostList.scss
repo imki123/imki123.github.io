@@ -6,7 +6,6 @@
 	&>a{
 		display: block;
 		width: 100%;
-		border-bottom: 1px solid black;
 	}
 	button{
 		width: 100%;
@@ -25,14 +24,22 @@
 }
 
 .postList {
+	width: 100%;
 	display: block !important;
 	font-size: 0.9rem;
-	border-bottom: 1px solid grey;
+	border-bottom: 1px solid grey !important;
+	border-radius: 0 !important;
 	padding-top: 8px;
+	&:hover {
+		background: #b3ffb3 !important;
+	}
+	.postTitle {
+		padding: 0 8px;
+		font-size: 1rem;
+		font-weight: bold;
+	}
 }
-.postList:hover {
-	background: #b3ffb3 !important;
-}
+
 .postListTags{
 	display: flex;
 	justify-content: space-between;
@@ -44,16 +51,11 @@
 	align-items: center;
 	height: 1.3rem;
 	overflow: hidden;
-}
-.postListHeader div{
-	height: 1.3rem;
-	display: flex;
-	align-items: flex-start;
-}
-.postList .postTitle {
-	padding: 0 8px;
-	font-size: 1rem;
-	font-weight: bold;
+	div{
+		height: 1.3rem;
+		display: flex;
+		align-items: flex-start;
+	}
 }
 .postTags{
 	color: gray;
