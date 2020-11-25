@@ -28,6 +28,22 @@ function Guide(props) {
           <Menus menus={store.menus} />
         </div>
         <div className="menus">
+        <a
+            href="https://imki123.github.io/interactive_coding"
+            className="list"
+            onClick={(e) => {
+              e.preventDefault()
+              window.open('https://imki123.github.io/interactive_coding')
+            }}
+          >
+            <Button className="menuLink">
+              <div>
+                <img alt="onandoff" src={process.env.PUBLIC_URL + '/images/imcat_64.png'} />
+                Interactive Coding
+              </div>
+              <OpenInNewIcon />
+            </Button>
+          </a>
           <a
             href="https://imki123.github.io/catbook"
             className="list"
