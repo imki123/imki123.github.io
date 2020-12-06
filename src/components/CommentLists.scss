@@ -21,6 +21,11 @@
 }
 .recentComment .postBody {
   height: 1.2rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 .recentComment .username {
   font-weight: bold;
