@@ -12,7 +12,7 @@ function Guide(props) {
   return (
     <>
       <div id="guideBack" onClick={closeMenuMobile}></div>
-      <div id="guideWrapper" className="slideMenu">
+      <div id="guideWrapper" className="slideMenu" onClick={closeMenuMobile}>
         <div id="avatar">
           <img alt="avatar" src={process.env.PUBLIC_URL + '/images/avatar.png'} title="Hello 😄" />
           <div id="name">Im kiyoung</div>
