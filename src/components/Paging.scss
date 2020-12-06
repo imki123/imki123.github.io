@@ -1,24 +1,24 @@
-.paging{
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: 100%;
-    height: 24px;
+.paging {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 24px;
 }
-.paging a:hover{
-    opacity: 0.7;
+.paging a:hover {
+  opacity: 0.7;
 }
-.inactivePage{
-    padding: 0 8px;
-    margin: 0 4px;
-    border: 1px solid black;
-    border-radius: 30%;
+.inactivePage {
+  padding: 0 8px;
+  margin: 0 4px;
+  border: 1px solid black;
+  border-radius: 30%;
 }
-.activePage{
-    padding: 0 8px;
-    margin: 0 4px;
-    background: #76ff76;
-    border: 1px solid #50ff50;
-    border-radius: 30%;
+.activePage {
+  padding: 0 8px;
+  margin: 0 4px;
+  background: #76ff76;
+  border: 1px solid #50ff50;
+  border-radius: 30%;
 }

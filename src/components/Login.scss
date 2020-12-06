@@ -1,152 +1,149 @@
 #background {
-	display: flex;
-	height: 100%;
-	justify-content: center;
-	align-items: center;
-	font-size: 1rem;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
 }
 #loginWrapper {
-	padding: 40px 0 40px;
-	border-radius: 30px;
-	border: 1px solid black;
-	max-width: 500px;
-	width: 100%;
-	margin: auto;
-	background: white;
+  padding: 40px 0 40px;
+  border-radius: 30px;
+  border: 1px solid black;
+  max-width: 500px;
+  width: 100%;
+  margin: auto;
+  background: white;
 }
 .login {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	max-width: 360px;
-	width: 90%;
-	margin: auto;
-	.text {
-		margin-bottom: 10px;
-		font-weight: bold;
-	}
-	input {
-		border: 0;
-		border-bottom: 1px solid black;
-		outline: none;
-		font-size: inherit;
-		background: transparent;
-	}
-	.loginLink {
-		color: blue;
-		text-decoration: underline;
-		text-align: right;
-		font-size: 0.9rem;
-		padding-top: 4px;
-	}
-	button {
-		border: 1px solid black;
-		border-radius: 20px;
-		background: #42ff42;
-		cursor: pointer;
-		height: 40px;
-		text-align: center !important;
-		font-size: inherit;
-		outline: none;
-	}
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 360px;
+  width: 90%;
+  margin: auto;
+  .text {
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  input {
+    border: 0;
+    border-bottom: 1px solid black;
+    outline: none;
+    font-size: inherit;
+    background: transparent;
+  }
+  .loginLink {
+    color: blue;
+    text-decoration: underline;
+    text-align: right;
+    font-size: 0.9rem;
+    padding-top: 4px;
+  }
+  button {
+    border: 1px solid black;
+    border-radius: 20px;
+    background: #42ff42;
+    cursor: pointer;
+    height: 40px;
+    text-align: center !important;
+    font-size: inherit;
+    outline: none;
+  }
 }
-.googleWarning{
-	font-size: 0.8rem;
-	margin-top: 4px;
-	word-break: break-all;
+.googleWarning {
+  font-size: 0.8rem;
+  margin-top: 4px;
+  word-break: break-all;
 }
-.googleWarning svg{
-	font-size: 1rem;
-	vertical-align: text-bottom;
+.googleWarning svg {
+  font-size: 1rem;
+  vertical-align: text-bottom;
 }
-.googleWarning span{
-	color:blue;
+.googleWarning span {
+  color: blue;
 }
-.googleWarning img{
-	width: 16px;
-	vertical-align: text-bottom;
+.googleWarning img {
+  width: 16px;
+  vertical-align: text-bottom;
 }
 .center {
-	color: black;
-	width: 100%;
-	font-size: 1rem;
-	margin-bottom: 10px;
-	font-weight: bold;
-	text-align: center;
+  color: black;
+  width: 100%;
+  font-size: 1rem;
+  margin-bottom: 10px;
+  font-weight: bold;
+  text-align: center;
 }
 .check {
-	height: 21px;
-	color: red;
+  height: 21px;
+  color: red;
 }
-.login 
-
-
-.red {
-	background: red !important;
+.login .red {
+  background: red !important;
 }
 .oAuth {
-	border-bottom: 2px solid gray;
-	padding-bottom: 40px;
-	margin-bottom: 40px;
+  border-bottom: 2px solid gray;
+  padding-bottom: 40px;
+  margin-bottom: 40px;
 }
-.googleLogin{
-    color: black !important;
-    width: 100%;
-	border: 1px solid black !important;
-	margin-bottom: 4px;
-	box-shadow: unset !important;
+.googleLogin {
+  color: black !important;
+  width: 100%;
+  border: 1px solid black !important;
+  margin-bottom: 4px;
+  box-shadow: unset !important;
 }
-.googleLogin:hover{
-    opacity: 0.7 !important;
-    background: rgb(190, 229, 241) !important;
+.googleLogin:hover {
+  opacity: 0.7 !important;
+  background: rgb(190, 229, 241) !important;
 }
 .googleLogin div {
-    background-color: transparent !important;
-	padding: 0 11px !important;
+  background-color: transparent !important;
+  padding: 0 11px !important;
 }
 .googleLogin span {
-	padding: 0 !important;
-    font-size: 1.1rem !important;
-    font-weight: bold !important;
+  padding: 0 !important;
+  font-size: 1.1rem !important;
+  font-weight: bold !important;
 }
-.naverLogin{
-	width: 100%;
-	height: 40px;
-	display: flex;
-	justify-content: flex-start;
-	align-items: center;
-	border: 0;
-	background: #1ec800;
-	border: 1px solid #1aaa00;
-	color: white;
-	font-weight: bold;
-	font-size: 1.1rem;
-	margin-bottom: 4px;
-	cursor: pointer;
-	border-radius: 2px;
-	font-family: Roboto, sans-serif;
+.naverLogin {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border: 0;
+  background: #1ec800;
+  border: 1px solid #1aaa00;
+  color: white;
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 4px;
+  cursor: pointer;
+  border-radius: 2px;
+  font-family: Roboto, sans-serif;
 }
-.naverLogin:hover{
-	opacity: 0.7 !important;
+.naverLogin:hover {
+  opacity: 0.7 !important;
 }
-.naverLogin img{
-	width: 40px;
-	margin-right: 10px;
+.naverLogin img {
+  width: 40px;
+  margin-right: 10px;
 }
-.kakaoLogin{
-	background: #fee500;
-	color: black;
-	border: 1px solid #c0ad00;
+.kakaoLogin {
+  background: #fee500;
+  color: black;
+  border: 1px solid #c0ad00;
 }
-.kakaoLogin img{
-	height: 38px;
+.kakaoLogin img {
+  height: 38px;
 }
-.googleLogin{
-	background: white;
-	color: black;
-	border: 1px solid black;
+.googleLogin {
+  background: white;
+  color: black;
+  border: 1px solid black;
 }
-.googleLogin img{
-	height: 38px;
-	padding: 4px; 
+.googleLogin img {
+  height: 38px;
+  padding: 4px;
 }

@@ -20,68 +20,67 @@ body {
   height: 100%;
 
   button {
-		text-align: left;
-		border-radius: 12px;
-		text-transform: unset;
-		line-height: unset;
+    text-align: left;
+    border-radius: 12px;
+    text-transform: unset;
+    line-height: unset;
   }
   .MuiButton-root {
-		min-width: unset;
-		font-family: inherit;
-	}
-	.MuiButton-text {
-		padding: 4px 6px;
-	}
-	.MuiButton-containedPrimary{
-		color: black;
-		&:hover{
-			background-color: #3bdb3b;
-		} 
-	}
+    min-width: unset;
+    font-family: inherit;
+  }
+  .MuiButton-text {
+    padding: 4px 6px;
+  }
+  .MuiButton-containedPrimary {
+    color: black;
+    &:hover {
+      background-color: #3bdb3b;
+    }
+  }
 
-	a {
-		cursor: pointer;
-		&:link,
-		&:visited,
-		&:hover {
-			color: inherit;
-			text-decoration: inherit;
-		}
-	}
-	
-	p {
-		min-height: 21px;
-		margin: 0px;
-	}
-	
-	img,
-	button,
-	.no-drag {
-		-ms-user-select: none;
-		-moz-user-select: -moz-none;
-		-webkit-user-select: none;
-		-khtml-user-select: none;
-		user-select: none;
-	}
-	
-	.slideMenu {
-		transition: width 0.5s ease, left 0.5s ease, box-shadow 0.5s ease;
-	}
+  a {
+    cursor: pointer;
+    &:link,
+    &:visited,
+    &:hover {
+      color: inherit;
+      text-decoration: inherit;
+    }
+  }
+
+  p {
+    min-height: 21px;
+    margin: 0px;
+  }
+
+  img,
+  button,
+  .no-drag {
+    -ms-user-select: none;
+    -moz-user-select: -moz-none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+  }
+
+  .slideMenu {
+    transition: width 0.5s ease, left 0.5s ease, box-shadow 0.5s ease;
+  }
 }
 
 textarea {
-	width: 100%;
-	overflow: visible;
-	resize: none;
-	font-size: 16px;
-	font: inherit;
-	padding: 0;
-	border: 1px solid gray;
-	&:focus {
-		outline: 1px solid green;
-	}
+  width: 100%;
+  overflow: visible;
+  resize: none;
+  font-size: 16px;
+  font: inherit;
+  padding: 0;
+  border: 1px solid gray;
+  &:focus {
+    outline: 1px solid green;
+  }
 }
-
 
 @media (min-width: 1280px) {
   #header {

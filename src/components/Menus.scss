@@ -1,46 +1,46 @@
-.list{
-    display: flex;
-    justify-content: space-between;
-    button{
-        padding: 8px 8px 8px 16px !important
-    }
+.list {
+  display: flex;
+  justify-content: space-between;
+  button {
+    padding: 8px 8px 8px 16px !important;
+  }
 }
-.list:hover{
-    background: #42ff42;
-    cursor: pointer;
+.list:hover {
+  background: #42ff42;
+  cursor: pointer;
 }
-.activeList{
-    background: #76ff76;
+.activeList {
+  background: #76ff76;
 }
-.activeListManual{
-    background: #76ff76;
+.activeListManual {
+  background: #76ff76;
 }
-.subList .menuName{
-    padding-left: 20px;
+.subList .menuName {
+  padding-left: 20px;
 }
-.subList .menuCnt{
-    margin-right: 5px;
-}
-
-.menuName{
-    height: 21px;
-    overflow: hidden;
-    min-width: 90px;
-    font-weight: bold;
+.subList .menuCnt {
+  margin-right: 5px;
 }
 
-.menuOptions{
-    min-width: 48px;
-    text-align: right;
+.menuName {
+  height: 21px;
+  overflow: hidden;
+  min-width: 90px;
+  font-weight: bold;
 }
-.menuOptions span{
-    display: inline-block;
-    min-width: 20px;
-    text-align: right;
-    margin-left: 4px;
+
+.menuOptions {
+  min-width: 48px;
+  text-align: right;
 }
-.menuOptions svg{
-    font-size: 20px;
-    color: black;
-    vertical-align: bottom;
+.menuOptions span {
+  display: inline-block;
+  min-width: 20px;
+  text-align: right;
+  margin-left: 4px;
+}
+.menuOptions svg {
+  font-size: 20px;
+  color: black;
+  vertical-align: bottom;
 }

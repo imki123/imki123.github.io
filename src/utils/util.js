@@ -127,7 +127,8 @@ export const resize = () => {
     //모바일
     guideWrapper.style.left = '-300px'
     content.style.width = 'calc(100% - 16px)'
-  } else { //PC
+  } else {
+    //PC
     content.style.width = 'calc(100% - 300px - 16px)'
   }
 

@@ -6,17 +6,17 @@ import App from './App'
 const rootElement = document.getElementById('root')
 
 if (rootElement.hasChildNodes()) {
-	hydrate(
-		<BrowserRouter basename={process.env.PUBLIC_URL}>
-			<App />
-		</BrowserRouter>,
-		rootElement,
-	)
+  hydrate(
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <App />
+    </BrowserRouter>,
+    rootElement,
+  )
 } else {
-	ReactDOM.render(
-		<BrowserRouter basename={process.env.PUBLIC_URL}>
-			<App />
-		</BrowserRouter>,
-		document.getElementById('root'),
-	)
+  ReactDOM.render(
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <App />
+    </BrowserRouter>,
+    document.getElementById('root'),
+  )
 }

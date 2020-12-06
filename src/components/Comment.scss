@@ -1,21 +1,21 @@
-.comment{
-    display: flex;
-    align-items: flex-start;
+.comment {
+  display: flex;
+  align-items: flex-start;
 }
 
-.comment .commentContent textarea{
-    border: 0px;
-    outline: 0px;
-    font-size: 0.9rem;
-    color: #4e4e4e;
+.comment .commentContent textarea {
+  border: 0px;
+  outline: 0px;
+  font-size: 0.9rem;
+  color: #4e4e4e;
 }
-.commentDate{
-    font-size: 0.8rem;
-    color: gray;
+.commentDate {
+  font-size: 0.8rem;
+  color: gray;
 }
-.updateMode{
-    border: 1px solid gray !important;
+.updateMode {
+  border: 1px solid gray !important;
 }
-.updateMode:focus{
-    outline: 1px solid green !important;
+.updateMode:focus {
+  outline: 1px solid green !important;
 }

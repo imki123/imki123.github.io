@@ -27,7 +27,7 @@ function Paging(props) {
   }
 
   useEffect(() => {
-		const links = document.querySelectorAll('.paging a')
+    const links = document.querySelectorAll('.paging a')
     for (let i = 0; i < links.length; i++) {
       if (parseInt(links[i].innerHTML) === page) {
         links[i].className = 'activePage'

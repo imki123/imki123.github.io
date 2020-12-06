@@ -356,7 +356,7 @@ function Login({ history, match, location }) {
           data={{
             title: '임기의 코딩 블로그',
             description: '네이버, 카카오, 구글 계정으로 로그인 해보세요!',
-            canonical: `login`
+            canonical: `login`,
           }}
         />
         {location.pathname.indexOf('/loginStatus') > -1 ? (
@@ -430,7 +430,9 @@ function Login({ history, match, location }) {
                   {buttonName}
                 </Button>
               ) : (
-                <Button variant="contained" color="primary" onClick={clickButton}>{buttonName}</Button>
+                <Button variant="contained" color="primary" onClick={clickButton}>
+                  {buttonName}
+                </Button>
               )}
 
               {/* 로그인 or 회원가입 */}

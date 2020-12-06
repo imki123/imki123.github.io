@@ -28,7 +28,7 @@ function Guide(props) {
           <Menus menus={store.menus} />
         </div>
         <div className="menus">
-        <a
+          <a
             href="https://imki123.github.io/interactive_coding"
             className="list"
             onClick={(e) => {

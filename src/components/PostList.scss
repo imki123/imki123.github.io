@@ -1,75 +1,75 @@
 .postListWrapper {
-	padding: 8px 15%;
-	border-radius: 8px;
-	background: white;
-	box-shadow: 0px 2px 2px 1px gray;
-	&>a{
-		display: block;
-		width: 100%;
-	}
-	button{
-		width: 100%;
-	}
+  padding: 8px 15%;
+  border-radius: 8px;
+  background: white;
+  box-shadow: 0px 2px 2px 1px gray;
+  & > a {
+    display: block;
+    width: 100%;
+  }
+  button {
+    width: 100%;
+  }
 }
 @media (max-width: 500px) {
-	.postListWrapper {
-		padding: 8px;
-	}
+  .postListWrapper {
+    padding: 8px;
+  }
 }
 .postListTitle {
-	padding-bottom: 12px;
-	font-size: 1.5rem;
-	font-weight: bold;
-	border-bottom: 1px solid grey;
+  padding-bottom: 12px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-bottom: 1px solid grey;
 }
 
 .postList {
-	width: 100%;
-	display: block !important;
-	font-size: 0.9rem;
-	border-bottom: 1px solid grey !important;
-	border-radius: 0 !important;
-	padding-top: 8px;
-	&:hover {
-		background: #b3ffb3 !important;
-	}
-	.postTitle {
-		padding: 0 8px;
-		font-size: 1rem;
-		font-weight: bold;
-	}
+  width: 100%;
+  display: block !important;
+  font-size: 0.9rem;
+  border-bottom: 1px solid grey !important;
+  border-radius: 0 !important;
+  padding-top: 8px;
+  &:hover {
+    background: #b3ffb3 !important;
+  }
+  .postTitle {
+    padding: 0 8px;
+    font-size: 1rem;
+    font-weight: bold;
+  }
 }
 
-.postListTags{
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+.postListTags {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .postListHeader {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	height: 1.3rem;
-	overflow: hidden;
-	div{
-		height: 1.3rem;
-		display: flex;
-		align-items: flex-start;
-	}
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 1.3rem;
+  overflow: hidden;
+  div {
+    height: 1.3rem;
+    display: flex;
+    align-items: flex-start;
+  }
 }
-.postTags{
-	color: gray;
-	font-size: 0.8rem;
-	padding-right: 4px;
+.postTags {
+  color: gray;
+  font-size: 0.8rem;
+  padding-right: 4px;
 }
 .postDate {
-	white-space: nowrap;
-	color: gray;
-	font-size: 0.8rem;
+  white-space: nowrap;
+  color: gray;
+  font-size: 0.8rem;
 }
 .postBody {
-	padding-left: 22px;
-	height: 2.4rem;
-	overflow: hidden;
-	text-overflow:ellipsis;
+  padding-left: 22px;
+  height: 2.4rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

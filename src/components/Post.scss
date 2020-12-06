@@ -1,175 +1,175 @@
 .nav {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	color: gray;
-	font-size: 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: gray;
+  font-size: 0.9rem;
 }
-.nav a:hover{
-	text-decoration: underline;
+.nav a:hover {
+  text-decoration: underline;
 }
 
 .post {
-	margin-bottom: 20px;
-	padding: 20px 4px;
-	border-radius: 8px;
-	background: white;
-	box-shadow: 2px 2px 3px 1px grey;
+  margin-bottom: 20px;
+  padding: 20px 4px;
+  border-radius: 8px;
+  background: white;
+  box-shadow: 2px 2px 3px 1px grey;
 }
-.post #editor>div:nth-child(1) {
-	display: none;
+.post #editor > div:nth-child(1) {
+  display: none;
 }
 .ql-disabled {
-	border: 0 !important;
+  border: 0 !important;
 }
 .tags a:hover {
-	cursor: pointer;
-	text-decoration: underline;
+  cursor: pointer;
+  text-decoration: underline;
 }
 .inActiveNav {
-	display: none;
-	margin-right: 8px;
+  display: none;
+  margin-right: 8px;
 }
 .activeNav {
-	display: inline;
-	color: blue !important;
+  display: inline;
+  color: blue !important;
 }
-.postTitle{
-	line-height: normal;
+.postTitle {
+  line-height: normal;
 }
 .postContent {
-	padding: 0 8px 20px;
+  padding: 0 8px 20px;
 }
-.EmojiDiv{
-	border-top: 2px dotted green;
-	padding: 20px 8px 0px;
-	text-align: right;
+.EmojiDiv {
+  border-top: 2px dotted green;
+  padding: 20px 8px 0px;
+  text-align: right;
 }
 .writeComment {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 }
 .commentProfile {
-	text-align: center;
-	font-size: 0.8rem;
-	margin-right: 10px;
-	width: 60px;
+  text-align: center;
+  font-size: 0.8rem;
+  margin-right: 10px;
+  width: 60px;
 }
 .commentProfile img {
-	width: 50px;
-	height: 50px;
-	border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
 }
 .commentUsername {
-	font-size: 0.8rem;
+  font-size: 0.8rem;
 }
 .commentContent {
-	width: calc(100% - 60px);
-	font-size: 0.8rem;
+  width: calc(100% - 60px);
+  font-size: 0.8rem;
 }
 .commentContent textarea {
-	font-size: 0.9rem;
+  font-size: 0.9rem;
 }
 .commentButtons {
-	text-align: right;
-	padding-right: 8px;
-	font-size: 0.8rem;
+  text-align: right;
+  padding-right: 8px;
+  font-size: 0.8rem;
 }
 .commentButton,
 .loginButton {
-	display: inline-block;
-	padding: 6px 6px;
-	border: 0px solid black;
-	border-radius: 5px;
-	background: #84ff84 !important;
-	cursor: pointer;
-	font-size: inherit;
-	outline: none;
-	cursor: pointer;
+  display: inline-block;
+  padding: 6px 6px;
+  border: 0px solid black;
+  border-radius: 5px;
+  background: #84ff84 !important;
+  cursor: pointer;
+  font-size: inherit;
+  outline: none;
+  cursor: pointer;
 }
 .commentButton {
-	margin-left: 8px;
+  margin-left: 8px;
 }
 
 .postButtons {
-	text-align: right;
-	font-size: 0.8rem;
+  text-align: right;
+  font-size: 0.8rem;
 }
 .postButtons button,
 .postButtons a {
-	display: inline-block;
-	padding: 6px 6px;
-	border: 0px solid black;
-	border-radius: 5px;
-	background: #84ff84;
-	cursor: pointer;
-	font-size: inherit;
-	outline: none;
-	cursor: pointer;
+  display: inline-block;
+  padding: 6px 6px;
+  border: 0px solid black;
+  border-radius: 5px;
+  background: #84ff84;
+  cursor: pointer;
+  font-size: inherit;
+  outline: none;
+  cursor: pointer;
 }
 
 #comments {
-	padding: 8px 8px 0;
+  padding: 8px 8px 0;
 }
 .commentTitle {
-	display: flex;
-	justify-content: space-between;
-	align-items: flex-end;
-	margin-bottom: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 4px;
 }
 .commentRefresh {
-	color: blue;
-	display: flex;
-	align-items: flex-end;
-	font-size: 0.8rem;
+  color: blue;
+  display: flex;
+  align-items: flex-end;
+  font-size: 0.8rem;
 }
 .commentRefresh svg {
-	font-size: 1rem;
+  font-size: 1rem;
 }
 .commentRefresh:hover {
-	cursor: pointer;
-	text-decoration: underline;
+  cursor: pointer;
+  text-decoration: underline;
 }
 .more {
-	text-align: center;
-	margin-top: 8px;
+  text-align: center;
+  margin-top: 8px;
 }
 .moreButton {
-	color: blue;
-	font-size: 0.9rem;
+  color: blue;
+  font-size: 0.9rem;
 }
 .moreButton:hover {
-	cursor: pointer;
-	text-decoration: underline;
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .refreshing {
-	animation: refresh 1s linear infinite;
+  animation: refresh 1s linear infinite;
 }
-.homeLists{
-	display: flex;
-	justify-content: space-between;
-	flex-wrap: wrap;
+.homeLists {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
-.hiddenText{
-	position:absolute;
-	height: 0;
-	width: 0;
-	opacity: 0;
-	top: -10000000px;
-	left: 0;
+.hiddenText {
+  position: absolute;
+  height: 0;
+  width: 0;
+  opacity: 0;
+  top: -10000000px;
+  left: 0;
 }
-@media(max-width: 500px){
-	.postContent{
-		padding: 0 0 20px;
-	}
+@media (max-width: 500px) {
+  .postContent {
+    padding: 0 0 20px;
+  }
 }
 
 @keyframes refresh {
-	0% {
-		transform: rotate(0deg);
-	}
-	100% {
-		transform: rotate(360deg);
-	}
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
