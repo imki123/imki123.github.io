@@ -10,7 +10,6 @@
 #guideWrapper {
   overflow-x: hidden;
   overflow-y: auto;
-  min-width: 300px;
   width: 300px;
   margin-top: 8px;
   background: white;
@@ -62,13 +61,13 @@
   flex-direction: column;
   padding: 8px 0 8px;
   border-top: 1px solid green;
-  button{
+  button {
     font-size: 1rem;
     text-align: left;
     font-weight: bold;
     width: 100%;
   }
-  .MuiButtonBase-root{
+  .MuiButtonBase-root {
     justify-content: space-between;
   }
 }

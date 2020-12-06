@@ -1,4 +1,5 @@
-import Axios from "axios"
+import Axios from 'axios'
+import { useEffect } from 'react'
 
 export const resizeTextarea = (e) => {
   //텍스트에어리어를 찾아서 크기를 글자 높이에 맞게 변경하기
@@ -106,7 +107,6 @@ export const checkToken = (login, setLogin) => {
     })
 }
 
-
 //리사이즈시에 동작
 export const resize = () => {
   //윈도우 사이즈에 맞춰서 콘텐트 사이즈 설정해줌
@@ -137,5 +137,34 @@ export const resize = () => {
   const toolbar = document.querySelector('.ql-toolbar')
   if (editor && toolbar) {
     editor.style.marginBottom = toolbar.clientHeight + 10 + 'px'
+  }
+}
+
+//스크롤이 가장 위가 아니라면 헤더 감추는 hook
+export function useToggleHeader() {
+  useEffect(() => {
+    toggleHeader()
+
+    let timer = null
+    document.body.addEventListener('scroll', function () {
+      //스로틀링 구현
+      if (!timer) {
+        timer = setTimeout(() => {
+          timer = null
+          toggleHeader()
+        }, 100)
+      }
+    })
+    return () => document.body.removeEventListener('scroll', toggleHeader)
+  })
+
+  document.body.addEventListener('scroll', toggleHeader)
+  function toggleHeader() {
+    const $header = document.querySelector('#headerWrapper')
+    if (document.body.scrollTop <= 0) {
+      $header.style.top = 0
+    } else {
+      $header.style.top = '-48px'
+    }
   }
 }
