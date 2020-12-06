@@ -127,9 +127,8 @@ export const resize = () => {
     //모바일
     guideWrapper.style.left = '-300px'
     content.style.width = 'calc(100% - 16px)'
-  } else {
+  } else { //PC
     content.style.width = 'calc(100% - 300px - 16px)'
-    content.style.maxWidth = 'calc(1280px - 300px - 16px)'
   }
 
   // Quill editor 아래 마진 변경
@@ -140,7 +139,7 @@ export const resize = () => {
   }
 }
 
-//스크롤이 가장 위가 아니라면 헤더 감추는 hook
+//스크롤되면 헤더 감추는 hook
 export function useToggleHeader() {
   useEffect(() => {
     toggleHeader()
