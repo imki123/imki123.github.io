@@ -46,17 +46,8 @@ function Content(props) {
   }, [location.hash, store])
 
   const scrollUp = (e) => {
-    // content의 스크롤을 가장 위로
-    const body = document.body
-    let contentScroll = body.scrollTop
-    let dif = contentScroll / 20
-    const frame = setInterval(function () {
-      if (body.scrollTop <= 0) {
-        clearInterval(frame)
-      } else {
-        body.scrollTop -= dif
-      }
-    }, 10)
+    // body의 스크롤을 가장 위로
+    document.body.scrollTop = 0
   }
 
   return (

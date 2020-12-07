@@ -9,7 +9,7 @@ import { Button } from '@material-ui/core'
 function Guide(props) {
   const store = React.useContext(AppContext)
 
-  const scrollToTop = ()=>{
+  const scrollUp = ()=>{
     //최상단으로 스크롤 이동
     document.body.scrollTop = 0
   }
@@ -29,10 +29,10 @@ function Guide(props) {
           </div>
           <div id="introduction">A web programmer who dreams of becoming a wise developer.</div>
         </div>
-        <div className="menus" onClick={scrollToTop}>
+        <div className="menus" onClick={scrollUp}>
           <Menus menus={store.menus} />
         </div>
-        <div className="menus" onClick={scrollToTop}>
+        <div className="menus" onClick={scrollUp}>
           <a
             href="https://imki123.github.io/interactive_coding"
             className="list"

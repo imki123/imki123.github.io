@@ -36,21 +36,11 @@ export const slideMenu = () => {
 
   if (body.offsetWidth < 500) {
     //모바일 메뉴 동작
-    //맨 위로 스크롤 0.2초
+    //메뉴로 스크롤
     if (body.scrollTop >= 48) {
-      let diff = body.scrollTop / 20
       let rect = document.querySelector('.menus').getBoundingClientRect()
       let top = rect.top + body.scrollTop
-      if(!top) top = 365
-
-      const interval = setInterval(() => {
-        body.scrollTop -= diff
-        if (body.scrollTop <= top) {
-          clearInterval(interval)
-          body.scrollTop = top
-        }
-      }, 10)
-      setTimeout(()=>clearInterval(interval), 300)
+      body.scrollTop = top
     }
 
     if (guideWrapper.style.left && guideWrapper.style.left.replace('px', '') > -100) {
