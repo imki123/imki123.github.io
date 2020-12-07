@@ -42,23 +42,27 @@ export const slideMenu = () => {
       body.scrollTop -= diff
       if (body.scrollTop <= 0) clearInterval(interval)
     }, 10)
+
     if (guideWrapper.style.left && guideWrapper.style.left.replace('px', '') > -100) {
+      //메뉴 닫기
       guideWrapper.style.left = '-300px' // 메뉴 0
       content.style.width = 'calc(100% - 16px)'
     } else {
+      //메뉴 열기
       guideBack.style.width = '100%' // 회색 100%
+      guideWrapper.style.width = '300px' //너비 300px
       guideWrapper.style.left = '0px' // 메뉴 0
     }
   } else {
     //데스크탑 메뉴 동작
     if (guideWrapper.offsetWidth > 0) {
-      //메뉴닫기
+      //메뉴 닫기
       guideWrapper.style.width = 0
       guideWrapper.style.boxShadow = 'unset'
       content.style.maxWidth = `calc(1280px - 16px)`
       content.style.width = `calc(100% - 16px)`
     } else {
-      //메뉴열기
+      //메뉴 열기
       content.style.maxWidth = `calc(1280px - 300px - 16px)`
       content.style.width = `calc(100% - 300px - 16px)`
       guideWrapper.style.width = '300px'
