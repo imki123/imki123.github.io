@@ -75,7 +75,7 @@ function Post({ match, location, history }) {
               if (elemTop > contentScroll) {
                 frame = setInterval(function () {
                   //인터벌
-                  if (content.scrollTop + dif >= elemTop || content.scrollTop >= content.scrollHeight - content.clientHeight) {
+                  if (content.scrollTop + dif >= elemTop || content.scrollTop >= content.scrollHeight - content.offsetHeight) {
                     clearInterval(frame)
                   } else {
                     content.scrollTop += dif

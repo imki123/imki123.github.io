@@ -1,12 +1,17 @@
 #content {
-  max-width: calc(1280px - 16px);
-  width: calc(1280px - 300px - 16px);
-  overflow: visible;
+  max-width: calc(1280px - 300px - 16px);
+  width: calc(100% - 300px - 16px);
   margin: 8px;
   position: relative;
   top: 0px;
   right: 0px;
 }
+@media (max-width: 500px) {
+  #content {
+    width: calc(100% - 16px);
+  }
+}
+
 
 .FAB {
   z-index: 1;
@@ -64,8 +69,4 @@
   top: -10000000px;
 }
 
-@media (max-width: 500px) {
-  #content {
-    width: calc(100% - 16px);
-  }
-}
+

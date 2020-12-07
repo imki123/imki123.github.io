@@ -15,7 +15,7 @@ export const resizeTextarea = (e) => {
   if (textareas && fake) {
     for (let i = 0; i < textareas.length; i++) {
       fake.style.height = '1px'
-      fake.style.width = textareas[i].clientWidth + 'px'
+      fake.style.width = textareas[i].offsetWidth + 'px'
       fake.value = textareas[i].value
       textareas[i].style.height = 5 + fake.scrollHeight + 'px'
     }
@@ -32,18 +32,10 @@ export const slideMenu = () => {
   const guideWrapper = document.querySelector('#guideWrapper')
   const content = document.querySelector('#content')
 
-  if (!guideWrapper.style.left) {
-    //스타일 속성이 없으면 초기값 지정
-    if (body.clientWidth < 500) {
-      guideWrapper.style.left = '-300px' //모바일
-    } else {
-      guideWrapper.style.left = body.clientWidth - 1280 + 'px' //PC
-    }
-  }
   guideBack.style.width = '0' // 회색 0
 
-  //모바일 메뉴 동작
-  if (body.clientWidth < 500) {
+  if (body.offsetWidth < 500) {
+    //모바일 메뉴 동작
     //맨 위로 스크롤 0.1초
     let diff = body.scrollTop / 10
     const interval = setInterval(() => {
@@ -59,19 +51,22 @@ export const slideMenu = () => {
     }
   } else {
     //데스크탑 메뉴 동작
-    if (guideWrapper.clientWidth > 0) {
+    if (guideWrapper.offsetWidth > 0) {
       //메뉴닫기
       guideWrapper.style.width = 0
       guideWrapper.style.boxShadow = 'unset'
-      content.style.width = `calc(1280px - 16px)`
+      content.style.maxWidth = `calc(1280px - 16px)`
+      content.style.width = `calc(100% - 16px)`
     } else {
       //메뉴열기
-      content.style.width = `calc(1280px - 300px - 16px)`
-      guideWrapper.style.width = 300 + 'px'
+      content.style.maxWidth = `calc(1280px - 300px - 16px)`
+      content.style.width = `calc(100% - 300px - 16px)`
+      guideWrapper.style.width = '300px'
       guideWrapper.style.boxShadow = '2px 2px 3px 1px gray'
     }
   }
 }
+
 //모바일에서 회색부분 클릭 시 메뉴 닫기
 export const closeMenuMobile = (e) => {
   const body = document.querySelector('#body')
@@ -80,7 +75,7 @@ export const closeMenuMobile = (e) => {
   const content = document.querySelector('#content')
 
   guideBack.style.width = '0' // 회색 0
-  if (body.clientWidth < 500) {
+  if (body.offsetWidth < 500) {
     //모바일
     guideWrapper.style.left = '-300px' // 메뉴 0
     content.style.width = 'calc(100% - 16px)'
@@ -109,34 +104,33 @@ export const checkToken = (login, setLogin) => {
 
 //리사이즈시에 동작
 export const resize = () => {
-  //윈도우 사이즈에 맞춰서 콘텐트 사이즈 설정해줌
-  const content = document.querySelector('#content')
-  if (content) {
-    content.style.height = window.innerHeight - 48 - 16 + 'px'
+  //윈도우 사이즈에 맞춰서 로딩 사이즈 설정해줌
+  const loading = document.querySelector('#loading')
+  if (loading) {
+    loading.style.height = document.body.offsetHeight - 48 - 16 + 'px'
   }
   //댓글 textarea 사이즈 조정
   resizeTextarea()
 
-  //화면 리사이즈 되면 모바일, PC 바꾸기
-  const body = document.querySelector('#body')
+  //화면 리사이즈 되면 스크립트로 작성한 스타일 지우기
   const guideBack = document.querySelector('#guideBack')
   const guideWrapper = document.querySelector('#guideWrapper')
-  guideBack.style.width = '0' // 회색 0
-  guideWrapper.style.width = '300px'
-  if (body.clientWidth < 500) {
-    //모바일
-    guideWrapper.style.left = '-300px'
-    content.style.width = 'calc(100% - 16px)'
+  const content = document.querySelector('#content')
+  if (document.body.offsetWidth < 500 && guideWrapper.style.left.replace('px', '') * 1 >= 0) {
+    //모바일이고 메뉴가 켜져있다면 메뉴 유지함
+  } else if (document.body.offsetWidth >= 500 && guideWrapper.offsetWidth === 0) {
+    //PC이고 메뉴가 꺼져있다면 메뉴 유지함
   } else {
-    //PC
-    content.style.width = 'calc(100% - 300px - 16px)'
+    guideBack.style = null
+    guideWrapper.style = null
+    content.style = null
   }
 
   // Quill editor 아래 마진 변경
   const editor = document.querySelector('#editor')
   const toolbar = document.querySelector('.ql-toolbar')
   if (editor && toolbar) {
-    editor.style.marginBottom = toolbar.clientHeight + 10 + 'px'
+    editor.style.marginBottom = toolbar.offsetHeight + 10 + 'px'
   }
 }
 

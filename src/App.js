@@ -53,15 +53,11 @@ function App() {
   }, [location.pathname, location.search, login])
 
   useEffect(() => {
-    const content = document.querySelector('#content')
     const editor = document.querySelector('#editor')
     const toolbar = document.querySelector('.ql-toolbar')
 
-    if (content) {
-      content.style.height = window.innerHeight - 48 - 16 + 'px'
-    }
     if (editor && toolbar) {
-      editor.style.marginBottom = toolbar.clientHeight + 10 + 'px'
+      editor.style.marginBottom = toolbar.offsetHeight + 10 + 'px'
     }
 
     window.addEventListener('resize', resize)
