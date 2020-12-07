@@ -36,12 +36,17 @@ export const slideMenu = () => {
 
   if (body.offsetWidth < 500) {
     //모바일 메뉴 동작
-    //맨 위로 스크롤 0.1초
-    let diff = body.scrollTop / 10
-    const interval = setInterval(() => {
-      body.scrollTop -= diff
-      if (body.scrollTop <= 0) clearInterval(interval)
-    }, 10)
+    //맨 위로 스크롤 0.2초
+    if (body.scrollTop >= 48) {
+      let diff = body.scrollTop / 20
+      const interval = setInterval(() => {
+        body.scrollTop -= diff
+        if (body.scrollTop <= 365) {
+          clearInterval(interval)
+          body.scrollTop = 365
+        }
+      }, 10)
+    }
 
     if (guideWrapper.style.left && guideWrapper.style.left.replace('px', '') > -100) {
       //메뉴 닫기
