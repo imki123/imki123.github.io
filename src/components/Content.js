@@ -13,12 +13,14 @@ import Tags from './Tags'
 import CommentLists from './CommentLists'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 import MenuIcon from '@material-ui/icons/Menu'
-import { resizeTextarea, slideMenu } from '../utils/util'
+import { resize, resizeTextarea, slideMenu } from '../utils/util'
 
 function Content(props) {
   const store = React.useContext(AppContext)
   const location = useLocation() //hash 사용
   const history = useHistory()
+
+  useEffect(resize,[])
 
   useEffect(() => {
     const loading = document.querySelector('#loading')

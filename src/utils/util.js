@@ -113,11 +113,6 @@ export const checkToken = (login, setLogin) => {
 
 //리사이즈시에 동작
 export const resize = () => {
-  //윈도우 사이즈에 맞춰서 로딩 사이즈 설정해줌
-  const loading = document.querySelector('#loading')
-  if (loading) {
-    loading.style.height = document.body.offsetHeight - 48 - 16 + 'px'
-  }
   //댓글 textarea 사이즈 조정
   resizeTextarea()
 
@@ -125,6 +120,7 @@ export const resize = () => {
   const guideBack = document.querySelector('#guideBack')
   const guideWrapper = document.querySelector('#guideWrapper')
   const content = document.querySelector('#content')
+
   if (document.body.offsetWidth < 500 && guideWrapper.style.left.replace('px', '') * 1 >= 0) {
     //모바일이고 메뉴가 켜져있다면 메뉴 유지함
   } else if (document.body.offsetWidth >= 500 && guideWrapper.offsetWidth === 0) {
@@ -133,6 +129,11 @@ export const resize = () => {
     guideBack.style = null
     guideWrapper.style = null
     content.style = null
+  }
+
+  //윈도우 사이즈에 맞춰서 콘텐트 사이즈 설정해줌
+  if (content) {
+    content.style.height = document.body.offsetHeight - 48 - 16 + 'px'
   }
 
   // Quill editor 아래 마진 변경
