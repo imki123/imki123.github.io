@@ -39,13 +39,18 @@ export const slideMenu = () => {
     //맨 위로 스크롤 0.2초
     if (body.scrollTop >= 48) {
       let diff = body.scrollTop / 20
+      let rect = document.querySelector('.menus').getBoundingClientRect()
+      let top = rect.top + body.scrollTop
+      if(!top) top = 365
+
       const interval = setInterval(() => {
         body.scrollTop -= diff
-        if (body.scrollTop <= 365) {
+        if (body.scrollTop <= top) {
           clearInterval(interval)
-          body.scrollTop = 365
+          body.scrollTop = top
         }
       }, 10)
+      setTimeout(()=>clearInterval(interval), 300)
     }
 
     if (guideWrapper.style.left && guideWrapper.style.left.replace('px', '') > -100) {
