@@ -9,7 +9,7 @@ import Content from './components/Content'
 import Setting from './components/Setting'
 import Axios from 'axios'
 import Meta from './components/Meta'
-import { checkToken, resize, useToggleHeader } from './utils/util'
+import { checkToken, useToggleHeader } from './utils/util'
 
 const AppContext = createContext()
 
@@ -59,9 +59,6 @@ function App() {
     if (editor && toolbar) {
       editor.style.marginBottom = toolbar.offsetHeight + 10 + 'px'
     }
-
-    window.addEventListener('resize', resize)
-    return () => window.removeEventListener('resize', resize)
   })
 
   //스크롤되면 헤더를 감추는 훅
