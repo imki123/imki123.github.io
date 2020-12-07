@@ -66,7 +66,7 @@ function Post({ match, location, history }) {
             if (content && elem) {
               let contentScroll = content.scrollTop
               let elemTop = elem.offsetTop
-              let dif = (elemTop - contentScroll) / 100
+              let dif = (elemTop - contentScroll) / 10
               let frame
               //프레임이 혹시라도 안멈출 수 있어서 1초 후에 강제로 종료함
               setTimeout(function () {

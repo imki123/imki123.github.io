@@ -49,7 +49,7 @@ function Content(props) {
     // content의 스크롤을 가장 위로
     const body = document.body
     let contentScroll = body.scrollTop
-    let dif = contentScroll / 50
+    let dif = contentScroll / 20
     const frame = setInterval(function () {
       if (body.scrollTop <= 0) {
         clearInterval(frame)
