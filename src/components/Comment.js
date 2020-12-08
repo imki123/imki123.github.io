@@ -118,7 +118,7 @@ function Comment(props) {
           <button className="commentButton" onClick={updateComment}>
             수정
           </button>
-          <button className="commentButton" style={{ background: 'red' }} onClick={deleteComment}>
+          <button className="commentButton" style={{ backgroundColor: 'red' }} onClick={deleteComment}>
             삭제
           </button>
         </div>

@@ -426,7 +426,7 @@ function Login({ history, match, location }) {
 
               {/* 버튼 */}
               {buttonName === '회원탈퇴' ? (
-                <Button variant="contained" color="primary" style={{ background: 'red' }} onClick={clickButton}>
+                <Button variant="contained" color="primary" style={{ backgroundColor: 'red' }} onClick={clickButton}>
                   {buttonName}
                 </Button>
               ) : (

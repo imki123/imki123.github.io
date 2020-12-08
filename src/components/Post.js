@@ -62,7 +62,7 @@ function Post({ match, location, history }) {
           setTimeout(() => {
             const elem = document.querySelector(location.hash)
             document.body.scrollTop = elem.offsetTop
-          },10)
+          }, 10)
         }
       })
       .catch((e) => {
