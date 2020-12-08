@@ -86,7 +86,7 @@ export const closeMenuMobile = (e) => {
   }
 }
 
-export const checkToken = (login, setLogin) => {
+export const checkToken = (setLogin) => {
   //로그인 되어있는지 토큰 체크하기
   let url = process.env.REACT_APP_URL + '/auth/check'
   //url = process.env.REACT_APP_LOCAL_URL+'/auth/check'

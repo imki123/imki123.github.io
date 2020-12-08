@@ -47,10 +47,12 @@ function App() {
       .catch((e) => console.log(e)) //실패
   }, [location.pathname])
 
-  //주소 변경될 때, 토큰 체크하고 포스트 조회하기
+  //주소 변경될 때, 토큰 체크하고 포스트 조회하기, 스크롤을 가장 위로
   useEffect(() => {
-    checkToken(login, setLogin)
-  }, [location.pathname, location.search, login])
+    checkToken(setLogin)
+    //최상단으로 스크롤 이동
+    document.body.scrollTop = 0
+  }, [location.pathname, location.search])
 
   useEffect(() => {
     const editor = document.querySelector('#editor')
