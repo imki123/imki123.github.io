@@ -45,7 +45,7 @@ export const slideMenu = () => {
 
     if (guideWrapper.style.left && guideWrapper.style.left.replace('px', '') > -100) {
       //메뉴 닫기
-      guideWrapper.style.left = '-300px' // 메뉴 0
+      guideWrapper.style.left = null // 메뉴 -310px
       content.style.width = 'calc(100% - 16px)'
     } else {
       //메뉴 열기
@@ -81,7 +81,7 @@ export const closeMenuMobile = (e) => {
   guideBack.style.width = '0' // 회색 0
   if (body.offsetWidth < 500) {
     //모바일
-    guideWrapper.style.left = '-300px' // 메뉴 0
+    guideWrapper.style.left = null // 메뉴 -310px
     content.style.width = 'calc(100% - 16px)'
   }
 }
