@@ -9,7 +9,7 @@ import Content from './components/Content'
 import Setting from './components/Setting'
 import Axios from 'axios'
 import Meta from './components/Meta'
-import { checkToken, useToggleHeader } from './utils/util'
+import { checkToken } from './utils/util'
 
 const AppContext = createContext()
 
@@ -63,8 +63,6 @@ function App() {
     }
   })
 
-  //스크롤되면 헤더를 감추는 훅
-  useToggleHeader()
 
   return (
     <AppContext.Provider value={store}>
