@@ -47,11 +47,19 @@ function App() {
       .catch((e) => console.log(e)) //실패
   }, [location.pathname])
 
-  //주소 변경될 때, 토큰 체크하고 포스트 조회하기, 스크롤을 가장 위로
+  //주소 변경될 때, 토큰 체크하고 스크롤을 가장 위로
   useEffect(() => {
     checkToken(setLogin)
     //최상단으로 스크롤 이동
     document.body.scrollTop = 0
+
+    //페이지 이동할 때 activeListManual 스타일을 모두 지움
+    const tags = document.querySelectorAll('.activeListManual')
+    if (tags) {
+      for (let i of tags) {
+        i.classList.remove('activeListManual')
+      }
+    }
   }, [location.pathname, location.search])
 
   useEffect(() => {

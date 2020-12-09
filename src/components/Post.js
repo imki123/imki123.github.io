@@ -109,14 +109,6 @@ function Post({ match, location, history }) {
     if (post) {
       store.setReady(true)
 
-      //페이지 이동할 때 activeListManual 스타일을 모두 지움
-      const tags = document.querySelectorAll('.activeListManual')
-      if (tags) {
-        for (let i of tags) {
-          i.classList.remove('activeListManual')
-        }
-      }
-
       //태그 찾아서 activeListManual 적용
       let activeTags
       if (post.tags[1]) {
