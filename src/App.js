@@ -71,7 +71,6 @@ function App() {
     }
   })
 
-
   return (
     <AppContext.Provider value={store}>
       <div id="app">

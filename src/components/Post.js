@@ -13,6 +13,7 @@ import CommentLists from './CommentLists'
 import Emoji from './Emoji'
 import { resizeTextarea } from '../utils/util'
 import { Button } from '@material-ui/core'
+import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 
 function Post({ match, location, history }) {
   const store = React.useContext(AppContext)
@@ -289,11 +290,11 @@ function Post({ match, location, history }) {
             <div className="writeComment">
               <div className="commentProfile">
                 {!store.login ? (
-                  <img alt="PROFILE" src={process.env.PUBLIC_URL + '/images/noavatar.png'} />
+                  <AccountCircleIcon />
                 ) : (
                   <img
                     alt="PROFILE"
-                    src={store.login.imageUrl}
+                    src={store.login.imageUrl + ''}
                     onError={(e) => {
                       e.target.src = process.env.PUBLIC_URL + '/images/dog' + (Math.floor(Math.random() * (3 - 1 + 1)) + 1) + '.png'
                     }}

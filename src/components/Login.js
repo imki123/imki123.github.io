@@ -363,7 +363,7 @@ function Login({ history, match, location }) {
           <>
             {store.login ? (
               <div className="center">
-                {store.login.username}님은 현재 <span style={{ color: 'green' }}>로그인</span> 되어있습니다 😄
+                {store.login.username}님은 현재 <span style={{ color: 'blue' }}>로그인</span> 되어있습니다 😄
                 <br />
                 <span style={{ fontSize: '0.8rem' }}>(로그인은 최대 일주일간 유지됩니다.)</span>
               </div>

@@ -36,10 +36,9 @@ body {
     padding: 4px 6px;
   }
   .MuiButton-containedPrimary {
-    color: black;
+    color: white;
     &:hover {
-      background-color: #3bdb3b;
-      background-color: $oc-green-5;
+      background-color: $oc-indigo-7;
     }
   }
 
@@ -82,13 +81,6 @@ textarea {
   padding: 0;
   border: 1px solid gray;
   &:focus {
-    outline: 1px solid green;
-  }
-}
-
-@media (min-width: 1280px) {
-  #header {
-    width: 1280px !important;
-    margin: auto !important;
+    outline: 1px solid blue;
   }
 }

@@ -1,3 +1,5 @@
+@import '~open-color/open-color';
+
 .postListWrapper {
   padding: 8px 15%;
   border-radius: 8px;
@@ -31,7 +33,7 @@
   border-radius: 0 !important;
   padding-top: 8px;
   &:hover {
-    background: #b3ffb3 !important;
+    background: $oc-indigo-3 !important;
   }
   .postTitle {
     padding: 0 8px;

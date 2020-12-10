@@ -1,8 +1,10 @@
+@import '~open-color/open-color';
+
 #headerWrapper {
   position: absolute;
   z-index: 20;
   width: 100%;
-  background: rgb(180, 255, 180);
+  background: $oc-indigo-9;
   box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.4);
   overflow: hidden;
   transition: all linear 0.3s;
@@ -14,22 +16,25 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #b4ffb4;
 }
 
 .menu {
   svg {
-    color: #606060;
+    color: white;
     font-size: 30px;
   }
 }
 
 .profile {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  position: relative;
-  top: 2px;
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+  svg {
+    font-size: 2.5rem !important;
+    color: white;
+  }
 }
 
 #title {
@@ -38,6 +43,7 @@
   align-items: center;
   font-size: 1.2rem;
   font-weight: bold;
+  color: white !important;
 }
 
 #logo {

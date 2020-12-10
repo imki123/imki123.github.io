@@ -1,3 +1,5 @@
+@import '~open-color/open-color';
+
 #content {
   max-width: calc(1280px - 300px - 16px);
   width: calc(100% - 300px - 16px);
@@ -21,18 +23,19 @@
   align-items: center;
   width: 40px;
   height: 40px;
-  background: rgba(180, 255, 180, 0.6);
+  background: $oc-indigo-5;
+  opacity: 0.8;
   border-radius: 50% !important;
   box-shadow: 5px 5px 5px 0 grey;
   right: 8px;
   cursor: pointer;
-}
-.FAB svg {
-  color: #606060;
-  font-size: 30px;
-}
-.FAB img {
-  width: 26px;
+  svg {
+    color: white;
+    font-size: 30px;
+  }
+  img {
+    width: 26px;
+  }
 }
 #postFAB {
   bottom: 190px;

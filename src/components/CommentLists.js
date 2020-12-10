@@ -1,3 +1,4 @@
+import { Button } from '@material-ui/core'
 import Axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
@@ -67,7 +68,7 @@ function CommentLists(props) {
           <div key={i.title + idx}>
             {idx < commentCnt && (
               <Link to={`/posts/${i.postId}/#comments`}>
-                <div className="postList no-drag">
+                <Button className="postList no-drag">
                   <div className="postListHeader">
                     <div>
                       <span className="postId">{idx + 1}.</span>
@@ -77,7 +78,7 @@ function CommentLists(props) {
                   </div>
                   <div className="postBody">{i.content}</div>
                   <div className="postTitle">{i.title}</div>
-                </div>
+                </Button>
               </Link>
             )}
           </div>

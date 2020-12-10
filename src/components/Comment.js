@@ -3,6 +3,7 @@ import './Comment.scss'
 import { AppContext } from '../App'
 import Axios from 'axios'
 import { resizeTextarea } from '../utils/util'
+import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 
 function Comment(props) {
   const store = React.useContext(AppContext)
@@ -25,6 +26,7 @@ function Comment(props) {
         },
       })
         .then((res) => {
+          console.log(res.data.imageUrl)
           if (!res.data.imageUrl) setImageUrl('noimage' + Math.floor(Math.random() * 100))
           else setImageUrl(res.data.imageUrl)
         })
@@ -87,7 +89,7 @@ function Comment(props) {
       <div className="comment">
         <div className="commentProfile">
           {!comment.username ? (
-            <img alt="PROFILE" src={process.env.PUBLIC_URL + '/images/noavatar.png'} />
+            <AccountCircleIcon />
           ) : (
             <img
               alt="PROFILE"

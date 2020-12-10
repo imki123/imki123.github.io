@@ -5,6 +5,7 @@ import { AppContext } from '../App'
 import MenuIcon from '@material-ui/icons/Menu'
 import { closeMenuMobile, slideMenu } from '../utils/util'
 import { Button } from '@material-ui/core'
+import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 
 function Header(props) {
   const store = React.useContext(AppContext)
@@ -31,12 +32,11 @@ function Header(props) {
             임기의 코딩 블로그
           </Button>
         </Link>
-        <Button className="hover" onClick={toggleSetting}>
+        <Button className="hover profile" onClick={toggleSetting}>
           {!store.login ? (
-            <img className="profile" alt="PROFILE" src={process.env.PUBLIC_URL + '/images/noavatar.png'} />
+            <AccountCircleIcon/>
           ) : (
             <img
-              className="profile"
               alt="PROFILE"
               src={store.login.imageUrl ? store.login.imageUrl : 'noimage' + Math.floor(Math.random() * 100)}
               onError={(e) => {
