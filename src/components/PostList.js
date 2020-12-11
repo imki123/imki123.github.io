@@ -26,7 +26,7 @@ function PostList(props) {
           </div>
         </div>
         <div className="postBody">
-        {list.thumbnail && <img className="thumbnail" alt="" src={list.thumbnail}/>}
+        {list.thumbnail && <img className="thumbnail" alt="" src={list.thumbnail} loading="lazy"/>}
         {list.text}
         </div>
       </Button>
