@@ -119,9 +119,10 @@
       function naverIdLogout() {
         naverLogin.logout() //로그인 정보를 지우고
         const win = window.open('https://nid.naver.com/nidlogin.logout') //실제로 네이버 로그아웃
-        setTimeout(function () {
+        let interval = setInterval(function () {
           win.close() //팝업창 닫아주기
-        }, 1)
+        }, 10)
+        setTimeout(()=>clearInterval(interval),500)
       }
     </script>
     <!-- // 네이버 아이디로 로그인 초기화 Script -->
