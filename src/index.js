@@ -37,6 +37,7 @@ window.addEventListener('resize', function () {
 //스크롤 이벤트 등록. 스크롤이 위로 올라가면 헤더 fixed. 내려가면 absolute.
 let scroll = 0
 window.addEventListener('load', function () {
+  resize()
   const $header = document.querySelector('#headerWrapper')
   $header.style.top = '0px'
   document.body.addEventListener('scroll', function () {
