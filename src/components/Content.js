@@ -24,24 +24,24 @@ function Content(props) {
 
   useEffect(() => {
     const loading = document.querySelector('#loading')
-    const views = document.querySelectorAll('.post')
+    /* const views = document.querySelectorAll('.post') */
     if (store.ready) {
       if (loading) loading.style.display = 'none'
-      if (views) {
+      /* if (views) {
         for (let i of views) {
           i.style.display = 'block'
         }
-      }
+      } */
       setTimeout(function () {
         resizeTextarea()
       }, 10)
     } else {
       if (loading) loading.style.display = 'flex'
-      if (views) {
+      /* if (views) {
         for (let i of views) {
           i.style.display = 'none'
         }
-      }
+      } */
     }
   }, [location.hash, store])
 
@@ -76,7 +76,7 @@ function Content(props) {
 
       {/* 로딩 */}
       <div id="loading">
-        <img alt="Loading" src={process.env.PUBLIC_URL + '/images/loading.gif'} />
+        {/* <img alt="Loading" src={process.env.PUBLIC_URL + '/images/loading.gif'} /> */}
       </div>
 
       <Switch>
