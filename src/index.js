@@ -48,6 +48,7 @@ window.addEventListener('load', function () {
         }else{
           $header.style.top = '0px'
         }
+        scroll = document.body.scrollTop
       }, 100)
     }
   })
