@@ -33,3 +33,23 @@ window.addEventListener('resize', function () {
     }, 100)
   }
 })
+
+//스크롤 이벤트 등록. 스크롤이 위로 올라가면 헤더 fixed. 내려가면 absolute.
+let scroll = 0
+window.addEventListener('load', function () {
+  const $header = document.querySelector('#headerWrapper')
+  document.body.addEventListener('scroll', function () {
+    //스로틀링 구현
+    if (!timer) {
+      timer = setTimeout(() => {
+        timer = null
+        console.log('scroll', document.body.scrollTop)
+        if (document.body.scrollTop >= scroll) {
+          $header.style.top = '-48px'
+        }else{
+          $header.style.top = '0px'
+        }
+      }, 100)
+    }
+  })
+})

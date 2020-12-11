@@ -38,7 +38,7 @@ export const slideMenu = () => {
     //메뉴로 스크롤
     if (body.scrollTop >= 48) {
       let rect = document.querySelector('.menus').getBoundingClientRect()
-      let top = rect.top + body.scrollTop
+      let top = rect.top + body.scrollTop - 48
       body.scrollTop = top
     }
 
@@ -111,9 +111,15 @@ export const resize = () => {
   resizeTextarea()
 
   //화면 리사이즈 되면 스크립트로 작성한 스타일 지우기
+  const $header = document.querySelector('#headerWrapper')
   const guideBack = document.querySelector('#guideBack')
   const guideWrapper = document.querySelector('#guideWrapper')
   const content = document.querySelector('#content')
+
+  //헤더 너비 지정
+  if($header){
+    $header.style.width = document.body.clientWidth +'px'
+  }
 
   if (document.body.offsetWidth < 500 && guideWrapper.style.left.replace('px', '') * 1 >= 0) {
     //모바일이고 메뉴가 켜져있다면 메뉴 유지함
