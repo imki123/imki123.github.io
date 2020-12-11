@@ -1,34 +1,36 @@
 .recentAll {
   width: 100% !important;
 }
-.recentComment .postListTitle {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.postListTitle a {
-  font-size: 0.8rem;
-  color: blue;
-}
-.recentComment .postTitle {
-  font-weight: unset;
-  font-size: 0.9rem;
-  text-align: right;
-  color: gray;
-  padding: 0;
-  height: 1.2rem;
-  overflow: hidden;
-}
-.recentComment .postBody {
-  height: 1.2rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-}
-.recentComment .username {
-  font-weight: bold;
-  font-size: 1rem;
-  padding-left: 8px;
+.recentComment {
+  .postListTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    a {
+      font-size: 0.8rem;
+      color: blue !important;
+    }
+  }
+  .postTitle {
+    font-weight: unset;
+    font-size: 0.9rem;
+    text-align: right;
+    color: gray;
+    padding: 0;
+    height: 1.2rem;
+    overflow: hidden;
+  }
+  .postBody {
+    height: 1.2rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
+  .username {
+    font-weight: bold;
+    font-size: 1rem;
+    padding-left: 8px;
+  }
 }

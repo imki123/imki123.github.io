@@ -27,21 +27,11 @@ function Content(props) {
     /* const views = document.querySelectorAll('.post') */
     if (store.ready) {
       if (loading) loading.style.display = 'none'
-      /* if (views) {
-        for (let i of views) {
-          i.style.display = 'block'
-        }
-      } */
       setTimeout(function () {
         resizeTextarea()
       }, 10)
     } else {
       if (loading) loading.style.display = 'flex'
-      /* if (views) {
-        for (let i of views) {
-          i.style.display = 'none'
-        }
-      } */
     }
   }, [location.hash, store])
 

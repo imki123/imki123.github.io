@@ -1,3 +1,5 @@
+@import '~open-color/open-color';
+
 .paging {
   margin-top: 10px;
   display: flex;
@@ -18,7 +20,8 @@
 .activePage {
   padding: 0 8px;
   margin: 0 4px;
-  background: #76ff76;
-  border: 1px solid #50ff50;
+  background: $oc-indigo-5;
+  border: 1px solid $oc-indigo-5;
+  color: white !important;
   border-radius: 30%;
 }
