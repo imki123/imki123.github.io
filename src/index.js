@@ -38,6 +38,7 @@ window.addEventListener('resize', function () {
 let scroll = 0
 window.addEventListener('load', function () {
   const $header = document.querySelector('#headerWrapper')
+  $header.style.top = '0px'
   document.body.addEventListener('scroll', function () {
     //스로틀링 구현
     if (!timer) {
