@@ -43,7 +43,6 @@ window.addEventListener('load', function () {
     if (!timer) {
       timer = setTimeout(() => {
         timer = null
-        console.log('scroll', document.body.scrollTop)
         if (document.body.scrollTop >= scroll) {
           $header.style.top = '-48px'
         }else{

@@ -26,7 +26,6 @@ function Comment(props) {
         },
       })
         .then((res) => {
-          console.log(res.data.imageUrl)
           if (!res.data.imageUrl) setImageUrl('noimage' + Math.floor(Math.random() * 100))
           else setImageUrl(res.data.imageUrl)
         })

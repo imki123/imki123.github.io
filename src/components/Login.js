@@ -26,7 +26,7 @@ function Login({ history, match, location }) {
     if (location.pathname === '/login' || location.pathname === '/login/' || location.pathname === '/register' || location.pathname === '/register/') {
       if (!store.login) {
         frame = setInterval(function () {
-          console.log('유저정보 체크')
+          //console.log('유저정보 체크')
           if (userinfoElem && userinfoElem.value) {
             //userinfo가 있으면 로그인 처리
             //새로고침되거나, 로그인 버튼을 누르면 userinfo를 가져옴
@@ -124,7 +124,7 @@ function Login({ history, match, location }) {
               })
               .catch((e) => console.error(e))
           }
-        }, 1000)
+        }, 500)
       }
     } else if (location.pathname === '/loginStatus' || location.pathname === '/loginStatus/') {
       if (userinfoElem && !userinfoElem.value) {
