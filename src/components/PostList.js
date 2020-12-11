@@ -25,7 +25,10 @@ function PostList(props) {
             <span className="postTitle">{list.title}</span>
           </div>
         </div>
-        <div className="postBody">{list.text}</div>
+        <div className="postBody">
+        {list.thumbnail && <img className="thumbnail" alt="" src={list.thumbnail}/>}
+        {list.text}
+        </div>
       </Button>
     </Link>
   )

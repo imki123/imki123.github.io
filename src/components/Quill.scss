@@ -1,3 +1,5 @@
+@import '~open-color/open-color';
+
 .quill {
   background: white;
   height: 100%;
@@ -44,7 +46,8 @@
 .editorButton {
   border: 0px;
   border-radius: 5px;
-  background: #84ff84;
+  background: $oc-indigo-5;
+  color: white;
   height: 30px;
   font-size: 0.9rem;
   margin-left: 12px;

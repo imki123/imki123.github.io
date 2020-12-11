@@ -133,6 +133,10 @@ function Quill({ match, location, history }) {
     const content = quill.getContents()
     const text = quill.getText()
     const mainMenu = document.querySelector('[name=mainMenu]:checked')
+    let $img = document.querySelector('#editor img') //첫 이미지를 썸네일에 저장
+    let thumbnail = null
+    if ($img) thumbnail = $img.src
+
     let tags = []
     const subMenu = document.querySelector('[name=subMenu]:checked')
     const newMainMenu = document.querySelector('[name=newMainMenu]')
@@ -164,7 +168,7 @@ function Quill({ match, location, history }) {
 
     //url에 POST 또는 PATCH 요청
     let url = process.env.REACT_APP_URL + '/posts'
-    //url = process.env.REACT_APP_LOCAL_URL + '/posts'
+    url = process.env.REACT_APP_LOCAL_URL + '/posts'
     let method = 'POST',
       message = '글 작성 성공'
     if (e.target.id === 'PATCH') {
@@ -187,6 +191,7 @@ function Quill({ match, location, history }) {
         body: content,
         text: text,
         tags: tags,
+        thumbnail: thumbnail,
       },
     })
       .then((res) => {
