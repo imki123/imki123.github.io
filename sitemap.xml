@@ -115,18 +115,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://imki123.github.io/posts/35</loc>
-    <lastmod>2020-12-12</lastmod>
-    <changefreq>always</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://imki123.github.io/posts/36</loc>
-    <lastmod>2020-12-12</lastmod>
-    <changefreq>always</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://imki123.github.io/register</loc>
     <lastmod>2020-12-12</lastmod>
     <changefreq>always</changefreq>
@@ -146,12 +134,6 @@
   </url>
   <url>
     <loc>https://imki123.github.io/tags/play</loc>
-    <lastmod>2020-12-12</lastmod>
-    <changefreq>always</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://imki123.github.io/tags/test</loc>
     <lastmod>2020-12-12</lastmod>
     <changefreq>always</changefreq>
     <priority>0.8</priority>
