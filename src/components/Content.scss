@@ -14,15 +14,23 @@
   }
 }
 
-
-.FAB {
-  z-index: 1;
+.FABs{
   position: fixed;
+  bottom: 0px;
+  right: 8px;
+  z-index: 1;
+  
+  display: flex;
+  flex-direction: column;
+  transition: all 0.5s ease;
+}
+.FAB {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 40px;
   height: 40px;
+  margin-Bottom: 10px;
   background: $oc-indigo-5;
   opacity: 0.8;
   border-radius: 50% !important;
@@ -36,18 +44,6 @@
   img {
     width: 26px;
   }
-}
-#postFAB {
-  bottom: 190px;
-}
-#scrollFAB {
-  bottom: 140px;
-}
-#backFAB {
-  bottom: 90px;
-}
-#menuFAB {
-  bottom: 40px;
 }
 
 #loading {

@@ -24,6 +24,7 @@ if (rootElement.hasChildNodes()) {
 
 //리사이즈 이벤트 등록
 let timer = null
+let debounce = null
 window.addEventListener('resize', function () {
   //스로틀링 구현
   if (!timer) {
@@ -39,7 +40,15 @@ let scroll = 0
 window.addEventListener('load', function () {
   resize()
   const $header = document.querySelector('#headerWrapper')
+  const $FABs = document.querySelector('.FABs')
   $header.style.top = '0px'
+
+  //로드후에 FABs 숨기기
+  setTimeout(() => {
+    if ($FABs) {
+      $FABs.style.right = '-40px'
+    }
+  }, 1000)
 
   //스크롤 이벤트 등록. 스크롤이 위로 올라가면 헤더 보이고 내려가면 숨김.
   document.body.addEventListener('scroll', function (event) {
@@ -54,7 +63,19 @@ window.addEventListener('load', function () {
           $header.style.top = '0px'
         }
         scroll = document.body.scrollTop
+        if ($FABs) {
+          $FABs.style.right = null
+        }
       }, 100)
     }
+    //디바운싱. 스크롤 끝나고 2초 후에 FABs 숨기기
+    if (debounce) {
+      clearTimeout(debounce)
+    }
+    debounce = setTimeout(() => {
+      if ($FABs) {
+        $FABs.style.right = '-40px'
+      }
+    }, 1000)
   })
 })
