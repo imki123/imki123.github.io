@@ -24,7 +24,6 @@ function Content(props) {
 
   useEffect(() => {
     const loading = document.querySelector('#loading')
-    /* const views = document.querySelectorAll('.post') */
     if (store.ready) {
       if (loading) loading.style.display = 'none'
       setTimeout(function () {

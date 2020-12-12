@@ -40,11 +40,12 @@ let scroll = 0
 window.addEventListener('load', function () {
   resize()
   const $header = document.querySelector('#headerWrapper')
-  const $FABs = document.querySelectorAll('.FAB')
   $header.style.top = '0px'
 
   //로드후에 FABs 숨기기
+  let $FABs
   setTimeout(() => {
+    $FABs = document.querySelectorAll('.FAB')
     $FABs.forEach((i, idx) => {
       setTimeout(() => {
         i.style.right = '-50px'
