@@ -22,6 +22,18 @@
 }
 #editor {
   height: calc(100% - 200px);
+  label {
+    margin-right: 12px;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+    input {
+      cursor: pointer;
+    }
+  }
 }
 #tags {
   margin: 10px 0;
@@ -30,18 +42,6 @@
   font-size: 1.2rem;
   font-weight: bold;
   margin-right: 12px;
-}
-#editor label {
-  margin-right: 12px;
-  display: inline-flex;
-  align-items: center;
-  cursor: pointer;
-}
-#editor label:hover {
-  text-decoration: underline;
-}
-#editor label input {
-  cursor: pointer;
 }
 .editorButton {
   border: 0px;
@@ -55,11 +55,14 @@
 }
 #content .ql-editor {
   padding: 0;
+  a {
+    color: blue;
+  }
+  img {
+    border: 1px solid #e9e9e9;
+  }
 }
-#content .ql-editor a {
-  color: blue;
-}
-.quill .ql-editor,
+#content .ql-editor .quill .ql-editor,
 .quill .ql-container {
   min-height: 300px;
 }
