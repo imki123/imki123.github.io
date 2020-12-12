@@ -72,13 +72,12 @@ export const slideMenu = () => {
 
 //모바일에서 회색부분 클릭 시 메뉴 닫기
 export const closeMenuMobile = (e) => {
-  const body = document.querySelector('#body')
   const guideBack = document.querySelector('#guideBack')
   const guideWrapper = document.querySelector('#guideWrapper')
   const content = document.querySelector('#content')
 
   guideBack.style.width = '0' // 회색 0
-  if (body.offsetWidth < 500) {
+  if (document.body.offsetWidth < 500) {
     //모바일
     guideWrapper.style.left = null // 메뉴 -310px
     content.style.width = 'calc(100% - 16px)'
