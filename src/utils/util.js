@@ -116,8 +116,8 @@ export const resize = () => {
   const content = document.querySelector('#content')
 
   //헤더 너비 지정
-  if($header){
-    $header.style.width = document.body.clientWidth +'px'
+  if ($header) {
+    $header.style.width = document.body.clientWidth + 'px'
   }
 
   if (document.body.offsetWidth < 500 && guideWrapper.style.left.replace('px', '') * 1 >= 0) {

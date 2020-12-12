@@ -40,14 +40,16 @@ let scroll = 0
 window.addEventListener('load', function () {
   resize()
   const $header = document.querySelector('#headerWrapper')
-  const $FABs = document.querySelector('.FABs')
+  const $FABs = document.querySelectorAll('.FAB')
   $header.style.top = '0px'
 
   //로드후에 FABs 숨기기
   setTimeout(() => {
-    if ($FABs) {
-      $FABs.style.right = '-40px'
-    }
+    $FABs.forEach((i, idx) => {
+      setTimeout(() => {
+        i.style.right = '-50px'
+      }, 150 * (idx + 1))
+    })
   }, 1000)
 
   //스크롤 이벤트 등록. 스크롤이 위로 올라가면 헤더 보이고 내려가면 숨김.
@@ -63,19 +65,24 @@ window.addEventListener('load', function () {
           $header.style.top = '0px'
         }
         scroll = document.body.scrollTop
-        if ($FABs) {
-          $FABs.style.right = null
-        }
+        //스크롤하면 FABs 보이기
+        $FABs.forEach((i, idx) => {
+          setTimeout(() => {
+            i.style.right = null
+          }, 150 * idx)
+        })
       }, 100)
     }
-    //디바운싱. 스크롤 끝나고 2초 후에 FABs 숨기기
+    //디바운싱. 스크롤 끝나고 1.5초 후에 FABs 숨기기
     if (debounce) {
       clearTimeout(debounce)
     }
     debounce = setTimeout(() => {
-      if ($FABs) {
-        $FABs.style.right = '-40px'
-      }
-    }, 1000)
+      $FABs.forEach((i, idx) => {
+        setTimeout(() => {
+          i.style.right = '-50px'
+        }, 150 * (idx + 1))
+      })
+    }, 1500)
   })
 })
