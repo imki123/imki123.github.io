@@ -70,7 +70,7 @@ window.addEventListener('load', function () {
         //스크롤하면 FABs 보이기
         $FABs.forEach((i, idx) => {
           setTimeout(() => {
-            i.style.right = '58px'
+            i.style.right = null
           }, 150 * idx)
         })
       }, 100)
