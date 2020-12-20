@@ -19,9 +19,12 @@
 }
 @media (max-width: 499px) {
   #guideWrapper {
-    position: absolute;
+    position: fixed;
+    top: 48px;
+    bottom: 0;
     z-index: 10;
     left: -310px;
+    overflow-y: auto;
   }
 }
 @media (min-width: 500px) {

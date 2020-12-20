@@ -17,7 +17,12 @@ body {
   overflow-y: auto;
   scroll-behavior: smooth;
 }
-
+@media (max-width: 499px) {
+  ::-webkit-scrollbar {
+    display: none;
+    appearance: none;
+  }
+}
 #app {
   position: relative;
   width: 100%;
