@@ -35,13 +35,6 @@ export const slideMenu = () => {
 
   if (body.offsetWidth < 500) {
     //모바일 메뉴 동작
-    //메뉴로 스크롤
-    if (body.scrollTop >= 48) {
-      let rect = document.querySelector('.menus').getBoundingClientRect()
-      let top = rect.top + body.scrollTop - 48
-      body.scrollTop = top
-    }
-
     if (guideWrapper.style.left && guideWrapper.style.left.replace('px', '') > -100) {
       //메뉴 닫기
       guideWrapper.style.left = null // 메뉴 -310px
