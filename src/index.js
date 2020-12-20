@@ -55,6 +55,7 @@ window.addEventListener('load', function () {
 
   //스크롤 이벤트 등록. 스크롤이 위로 올라가면 헤더 보이고 내려가면 숨김.
   document.body.addEventListener('scroll', function (event) {
+    $FABs = document.querySelectorAll('.FAB')
     //스로틀링 구현
     if (!timer) {
       timer = setTimeout(() => {
