@@ -17,7 +17,7 @@
 .FABs {
   position: fixed;
   bottom: 0px;
-  right: 8px;
+  right: -50px;
   z-index: 1;
 
   display: flex;
@@ -25,6 +25,7 @@
 }
 .FAB {
   position: relative;
+  right: 58px;
 
   display: flex;
   justify-content: center;
@@ -36,7 +37,6 @@
   opacity: 0.8;
   border-radius: 50% !important;
   box-shadow: 2px 2px 2px 0 grey;
-  right: 8px;
   transition: all 0.5s ease;
   cursor: pointer;
   svg {

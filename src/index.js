@@ -48,7 +48,7 @@ window.addEventListener('load', function () {
     $FABs = document.querySelectorAll('.FAB')
     $FABs.forEach((i, idx) => {
       setTimeout(() => {
-        i.style.right = '-50px'
+        i.style.right = '0px'
       }, 150 * (idx + 1))
     })
   }, 1000)
@@ -69,7 +69,7 @@ window.addEventListener('load', function () {
         //스크롤하면 FABs 보이기
         $FABs.forEach((i, idx) => {
           setTimeout(() => {
-            i.style.right = null
+            i.style.right = '58px'
           }, 150 * idx)
         })
       }, 100)
@@ -81,7 +81,7 @@ window.addEventListener('load', function () {
     debounce = setTimeout(() => {
       $FABs.forEach((i, idx) => {
         setTimeout(() => {
-          i.style.right = '-50px'
+          i.style.right = '0px'
         }, 150 * (idx + 1))
       })
     }, 1500)
