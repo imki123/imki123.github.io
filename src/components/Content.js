@@ -42,7 +42,17 @@ function Content(props) {
   return (
     <div id="content" className="slideMenu">
       {/* 로딩 */}
-      <div id="loading"></div>
+      <div id="loading">
+        <div className="modal">
+          <div>
+            블로그를 이전했습니다.
+            <br />
+            벨로그에서 만나요~ ^-^
+          </div>
+          <br />
+          <a href="https://velog.io/@goyoung2">https://velog.io/@goyoung2</a>
+        </div>
+      </div>
 
       <Switch>
         <Route path={['/login', '/register', '/loginStatus', '/withdraw']} component={Login} />

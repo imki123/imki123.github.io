@@ -47,8 +47,8 @@ function Post({ match, location, history }) {
         setPost(res.data)
       })
       .catch((e) => {
-        alert('찾으시는 페이지가 없습니다.\n' + e)
-        history.go(-1)
+        // alert('찾으시는 페이지가 없습니다.\n' + e)
+        // history.go(-1)
       }) //실패
 
     //포스트바디 가져오기

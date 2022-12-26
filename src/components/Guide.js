@@ -38,7 +38,7 @@ function Guide(props) {
           >
             <Button className="menuLink">
               <div>
-                <img alt="onandoff" src={process.env.PUBLIC_URL + '/images/imcat_64.png'} />
+                <img alt="onandoff" src={process.env.PUBLIC_URL + '/favicon.ico'} />
                 Interactive Coding
               </div>
               <OpenInNewIcon />
@@ -70,7 +70,7 @@ function Guide(props) {
           >
             <Button className="menuLink">
               <div>
-                <img alt="onandoff" src={process.env.PUBLIC_URL + '/images/imcat_64.png'} />
+                <img alt="onandoff" src={process.env.PUBLIC_URL + '/favicon.ico'} />
                 OnAndOff
               </div>
               <OpenInNewIcon />

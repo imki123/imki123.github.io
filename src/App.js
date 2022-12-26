@@ -78,7 +78,7 @@ function App() {
           data={{
             title: '임기의 코딩 블로그',
             description: '주로 Javascript, React, ReactNative, Node 관련 글을 포스팅합니다. 감사합니다. 😄',
-            image: process.env.PUBLIC_URL + '/images/imcat_800x400.png',
+            image: process.env.PUBLIC_URL + '/favicon.ico',
           }}
         />
         <Header />

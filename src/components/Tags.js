@@ -29,8 +29,8 @@ function Tags({ match, location, history }) {
     })
       .then((res) => {
         if (res.data.list.length < 1) {
-          alert('찾으시는 페이지가 없습니다.')
-          history.go(-1)
+          // alert('찾으시는 페이지가 없습니다.')
+          // history.go(-1)
         } else {
           setLists(res.data.list)
           let tempTitles = ''

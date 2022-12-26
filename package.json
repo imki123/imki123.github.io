@@ -4,8 +4,8 @@
   "private": true,
   "homepage": "https://imki123.github.io/",
   "scripts": {
-    "start": "react-scripts --openssl-legacy-provider start",
-    "build": "react-scripts --openssl-legacy-provider build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "predeploy": "npm run build && react-snap && react-snap-sitemap --base-url=https://imki123.github.io/ --change-frequency=always",
     "deploy": "gh-pages -d build",
     "test": "react-scripts test",
