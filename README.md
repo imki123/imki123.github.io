@@ -7,5 +7,9 @@ Thanks 😄
 There is a environmental variable ```REACT_APP_URL``` in .env file.  
 Set this your own backend URL.
 
-블로그를 이전했습니다. 
+---
+
+블로그를 이전했습니다. 벨로그에서 만나요~
 https://velog.io/@goyoung2
+
+---
